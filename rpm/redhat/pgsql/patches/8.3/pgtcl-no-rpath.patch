@@ -1,0 +1,84 @@
+This patch removes some bogus stuff from the pgtcl configure script;
+in particular it gets rid of rpath specifications that we don't want
+or need on an RPM platform, as well as long-obsolete optimization
+bypasses.
+
+We also remove some direct hacks on LIBOBJS because modern Autoconf
+doesn't like them; not worth fixing properly since they won't be
+invoked on our systems anyway.
+
+Finally, tweak Makefile.in to ensure that the -L switch for libpq appears
+before any -L for the Tcl libraries during the link.  This prevents the
+generated library from being bound to the wrong version of libpq when
+building on a machine that has an older version of libpq already installed
+(bug #166665).
+
+
+diff -Naur Pgtcl.orig/aclocal.m4 Pgtcl/aclocal.m4
+--- Pgtcl.orig/aclocal.m4	2004-02-15 15:15:37.000000000 -0500
++++ Pgtcl/aclocal.m4	2005-03-11 18:26:44.610459295 -0500
+@@ -293,12 +293,6 @@
+ 	    DL_OBJS="tclLoadDl.o"
+ 	    LDFLAGS=""
+ 
+-	    # AIX v<=4.1 has some different flags than 4.2+
+-	    if test "$system" = "AIX-4.1" -o "`uname -v`" -lt "4" ; then
+-		LIBOBJS="$LIBOBJS tclLoadAix.o"
+-		DL_LIBS="-lld"
+-	    fi
+-
+ 	    # On AIX <=v4 systems, libbsd.a has to be linked in to support
+ 	    # non-blocking file IO.  This library has to be linked in after
+ 	    # the MATH_LIBS or it breaks the pow() function.  The way to
+@@ -490,18 +484,12 @@
+ 	    SHLIB_LD_LIBS='${LIBS}'
+ 	    SHLIB_SUFFIX=".so"
+ 
+-	    # egcs-2.91.66 on Redhat Linux 6.0 generates lots of warnings 
+-	    # when you inline the string and math operations.  Turn this off to
+-	    # get rid of the warnings.
+-
+-	    CFLAGS_OPTIMIZE="${CFLAGS_OPTIMIZE} -D__NO_STRING_INLINES -D__NO_MATH_INLINES"
+-
+ 	    if test "$have_dl" = yes; then
+ 		SHLIB_LD="${CC} -shared"
+ 		DL_OBJS="tclLoadDl.o"
+ 		DL_LIBS="-ldl"
+ 		LDFLAGS="-rdynamic"
+-		LD_SEARCH_FLAGS='-Wl,-rpath,${LIB_RUNTIME_DIR},-rpath,${LIB_PGTCL_RUNTIME_DIR}'
++		LD_SEARCH_FLAGS=""
+ 	    else
+ 		AC_CHECK_HEADER(dld.h, [
+ 		    SHLIB_LD="ld -shared"
+@@ -514,17 +502,6 @@
+ 		EXTRA_CFLAGS="-mieee"
+ 	    fi
+ 
+-	    # The combo of gcc + glibc has a bug related
+-	    # to inlining of functions like strtod(). The
+-	    # -fno-builtin flag should address this problem
+-	    # but it does not work. The -fno-inline flag
+-	    # is kind of overkill but it works.
+-	    # Disable inlining only when one of the
+-	    # files in compat/*.c is being linked in.
+-	    if test x"${LIBOBJS}" != x ; then
+-	        EXTRA_CFLAGS="${EXTRA_CFLAGS} -fno-inline"
+-	    fi
+-
+ 	    ;;
+ 	GNU*)
+ 	    SHLIB_CFLAGS="-fPIC"
+
+
+diff -Naur Pgtcl.orig/Makefile.in Pgtcl/Makefile.in
+--- Pgtcl.orig/Makefile.in	2004-06-13 17:49:14.000000000 -0400
++++ Pgtcl/Makefile.in	2005-10-04 14:23:37.000000000 -0400
+@@ -121,7 +121,7 @@
+ SHLIB_LD	= @SHLIB_LD@
+ SHLIB_LDFLAGS	= @SHLIB_LDFLAGS@
+ # Added EXTRA_LIBS for special cases like -lssl
+-SHLIB_LD_LIBS	= @SHLIB_LD_LIBS@ $(PG_LIBS) $(TCL_LIBS) @EXTRA_LIBS@
++SHLIB_LD_LIBS	= $(PG_LIBS) @SHLIB_LD_LIBS@ $(TCL_LIBS) @EXTRA_LIBS@
+ STLIB_LD	= @STLIB_LD@
+ TCL_DEFS	= @TCL_DEFS@
+ TCL_BIN_DIR	= @TCL_BIN_DIR@

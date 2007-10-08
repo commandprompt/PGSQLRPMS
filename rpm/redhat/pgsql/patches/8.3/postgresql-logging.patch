@@ -1,0 +1,35 @@
+--- postgresql-8.3beta1/src/backend/utils/misc/postgresql.conf.sample.old	2007-10-05 09:35:59.000000000 -0700
++++ postgresql-8.3beta1/src/backend/utils/misc/postgresql.conf.sample	2007-10-05 09:42:48.000000000 -0700
+@@ -236,16 +236,16 @@
+ 					# csvlog requires logging_collector to be on
+ 
+ # This is used when logging to stderr:
+-#logging_collector = off		# Enable capturing of stderr and csvlog 
++logging_collector = on			# Enable capturing of stderr and csvlog 
+ 					# into log files. Required to be on for csvlogs.
+ 					# (change requires restart)
+ 
+ # These are only used if logging_collector is on:
+-#log_directory = 'pg_log'		# Directory where log files are written
++log_directory = 'pg_log'		# Directory where log files are written
+ 					# Can be absolute or relative to PGDATA
+ #log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log' # Log file name pattern.
+ 					# Can include strftime() escapes
+-#log_truncate_on_rotation = off # If on, any existing log file of the same 
++log_truncate_on_rotation = on		 # If on, any existing log file of the same 
+ 					# name as the new log file will be
+ 					# truncated rather than appended to. But
+ 					# such truncation only occurs on
+@@ -253,10 +253,10 @@
+ 					# or size-driven rotation. Default is
+ 					# off, meaning append to existing files
+ 					# in all cases.
+-#log_rotation_age = 1d			# Automatic rotation of logfiles will 
++log_rotation_age = 1d			# Automatic rotation of logfiles will 
+ 					# happen after that time.  0 to 
+ 					# disable.
+-#log_rotation_size = 10MB		# Automatic rotation of logfiles will 
++log_rotation_size = 0			# Automatic rotation of logfiles will 
+ 					# happen after that much log
+ 					# output.  0 to disable.
+ 

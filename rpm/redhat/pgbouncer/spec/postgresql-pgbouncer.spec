@@ -54,7 +54,7 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Tue Sep 25 2007 - Darcy Buskermolen <darcyb@commandprompt.com> 1.0.8-2
+* Tue Sep 25 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.0.8-2
 - Added init script from Darcy.
 
 * Tue Sep 18 2007 - Darcy Buskermolen <darcyb@commandprompt.com> 1.0.8-1

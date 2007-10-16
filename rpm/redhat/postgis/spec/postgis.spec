@@ -4,13 +4,13 @@
 
 Summary:	Geographic Information Systems Extensions to PostgreSQL
 Name:		postgis
-Version:	1.3.0RC1
+Version:	1.3.1
 Release:	1%{?dist}
 License:	GPL
 Group:		Applications/Databases
 Source0:	http://postgis.refractions.net/download/%{name}-%{version}.tar.gz
 Source4:	filter-requires-perl-Pg.sh
-#Patch1:		postgis-gnumakefile.patch
+Patch1:		postgis-gnumakefile.patch
 Patch2:		postgis-jdbcmakefile.patch
 URL:		http://postgis.refractions.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -58,7 +58,7 @@ The postgis-utils package provides the utilities for PostGIS.
 
 %prep
 %setup -q
-#%patch1 -p0
+%patch1 -p0
 # To be removed in 1.2.2
 %patch2 -p0
 
@@ -146,11 +146,15 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Tue Jul 17 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.3.0RC1-1
-- Update to 1.3.0RC1
+* Tue Oct 16 2007 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.1-1
+- Update to 1.3.1
+- Updated patch2
+
+* Tue Aug 28 2007 Fedora Release Engineering <rel-eng at fedoraproject dot org> - 1.2.1-3
+- Rebuild for selinux ppc32 issue.
 
 * Mon Jul 2 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.1-2
-- Fix build problems (removed template_gis, per discussion with upsteam).
+- Fix build problems (removed template_gis, per discussion with upstream).
 
 * Mon Feb 19 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.1-1
 - Update to 1.2.1

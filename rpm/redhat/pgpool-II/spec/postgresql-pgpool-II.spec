@@ -2,12 +2,12 @@
 
 Summary:	Pgpool is a connection pooling/replication server for PostgreSQL
 Name:		postgresql-%{short_name}
-Version:	1.2
-Release:	5%{?dist}
+Version:	1.2.1
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org/pgpool-II/en
-Source0:	http://pgfoundry.org/frs/download.php/1419/%{short_name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1472/%{short_name}-%{version}.tar.gz
 Source1:        pgpool.init
 Source2:        pgpool.sysconfig
 Patch1:		pgpool.conf.sample.patch
@@ -103,6 +103,9 @@ chkconfig --add pgpool
 %{_libdir}/libpcp.so
 
 %changelog
+* Fri Oct 5 2007 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.1-1
+- Update to 1.2.1
+
 * Wed Aug 29 2007 Devrim Gunduz <devrim@CommandPrompt.com> 1.2-5
 - Chmod sysconfig/pgpool to 644, not 755. Per BZ review.
 - Run chkconfig --add pgpool during %%post.

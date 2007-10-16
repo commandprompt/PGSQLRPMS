@@ -2,13 +2,16 @@
 
 Summary:	Pgpool is a connection pooling/replication server for PostgreSQL
 Name:		postgresql-%{short_name}
-Version:	3.4
+Version:	3.4.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org
-Source0:	http://pgfoundry.org/frs/download.php/1374/%{short_name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1446/%{short_name}-%{version}.tar.gz
+Source1:	%{short_name}.init
+Source2:	%{short_name}.sysconfig
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:	initscripts, pam-devel
 
 %description
 pgpool is a connection pooling/replication server for PostgreSQL.
@@ -35,6 +38,10 @@ install -m 644 %{short_name}.8 %{buildroot}%{_mandir}/man8/
 install -d %{buildroot}/%{_docdir}/%{name}-%{version}
 mv %{buildroot}%{_sysconfdir}/pgpool.conf.sample %{buildroot}/%{_docdir}/%{name}-%{version}
 mv %{buildroot}%{_sysconfdir}/pool_hba.conf.sample %{buildroot}/%{_docdir}/%{name}-%{version}
+install -d %{buildroot}%{_initrddir}
+install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{short_name}
+install -d %{buildroot}%{_sysconfdir}/sysconfig
+install -m 755 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{short_name}
 
 %clean
 rm -rf %{buildroot}
@@ -44,10 +51,18 @@ rm -rf %{buildroot}
 %doc README README.euc_jp TODO COPYING INSTALL AUTHORS ChangeLog NEWS pgpool.conf.sample pool_hba.conf.sample
 %{_datadir}/pgpool/pgpool.pam
 %{_bindir}/pgpool
+%{_initrddir}/pgpool
+%config(noreplace) %{_sysconfdir}/sysconfig/pgpool
 %{_mandir}/man8/*
 
-
 %changelog
+* Tue Oct 16 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 3.4.1-1
+- Update to 3.4.1
+
+* Sun Aug 5 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 3.4-2
+- Added an init script for pgpool
+- Added /etc/sysconfig/pgpool
+
 * Wed Aug 1 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 3.4-1
 - Update to 3.4
 - Removed patches, they are now in upstream

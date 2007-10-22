@@ -30,8 +30,8 @@ fi
 BOUNCERCONF=/etc/pgbouncer.ini
 BOUNCERLOG=/var/log/pgbouncer.log
 
-# Override defaults from /etc/sysconfig/pgsql if file is present
-[ -f /etc/sysconfig/pgsql/${NAME} ] && . /etc/sysconfig/pgsql/${NAME}
+# Override defaults from /etc/sysconfig/pgbouncer if file is present
+[ -f /etc/sysconfig/${NAME} ] && . /etc/sysconfig/${NAME}
 
 # Check that networking is up.
 [ "${NETWORKING}" = "no" ] && exit 0

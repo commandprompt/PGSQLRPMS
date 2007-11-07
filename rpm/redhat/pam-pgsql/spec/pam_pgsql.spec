@@ -37,7 +37,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/lib/security/pam_pgsql.so
+/%{_lib}/security/pam_pgsql.so
 %doc README CREDITS
 
 %changelog

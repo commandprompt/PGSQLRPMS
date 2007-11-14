@@ -7,7 +7,7 @@
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
 Version:	1.8.0
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	Artistic
 Group:		Applications/Databases
 URL:		http://www.pgadmin.org/
@@ -52,11 +52,9 @@ make %{?_smp_mflags} all
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
-make DESTDIR=%{buildroot} install
-
-#cp -f ./src/include/images/elephant48.xpm %{buildroot}/%{_datadir}/%{name}/%{name}.xpm
-
 mkdir -p %{buildroot}/%{_datadir}/applications
+
+cp -f ./pkg/debian/pgadmin3.xpm %{buildroot}/%{_datadir}/%{name}/%{name}.xpm
 
 desktop-file-install --vendor fedora --dir %{buildroot}/%{_datadir}/applications \
 	--add-category X-Fedora\
@@ -79,8 +77,11 @@ rm -rf %{buildroot}
 %doc docs/*
 
 %changelog
+* Wed Nov 14 2007 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.0-3
+- Properly install xpm file (Again)
+
 * Tue Oct 23 2007 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.0-2
-- Fix requires and builrequires
+- Fix requires and buildrequires
 - We are not in beta, set beta flag to 0
 
 * Mon Oct 22 2007 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.0-1

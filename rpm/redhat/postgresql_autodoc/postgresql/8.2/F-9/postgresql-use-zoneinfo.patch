@@ -1,0 +1,61 @@
+PostgreSQL includes its own copy of the zic timezone database, which is great
+for ensuring portable results but not so great from a package maintenance
+perspective.  Since the data is in the same format as is provided by the
+Linux-standard /usr/share/zoneinfo files, we can avoid having to update
+postgresql for timezone updates by just using those files instead.
+
+Note: as of PG 8.3 this patch will be unnecessary; use configure's
+--with-system-tzdata switch instead.
+
+
+diff -Naur postgresql-8.2.4.orig/src/timezone/Makefile postgresql-8.2.4/src/timezone/Makefile
+--- postgresql-8.2.4.orig/src/timezone/Makefile	2007-03-14 13:38:15.000000000 -0400
++++ postgresql-8.2.4/src/timezone/Makefile	2007-08-25 16:38:53.000000000 -0400
+@@ -38,14 +38,12 @@
+ 	$(CC) $(CFLAGS) $(ZICOBJS) $(LDFLAGS) $(LIBS) -o $@$(X)
+ 
+ install: all installdirs
+-	./zic -d '$(DESTDIR)$(datadir)/timezone' -p '$(POSIXRULES)' $(TZDATAFILES)
+ 	$(MAKE) -C tznames $@
+ 
+ installdirs:
+ 	$(mkinstalldirs) '$(DESTDIR)$(datadir)'
+ 
+ uninstall:
+-	rm -rf '$(DESTDIR)$(datadir)/timezone'
+ 	$(MAKE) -C tznames $@
+ 
+ clean distclean maintainer-clean:
+diff -Naur postgresql-8.2.4.orig/src/timezone/pgtz.c postgresql-8.2.4/src/timezone/pgtz.c
+--- postgresql-8.2.4.orig/src/timezone/pgtz.c	2006-11-21 18:11:55.000000000 -0500
++++ postgresql-8.2.4/src/timezone/pgtz.c	2007-08-25 16:42:32.000000000 -0400
+@@ -31,9 +31,6 @@
+ pg_tz	   *global_timezone = NULL;
+ 
+ 
+-static char tzdir[MAXPGPATH];
+-static bool done_tzdir = false;
+-
+ static bool scan_directory_ci(const char *dirname,
+ 							  const char *fname, int fnamelen,
+ 							  char *canonname, int canonnamelen);
+@@ -45,17 +42,10 @@
+ /*
+  * Return full pathname of timezone data directory
+  */
+-static char *
++static const char *
+ pg_TZDIR(void)
+ {
+-	if (done_tzdir)
+-		return tzdir;
+-
+-	get_share_path(my_exec_path, tzdir);
+-	strlcpy(tzdir + strlen(tzdir), "/timezone", MAXPGPATH - strlen(tzdir));
+-
+-	done_tzdir = true;
+-	return tzdir;
++	return "/usr/share/zoneinfo";
+ }
+ 
+ 

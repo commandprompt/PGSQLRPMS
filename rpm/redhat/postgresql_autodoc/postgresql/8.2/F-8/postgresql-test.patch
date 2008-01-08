@@ -1,0 +1,73 @@
+diff -Naur postgresql-8.2.0.orig/src/test/regress/GNUmakefile postgresql-8.2.0/src/test/regress/GNUmakefile
+--- postgresql-8.2.0.orig/src/test/regress/GNUmakefile	2006-07-20 20:24:04.000000000 -0400
++++ postgresql-8.2.0/src/test/regress/GNUmakefile	2006-12-04 19:56:54.000000000 -0500
+@@ -102,12 +102,23 @@
+ testtablespace := $(abs_builddir)/testtablespace
+ 
+ 
++ifdef RPMTESTING
++define sed-command
++sed -e 's,@abs_srcdir@,$(libdir)/pgsql/test/regress,g' \
++    -e 's,@abs_builddir@,$(libdir)/pgsql/test/regress,g' \
++    -e 's,@abs_spidir@,$(libdir)/pgsql/test/regress,g' \
++    -e 's,@testtablespace@,$(libdir)/pgsql/test/regress/testtablespace,g' \
++    -e 's/@DLSUFFIX@/$(DLSUFFIX)/g' $< >$@
++endef
++else
+ define sed-command
+ sed -e 's,@abs_srcdir@,$(abs_srcdir),g' \
+     -e 's,@abs_builddir@,$(abs_builddir),g' \
++    -e 's,@abs_spidir@,$(abs_builddir)/../../../contrib/spi,g' \
+     -e 's,@testtablespace@,$(testtablespace),g' \
+     -e 's/@DLSUFFIX@/$(DLSUFFIX)/g' $< >$@
+ endef
++endif
+ 
+ $(input_files): sql/%.sql: input/%.source
+ 	$(sed-command)
+diff -Naur postgresql-8.2.0.orig/src/test/regress/input/create_function_1.source postgresql-8.2.0/src/test/regress/input/create_function_1.source
+--- postgresql-8.2.0.orig/src/test/regress/input/create_function_1.source	2006-02-27 11:09:50.000000000 -0500
++++ postgresql-8.2.0/src/test/regress/input/create_function_1.source	2006-12-04 19:58:24.000000000 -0500
+@@ -24,17 +24,17 @@
+ 
+ CREATE FUNCTION check_primary_key ()
+ 	RETURNS trigger
+-	AS '@abs_builddir@/../../../contrib/spi/refint@DLSUFFIX@'
++	AS '@abs_spidir@/refint@DLSUFFIX@'
+ 	LANGUAGE C;
+ 
+ CREATE FUNCTION check_foreign_key ()
+ 	RETURNS trigger
+-	AS '@abs_builddir@/../../../contrib/spi/refint@DLSUFFIX@'
++	AS '@abs_spidir@/refint@DLSUFFIX@'
+ 	LANGUAGE C;
+ 
+ CREATE FUNCTION autoinc ()
+ 	RETURNS trigger
+-	AS '@abs_builddir@/../../../contrib/spi/autoinc@DLSUFFIX@'
++	AS '@abs_spidir@/autoinc@DLSUFFIX@'
+ 	LANGUAGE C;
+ 
+ CREATE FUNCTION funny_dup17 ()
+diff -Naur postgresql-8.2.0.orig/src/test/regress/output/create_function_1.source postgresql-8.2.0/src/test/regress/output/create_function_1.source
+--- postgresql-8.2.0.orig/src/test/regress/output/create_function_1.source	2006-03-14 17:48:25.000000000 -0500
++++ postgresql-8.2.0/src/test/regress/output/create_function_1.source	2006-12-04 19:58:54.000000000 -0500
+@@ -25,15 +25,15 @@
+ NOTICE:  argument type city_budget is only a shell
+ CREATE FUNCTION check_primary_key ()
+ 	RETURNS trigger
+-	AS '@abs_builddir@/../../../contrib/spi/refint@DLSUFFIX@'
++	AS '@abs_spidir@/refint@DLSUFFIX@'
+ 	LANGUAGE C;
+ CREATE FUNCTION check_foreign_key ()
+ 	RETURNS trigger
+-	AS '@abs_builddir@/../../../contrib/spi/refint@DLSUFFIX@'
++	AS '@abs_spidir@/refint@DLSUFFIX@'
+ 	LANGUAGE C;
+ CREATE FUNCTION autoinc ()
+ 	RETURNS trigger
+-	AS '@abs_builddir@/../../../contrib/spi/autoinc@DLSUFFIX@'
++	AS '@abs_spidir@/autoinc@DLSUFFIX@'
+ 	LANGUAGE C;
+ CREATE FUNCTION funny_dup17 ()
+         RETURNS trigger

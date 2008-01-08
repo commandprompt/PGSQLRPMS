@@ -1,0 +1,75 @@
+diff -Naur postgresql-7.4.orig/doc/tutorial-sql.html postgresql-7.4/doc/tutorial-sql.html
+--- postgresql-7.4.orig/doc/tutorial-sql.html	2003-11-16 23:52:47.000000000 +0200
++++ postgresql-7.4/doc/tutorial-sql.html	2003-11-18 21:41:17.000000000 +0200
+@@ -212,10 +212,10 @@
+     <SPAN
+ CLASS="PRODUCTNAME"
+ >PostgreSQL</SPAN
+-> source distribution
++> docs package
+     in the directory <TT
+ CLASS="FILENAME"
+->src/tutorial/</TT
++>tutorial/</TT
+ >.  Refer to the
+     <TT
+ CLASS="FILENAME"
+@@ -232,10 +232,8 @@
+ CLASS="USERINPUT"
+ >cd <TT
+ CLASS="REPLACEABLE"
+-><I
+->....</I
+-></TT
+->/src/tutorial</KBD
+++></VAR
+++>/usr/share/doc/postgresql-docs-7.4.7/tutorial</KBD
+ >
+ <SAMP
+ CLASS="PROMPT"
+@@ -337,4 +337,4 @@
+ ></DIV
+ ></BODY
+ ></HTML
+->
+\ No newline at end of file
++>
+diff -Naur postgresql-7.4.orig/GNUmakefile.in postgresql-7.4/GNUmakefile.in
+--- postgresql-7.4.orig/GNUmakefile.in	2003-10-14 00:39:41.000000000 +0300
++++ postgresql-7.4/GNUmakefile.in	2003-11-18 21:42:24.000000000 +0200
+@@ -11,16 +11,19 @@
+ all:
+ 	$(MAKE) -C doc all
+ 	$(MAKE) -C src all
++	$(MAKE) -C src/tutorial all
+ 	@echo "All of PostgreSQL successfully made. Ready to install."
+ 
+ install:
+ 	$(MAKE) -C doc install
+ 	$(MAKE) -C src install
++	$(MAKE) -C src/tutorial install
+ 	@echo "PostgreSQL installation complete."
+ 
+ installdirs uninstall distprep:
+ 	$(MAKE) -C doc $@
+ 	$(MAKE) -C src $@
++	$(MAKE) -C src/tutorial $@
+ 
+ install-all-headers:
+ 	$(MAKE) -C src $@
+@@ -31,6 +34,7 @@
+ 	$(MAKE) -C doc $@
+ 	$(MAKE) -C contrib $@
+ 	$(MAKE) -C src $@
++	$(MAKE) -C src/tutorial $@
+ # Garbage from autoconf:
+ 	@rm -rf autom4te.cache/
+ 
+@@ -40,6 +44,7 @@
+ 	-$(MAKE) -C doc $@
+ 	-$(MAKE) -C contrib $@
+ 	-$(MAKE) -C src $@
++	-$(MAKE) -C src/tutorial $@
+ 	-rm -f config.cache config.log config.status GNUmakefile
+ # Garbage from autoconf:
+ 	@rm -rf autom4te.cache/

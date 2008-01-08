@@ -1,0 +1,45 @@
+--- postgresql-7.3.20/src/backend/storage/lmgr/s_lock.c.sopwith	2002-09-20 20:14:05.000000000 -0400
++++ postgresql-7.3.20/src/backend/storage/lmgr/s_lock.c	2003-02-12 11:45:49.000000000 -0500
+@@ -144,7 +144,30 @@
+ }
+ #endif   /* __APPLE__ && __ppc__ */
+ 
+-#if defined(__powerpc__)
++#if defined(__powerpc64__)
++/* Note: need a nice gcc constrained asm version so it can be inlined */
++static void
++tas_dummy()
++{
++	__asm__		__volatile__(
++										 "\
++.global .tas 					\n\
++.tas:							\n\
++			lwarx	5,0,3		\n\
++			cmpwi 	5,0 		\n\
++			bne 	fail		\n\
++			addi 	5,5,1		\n\
++			stwcx.	5,0,3		\n\
++			beq 	success 	\n\
++fail:		li		3,1 		\n\
++			blr 				\n\
++success:						\n\
++			isync				\n\
++			li 		3,0			\n\
++			blr					\n\
++");
++}
++#elif defined(__powerpc__)
+ /* Note: need a nice gcc constrained asm version so it can be inlined */
+ static void
+ tas_dummy()
+--- postgresql-7.3.20/src/include/storage/s_lock.h.sopwith	2002-11-21 20:13:28.000000000 -0500
++++ postgresql-7.3.20/src/include/storage/s_lock.h	2003-02-12 11:38:47.000000000 -0500
+@@ -244,7 +244,7 @@
+ #endif	 /* defined(__mc68000__) && defined(__linux__) */
+ 
+ 
+-#if defined(__ppc__) || defined(__powerpc__)
++#if defined(__ppc__) || defined(__powerpc__) || defined(__powerpc64__)
+ /*
+  * We currently use out-of-line assembler for TAS on PowerPC; see s_lock.c.
+  * S_UNLOCK is almost standard but requires a "sync" instruction.

@@ -1,0 +1,18 @@
+--- postgresql-7.4/src/backend/libpq/pg_hba.conf.sample.orig	2003-09-13 19:43:38.000000000 +0300
++++ postgresql-7.4/src/backend/libpq/pg_hba.conf.sample	2003-11-18 21:35:01.000000000 +0200
+@@ -55,8 +55,12 @@
+ 
+ # TYPE  DATABASE    USER        IP-ADDRESS        IP-MASK           METHOD
+ 
+-local   all         all                                             trust
+ # IPv4-style local connections:
+-host    all         all         127.0.0.1         255.255.255.255   trust
++#host    all         all         127.0.0.1         255.255.255.255   trust
+ # IPv6-style local connections:
+-host    all         all         ::1               ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff        trust
++#host    all         all         ::1               ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff        trust
++
++# Using sockets credentials for improved security. Not available everywhere,
++# but works on Linux, *BSD (and probably some others)
++
++local  all    all             ident   sameuser

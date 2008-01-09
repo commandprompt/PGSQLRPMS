@@ -65,7 +65,7 @@ Version: 7.4.19
 # Pre-release RPM's should not be put up on the public ftp.postgresql.org server
 # -- only test releases or full releases should be.
 
-Release: 1PGDG%{?dist}
+Release: 2PGDG%{?dist}
 License: BSD
 Group: Applications/Databases
 Source0: ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
@@ -185,6 +185,7 @@ if you're installing the postgresql-server package.
 Summary: The shared libraries required for any PostgreSQL clients.
 Group: Applications/Databases
 Provides: libpq.so
+Requires: compat-postgresql-libs
 
 %description libs
 The postgresql-libs package provides the essential shared libraries for any 
@@ -784,6 +785,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Jan 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 7.4.19-2PGDG
+- Add Requires for compat-postgresql-libs-5 for F-8
+
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 7.4.19-1PGDG
 - Update to 7.4.19, which also includes security fixes for CVE-2007-4769,
   CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601

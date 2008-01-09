@@ -6,7 +6,8 @@ License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/
 Source0:	%{name}-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 Conflicts:	postgresql-libs < 8.2.6
 
 %description
@@ -39,9 +40,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %{_libdir}/libpq.so.*
-%{_libdir}/libecpg_compat.so.*
-%{_libdir}/libpgtypes.so.*
-%{_libdir}/libecpg.so.*
 
 %changelog
 * Tue Jan 8 2008 - Devrim GUNDUZ <devrim@CommandPrompt.com> 5.1PGDG

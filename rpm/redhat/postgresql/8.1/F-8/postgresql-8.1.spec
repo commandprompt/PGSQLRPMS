@@ -73,7 +73,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.1.11
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -161,6 +161,7 @@ if you're installing the postgresql-server package.
 Summary:	The shared libraries required for any PostgreSQL clients
 Group:		Applications/Databases
 Provides:	libpq.so
+Requires:	compat-postgresql-libs-5 
 
 %description libs
 The postgresql-libs package provides the essential shared libraries for any 
@@ -648,6 +649,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Jan 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.11-2PGDG
+- Add Requires for compat-postgresql-libs-5 for F-8
+
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.11-1PGDG
 - Update to 8.1.11, which also includes security fixes for CVE-2007-4769,
   CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601

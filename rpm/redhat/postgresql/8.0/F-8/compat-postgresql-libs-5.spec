@@ -39,6 +39,9 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %{_libdir}/libpq.so.*
+%{_libdir}/libecpg_compat.so.*
+%{_libdir}/libpgtypes.so.*
+%{_libdir}/libecpg.so.*
 
 %changelog
 * Tue Jan 8 2008 - Devrim GUNDUZ <devrim@CommandPrompt.com> 5.1PGDG

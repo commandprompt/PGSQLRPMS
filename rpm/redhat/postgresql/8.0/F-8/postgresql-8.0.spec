@@ -55,7 +55,7 @@ Version:	8.0.15
 # Test releases are where PostgreSQL itself is not in beta, but certain parts of
 # the RPM packaging (such as the spec file, the initscript, etc) are in beta.
 
-Release: 	1PGDG%{?dist}
+Release: 	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0: 	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
@@ -166,6 +166,7 @@ if you're installing the postgresql-server package.
 Summary: The shared libraries required for any PostgreSQL clients.
 Group: Applications/Databases
 Provides: libpq.so
+Requires:	compat-postgresql-libs
 
 %description libs
 The postgresql-libs package provides the essential shared libraries for any 
@@ -643,6 +644,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Jan 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.15-2PGDG
+- Add Requires for compat-postgresql-libs-5 for F-8
+ 
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.15-1PGDG
 - Update to 8.0.15, which also includes security fixes for CVE-2007-4769, 
   CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601

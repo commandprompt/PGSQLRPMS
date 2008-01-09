@@ -28,10 +28,9 @@ install -m 755 lib*/* %{buildroot}%{_libdir}
 # Remove some files
 /bin/rm -f %{_libdir}/libpq.so.5
 # ... and now link them.
-/bin/ln -s %{_libdir}/libpq.so.5.1 %{_libdir}/libpq.so.5
-# Run ldconfig
-/sbin/ldconfig
+/bin/ln -s %{_libdir}/libpq.so.5.0 %{_libdir}/libpq.so.5
 
+%post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %clean
@@ -44,4 +43,3 @@ rm -rf %{buildroot}
 %changelog
 * Tue Jan 8 2008 - Devrim GUNDUZ <devrim@CommandPrompt.com> 5.1PGDG
 - Initial packaging for libpq5
-

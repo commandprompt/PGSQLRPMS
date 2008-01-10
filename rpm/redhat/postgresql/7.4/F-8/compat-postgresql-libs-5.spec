@@ -8,11 +8,8 @@ Url:		http://www.postgresql.org/
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Conflicts:	postgresql-libs < 8.2.6
-
 %description
-This package provides compatibility libraries
-for PostgreSQL PostgreSQL <=8.2.6
+This package provides compatibility libraries for PostgreSQL
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -29,8 +26,8 @@ install -m 755 lib*/* %{buildroot}%{_libdir}
 /bin/rm -f %{_libdir}/libpq.so.5
 # ... and now link them.
 /bin/ln -s %{_libdir}/libpq.so.5.0 %{_libdir}/libpq.so.5
+/sbin/ldconfig
 
-%post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %clean
@@ -43,3 +40,4 @@ rm -rf %{buildroot}
 %changelog
 * Tue Jan 8 2008 - Devrim GUNDUZ <devrim@CommandPrompt.com> 5.1PGDG
 - Initial packaging for libpq5
+

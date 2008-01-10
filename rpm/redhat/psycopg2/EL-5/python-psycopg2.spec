@@ -7,8 +7,8 @@
 
 Summary:	A PostgreSQL database adapter for Python
 Name:		python-psycopg2
-Version:	2.0.3
-Release:	3%{?dist}
+Version:	2.0.6
+Release:	1%{?dist}
 Source0:	http://initd.org/pub/software/psycopg/psycopg2-%{version}.tar.gz
 License:	GPL (with Exceptions)
 Group:		Applications/Databases
@@ -68,7 +68,7 @@ rm -rf %{buildroot}
 %{python_sitearch}/psycopg2/*.py
 %{python_sitearch}/psycopg2/*.pyc
 %{python_sitearch}/psycopg2/*.so
-%ghost %{python_sitearch}/psycopg2/*.pyo
+%{python_sitearch}/psycopg2/*.pyo
 
 %files doc
 %defattr(-,root,root)
@@ -78,12 +78,31 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %dir %{ZPsycopgDAdir}
 %{ZPsycopgDAdir}/*.py
-%ghost %{ZPsycopgDAdir}/*.pyo
+%{ZPsycopgDAdir}/*.pyo
 %{ZPsycopgDAdir}/*.pyc
 %{ZPsycopgDAdir}/dtml/*
 %{ZPsycopgDAdir}/icons/*
 
 %changelog
+
+* Fri Jun 15 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.6-1
+- Update to 2.0.6
+
+* Sun May 06 2007 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info>
+- rebuilt for RHEL5 final
+
+* Wed Dec 6 2006 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.5.1-4
+- Rebuilt for PostgreSQL 8.2.0
+
+* Mon Sep 11 2006 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.5.1-3
+- Rebuilt
+
+* Wed Sep 6 2006 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.5.1-2
+- Remove ghost'ing, per Python Packaging Guidelines
+
+* Mon Sep 4 2006 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.5.1-1
+- Update to 2.0.5.1
+
 * Sun Aug 6 2006 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.3-3
 - Fixed zope package dependencies and macro definition, per bugzilla review (#199784)
 - Fixed zope package directory ownership, per bugzilla review (#199784)

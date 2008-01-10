@@ -1,11 +1,11 @@
 Summary:	PgFouine PostgreSQL log analyzer
 Name:		pgfouine
-Version:	0.7.1
+Version:	1.0
 Release:	2%{?dist}
 BuildArch:	noarch
 License:	GPL
 Group:		Development/Tools
-Source0:	http://pgfouine.projects.postgresql.org/releases/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1334/%{name}-%{version}.tar.gz
 Source2:	pgfouine-tutorial.txt
 URL: 		http://pgfouine.projects.postgresql.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -61,29 +61,50 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}
 
 %changelog 
+* Sun Jun 3 2007 Devrim Gunduz <devrim@CommandPrompt.com> - 1.0-2
+- Bumped up spec version
+
+* Sun Apr 1 2007 Devrim Gunduz <devrim@CommandPrompt.com> - 1.0-1
+- Update to 1.0
+
+* Tue Dec 12 2006 Devrim Gunduz <devrim@CommandPrompt.com> - 0.7.2-1
+- Update to 0.7.2
+
 * Thu Nov 30 2006 Devrim Gunduz <devrim@CommandPrompt.com> - 0.7.1-2
 - Added tutorial.txt per bugzilla review
+
 * Sat Oct 28 2006 Guillaume Smet <guillaume-pg@smet.org> - 0.7.1-1
 - released 0.7.1
+
 * Sun Sep 3 2006 Guillaume Smet <guillaume-pg@smet.org> - 0.7-4
 - fixed spec according to bugzilla #202901 comment #2
+
 * Thu Aug 18 2006 Devrim Gunduz <devrim@CommandPrompt.com> - 0.7-3
 - fixed spec, per bugzilla review
+
 * Thu Aug 17 2006 Devrim Gunduz <devrim@CommandPrompt.com> - 0.7-2
 - fixed rpmlint warnings, and made cosmetic changes
+
 * Thu Aug 17 2006 Guillaume Smet <guillaume-pg@smet.org>
 - released 0.7
+
 * Thu Aug 10 2006 Guillaume Smet <guillaume-pg@smet.org>
 - fixed RPM packaging for 0.7
+
 * Wed Jul 19 2006 Guillaume Smet <guillaume-pg@smet.org>
 - added pgfouine_vacuum.php
+
 * Sun May 21 2006 Guillaume Smet <guillaume-pg@smet.org>
 - released 0.6
+
 * Sun Mar 26 2006 Guillaume Smet <guillaume-pg@smet.org>
 - released 0.5
+
 * Tue Jan 10 2006 Guillaume Smet <guillaume-pg@smet.org>
 - released 0.2.1
+
 * Sun Dec 4 2005 Guillaume Smet <guillaume-pg@smet.org>
 - released 0.2
+
 * Fri Nov 18 2005 Guillaume Smet <guillaume-pg@smet.org>
 - initial RPM packaging

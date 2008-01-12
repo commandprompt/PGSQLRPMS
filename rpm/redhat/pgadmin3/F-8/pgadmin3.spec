@@ -7,7 +7,8 @@ Group:		Applications/Databases
 Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	wxGTK-devel postgresql-devel desktop-file-utils openssl-devel libxml2-devel libxslt-devel
+BuildRequires:	wxGTK-devel postgresql-devel >= 8.0 
+BuildRequires:	desktop-file-utils openssl-devel libxml2-devel libxslt-devel
 Requires:	wxGTK
 
 %description

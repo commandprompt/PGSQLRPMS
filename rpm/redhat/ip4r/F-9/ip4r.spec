@@ -1,12 +1,10 @@
-%define sname	ip4r
-
 Summary:	IPv4 and IPv4 range index types for PostgreSQL
-Name:		postgresql-%{sname}
+Name:		ip4r
 Version:	1.01
 Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1226/%{sname}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1226/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/ip4r
 BuildRequires:	postgresql-devel >= 8.1
 Requires:	postgresql-server >= 8.1
@@ -18,7 +16,7 @@ IPv4 addresses respectively. They can be used as a more flexible,
 indexable version of the cidr type.
 
 %prep
-%setup -q -n %{sname}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 make USE_PGXS=1 %{?_smp_mflags} 
@@ -29,9 +27,9 @@ rm -rf %{buildroot}
 install -d %{buildroot}%{_libdir}/pgsql/
 install -d %{buildroot}%{_datadir}/%{name}
 install -d %{buildroot}%{_docdir}/%{name}-%{version}
-install -m 755 %{sname}.so %{buildroot}%{_libdir}/pgsql/%{sname}.so
-install -p -m 755 %{sname}.sql %{buildroot}%{_datadir}/%{name}
-install -p -m 755 README.%{sname} %{buildroot}%{_docdir}/%{name}-%{version}/README
+install -m 755 %{name}.so %{buildroot}%{_libdir}/pgsql/%{name}.so
+install -p -m 755 %{name}.sql %{buildroot}%{_datadir}/%{name}
+install -p -m 755 README.%{name} %{buildroot}%{_docdir}/%{name}-%{version}/README
 
 %clean
 rm -rf %{buildroot}
@@ -40,8 +38,8 @@ rm -rf %{buildroot}
 %defattr(644,root,root,755)
 %doc %{_docdir}/%{name}-%{version}/README
 %{_datadir}/%{name}
-%{_datadir}/%{name}/%{sname}*.sql
-%{_libdir}/pgsql/%{sname}.so
+%{_datadir}/%{name}/%{name}*.sql
+%{_libdir}/pgsql/%{name}.so
 
 %changelog
 * Mon Jul 9 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.01-2

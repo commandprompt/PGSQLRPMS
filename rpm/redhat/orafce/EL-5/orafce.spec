@@ -1,12 +1,10 @@
-%define sname	orafce
-
 Summary:	Implementation of some Oracle functions into PostgreSQL
-Name:		postgresql-%{sname}
+Name:		orafce
 Version:	2.1.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1301/%{sname}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1301/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/orafce/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 
@@ -20,7 +18,7 @@ now. Functionality was verified on Oracle 10g and module is useful
 for production work.
 
 %prep
-%setup -q -n %{sname}
+%setup -q -n %{name}
 
 %build
 USE_PGXS=1 make %{?_smp_mflags} 

@@ -1,15 +1,13 @@
-%define short_name	pgpool
-
 Summary:	Pgpool is a connection pooling/replication server for PostgreSQL
-Name:		postgresql-%{short_name}
+Name:		pgpool
 Version:	3.4.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org
-Source0:	http://pgfoundry.org/frs/download.php/1446/%{short_name}-%{version}.tar.gz
-Source1:	%{short_name}.init
-Source2:	%{short_name}.sysconfig
+Source0:	http://pgfoundry.org/frs/download.php/1446/%{name}-%{version}.tar.gz
+Source1:	%{name}.init
+Source2:	%{name}.sysconfig
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	initscripts, pam-devel
 
@@ -20,7 +18,7 @@ pgpool runs between PostgreSQL's clients(front ends) and servers
 were a standard PostgreSQL server.
 
 %prep
-%setup -q -n %{short_name}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 CFLAGS="${CFLAGS:-%optflags}" ; export CFLAGS
@@ -33,15 +31,15 @@ make %{?smp_flags}
 %install
 rm -rf %{buildroot}
 make DESTDIR=%{buildroot} install
-install -m 755 %{short_name} %{buildroot}%{_bindir}
-install -m 644 %{short_name}.8 %{buildroot}%{_mandir}/man8/
+install -m 755 %{name} %{buildroot}%{_bindir}
+install -m 644 %{name}.8 %{buildroot}%{_mandir}/man8/
 install -d %{buildroot}/%{_docdir}/%{name}-%{version}
 mv %{buildroot}%{_sysconfdir}/pgpool.conf.sample %{buildroot}/%{_docdir}/%{name}-%{version}
 mv %{buildroot}%{_sysconfdir}/pool_hba.conf.sample %{buildroot}/%{_docdir}/%{name}-%{version}
 install -d %{buildroot}%{_initrddir}
-install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{short_name}
+install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 install -d %{buildroot}%{_sysconfdir}/sysconfig
-install -m 755 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{short_name}
+install -m 755 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 
 %clean
 rm -rf %{buildroot}

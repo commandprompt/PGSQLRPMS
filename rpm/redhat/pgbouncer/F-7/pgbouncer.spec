@@ -1,16 +1,12 @@
-%define sname	pgbouncer
-%define debug 0
-%{?debug:%define __os_install_post /usr/lib/rpm/brp-compress}
-
-Name:		postgresql-%{sname}
+Name:		pgbouncer
 Version:	1.0.8
 Release:	2%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/pgbouncer/
-Source0:	http://pgfoundry.org/frs/download.php/1356/%{sname}-%{version}.tgz
-Source1:	%{sname}.init
+Source0:	http://pgfoundry.org/frs/download.php/1356/%{name}-%{version}.tgz
+Source1:	%{name}.init
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	libevent-devel
@@ -21,7 +17,7 @@ pgbouncer is a lightweight connection pooler for PostgreSQL.
 pgbouncer uses libevent for low-level socket handling.
 
 %prep
-%setup -q -n %{sname}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 %configure \
@@ -38,9 +34,9 @@ rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -d %{buildroot}%{_sysconfdir}/
 install -m 644 etc/pgbouncer.ini %{buildroot}%{_sysconfdir}/
-rm -f %{buildroot}%{_docdir}/%{sname}/pgbouncer.ini
+rm -f %{buildroot}%{_docdir}/%{name}/pgbouncer.ini
 install -d %{buildroot}%{_initrddir}
-install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{sname}
+install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 
 %clean
 rm -rf %{buildroot}
@@ -49,8 +45,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc README NEWS
 %{_bindir}/*
-%config(noreplace) %{_sysconfdir}/%{sname}.ini
-%{_initrddir}/%{sname}
+%config(noreplace) %{_sysconfdir}/%{name}.ini
+%{_initrddir}/%{name}
 
 
 %changelog

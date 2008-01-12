@@ -9,7 +9,7 @@ Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/1538/%{sname}-%{version}-beta2.tar.gz
 Patch1:		postgresql-ptop-makefile.patch
 URL:		http://pgfoundry.org/projects/ptop
-BuildRequires:	postgresql-devel
+BuildRequires:	postgresql-devel >= 8.1
 Requires:	postgresql-server
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 

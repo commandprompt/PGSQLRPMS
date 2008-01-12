@@ -1,11 +1,10 @@
 %{!?ruby_sitearch: %define ruby_sitearch %(ruby -rrbconfig -e "puts Config::CONFIG['sitearchdir']")}
-%define sname	plruby
 
 Summary:	PostgreSQL Ruby Procedural Language
-Name:		postgresql-%{sname}
+Name:		plruby
 Version:	0.5.1
 Release:	4%{?dist}
-Source0:	ftp://moulon.inra.fr/pub/ruby/%{sname}-%{version}.tar.gz
+Source0:	ftp://moulon.inra.fr/pub/ruby/%{name}-%{version}.tar.gz
 License:	Ruby or GPL+
 Group:		Applications/Databases
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -27,7 +26,7 @@ Requires:	%{name} = %{version}-%{release}
 Documentation for plruby.
 
 %prep
-%setup -q -n %{sname}-%{version}
+%setup -q -n %{name}-%{version}
 
 unset FILE
 for f in %{_includedir}/pg_config_*.h

@@ -1,19 +1,17 @@
-%define short_name	pgpoolAdmin
-
 Summary:	PgpoolAdmin - web-based pgpool administration
-Name:		postgresql-pgpoolAdmin
+Name:		pgpoolAdmin
 Version:	1.0.0
-Release:	9%{?dist}
+Release:	10%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.postgresql.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:	http://pgfoundry.org/frs/download.php/980/%{short_name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/980/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
 
-Requires:	php >= 4.4.2
-Requires:	php-pgsql >= 4.4.2
+Requires:	php >= 4.3.9
+Requires:	php-pgsql >= 4.3.9
 Requires:	webserver
 Requires:	postgresql-pgpool-II
 
@@ -29,7 +27,7 @@ The pgpool Administration Tool is management tool of pgpool-II. It is
 possible to monitor, start, stop pgpool and change settings of pgpool-II.
 
 %prep
-%setup -q -n %{short_name}-%{version}
+%setup -q -n %{name}-%{version}
 %patch1 -p1
 %build
 
@@ -75,6 +73,9 @@ rm -rf %{buildroot}
 %{_pgpoolAdmindir}/screen.css
 
 %changelog
+* Sat Jan 12 2008 Devrim Gunduz <devrim@commandprompt.com> 1.0.0-10
+- Require PHP 4.3.9 (Fix for RHEL/CentOS 4)
+
 * Tue Oct 16 2007 Devrim Gunduz <devrim@commandprompt.com> 1.0.0-9
 - Fixed smarty error caused by wrong ownership
 

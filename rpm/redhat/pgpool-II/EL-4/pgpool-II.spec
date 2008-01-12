@@ -1,13 +1,11 @@
-%define short_name	pgpool-II
-
 Summary:	Pgpool is a connection pooling/replication server for PostgreSQL
-Name:		postgresql-%{short_name}
+Name:		postgresql-%{name}
 Version:	1.2.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org/pgpool-II/en
-Source0:	http://pgfoundry.org/frs/download.php/1472/%{short_name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1472/%{name}-%{version}.tar.gz
 Source1:        pgpool.init
 Source2:        pgpool.sysconfig
 Patch1:		pgpool.conf.sample.patch
@@ -43,7 +41,7 @@ Requires:	%{name} = %{version}
 Development headers and libraries for pgpool-II.
 
 %prep
-%setup -q -n %{short_name}-%{version}
+%setup -q -n %{name}-%{version}
 %patch1 -p0
 
 %build
@@ -56,8 +54,8 @@ rm -rf %{buildroot}
 make %{?_smp_flags} DESTDIR=%{buildroot} install
 install -d %{buildroot}%{_datadir}/%{name}
 mv %{buildroot}/%{_sysconfdir}/*.conf.sample %{buildroot}%{_datadir}/%{name}
-mv %{buildroot}%{_datadir}/%{short_name}/system_db.sql %{buildroot}%{_datadir}/%{name}
-mv %{buildroot}%{_datadir}/%{short_name}/pgpool.pam %{buildroot}%{_datadir}/%{name}
+mv %{buildroot}%{_datadir}/%{name}/system_db.sql %{buildroot}%{_datadir}/%{name}
+mv %{buildroot}%{_datadir}/%{name}/pgpool.pam %{buildroot}%{_datadir}/%{name}
 install -d %{buildroot}%{_initrddir}
 install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/pgpool
 install -d %{buildroot}%{_sysconfdir}/sysconfig

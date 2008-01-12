@@ -1,13 +1,11 @@
-%define short_name	pgpool-ha
-
 Summary:	Pgpool-HA uses heartbeat to keep pgpool from being a single point of failure
-Name:		postgresql-%{short_name}
+Name:		pgpool-ha
 Version:	1.1.0
 Release:	4%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org
-Source0:	http://pgfoundry.org/frs/download.php/1400/%{short_name}-%{version}.tar.bz2
+Source0:	http://pgfoundry.org/frs/download.php/1400/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	heartbeat >= 2.0
 BuildRequires:	heartbeat-devel >= 2.0 postgresql-pgpool-II
@@ -19,7 +17,7 @@ always a single point failure.  Pgpool-HA uses heartbeat to eliminate
 this.
 
 %prep
-%setup -q -n %{short_name}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 %configure --bindir=%{_bindir} --sysconfdir=%{_sysconfdir} --mandir=%{_mandir} --libdir=%{_libdir}

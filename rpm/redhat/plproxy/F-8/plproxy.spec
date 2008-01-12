@@ -1,15 +1,11 @@
-%define sname	plproxy
-%define debug 0
-%{?debug:%define __os_install_post /usr/lib/rpm/brp-compress}
-
-Name:		postgresql-%{sname}
+Name:		plproxy
 Version:	2.0.2
 Release:	2%{?dist}
 Summary:	PL/Proxy is database partitioning system implemented as PL language.
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/plproxy/
-Source0:	http://pgfoundry.org/frs/download.php/1355/%{sname}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1355/%{name}-%{version}.tar.gz
 Source1:	scanner.c
 Source2:	scanner.h
 Patch1:		plproxy-makefile.patch
@@ -22,7 +18,7 @@ Requires:	postgresql >= 8.1
 PL/Proxy is database partitioning system implemented as PL language.
 
 %prep
-%setup -q -n %{sname}-%{version}
+%setup -q -n %{name}-%{version}
 %patch1 -p0 
 
 %build
@@ -38,10 +34,10 @@ install -d %{buildroot}%{_libdir}/pgsql
 install -m 644 plproxy.sql %{buildroot}%{_datadir}/%{name}-%{version}/
 %{__cp} -rp sql/ %{buildroot}%{_datadir}/%{name}-%{version}/
 %{__cp} -rp config/ %{buildroot}%{_datadir}/%{name}-%{version}/
-%{__cp} libplproxy.so.0.0 %{buildroot}%{_libdir}/pgsql/%{sname}.so.0.0
-ln -s %{sname}.so.0.0 %{buildroot}%{_libdir}/pgsql/%{sname}.so.0
-ln -s %{sname}.so.0.0 %{buildroot}%{_libdir}/pgsql/%{sname}.so
-%{__rm} -f %{buildroot}/%{_datadir}/pgsql/contrib/%{sname}.sql
+%{__cp} libplproxy.so.0.0 %{buildroot}%{_libdir}/pgsql/%{name}.so.0.0
+ln -s %{name}.so.0.0 %{buildroot}%{_libdir}/pgsql/%{name}.so.0
+ln -s %{name}.so.0.0 %{buildroot}%{_libdir}/pgsql/%{name}.so
+%{__rm} -f %{buildroot}/%{_datadir}/pgsql/contrib/%{name}.sql
 
 %clean
 rm -rf %{buildroot}
@@ -50,7 +46,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc README NEWS AUTHORS COPYRIGHT 
 %{_datadir}/%{name}-%{version}/*
-%{_libdir}/pgsql/%{sname}.so*
+%{_libdir}/pgsql/%{name}.so*
 
 %changelog
 * Tue Aug 28 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.2-2

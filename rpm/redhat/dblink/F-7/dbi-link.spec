@@ -1,13 +1,11 @@
-%define sname	dbi-link
-
-Name:		postgresql-%{sname}
+Name:		dbi-link
 Version:	2.0.0
 Release:	3%{?dist}
 Summary:	Partial implementation of the SQL/MED portion of the SQL:2003 specification
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/dbi-link/
-Source0:	http://pgfoundry.org/frs/download.php/1235/%{sname}-%{version}.tar.bz2
+Source0:	http://pgfoundry.org/frs/download.php/1235/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	postgresql-server, perl, perl-DBI >= 1.52, perl-YAML >= 0.62
 BuildArch:	noarch
@@ -21,7 +19,7 @@ and accuracy to your ETL processes...your imagination is the only
 limit.
 
 %prep
-%setup -q -n %{sname}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 

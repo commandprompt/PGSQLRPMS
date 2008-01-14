@@ -60,7 +60,7 @@ rm -rf %{buildroot}
 %doc README README.euc_jp
 %dir %{_pgpoolAdmindir}
 %config(noreplace) %{_sysconfdir}/httpd/conf.d/%{name}.conf
-%attr(%644,apache,apache,0644) %config(noreplace) %{_sysconfdir}/%{name}/*
+%attr(644,apache,apache,0644) %config(noreplace) %{_sysconfdir}/%{name}/*
 %attr(644,root,root) %{_pgpoolAdmindir}/*.php
 %{_pgpoolAdmindir}/conf
 %{_pgpoolAdmindir}/doc

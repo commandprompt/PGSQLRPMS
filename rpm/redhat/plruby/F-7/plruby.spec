@@ -9,7 +9,7 @@ License:	Ruby or GPL+
 Group:		Applications/Databases
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Url:		http://raa.ruby-lang.org/project/pl-ruby/
-BuildRequires:	ruby >= 1.8 ruby-devel >= 1.8 postgresql-devel > 8.0
+BuildRequires:	ruby >= 1.8 ruby-devel >= 1.8 postgresql-devel >= 8.1
 Requires:	postgresql-libs, ruby(abi) = 1.8
 
 %description

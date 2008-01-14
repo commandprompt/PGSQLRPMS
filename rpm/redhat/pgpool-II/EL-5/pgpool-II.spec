@@ -1,14 +1,15 @@
 Summary:	Pgpool is a connection pooling/replication server for PostgreSQL
-Name:		postgresql-%{name}
-Version:	1.2.1
+Name:		pgpool-II
+Version:	2.0.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org/pgpool-II/en
-Source0:	http://pgfoundry.org/frs/download.php/1472/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1521/%{name}-%{version}.tar.gz
 Source1:        pgpool.init
 Source2:        pgpool.sysconfig
 Patch1:		pgpool.conf.sample.patch
+Patch4:		pool_process_query-%{version}.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	postgresql-devel pam-devel
 
@@ -43,6 +44,7 @@ Development headers and libraries for pgpool-II.
 %prep
 %setup -q -n %{name}-%{version}
 %patch1 -p0
+%patch4 -p0
 
 %build
 %configure --with-pgsql-includedir=%{_includedir}/pgsql --with-pgsql-lib=%{_libdir}/pgsql --disable-static --with-pam --disable-rpath
@@ -54,8 +56,7 @@ rm -rf %{buildroot}
 make %{?_smp_flags} DESTDIR=%{buildroot} install
 install -d %{buildroot}%{_datadir}/%{name}
 mv %{buildroot}/%{_sysconfdir}/*.conf.sample %{buildroot}%{_datadir}/%{name}
-mv %{buildroot}%{_datadir}/%{name}/system_db.sql %{buildroot}%{_datadir}/%{name}
-mv %{buildroot}%{_datadir}/%{name}/pgpool.pam %{buildroot}%{_datadir}/%{name}
+#mv %{buildroot}%{_datadir}/%{name}/system_db.sql %{buildroot}%{_datadir}/%{name}
 install -d %{buildroot}%{_initrddir}
 install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/pgpool
 install -d %{buildroot}%{_sysconfdir}/sysconfig
@@ -84,6 +85,7 @@ chkconfig --add pgpool
 %{_bindir}/pcp_proc_count
 %{_bindir}/pcp_proc_info
 %{_bindir}/pcp_stop_pgpool
+%{_bindir}/pcp_recovery_node
 %{_bindir}/pcp_systemdb_info
 %{_bindir}/pg_md5
 %{_mandir}/man8/pgpool*
@@ -101,6 +103,10 @@ chkconfig --add pgpool
 %{_libdir}/libpcp.so
 
 %changelog
+* Sun Jan 13 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.1-1
+- Update to 2.0.1
+- Add a temp patch that will disappear in 2.0.2
+
 * Fri Oct 5 2007 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.1-1
 - Update to 1.2.1
 

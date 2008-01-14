@@ -1,7 +1,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		compat-postgresql-libs
 Version:	3
-Release:	1PGDG%{dist}
+Release:	2PGDG%{dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/
@@ -25,7 +25,7 @@ install -m 755 lib*/* %{buildroot}%{_libdir}
 # Remove some files
 /bin/rm -f %{_libdir}/libpq.so.3
 # ... and now link them.
-/bin/ln -s %{_libdir}/libpq.so.3.0 %{_libdir}/libpq.so.3
+/bin/ln -s %{_libdir}/libpq.so.3.1 %{_libdir}/libpq.so.3
 /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
@@ -38,6 +38,9 @@ rm -rf %{buildroot}
 %{_libdir}/libpq.so.*
 
 %changelog
+* Sun Jan 13 2008 - Devrim GUNDUZ <devrim@CommandPrompt.com> 3.2PGDG
+- Fix libpq version number
+
 * Tue Jan 8 2008 - Devrim GUNDUZ <devrim@CommandPrompt.com> 3.1PGDG
 - Initial packaging for libpq3
 

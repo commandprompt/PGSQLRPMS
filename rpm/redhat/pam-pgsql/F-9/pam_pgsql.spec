@@ -29,8 +29,8 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 make %{?_smp_mflags} DESTDIR=%{buildroot} install
-install -d %{buildroot}/lib/security
-install -m 755 pam_pgsql.so %{buildroot}/lib/security
+install -d %{buildroot}/%{_lib}/security
+install -m 755 pam_pgsql.so %{buildroot}/%{_lib}/security
 
 %clean
 rm -rf %{buildroot}

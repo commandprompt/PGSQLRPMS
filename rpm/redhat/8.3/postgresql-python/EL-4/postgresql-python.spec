@@ -28,7 +28,7 @@
 Summary:	Development module for Python code to access a PostgreSQL DB
 Name:		postgresql-python
 Version:	3.8.1
-Release:	7PGDG%{?dist}.pg83
+Release:	7PGDG%{?dist}
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
@@ -37,8 +37,8 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0:	ftp://ftp.pygresql.org/pub/distrib/PyGreSQL-%{version}.tgz
 
-BuildRequires:	python-devel, postgresql-devel >= 8.3
-Requires:	python mx  postgresql-libs >= 8.3
+BuildRequires:	python-devel, postgresql-devel
+Requires:	python mx  postgresql-libs
 
 %description
 PostgreSQL is an advanced Object-Relational database management

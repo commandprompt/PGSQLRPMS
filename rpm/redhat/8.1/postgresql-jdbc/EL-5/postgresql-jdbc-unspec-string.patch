@@ -1,0 +1,279 @@
+This patch is based on
+http://gborg.postgresql.org/pipermail/pgjdbc-commit/2005-November/000416.html
+but omitting some changes relevant to logging.  The changes are
+
+    Add a new parameter 'stringtype' (values 'varchar' or 'unspecified') to
+    control how parameters set via setString() are bound.
+
+    Make compatible=7.4 use stringtype=unspecified.
+
+    Rename Oid.INVALID -> Oid.UNSPECIFIED.
+
+    Fix V3 parameter logic so that prepared statements are not reused when a
+    non-NULL UNSPECIFIED parameter is set over the top of a previous
+    parameter.
+
+    Change testTypeChange() so it works with stringtype=unspecified.
+
+The stringtype=unspecified option is really important to minimize problems
+for applications being ported forward from the 7.4 postgresql JDBC driver.
+
+
+diff -Naur postgresql-jdbc-8.1-405.src.orig/org/postgresql/Driver.java.in postgresql-jdbc-8.1-405.src/org/postgresql/Driver.java.in
+--- postgresql-jdbc-8.1-405.src.orig/org/postgresql/Driver.java.in	2005-02-15 03:56:24.000000000 -0500
++++ postgresql-jdbc-8.1-405.src/org/postgresql/Driver.java.in	2006-02-17 19:19:50.000000000 -0500
+@@ -420,9 +420,12 @@
+                   "When connecting to a pre-7.3 server, the database encoding to assume is in use." },
+                 { "compatible", Boolean.FALSE,
+                   "Force compatibility of some features with an older version of the driver.",
+-                  new String[] { "7.1", "7.2", "7.3" } },
++                  new String[] { "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" } },
+                 { "loginTimeout", Boolean.FALSE,
+-                  "The login timeout, in seconds; 0 means no timeout beyond the normal TCP connection timout." }
++                  "The login timeout, in seconds; 0 means no timeout beyond the normal TCP connection timout." },
++                { "stringtype", Boolean.FALSE,
++                  "The type to bind String parameters as (usually 'varchar'; 'unspecified' allows implicit casting to other types)",
++                  new String[] { "varchar", "unspecified" } },
+             };
+ 
+     /**
+diff -Naur postgresql-jdbc-8.1-405.src.orig/org/postgresql/core/BaseConnection.java postgresql-jdbc-8.1-405.src/org/postgresql/core/BaseConnection.java
+--- postgresql-jdbc-8.1-405.src.orig/org/postgresql/core/BaseConnection.java	2005-08-01 02:54:14.000000000 -0400
++++ postgresql-jdbc-8.1-405.src/org/postgresql/core/BaseConnection.java	2006-02-17 19:19:50.000000000 -0500
+@@ -143,4 +143,7 @@
+ 
+     // Ew. Quick hack to give access to the connection-specific utils implementation.
+     public TimestampUtils getTimestampUtils();
++
++    // Get the bind-string-as-varchar config flag
++    public boolean getStringVarcharFlag();
+ }
+diff -Naur postgresql-jdbc-8.1-405.src.orig/org/postgresql/core/Oid.java postgresql-jdbc-8.1-405.src/org/postgresql/core/Oid.java
+--- postgresql-jdbc-8.1-405.src.orig/org/postgresql/core/Oid.java	2005-07-04 14:50:28.000000000 -0400
++++ postgresql-jdbc-8.1-405.src/org/postgresql/core/Oid.java	2006-02-17 19:19:50.000000000 -0500
+@@ -14,7 +14,7 @@
+  * use.
+  */
+ public class Oid {
+-    public static final int INVALID = 0;
++    public static final int UNSPECIFIED = 0;
+     public static final int INT2 = 21;
+     public static final int INT4 = 23;
+     public static final int INT8 = 20;
+diff -Naur postgresql-jdbc-8.1-405.src.orig/org/postgresql/core/v3/SimpleParameterList.java postgresql-jdbc-8.1-405.src/org/postgresql/core/v3/SimpleParameterList.java
+--- postgresql-jdbc-8.1-405.src.orig/org/postgresql/core/v3/SimpleParameterList.java	2005-07-08 13:38:29.000000000 -0400
++++ postgresql-jdbc-8.1-405.src/org/postgresql/core/v3/SimpleParameterList.java	2006-02-17 19:19:50.000000000 -0500
+@@ -62,10 +62,11 @@
+         paramValues[index] = value ;
+         direction[index] |= IN;
+         
+-        // If we are setting something to null, don't overwrite our existing type
+-        // for it.  We don't need the correct type info to send NULL and we
+-        // don't want to overwrite and require a reparse.
+-        if (oid == Oid.INVALID && paramTypes[index] != Oid.INVALID)
++        // If we are setting something to an UNSPECIFIED NULL, don't overwrite
++        // our existing type for it.  We don't need the correct type info to
++        // send this value, and we don't want to overwrite and require a
++        // reparse.
++        if (oid == Oid.UNSPECIFIED && paramTypes[index] != Oid.UNSPECIFIED && value == NULL_OBJECT)
+             return;
+ 
+         paramTypes[index] = oid;
+@@ -170,7 +171,7 @@
+ 
+     boolean hasUnresolvedTypes() {
+         for (int i=0; i< paramTypes.length; i++) {
+-            if (paramTypes[i] == Oid.INVALID)
++            if (paramTypes[i] == Oid.UNSPECIFIED)
+                 return true;
+         }
+         return false;
+@@ -178,7 +179,7 @@
+ 
+     void setResolvedType(int index, int oid) {
+         // only allow overwriting an unknown value
+-        if (paramTypes[index-1] == Oid.INVALID) {
++        if (paramTypes[index-1] == Oid.UNSPECIFIED) {
+             paramTypes[index-1] = oid;
+         } else if (paramTypes[index-1] != oid) {
+             throw new IllegalArgumentException("Can't change resolved type for param: " + index + " from " + paramTypes[index] + " to " + oid);
+diff -Naur postgresql-jdbc-8.1-405.src.orig/org/postgresql/jdbc2/AbstractJdbc2Connection.java postgresql-jdbc-8.1-405.src/org/postgresql/jdbc2/AbstractJdbc2Connection.java
+--- postgresql-jdbc-8.1-405.src.orig/org/postgresql/jdbc2/AbstractJdbc2Connection.java	2005-08-01 02:54:14.000000000 -0400
++++ postgresql-jdbc-8.1-405.src/org/postgresql/jdbc2/AbstractJdbc2Connection.java	2006-02-17 19:19:50.000000000 -0500
+@@ -58,6 +58,9 @@
+     // Connection's readonly state.
+     public boolean readOnly = false;
+ 
++    // Bind String to UNSPECIFIED or VARCHAR?
++    public final boolean bindStringAsVarchar;
++
+     // Current warnings; there might be more on protoConnection too.
+     public SQLWarning firstWarning = null;
+ 
+@@ -124,6 +127,23 @@
+             Driver.debug("    prepare threshold = " + prepareThreshold);
+         }
+ 
++        //
++        // String -> text or unknown?
++        //
++
++        String stringType = info.getProperty("stringtype");
++        if (stringType != null) {
++            if (stringType.equalsIgnoreCase("unspecified"))
++                bindStringAsVarchar = false;
++            else if (stringType.equalsIgnoreCase("varchar"))
++                bindStringAsVarchar = true;
++            else
++                throw new PSQLException(GT.tr("Unsupported value for stringtype parameter: {0}", stringType),
++                                        PSQLState.INVALID_PARAMETER_VALUE);
++        } else {
++            bindStringAsVarchar = haveMinimumCompatibleVersion("8.0");
++        }
++
+         // Initialize timestamp stuff
+         timestampUtils = new TimestampUtils(haveMinimumServerVersion("7.4"));
+ 
+@@ -1033,5 +1053,9 @@
+     {
+         return protoConnection.getProtocolVersion();
+     }
+-}
+ 
++    public boolean getStringVarcharFlag()
++    {
++        return bindStringAsVarchar;
++    }
++}
+diff -Naur postgresql-jdbc-8.1-405.src.orig/org/postgresql/jdbc2/AbstractJdbc2Statement.java postgresql-jdbc-8.1-405.src/org/postgresql/jdbc2/AbstractJdbc2Statement.java
+--- postgresql-jdbc-8.1-405.src.orig/org/postgresql/jdbc2/AbstractJdbc2Statement.java	2006-02-01 13:52:30.000000000 -0500
++++ postgresql-jdbc-8.1-405.src/org/postgresql/jdbc2/AbstractJdbc2Statement.java	2006-02-17 19:19:50.000000000 -0500
+@@ -1066,7 +1066,7 @@
+         case Types.STRUCT:
+         case Types.NULL:
+         case Types.OTHER:
+-            oid = Oid.INVALID;
++            oid = Oid.UNSPECIFIED;
+             break;
+         default:
+             // Bad Types value.
+@@ -1206,7 +1206,7 @@
+     public void setString(int parameterIndex, String x) throws SQLException
+     {
+         checkClosed();
+-        setString(parameterIndex, x, Oid.VARCHAR);
++        setString(parameterIndex, x, (connection.getStringVarcharFlag() ? Oid.VARCHAR : Oid.UNSPECIFIED));
+     }
+ 
+     protected void setString(int parameterIndex, String x, int oid) throws SQLException
+@@ -1519,7 +1519,7 @@
+     private void setPGobject(int parameterIndex, PGobject x) throws SQLException {
+         String typename = x.getType();
+         int oid = connection.getPGType(typename);
+-        if (oid == Oid.INVALID)
++        if (oid == Oid.UNSPECIFIED)
+             throw new PSQLException(GT.tr("Unknown type {0}.", typename), PSQLState.INVALID_PARAMETER_TYPE);
+ 
+         setString(parameterIndex, x.getValue(), oid);
+@@ -1585,7 +1585,7 @@
+ 	            break;
+ 	        case Types.VARCHAR:
+ 	        case Types.LONGVARCHAR:
+-	            setString(parameterIndex, pgType.toString());
++	            setString(parameterIndex, pgType.toString(), Oid.VARCHAR);
+ 	            break;
+ 	        case Types.DATE:
+ 	            if (in instanceof java.sql.Date)
+@@ -2681,7 +2681,7 @@
+         // backend looks for array types.
+         String typename = "_" + x.getBaseTypeName();
+         int oid = connection.getPGType(typename);
+-        if (oid == Oid.INVALID)
++        if (oid == Oid.UNSPECIFIED)
+             throw new PSQLException(GT.tr("Unknown type {0}.", typename), PSQLState.INVALID_PARAMETER_TYPE);
+ 
+         setString(i, x.toString(), oid);
+@@ -2882,7 +2882,7 @@
+         if (cal != null)
+             cal = (Calendar)cal.clone();
+ 
+-        // We must use INVALID here, or inserting a Date-with-timezone into a
++        // We must use UNSPECIFIED here, or inserting a Date-with-timezone into a
+         // timestamptz field does an unexpected rotation by the server's TimeZone:
+         //
+         // We want to interpret 2005/01/01 with calendar +0100 as
+@@ -2901,7 +2901,7 @@
+         //  2005-01-01 00:00:00+03
+         // (1 row)
+ 
+-        bindString(i, connection.getTimestampUtils().toString(cal, d), Oid.INVALID);
++        bindString(i, connection.getTimestampUtils().toString(cal, d), Oid.UNSPECIFIED);
+     }
+ 
+     public void setTime(int i, Time t, java.util.Calendar cal) throws SQLException
+@@ -2917,9 +2917,7 @@
+         if (cal != null)
+             cal = (Calendar)cal.clone();
+ 
+-        // We don't need INVALID here as we only support inserting a Time into
+-        // 'time' and 'timetz' columns.
+-        bindString(i, connection.getTimestampUtils().toString(cal, t), Oid.INVALID);
++        bindString(i, connection.getTimestampUtils().toString(cal, t), Oid.UNSPECIFIED);
+     }
+ 
+     public void setTimestamp(int i, Timestamp t, java.util.Calendar cal) throws SQLException
+@@ -2934,7 +2932,7 @@
+         if (cal != null)
+             cal = (Calendar)cal.clone();
+ 
+-        // Use INVALID as a compromise to get both TIMESTAMP and TIMESTAMPTZ working.
++        // Use UNSPECIFIED as a compromise to get both TIMESTAMP and TIMESTAMPTZ working.
+         // This is because you get this in a +1300 timezone:
+         // 
+         // template1=# select '2005-01-01 15:00:00 +1000'::timestamptz;
+@@ -2961,10 +2959,10 @@
+         // time compared to the string we originally provided. But going straight
+         // to timestamp is OK as the input parser for timestamp just throws away
+         // the timezone part entirely. Since we don't know ahead of time what type
+-        // we're actually dealing with, INVALID seems the lesser evil, even if it
++        // we're actually dealing with, UNSPECIFIED seems the lesser evil, even if it
+         // does give more scope for type-mismatch errors being silently hidden.
+ 
+-        bindString(i, connection.getTimestampUtils().toString(cal, t), Oid.INVALID); // Let the server infer the right type.
++        bindString(i, connection.getTimestampUtils().toString(cal, t), Oid.UNSPECIFIED); // Let the server infer the right type.
+     }
+ 
+     // ** JDBC 2 Extensions for CallableStatement**
+diff -Naur postgresql-jdbc-8.1-405.src.orig/org/postgresql/jdbc2/TypeInfoCache.java postgresql-jdbc-8.1-405.src/org/postgresql/jdbc2/TypeInfoCache.java
+--- postgresql-jdbc-8.1-405.src.orig/org/postgresql/jdbc2/TypeInfoCache.java	2006-02-09 11:29:20.000000000 -0500
++++ postgresql-jdbc-8.1-405.src/org/postgresql/jdbc2/TypeInfoCache.java	2006-02-17 19:19:50.000000000 -0500
+@@ -140,7 +140,7 @@
+         if (!((BaseStatement)_getOidStatement).executeWithFlags(QueryExecutor.QUERY_SUPPRESS_BEGIN))
+             throw new PSQLException(GT.tr("No results were returned by the query."), PSQLState.NO_DATA);
+ 
+-        oid = new Integer(Oid.INVALID);
++        oid = new Integer(Oid.UNSPECIFIED);
+         ResultSet rs = _getOidStatement.getResultSet();
+         if (rs.next()) {
+             oid = new Integer(rs.getInt(1));
+@@ -154,7 +154,7 @@
+ 
+     public String getPGType(int oid) throws SQLException
+     {
+-        if (oid == Oid.INVALID)
++        if (oid == Oid.UNSPECIFIED)
+             return null;
+ 
+         String pgTypeName = (String)_oidToPgName.get(new Integer(oid));
+diff -Naur postgresql-jdbc-8.1-405.src.orig/org/postgresql/test/jdbc2/ServerPreparedStmtTest.java postgresql-jdbc-8.1-405.src/org/postgresql/test/jdbc2/ServerPreparedStmtTest.java
+--- postgresql-jdbc-8.1-405.src.orig/org/postgresql/test/jdbc2/ServerPreparedStmtTest.java	2005-01-27 17:50:17.000000000 -0500
++++ postgresql-jdbc-8.1-405.src/org/postgresql/test/jdbc2/ServerPreparedStmtTest.java	2006-02-17 19:19:50.000000000 -0500
+@@ -256,7 +256,7 @@
+     }
+ 
+     public void testTypeChange() throws Exception {
+-        PreparedStatement pstmt = con.prepareStatement("SELECT ?");
++        PreparedStatement pstmt = con.prepareStatement("SELECT CAST (? AS TEXT)");
+         ((PGStatement)pstmt).setUseServerPrepare(true);
+         
+         // Prepare with int parameter.

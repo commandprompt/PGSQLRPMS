@@ -13,8 +13,7 @@ Source4:	filter-requires-perl-Pg.sh
 URL:		http://postgis.refractions.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	postgresql-devel, proj-devel, geos-devel, byacc, proj-devel, flex, sinjdoc, java, java-devel, ant
-
+BuildRequires:	postgresql-devel, proj-devel, geos-devel, byacc, proj-devel, flex
 Requires:	postgresql, geos, proj
 
 %description
@@ -31,12 +30,12 @@ Summary:	The JDBC driver for PostGIS
 Group:		Applications/Databases
 License:	LGPL
 Requires:	%{name} = %{version}-%{release}, postgresql-jdbc
-BuildRequires:  ant >= 0:1.6.2, junit >= 0:3.7, postgresql-jdbc
+BuildRequires:  ant >= 0:1.6.2, junit >= 0:3.7
 
 %if %{gcj_support}
-BuildRequires:		gcc-java
-Requires(post):		%{_bindir}/rebuild-gcj-db
-Requires(postun):	%{_bindir}/rebuild-gcj-db
+BuildRequires:		gcc-java, postgresql-jdbc
+Requires(post):		java-1.4.2-gcj-compat
+Requires(postun):	java-1.4.2-gcj-compat
 %endif
 
 %description jdbc
@@ -149,12 +148,6 @@ rm -rf %{buildroot}
 - Removed patch2: template_gis is no longer built by default.
 - Removed patch0: Building the JDBC driver using make is now deprecated
 - Build JDBC driver using ant, rather than make.
-
-* Thu Dec 6 2007 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.2-1
-- Update to 1.3.2
-- Updated patch2
-
-* Wed Nov 21 2007 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.1-2
 - Move postgresql-jdbc dependency to the correct place, per Rob Nagler.
 
 * Tue Oct 16 2007 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.1-1

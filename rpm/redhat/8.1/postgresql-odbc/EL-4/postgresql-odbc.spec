@@ -24,7 +24,7 @@
 Name:		postgresql-odbc
 Summary:	PostgreSQL ODBC driver
 Version:	08.02.0500
-Release:	1PGDG%{?dist}.pg81
+Release:	1PGDG%{?dist}
 License:	LGPL
 Group:		Applications/Databases
 Url:		http://pgfoundry.org/projects/psqlodbc/
@@ -36,7 +36,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	unixODBC-devel
 BuildRequires:	libtool automake autoconf postgresql-devel
 
-Requires:	postgresql-libs >= 8.1
+Requires:	postgresql-libs
 
 # This spec file and ancillary files are licensed in accordance with 
 # the psqlodbc license.

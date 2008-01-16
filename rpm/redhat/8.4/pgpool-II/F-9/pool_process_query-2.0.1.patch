@@ -1,0 +1,27 @@
+*** pool_process_query.c	2007/11/21 09:37:39	1.79
+--- pool_process_query.c.old	2007/12/01 13:26:36	1.80
+***************
+*** 1,6 ****
+  /* -*-pgsql-c-*- */
+  /*
+!  * $Header: /cvsroot/pgpool/pgpool-II/pool_process_query.c,v 1.79 2007/11/21 09:37:39 y-asaba Exp $
+   *
+   * pgpool: a language independent connection pool server for PostgreSQL 
+   * written by Tatsuo Ishii
+--- 1,6 ----
+  /* -*-pgsql-c-*- */
+  /*
+!  * $Header: /cvsroot/pgpool/pgpool-II/pool_process_query.c,v 1.80 2007/12/01 13:26:36 y-asaba Exp $
+   *
+   * pgpool: a language independent connection pool server for PostgreSQL 
+   * written by Tatsuo Ishii
+*************** POOL_STATUS SimpleForwardToBackend(char 
+*** 3895,3901 ****
+  
+  	if (kind == 'S') /* Sync message? */
+  	{
+- 		pool_log("YYYYY");
+  		receive_sync = 1;
+  	}
+  
+--- 3895,3900 ----

@@ -1,10 +1,11 @@
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
 Version:	1.8.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	Artistic
 Group:		Applications/Databases
 Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
+Patch2:		%{name}-%{version}-rhel4libxml.patch
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	wxGTK-devel postgresql-devel >= 8.0 
@@ -39,7 +40,7 @@ which are in html format.
 
 %prep
 %setup -q
-
+%patch2 -p0
 %build
 export LIBS="-lwx_gtk2u_core-2.8"
 %configure --disable-debug --with-wx-version=2.8 --with-wx=/usr
@@ -75,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/*
 
 %changelog
+* Sat Jan 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.1-2
+- Added a patch to enable builds on RHEL-4
+
 * Fri Jan 4 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.1-1
 - Update to 1.8.1
 

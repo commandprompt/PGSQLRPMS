@@ -1,8 +1,0 @@
---- lang/langcheck.orig	2006-07-29 00:40:42.000000000 +0300
-+++ lang/langcheck	2006-07-29 00:40:54.000000000 +0300
-@@ -1,4 +1,4 @@
--#!/usr/local/bin/php -q
-+#!/usr/bin/php -q
- <?php
- 
- 	/**

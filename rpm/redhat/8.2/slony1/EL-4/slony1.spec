@@ -1,4 +1,4 @@
-%{!?docs:%define docs 1}
+%{!?docs:%define docs 0}
 %{?buildrhel3:%define kerbdir /usr/kerberos}
 %{!?kerbdir:%define kerbdir "/usr"}
 

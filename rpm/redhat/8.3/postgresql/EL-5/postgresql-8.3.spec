@@ -76,7 +76,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.3RC2
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -349,6 +349,10 @@ export LIBNAME=%{_lib}
 %if %uuid
 	--with-ossp-uuid \
 %endif
+%if %xml
+	--with-libxml \
+	--with-libxslt \
+%endif
 	--with-system-tzdata=%{_datadir}/zoneinfo \
 	--sysconfdir=/etc/sysconfig/pgsql \
 	--datadir=/usr/share/pgsql \
@@ -356,9 +360,6 @@ export LIBNAME=%{_lib}
 
 make %{?_smp_mflags} all
 make %{?_smp_mflags} -C contrib all
-%if %xml
-make %{?_smp_mflags} -C contrib/xml2 all
-%endif
 %if %uuid
 make %{?_smp_mflags} -C contrib/uuid-ossp all
 %endif
@@ -387,9 +388,6 @@ rm -rf %{buildroot}
 
 make DESTDIR=%{buildroot} install
 make -C contrib DESTDIR=%{buildroot} install
-%if %xml
-make -C contrib/xml2 DESTDIR=%{buildroot} install
-%endif
 %if %uuid
 make -C contrib/uuid-ossp DESTDIR=%{buildroot} install
 %endif
@@ -714,6 +712,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Jan 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3RC2-2PGDG
+- Fix xml builds -- it was broken since first 8.3 package was built. 
+  Per report from Steve Woodcock.
+
 * Fri Jan 18 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3RC2-1PGDG
 - Update to 8.3 RC2
 

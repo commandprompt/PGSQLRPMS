@@ -47,14 +47,11 @@
 # rpm --define 'packagename 0' .... to force the package NOT to build.
 # The base package, the lib package, the devel package, and the server package always get built.
 
-# We have support for Red Hat Linux 9, Red Hat Enterprise Linux 3 
-# and above and all Fedora Core Linux releases
-# RHL 9 and RHEL 3 builds needs a special macro to build.
-%{?build9:%define build9 1}
-%{?build9:%define kerbdir /usr/kerberos}
+# We support RHEL 3+, and Fedora 7+ .
+# RHEL 3 builds need a special macro to build.
 %{?buildrhel3:%define kerbdir /usr/kerberos}
 
-%define beta 1
+%define beta 0
 %{?beta:%define __os_install_post /usr/lib/rpm/brp-compress}
 
 %{!?kerbdir:%define kerbdir "/usr"}
@@ -75,8 +72,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.3RC2
-Release:	2PGDG%{?dist}
+Version:	8.3.0
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -87,7 +84,7 @@ Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/8.2/postgresql-8.2-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/8.3/postgresql-8.3-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh
@@ -712,6 +709,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Feb 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-1PGDG
+- Update to 8.3.0 
+- Update PDF docs to 8.3.0 
+
 * Tue Jan 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3RC2-2PGDG
 - Fix xml builds -- it was broken since first 8.3 package was built. 
   Per report from Steve Woodcock.

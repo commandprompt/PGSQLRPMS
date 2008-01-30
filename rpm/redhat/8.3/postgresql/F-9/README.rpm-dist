@@ -1,6 +1,6 @@
 README.rpm-dist
 -----------------------------------------------------------------------------
-Version 8.3, for the PostgreSQL 8.3RC1-1PGDG RPMset.
+Version 8.3, for the PostgreSQL 8.3.0-1PGDG RPMset.
 Devrim Gündüz <devrim@CommandPrompt.com>, Lamar Owen <lowen@pari.edu>
 -----------------------------------------------------------------------------
 
@@ -283,14 +283,15 @@ kerberos	1	#use Kerberos 5 support.
 nls		1	#build with national language support.
 pam		1	#build with PAM support.
 runselftest	1	#do "make check" during the build.
-xml		1	#build contrib/xml2
+xml		1	#build with XML support
 pgfts		0	#build with --enable-thread-safety
 uuid		1	#build contrib/uuid-ossp
+intdatetimes	0	#build with --enable-integer-datetimes
 
 To use these defines, invoke a rebuild like this:
 rpmbuild --rebuild --define 'tcl 0' \
 	--define 'test 0' --define 'runselftest 1' --define 'kerberos 0' \
-	postgresql-8.3RC1-1PGDG.src.rpm
+	postgresql-8.3.0-1PGDG.src.rpm
 This line would disable the tcl, and test subpackages, enable the
 regression test run during build, and disable kerberos support.
 

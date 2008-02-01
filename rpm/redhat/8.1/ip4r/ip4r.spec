@@ -1,6 +1,6 @@
 Summary:	IPv4 and IPv4 range index types for PostgreSQL
 Name:		ip4r
-Version:	1.02
+Version:	1.03
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -42,6 +42,9 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/%{name}.so
 
 %changelog
+* Fri Feb 1 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.03-1
+- Update to 1.03
+
 * Sun Jan 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.02-1
 - Update to 1.02
 

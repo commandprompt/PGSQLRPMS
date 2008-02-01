@@ -22,7 +22,7 @@
 # In this file you can find the default build package list macros.  These can be overridden by defining
 # on the rpm command line
 
-%{!?upstreamserver:%define upstreamver	8.0-321}
+%{!?upstreamserver:%define upstreamver	8.0-322}
 %{!?gcj_support:%define gcj_support	1}
 
 %define beta 0
@@ -30,8 +30,8 @@
 
 Summary:	JDBC driver for PostgreSQL
 Name:		postgresql-jdbc
-Version:	8.0.321
-Release:	2PGDG%{?dist}
+Version:	8.0.322
+Release:	1PGDG%{?dist}
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
@@ -115,6 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jan 31 2008 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.0.322-1PGDG
+- Update to build 322
+
 * Tue Jan 1 2008 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.0.321-2PGDG
 - Updated gcj_support requires, per Fedora spec file
 - Fix buildroot

@@ -64,7 +64,7 @@
 %{!?intdatetimes:%define intdatetimes 0}
 %{!?kerberos:%define kerberos 1}
 %{!?nls:%define nls 1}
-%{!?xml:%define xml 1}
+%{!?xml:%define xml 0}
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}

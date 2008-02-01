@@ -4,7 +4,7 @@ Version:	1.03
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1573/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1581/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/ip4r
 BuildRequires:	postgresql-devel >= 8.1
 Requires:	postgresql-server >= 8.1

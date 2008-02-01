@@ -67,7 +67,7 @@
 %{!?xml:%define xml 1}
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
-%{!?runselftest:%define runselftest 0}
+%{!?runselftest:%define runselftest 1}
 %{!?uuid:%define uuid 0}
 
 Summary:	PostgreSQL client programs and libraries
@@ -367,17 +367,20 @@ make %{?_smp_mflags} -C src/tutorial NO_PGXS=1 all
 rm -f src/tutorial/GNUmakefile
 
 %if %runselftest
-pushd src/test/regress
-make all
-make MAX_CONNECTIONS=5 check
-make clean
-popd
+	pushd src/test/regress
+	make all
+	cp ../../../contrib/spi/refint.so .
+	cp ../../../contrib/spi/autoinc.so .
+	make MAX_CONNECTIONS=5 check
+	make clean
+	rm refint.so autoinc.so
+	popd
 %endif
 
 %if %test
-pushd src/test/regress
-make RPMTESTING=1 all
-popd
+	pushd src/test/regress
+	make all
+	popd
 %endif
 
 %install
@@ -397,26 +400,20 @@ case `uname -i` in
 		install -m 644 %{SOURCE5} %{buildroot}/usr/include/
 		mv %{buildroot}/usr/include/pgsql/server/pg_config.h %{buildroot}/usr/include/pgsql/server/pg_config_`uname -i`.h
 		install -m 644 %{SOURCE5} %{buildroot}/usr/include/pgsql/server/
-		mv $RPM_BUILD_ROOT/usr/include/ecpg_config.h $RPM_BUILD_ROOT/usr/include/ecpg_config_`uname -i`.h
-		install -m 644 %{SOURCE7} $RPM_BUILD_ROOT/usr/include/
+		mv %{buildroot}/usr/include/ecpg_config.h %{buildroot}/usr/include/ecpg_config_`uname -i`.h
+		install -m 644 %{SOURCE7} %{buildroot}/usr/include/
 		;;
 	*)
 	;;
 esac
 
-if [ -d /etc/rc.d/init.d ]
-then
-	install -d %{buildroot}/etc/rc.d/init.d
-	sed 's/^PGVERSION=.*$/PGVERSION=%{version}/' <%{SOURCE3} > postgresql.init
-	install -m 755 postgresql.init %{buildroot}/etc/rc.d/init.d/postgresql
-fi
+install -d %{buildroot}/etc/rc.d/init.d
+sed 's/^PGVERSION=.*$/PGVERSION=%{version}/' <%{SOURCE3} > postgresql.init
+install -m 755 postgresql.init %{buildroot}/etc/rc.d/init.d/postgresql
 
 %if %pam
-if [ -d /etc/pam.d ]
-then
-	install -d %{buildroot}/etc/pam.d
-	install -m 644 %{SOURCE14} %{buildroot}/etc/pam.d/postgresql
-fi
+install -d %{buildroot}/etc/pam.d
+install -m 644 %{SOURCE14} %{buildroot}/etc/pam.d/postgresql
 %endif
 
 # PGDATA needs removal of group and world permissions due to pg_pwd hole.
@@ -432,18 +429,19 @@ install -m 644 %{SOURCE15} %{buildroot}/var/lib/pgsql/.bash_profile
 install -d -m 700 %{buildroot}/etc/sysconfig/pgsql
 
 %if %test
-	# tests. There are many files included here that are unnecessary, but include
-	# them anyway for completeness.
-	mkdir -p %{buildroot}/usr/lib/pgsql/test
-	cp -a src/test/regress %{buildroot}/usr/lib/pgsql/test
-	install -m 0755 contrib/spi/refint.so %{buildroot}/usr/lib/pgsql/test/regress
-	install -m 0755 contrib/spi/autoinc.so %{buildroot}/usr/lib/pgsql/test/regress
-	pushd  %{buildroot}/usr/lib/pgsql/test/regress/
+	# tests. There are many files included here that are unnecessary,
+	# but include them anyway for completeness.  We replace the original
+	# Makefiles, however.
+	mkdir -p %{buildroot}%{_libdir}/pgsql/test
+	cp -a src/test/regress %{buildroot}%{_libdir}/pgsql/test
+	install -m 0755 contrib/spi/refint.so %{buildroot}%{_libdir}/pgsql/test/regress
+	install -m 0755 contrib/spi/autoinc.so %{buildroot}%{_libdir}/pgsql/test/regress
+	pushd  %{buildroot}%{_libdir}/pgsql/test/regress
 	strip *.so
-	rm -f GNUmakefile Makefile
+	rm -f GNUmakefile Makefile *.o
 	popd
-	cp %{SOURCE4} %{buildroot}/usr/lib/pgsql/test/regress/Makefile
-	chmod 0644 %{buildroot}/usr/lib/pgsql/test/regress/Makefile
+	cp %{SOURCE4} %{buildroot}%{_libdir}/pgsql/test/regress/Makefile
+	chmod 0644 %{buildroot}%{_libdir}/pgsql/test/regress/Makefile
 %endif
 
 # Fix some more documentation
@@ -704,14 +702,20 @@ rm -rf %{buildroot}
 %if %test
 %files test
 %defattr(-,postgres,postgres)
-%attr(-,postgres,postgres) /usr/lib/pgsql/test/*
-%attr(-,postgres,postgres) %dir /usr/lib/pgsql/test
+%attr(-,postgres,postgres) %{_libdir}/pgsql/test/*
+%attr(-,postgres,postgres) %dir %{_libdir}/pgsql/test
 %endif
 
 %changelog
 * Fri Feb 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-1PGDG
 - Update to 8.3.0 
 - Update PDF docs to 8.3.0 
+- Set selftest to on by default.
+- Fix test routines, per Red Hat spec file.
+- Remove RHL 9 calls, and update supported platforms list.
+- Make initscript and pam config files be installed unconditionally;
+  seems new buildroots don't necessarily have those directories in 
+  place, per Red Hat RPMs
 
 * Tue Jan 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3RC2-2PGDG
 - Fix xml builds -- it was broken since first 8.3 package was built. 

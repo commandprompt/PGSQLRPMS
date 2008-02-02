@@ -1,11 +1,11 @@
-%{!?javabuild:%define	javabuild 1}
+%{!?javabuild:%define	javabuild 0}
 %{!?utils:%define	utils 1}
-%{!?gcj_support:%define	gcj_support 1}
+%{!?gcj_support:%define	gcj_support 0}
 
 Summary:	Geographic Information Systems Extensions to PostgreSQL
 Name:		postgis
 Version:	1.3.2
-Release:	2%{?dist}
+Release:	1%{?dist}
 License:	GPL
 Group:		Applications/Databases
 Source0:	http://postgis.refractions.net/download/%{name}-%{version}.tar.gz
@@ -13,8 +13,7 @@ Source4:	filter-requires-perl-Pg.sh
 URL:		http://postgis.refractions.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	postgresql-devel, proj-devel, geos-devel, byacc, proj-devel, flex, sinjdoc, java, java-devel, ant
-
+BuildRequires:	postgresql-devel, proj-devel, geos-devel, byacc, proj-devel, flex
 Requires:	postgresql, geos, proj
 
 %description
@@ -31,12 +30,12 @@ Summary:	The JDBC driver for PostGIS
 Group:		Applications/Databases
 License:	LGPL
 Requires:	%{name} = %{version}-%{release}, postgresql-jdbc
-BuildRequires:  ant >= 0:1.6.2, junit >= 0:3.7, postgresql-jdbc
+BuildRequires:  ant >= 0:1.6.2, junit >= 0:3.7
 
 %if %{gcj_support}
-BuildRequires:		gcc-java
-Requires(post):		%{_bindir}/rebuild-gcj-db
-Requires(postun):	%{_bindir}/rebuild-gcj-db
+BuildRequires:		gcc-java, postgresql-jdbc
+Requires(post):		java-1.4.2-gcj-compat
+Requires(postun):	java-1.4.2-gcj-compat
 %endif
 
 %description jdbc
@@ -63,13 +62,11 @@ The postgis-utils package provides the utilities for PostGIS.
 make %{?_smp_mflags} LPATH=`pg_config --pkglibdir` shlib="%{name}.so"
 
 %if %javabuild
-export BUILDXML_DIR=%{_builddir}/%{name}-%{version}/java/jdbc
+export MAKEFILE_DIR=%{_builddir}/%{name}-%{version}/java/jdbc
 JDBC_VERSION_RPM=`rpm -ql postgresql-jdbc| grep 'jdbc2.jar$'|awk -F '/' '{print $5}'`
-sed 's/postgresql.jar/'${JDBC_VERSION_RPM}'/g' $BUILDXML_DIR/build.xml > $BUILDXML_DIR/build.xml.new
-mv -f $BUILDXML_DIR/build.xml.new $BUILDXML_DIR/build.xml
-pushd java/jdbc
-ant
-popd
+sed 's/postgresql.jar/'${JDBC_VERSION_RPM}'/g' $MAKEFILE_DIR/Makefile > $MAKEFILE_DIR/Makefile.new
+mv -f $MAKEFILE_DIR/Makefile.new $MAKEFILE_DIR/Makefile
+make -C java/jdbc
 %endif
 
 %if %utils
@@ -144,22 +141,15 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Sat Jan 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.2-2
-- Various fixes from Mark Cave-Ayland
+* Sat Feb 2 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.2-1
+- Update to 1.3.2
 - Removed patch2: template_gis is no longer built by default.
 - Removed patch0: Building the JDBC driver using make is now deprecated
-- Build JDBC driver using ant, rather than make.
-
-* Thu Dec 6 2007 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.2-1
-- Update to 1.3.2
-- Updated patch2
-
-* Wed Nov 21 2007 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.1-2
-- Move postgresql-jdbc dependency to the correct place, per Rob Nagler.
 
 * Tue Oct 16 2007 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.1-1
 - Update to 1.3.1
 - Updated patch2
+- Initial build for EPEL-4
 
 * Tue Aug 28 2007 Fedora Release Engineering <rel-eng at fedoraproject dot org> - 1.2.1-3
 - Rebuild for selinux ppc32 issue.

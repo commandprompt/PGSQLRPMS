@@ -11,6 +11,7 @@ Requires:	postgresql >= 7.4
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch1:		pam-pgsql-getservice.patch
+Patch3:		pam-pgsql-makefile.patch
 
 %description 
 This module lets you authenticate users against a table in a 
@@ -21,6 +22,7 @@ PostgreSQL database. It also supports:
 %prep
 %setup -q -n pam-pgsql-%{version}
 %patch1 -p0
+%patch3 -p0
 
 %build
 %configure 
@@ -28,7 +30,8 @@ make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
-make %{?_smp_mflags} DESTDIR=%{buildroot} install
+make %{?_smp_mflags} ROOTDIR=%{buildroot} install
+install -d %{buildroot}/%{_lib}
 install -d %{buildroot}/%{_lib}/security
 install -m 755 pam_pgsql.so %{buildroot}/%{_lib}/security
 
@@ -41,5 +44,5 @@ rm -rf %{buildroot}
 %doc README CREDITS
 
 %changelog
-* Wed Nov 7 2007 Devrim Gunduz <devrim@commandprompt.com> - 0.6.3-1
+* Sun Feb 3 2008 Devrim Gunduz <devrim@commandprompt.com> - 0.6.3-1
 - Initial packaging for Fedora

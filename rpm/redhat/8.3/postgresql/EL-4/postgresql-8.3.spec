@@ -73,7 +73,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.3.0
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -331,6 +331,7 @@ export LIBNAME=%{_lib}
 %endif
 %if %kerberos
 	--with-krb5 \
+	--with-gssapi \
 	--with-includes=%{kerbdir}/include \
 	--with-libraries=%{kerbdir}/%{_lib} \
 %endif
@@ -707,6 +708,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Feb 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-2PGDG
+- Enable the new GSSAPI support in 8.3, per reminder from Tom.
+
 * Fri Feb 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-1PGDG
 - Update to 8.3.0 
 - Update PDF docs to 8.3.0 

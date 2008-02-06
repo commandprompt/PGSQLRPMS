@@ -64,7 +64,7 @@
 %{!?intdatetimes:%define intdatetimes 0}
 %{!?kerberos:%define kerberos 1}
 %{!?nls:%define nls 1}
-%{!?xml:%define xml 1}
+%{!?xml:%define xml 0}
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
@@ -710,6 +710,7 @@ rm -rf %{buildroot}
 %changelog
 * Tue Feb 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-2PGDG
 - Enable the new GSSAPI support in 8.3, per reminder from Tom.
+- Disable xml builds for RHEL 3.
 
 * Fri Feb 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-1PGDG
 - Update to 8.3.0 

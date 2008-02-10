@@ -4,8 +4,8 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	1.2.12
-Release:	2%{?dist}
+Version:	1.2.13
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -84,7 +84,7 @@ install -m 0644 share/slon.conf-sample %{buildroot}%{_sysconfdir}/slon.conf
 /bin/chmod 644 COPYRIGHT UPGRADING SAMPLE HISTORY-1.1 RELEASE
 
 install -d %{buildroot}%{_initrddir}
-install -m 755 redhat/postgresql-slony1.init %{buildroot}%{_initrddir}/postgresql-slony1
+install -m 755 redhat/postgresql-slony1.init %{buildroot}%{_initrddir}/slony1
 
 # Temporary measure for 1.2.X
 %if %docs
@@ -132,7 +132,7 @@ fi
 %config(noreplace) %{_sysconfdir}/slon.conf
 %{_libdir}/pgsql/slon-tools.pm
 %config(noreplace) %{_sysconfdir}/slon_tools.conf
-%attr(755,root,root) %{_sysconfdir}/rc.d/init.d/postgresql-slony1
+%attr(755,root,root) %{_initrddir}/slony1
 
 %if %docs
 %files docs
@@ -140,6 +140,9 @@ fi
 %endif
 
 %changelog
+* Sun Feb 10 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.13-1
+- Update to 1.2.13
+
 * Mon Dec 17 2007 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.12-2
 - Add flex and byacc to buildrequires, per Michael Best
 

@@ -262,10 +262,10 @@ chkconfig --level 345 anacron off 2>/dev/null
 chkconfig --level 345 readahead_early off 2>/dev/null
 chkconfig --level 345 readahead_later off 2>/dev/null
 
-# Disable cups,portmap and sshd for this spin
+# Disable cups,rpcbind and sshd for this spin
 chkconfig cups off 2>/dev/null
 chkconfig sshd off 2>/dev/null
-chkconfig portmap off 2>/dev/null
+chkconfig rpcbind off 2>/dev/null
 
 # Enable NetworkManager for this spin
 chkconfig NetworkManager on

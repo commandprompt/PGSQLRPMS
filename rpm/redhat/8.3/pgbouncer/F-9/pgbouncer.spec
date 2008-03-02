@@ -1,16 +1,19 @@
+%define debug 0
+%{?debug:%define __os_install_post /usr/lib/rpm/brp-compress}
+
 Name:		pgbouncer
-Version:	1.0.8
-Release:	2%{?dist}
+Version:	1.1.2
+Release:	1%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/pgbouncer/
-Source0:	http://pgfoundry.org/frs/download.php/1356/%{name}-%{version}.tgz
+Source0:	http://pgfoundry.org/frs/download.php/1532/%{name}-%{version}.tgz
 Source1:	%{name}.init
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	libevent-devel
-Requires:	libevent initscripts
+Requires:	initscripts
 
 %description
 pgbouncer is a lightweight connection pooler for PostgreSQL.
@@ -38,6 +41,15 @@ rm -f %{buildroot}%{_docdir}/%{name}/pgbouncer.ini
 install -d %{buildroot}%{_initrddir}
 install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 
+%post
+chkconfig --add postgresql
+
+%preun
+if [ $1 = 0 ] ; then
+	/sbin/service pgbouncer condstop >/dev/null 2>&1
+	chkconfig --del pgbouncer
+fi
+
 %clean
 rm -rf %{buildroot}
 
@@ -47,9 +59,20 @@ rm -rf %{buildroot}
 %{_bindir}/*
 %config(noreplace) %{_sysconfdir}/%{name}.ini
 %{_initrddir}/%{name}
-
+%{_mandir}/man1/%{name}.*
+%{_mandir}/man5/%{name}.*
 
 %changelog
+* Sat Mar 1 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.2-1
+- Update to 1.1.2
+- Various spec file improvements, per bz review #244593 .
+
+* Fri Oct 26 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.1-1
+- Update to 1.1.1
+
+* Tue Oct 9 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1-1
+- Update to 1.1
+
 * Tue Sep 25 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.0.8-2
 - Added init script from Darcy.
 

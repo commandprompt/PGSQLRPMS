@@ -57,8 +57,8 @@ start(){
         if [ $pid ]
         then
           success "$BOUNCER_START"
-          touch /var/lock/subsys/${NAME}
-          echo "$pid" > "/var/run/${NAME}.pid"
+          touch /var/lock/subsys/pgbouncer
+          echo "$pid" > "/var/run/pgbouncer.pid"
           echo
         else
           failure "$BOUNCER_START"
@@ -79,8 +79,8 @@ stop(){
                 script_result=1
         fi
         echo
-          rm -f "/var/run/${NAME}.pid"
-          rm -f "/var/lock/subsys/${NAME}"
+          rm -f "/var/run/pgbouncer.pid"
+          rm -f "/var/lock/subsys/pgbouncer"
 }
 
 restart(){
@@ -89,11 +89,11 @@ restart(){
 }
 
 condrestart(){
-    [ -e /var/lock/subsys/${NAME} ] && restart
+    [ -e /var/lock/subsys/pgbouncer ] && restart
 }
 
 condstop(){
-    [ -e /var/lock/subsys/${NAME} ] && stop
+    [ -e /var/lock/subsys/pgbouncer ] && stop
 }
 
 reload(){

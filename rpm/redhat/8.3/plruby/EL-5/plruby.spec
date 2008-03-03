@@ -2,14 +2,14 @@
 
 Summary:	PostgreSQL Ruby Procedural Language
 Name:		plruby
-Version:	0.5.1
-Release:	4%{?dist}
+Version:	0.5.3
+Release:	1%{?dist}
 Source0:	ftp://moulon.inra.fr/pub/ruby/%{name}-%{version}.tar.gz
 License:	Ruby or GPL+
 Group:		Applications/Databases
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Url:		http://raa.ruby-lang.org/project/pl-ruby/
-BuildRequires:	ruby >= 1.8 ruby-devel >= 1.8 postgresql-devel > 8.0
+BuildRequires:	ruby >= 1.8 ruby-devel >= 1.8 postgresql-devel >= 8.1
 Requires:	postgresql-libs, ruby(abi) = 1.8
 
 %description
@@ -43,8 +43,7 @@ fi
 
 %build
 ruby extconf.rb --with-pgsql-include=%{_includedir}/pgsql/server
-make %{?_smp_mflags} \
-	CC="%{__cc} -I%{_includedir}/pgsql -I%{_includedir}/pgsql/server"
+CC="%{__cc} -I%{_includedir}/pgsql -I%{_includedir}/pgsql/server" make DESTDIR=%{buildroot} %{?_smp_mflags} install
 
 %install
 rm -rf %{buildroot}
@@ -58,12 +57,28 @@ rm -rf %{buildroot}
 %doc Changes README.en plruby.html 
 %dir %{ruby_sitearch}/plruby
 %{ruby_sitearch}/plruby/plruby_*.so
- 
+%{ruby_sitearch}/plruby.so
+
 %files doc
 %defattr(-,root,root,-)
 %doc docs/plruby.rb
 
 %changelog
+* Mon Mar 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 0.5.3-1
+- Update to 0.5.3 to fix PostgreSQL 8.3 + GCC 4.3 problems. 0.5.2 had
+  a problem with PostgreSQL version detection, so author kindly released
+  0.5.3 for this issue.
+- Sync with Fedora spec.
+
+* Mon Feb 18 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 0.5.1-6.1
+- Autorebuild for GCC 4.3
+
+* Mon Jan 21 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 0.5.1-5.1
+- Rebuilt against PostgreSQL 8.3
+
+* Mon Jan 14 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 0.5.1-5
+- Use a better BR line for postgresql-devel
+
 * Sat Nov 30 2007 - Mamoru Tasaka <mtasaka@ioa.s.u-tokyo.ac.jp> 0.5.1-4
 - Make spec file actually compile
 - Fix license tag

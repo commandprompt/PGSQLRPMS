@@ -31,6 +31,7 @@ Summary:	JDBC driver for PostgreSQL
 Name:		postgresql-jdbc
 Version:	8.1.412
 Release:	1PGDG%{?dist}
+BuildArch:	noarch
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases

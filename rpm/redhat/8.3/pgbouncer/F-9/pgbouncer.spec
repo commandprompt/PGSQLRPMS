@@ -3,13 +3,15 @@
 
 Name:		pgbouncer
 Version:	1.1.2
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/pgbouncer/
 Source0:	http://pgfoundry.org/frs/download.php/1532/%{name}-%{version}.tgz
 Source1:	%{name}.init
+Source2:	%{name}.sysconfig
+Patch0:		%{name}-ini.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	libevent-devel
@@ -21,6 +23,7 @@ pgbouncer uses libevent for low-level socket handling.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p0
 
 %build
 %configure \
@@ -36,13 +39,15 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -d %{buildroot}%{_sysconfdir}/
+install -d %{buildroot}%{_sysconfdir}/sysconfig
 install -m 644 etc/pgbouncer.ini %{buildroot}%{_sysconfdir}/
 rm -f %{buildroot}%{_docdir}/%{name}/pgbouncer.ini
 install -d %{buildroot}%{_initrddir}
 install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
+install -m 755 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 
 %post
-chkconfig --add postgresql
+chkconfig --add pgbouncer
 
 %preun
 if [ $1 = 0 ] ; then
@@ -59,10 +64,18 @@ rm -rf %{buildroot}
 %{_bindir}/*
 %config(noreplace) %{_sysconfdir}/%{name}.ini
 %{_initrddir}/%{name}
+%{_sysconfdir}/sysconfig/%{name}
 %{_mandir}/man1/%{name}.*
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Fri Mar 7 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.2-2
+- Add a patch for pgbouncer.ini to satisfy Red Hat defaults and security.
+  Per Darcy Buskermolen.
+- Fix chkconfig line
+- Add sysconfig file
+- Refactor init script
+
 * Sat Mar 1 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.2-1
 - Update to 1.1.2
 - Various spec file improvements, per bz review #244593 .

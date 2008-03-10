@@ -1,10 +1,10 @@
 Summary:	'top' for PostgreSQL process
 Name:		ptop
 Version:	3.6.1
-Release:	1.beta3%{?dist}
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1567/%{name}-%{version}-beta3.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1667/%{name}-%{version}-beta3.tar.gz
 Patch1:		%{name}-makefile.patch
 URL:		http://pgfoundry.org/projects/ptop
 BuildRequires:	postgresql-devel >= 8.1, libtermcap-devel
@@ -16,7 +16,7 @@ ptop is 'top' for PostgreSQL processes. See running queries,
 query plans, issued locks, and table and index statistics.
 
 %prep
-%setup -q -n %{name}-%{version}-beta3
+%setup -q -n %{name}-%{version}
 %patch1 -p0
 
 %build
@@ -42,6 +42,9 @@ rm -rf %{buildroot}
 %{_bindir}/%{name}
 
 %changelog
+* Mon Mar 10 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 3.6.1-1
+- Update to 3.6.1
+
 * Sun Jan 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 3.6.1-1.beta3
 - Update to 3.6.1-beta3
 

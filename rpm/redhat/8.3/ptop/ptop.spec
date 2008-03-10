@@ -4,7 +4,7 @@ Version:	3.6.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1667/%{name}-%{version}-beta3.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1667/%{name}-%{version}.tar.gz
 Patch1:		%{name}-makefile.patch
 URL:		http://pgfoundry.org/projects/ptop
 BuildRequires:	postgresql-devel >= 8.1, libtermcap-devel
@@ -16,7 +16,7 @@ ptop is 'top' for PostgreSQL processes. See running queries,
 query plans, issued locks, and table and index statistics.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q 
 %patch1 -p0
 
 %build

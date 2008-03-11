@@ -1,6 +1,6 @@
 Summary:	PostgreSQL File Dump Utility
 Name:		pg_filedump
-Version:	8.2.0
+Version:	8.2
 Release:	1%{?dist}
 URL:		http://sources.redhat.com/rhdb/
 License:	GPLv2+
@@ -46,7 +46,7 @@ rm -rf %{buildroot}
 %doc ChangeLog README.pg_filedump
 
 %changelog
-* Tue Mar 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.0-1
+* Tue Mar 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2-1
 - Initial packaging for PGDG Repository, using the Fedora
   spec of Tom, with minor stylistic cleanup. Also, conflict
   with rhdb-utils.

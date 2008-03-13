@@ -48,8 +48,9 @@
 # The base package, the lib package, the devel package, and the server package always get built.
 
 # We have support for Red Hat Linux 9, Red Hat Enterprise Linux 3 
-# and above and all Fedora Core Linux releases
+# and above and all Fedora Linux releases
 # RHL 9 and RHEL 3 builds needs a special macro to build.
+%{!?buildrhel3:%define buildrhel3 1}
 %{?build9:%define build9 1}
 %{?build9:%define kerbdir /usr/kerberos}
 %{?buildrhel3:%define kerbdir /usr/kerberos}
@@ -73,7 +74,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.2.6
+Version:	8.2.7
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -679,6 +680,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.7-1PGDG
+- Update to 8.2.7
+- Enable buildrhel3 macro by default
+
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.6-1PGDG
 - Update to 8.2.6, which also includes security fixes for  CVE-2007-4769,
   CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601

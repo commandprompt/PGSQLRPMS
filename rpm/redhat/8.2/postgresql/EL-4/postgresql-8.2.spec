@@ -73,7 +73,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.2.6
+Version:	8.2.7
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -679,6 +679,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.7-1PGDG
+- Update to 8.2.7
+
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.6-1PGDG
 - Update to 8.2.6, which also includes security fixes for  CVE-2007-4769,
   CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601

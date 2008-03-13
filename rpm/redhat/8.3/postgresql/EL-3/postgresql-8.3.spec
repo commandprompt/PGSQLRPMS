@@ -49,6 +49,7 @@
 
 # We support RHEL 3+, and Fedora 7+ .
 # RHEL 3 builds need a special macro to build.
+%{!?buildrhel3:%define buildrhel3 1}
 %{?buildrhel3:%define kerbdir /usr/kerberos}
 
 %define beta 0
@@ -72,8 +73,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.3.0
-Release:	2PGDG%{?dist}
+Version:	8.3.1
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -708,6 +709,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-1PGDG
+- Set the buildrhel3 macro to 1 
+- Update to 8.3.1
+
 * Tue Feb 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-2PGDG
 - Enable the new GSSAPI support in 8.3, per reminder from Tom.
 - Disable xml builds for RHEL 3.

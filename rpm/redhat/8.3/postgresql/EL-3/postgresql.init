@@ -270,7 +270,7 @@ case "$1" in
 	stop
 	;;
   status)
-	status postmaster
+	status -p /var/run/postmaster.${PGPORT}.pid
 	script_result=$?
 	;;
   restart)

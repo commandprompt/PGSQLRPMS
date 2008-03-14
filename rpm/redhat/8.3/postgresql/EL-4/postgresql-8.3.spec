@@ -708,7 +708,7 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Thu Mart 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-1PGDG
+* Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-1PGDG
 - Update to 8.3.1
 
 * Tue Feb 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-2PGDG

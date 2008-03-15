@@ -101,6 +101,9 @@ pagila
 pgplsh
 ip4r
 usda-r18
+pgbouncer
+ruby-pg
+pg_filedump
 
 # Save some space
 -bittorrent

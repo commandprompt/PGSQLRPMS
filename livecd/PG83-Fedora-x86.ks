@@ -185,6 +185,9 @@ pg_filedump
 anaconda
 isomd5sum
 
+# Need to prevent conflicts
+-rhdb-utils
+
 # make sure debuginfo doesn't end up on the live image
 -*debuginfo
 

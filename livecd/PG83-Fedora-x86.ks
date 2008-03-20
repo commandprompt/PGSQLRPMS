@@ -34,7 +34,7 @@ timezone  America/New_York
 # X Window System configuration information
 xconfig  --defaultdesktop=GNOME --depth=32 --resolution=1024x768 --startxonboot
 # System bootloader configuration
-bootloader --location=mbr
+bootloader --append="selinux=0"  --location=mbr
 # Partition clearing information
 clearpart --all  
 part / --size 4096

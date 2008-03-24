@@ -3,7 +3,7 @@
 
 Name:		pgbouncer
 Version:	1.1.2
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	BSD
@@ -64,11 +64,14 @@ rm -rf %{buildroot}
 %{_bindir}/*
 %config(noreplace) %{_sysconfdir}/%{name}.ini
 %{_initrddir}/%{name}
-%{_sysconfdir}/sysconfig/%{name}
+%config %{_sysconfdir}/sysconfig/%{name}
 %{_mandir}/man1/%{name}.*
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Sun Mar 23 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.2-3
+- Mark sysconfig file as config file, per Guillaume Smet.
+
 * Fri Mar 7 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.2-2
 - Add a patch for pgbouncer.ini to satisfy Red Hat defaults and security.
   Per Darcy Buskermolen.

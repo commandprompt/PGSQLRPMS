@@ -1,5 +1,11 @@
 #!/bin/sh
+# postgresql    This is the init script for starting up the pgbouncer
+#
 # chkconfig: - 64 36
+# description: Starts and stops the pgbouncer daemon.
+#
+# processname: pgbouncer
+# pidfile: /var/run/pgbouncer/pgbouncer.pid
 
 # Source function library.
 INITD=/etc/rc.d/init.d
@@ -26,10 +32,6 @@ else
     SU=su
 fi
 
-
-BOUNCERCONF=/etc/pgbouncer.ini
-BOUNCERLOG=/var/log/pgbouncer.log
-
 # Override defaults from /etc/sysconfig/pgbouncer if file is present
 [ -f /etc/sysconfig/${NAME} ] && . /etc/sysconfig/${NAME}
 
@@ -50,7 +52,19 @@ start(){
 		[ -x /usr/bin/chcon ] && /usr/bin/chcon -u system_u -r object_r -t postgresql_log_t "$BOUNCERLOG" 2>/dev/null
 	fi
 
+	# Make sure that pgbouncer is not already running:	
+	if [ -f /var/run/${NAME}/${NAME}.pid ]
+	then
+		echo "${NAME} is already running"
+		echo_failure
+		echo
+		exit 1
+	fi
+
 	echo -n "$BOUNCER_START"
+	[ -d /var/run/${NAME} ] || mkdir /var/run/${NAME}
+	chown postgres: /var/run/${NAME}
+
 	$SU -l postgres -c "pgbouncer '$BOUNCERCONF' & " >> "$BOUNCERLOG" 2>&1 < /dev/null
 	sleep 2
 	pid=`pidof -s pgbouncer`
@@ -58,7 +72,7 @@ start(){
         then
           success "$BOUNCER_START"
           touch /var/lock/subsys/${NAME}
-          echo "$pid" > "/var/run/${NAME}.pid"
+          echo "$pid" > "/var/run/${NAME}/${NAME}.pid"
           echo
         else
           failure "$BOUNCER_START"
@@ -69,18 +83,26 @@ start(){
 
 stop(){
         echo -n $"Stopping ${NAME} service: "
-        kill -TERM `cat "/var/run/${NAME}.pid"`
-        ret=$? 
-        if [ $ret -eq 0 ]
-        then
-                echo_success
-        else
-                echo_failure
-                script_result=1
-        fi
-        echo
-          rm -f "/var/run/${NAME}.pid"
-          rm -f "/var/lock/subsys/${NAME}"
+	if [ -f /var/run/${NAME}/${NAME}.pid ]
+	then
+	        kill -TERM `cat "/var/run/${NAME}/${NAME}.pid"`
+	        ret=$? 
+	        if [ $ret -eq 0 ]
+	        then
+	                echo_success
+	        else
+	                echo_failure
+	                script_result=1
+	        fi
+	        echo
+	          rm -f "/var/run/${NAME}/${NAME}.pid"
+	          rm -f "/var/lock/subsys/${NAME}"
+	else
+		echo "   ${NAME} is not running."
+		echo_failure
+		echo
+		exit 1
+	fi
 }
 
 restart(){
@@ -97,13 +119,13 @@ condstop(){
 }
 
 reload(){
-    $SU -l postgres -c "kill -HUP `cat /var/run/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
+    $SU -l postgres -c "kill -HUP `cat /var/run/${NAME}/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
 }
 pause(){
-    $SU -l postgres -c "kill -USR1 `cat /var/run/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
+    $SU -l postgres -c "kill -USR1 `cat /var/run/${NAME}/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
 }
 resum(){
-   $SU -l postgres -c "kill -USR2 `cat /var/run/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
+   $SU -l postgres -c "kill -USR2 `cat /var/run/${NAME}/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
 }
 # See how we were called.
 case "$1" in

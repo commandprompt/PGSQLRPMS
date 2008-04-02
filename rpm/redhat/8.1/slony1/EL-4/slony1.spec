@@ -5,7 +5,7 @@
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
 Version:	1.2.13
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -109,17 +109,17 @@ install -m 0644 altperl/slon-tools  %{buildroot}%{_libdir}/pgsql/slon-tools.pm
 rm -rf %{buildroot}
 
 %post
-chkconfig --add postgresql-slony1
+chkconfig --add slony1
 
 %preun
 if [ $1 = 0 ] ; then
-	/sbin/service postgresql-slony1 condstop >/dev/null 2>&1
-	chkconfig --del postgresql-slony1
+	/sbin/service slony1 condstop >/dev/null 2>&1
+	chkconfig --del slony1
 fi
 
 %postun
 if [ $1 -ge 1 ]; then
-	/sbin/service postgresql-slony1 condrestart >/dev/null 2>&1
+	/sbin/service slony1 condrestart >/dev/null 2>&1
 fi
 
 %files
@@ -140,6 +140,9 @@ fi
 %endif
 
 %changelog
+* Wed Apr 2 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.13-2
+- Fix init script name.
+
 * Sun Feb 10 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.13-1
 - Update to 1.2.13
 

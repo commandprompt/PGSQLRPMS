@@ -1,7 +1,7 @@
 Summary:	Web-based PostgreSQL administration
 Name:		phpPgAdmin
-Version:	4.1.3
-Release:	2%{?dist}
+Version:	4.2
+Release:	1%{?dist}
 License:	GPL
 Group:		Applications/Databases
 URL:		http://phppgadmin.sourceforge.net/
@@ -18,7 +18,6 @@ Buildarch:	noarch
 %define		_phppgadmindir	%{_datadir}/%{name}
 
 Patch1:		%{name}-langcheck.patch
-Patch2:		%{name}-%{version}-rebuild.patch
 
 %description
 phpPgAdmin is a fully functional web-based administration utility for
@@ -29,7 +28,6 @@ functions (stored procedures). It also has Slony-I support.
 %prep
 %setup -q -n %{name}-%{version}
 %patch1 -p0
-%patch2 -p0
 
 %build
 # Cleanup encoding problem
@@ -87,6 +85,13 @@ rm -rf %{buildroot}
 %{_phppgadmindir}/conf/config.inc.php*
 
 %changelog
+* Sun Apr 6 2008 Devrim Gunduz <devrim@commandprompt.com> 4.2-1
+- Update to 4.2
+- Removed patch #2
+
+* Wed Jul 11 2007 Devrim Gunduz <devrim@commandprompt.com> 4.1.3-2
+- Added temporary patch #2 , per sf.net bug #1751614
+
 * Tue Jul 10 2007 Devrim Gunduz <devrim@commandprompt.com> 4.1.3-1
 - Update to 4.1.3
 

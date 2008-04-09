@@ -11,9 +11,9 @@ Requires:	postgresql-server >= 7.3
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
-pgSphere is a server side module for PostgreSQL. It contains methods for working 
-with spherical coordinates and objects. It also supports indexing of spherical 
-objects.
+pgSphere is a server side module for PostgreSQL. It contains methods for 
+working with spherical coordinates and objects. It also supports indexing of 
+spherical objects.
 
 %prep
 %setup -q -n %{name}-1.0

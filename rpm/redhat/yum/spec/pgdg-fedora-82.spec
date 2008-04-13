@@ -1,6 +1,6 @@
 Name:		pgdg-fedora
 Version:	8.2
-Release:	2
+Release:	3
 Summary:	PostgreSQL 8.2.X PGDG RPMs for Fedora - Yum Repository Configuration
 Group:		System Environment/Base 
 License:	BSD
@@ -44,6 +44,9 @@ rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 %{_sysconfdir}/pki/rpm-gpg/*
 
 %changelog
+* Sun Apr 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 8.2-3
+- Enable srpms
+
 * Fri Feb 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 8.2-2
 - Enable gpgcheck
 

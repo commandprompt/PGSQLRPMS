@@ -5,3 +5,11 @@ enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 
+[pgdg80-source]
+name=PostgreSQL 8.0 $releasever - $basearch - Source
+failovermethod=priority
+baseurl=http://yum.pgsqlrpms.org/srpms/8.0/fedora/fedora-$releasever-$basearch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
+

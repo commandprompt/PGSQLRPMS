@@ -134,5 +134,5 @@ rm -rf %{buildroot}
 %{_bindir}/pg_dumpall-%{version}
 
 %changelog
-* Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-1PGDG
+* Sat Apr 12 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-1PGDG
 - Initial packaging for pgsqlrpms project.

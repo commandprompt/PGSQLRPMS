@@ -1,6 +1,6 @@
 Name:		pgdg-redhat
 Version:	7.4
-Release:	3
+Release:	4
 Summary:	PostgreSQL 7.4.X PGDG RPMs for RHEL - Yum Repository Configuration
 Group:		System Environment/Base 
 License:	BSD
@@ -44,6 +44,9 @@ rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 %{_sysconfdir}/pki/rpm-gpg/*
 
 %changelog
+* Sun Apr 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 7.4-4
+- Rebuilt
+
 * Sun Apr 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 7.4-3
 - Enable srpms
 

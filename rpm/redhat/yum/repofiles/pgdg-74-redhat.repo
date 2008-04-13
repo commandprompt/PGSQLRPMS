@@ -8,7 +8,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 [pgdg74-source]
 name=PostgreSQL 7.4 $releasever - $basearch - Source
 failovermethod=priority
-baseurl=http://yum.pgsqlrpms.org/srpms/7.4/fedora/fedora-$releasever-$basearch
+baseurl=http://yum.pgsqlrpms.org/srpms/7.4/redhat/rhel-$releasever-$basearch
 enabled=0
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG

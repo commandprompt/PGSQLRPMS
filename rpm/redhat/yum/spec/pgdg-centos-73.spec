@@ -1,6 +1,6 @@
 Name:		pgdg-centos
 Version:	7.3
-Release:	3
+Release:	4
 Summary:	PostgreSQL 7.3.X PGDG RPMs for CentOS - Yum Repository Configuration
 Group:		System Environment/Base 
 License:	BSD
@@ -44,6 +44,9 @@ rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 %{_sysconfdir}/pki/rpm-gpg/*
 
 %changelog
+* Sun Apr 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 7.3-4
+- Rebuilt
+
 * Sun Apr 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 7.3-3
 - Enable srpms
 

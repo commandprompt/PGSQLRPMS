@@ -1,0 +1,19 @@
+--- tools/geos-config.in~	2006-01-05 16:55:49.000000000 -0800
++++ tools/geos-config.in	2006-01-05 16:56:33.000000000 -0800
+@@ -32,13 +32,13 @@
+     echo @VERSION@
+      ;;
+     --cflags)
+-    echo -I@prefix@/include 
++    echo 
+       ;;
+     --libs)
+-      echo -L@prefix@/lib -lgeos
++      echo -lgeos
+       ;;
+     --ldflags)
+-      echo -L@prefix@/lib
++      echo 
+       ;;
+     --includes)
+       echo @prefix@/include

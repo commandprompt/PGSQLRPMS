@@ -4,8 +4,8 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	1.2.13
-Release:	2%{?dist}
+Version:	1.2.14
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -140,6 +140,9 @@ fi
 %endif
 
 %changelog
+* Fri May 16 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.14-1
+- Update to 1.2.14
+
 * Wed Apr 2 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.13-2
 - Fix init script name.
 

@@ -2,7 +2,7 @@ Name:		odbcng
 Summary:	PostgreSQL ODBCng driver
 Version:	0.90.101
 Release:	1%{?dist}
-License:	GPL
+License:	GPLv2
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/%{name}
 Source0:	http://projects.commandprompt.com/public/%{name}/attachment/wiki/Downloads/%{name}-%{version}.tar.gz

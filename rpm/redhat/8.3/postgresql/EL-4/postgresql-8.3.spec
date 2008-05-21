@@ -69,11 +69,12 @@
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
 %{!?uuid:%define uuid 0}
+%{!?ldap:%define ldap 1}
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.3.1
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -134,6 +135,11 @@ BuildRequires:	pam-devel
 BuildRequires:	uuid-devel
 %endif
 
+%if %ldap
+BuildRequires:	openldap-devel
+%endif
+
+Requires:	postgresql-libs = %{version}-%{release}
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -169,7 +175,7 @@ PostgreSQL server.
 Summary:	The programs needed to create and run a PostgreSQL server
 Group:		Applications/Databases
 Requires:	/usr/sbin/useradd /sbin/chkconfig 
-Requires:	postgresql = %{version} libpq.so
+Requires:	postgresql = %{version}-%{release}
 Conflicts:	postgresql < 7.4
 
 %description server
@@ -204,8 +210,7 @@ included in the PostgreSQL distribution.
 %package devel
 Summary:	PostgreSQL development header files and libraries
 Group:		Development/Libraries
-Requires:	postgresql-libs = %{version}
-Requires:	postgresql = %{version}
+Requires:	postgresql = %{version}-%{release}
 
 %description devel
 The postgresql-devel package contains the header files and libraries
@@ -218,8 +223,7 @@ develop applications which will interact with a PostgreSQL server.
 %package plperl
 Summary:	The Perl procedural language for PostgreSQL
 Group:		Applications/Databases
-Requires:	postgresql = %{version}
-Requires:	postgresql-server = %{version}
+Requires:	postgresql-server = %{version}-%{release}
 %ifarch ppc ppc64
 BuildRequires:  perl-devel
 %endif
@@ -263,8 +267,7 @@ for the backend.
 %package test
 Summary:	The test suite distributed with PostgreSQL
 Group:		Applications/Databases
-Requires:	postgresql = %{version}
-Requires:	postgresql-server = %{version}
+Requires:	postgresql-server = %{version}-%{release}
 
 %description test
 PostgreSQL is an advanced Object-Relational database management
@@ -306,6 +309,10 @@ CFLAGS="${CFLAGS} -I%{_includedir}/et" ; export CFLAGS
 # Strip out -ffast-math from CFLAGS....
 
 CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
+
+# Use --as-needed to eliminate unnecessary link dependencies.
+# Hopefully upstream will do this for itself in some future release.
+LDFLAGS="-Wl,--as-needed"; export LDFLAGS
 
 export LIBNAME=%{_lib}
 %configure --disable-rpath \
@@ -350,6 +357,9 @@ export LIBNAME=%{_lib}
 %if %xml
 	--with-libxml \
 	--with-libxslt \
+%endif
+%if %ldap
+	--with-ldap \
 %endif
 	--with-system-tzdata=%{_datadir}/zoneinfo \
 	--sysconfdir=/etc/sysconfig/pgsql \
@@ -708,6 +718,14 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-2PGDG
+- Enable LDAP support, per gripe from Bartek Siebab.
+- Use -Wl,--as-needed to suppress bogus dependencies for libraries that
+  are really only needed by some of the subpackages, per Fedora package.
+- Clean up cross-subpackage Requires: to ensure that updating any one
+  subpackage brings in the matching versions of others.
+  Resolves: #444271, per Fedora spec.
+
 * Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-1PGDG
 - Update to 8.3.1
 

@@ -27,25 +27,27 @@ implementations. PostgreSQL implementation is called PL/pgPSM (using
 the standard naming scheme in PostgreSQL).
 
 %prep
-%setup -q
+%setup -q -n %{name}
 
 %build
 USE_PGXS=1 make %{?_smp_mflags} 
 
 %install
 rm -rf %{buildroot}
-USE_PGXS=1 make %{?_smp_mflags} install
 
 install -d %{buildroot}%{_libdir}/pgsql/
+install -d %{buildroot}%{_datadir}/%{name}
 install -m 755 libplpgpsm.so.0.0 %{buildroot}%{_libdir}/pgsql/plpgpsm.so
+install -p -m 644 plpgpsm.sql %{buildroot}%{_datadir}/%{name}
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(644,root,root,755)
-%doc README.plpgpsm INSTALL.plpgpsm COPYRIGHT.plpgpsm plpgpsm.sql
+%doc INSTALL.plpgpsm
 %{_libdir}/pgsql/plpgpsm.so
+%{_datadir}/%{name}/plpgpsm.sql
 
 %changelog
 * Wed May 21 2008 - Pavel STEHULE <pavel.stehule@gmail.com> 0.3.1-1

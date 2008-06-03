@@ -1,6 +1,6 @@
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
-Version:	1.8.2
+Version:	1.8.3
 Release:	1%{?dist}
 License:	Artistic
 Group:		Applications/Databases
@@ -74,6 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/*
 
 %changelog
+* Tue Jun 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.3-1
+- Update to 1.8.3
+
 * Fri Feb 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.2-1
 - Update to 1.8.2
 

@@ -1,14 +1,13 @@
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
-Version:	1.8.1
+Version:	1.8.3
 Release:	1%{?dist}
 License:	Artistic
 Group:		Applications/Databases
 Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	wxGTK-devel postgresql-devel >= 8.0 
-BuildRequires:	desktop-file-utils openssl-devel libxml2-devel libxslt-devel
+BuildRequires:	wxGTK-devel postgresql-devel desktop-file-utils openssl-devel libxml2-devel libxslt-devel
 Requires:	wxGTK
 
 %description
@@ -75,6 +74,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/*
 
 %changelog
+* Tue Jun 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.3-1
+- Update to 1.8.3
+
+* Fri Feb 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.2-1
+- Update to 1.8.2
+
 * Fri Jan 4 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.1-1
 - Update to 1.8.1
 

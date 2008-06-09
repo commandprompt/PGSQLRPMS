@@ -36,7 +36,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.0.15
+Version:	8.0.17
 
 # Conventions for PostgreSQL Global Development Group RPM releases:
 
@@ -643,6 +643,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.17-1PGDG
+- Update to 8.0.17 (8.0.16 was skipped by upstream)
+
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.15-1PGDG
 - Update to 8.0.15, which also includes security fixes for CVE-2007-4769, 
   CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601

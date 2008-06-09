@@ -1,0 +1,22 @@
+############################
+# General Makefile 	   #
+# for RPM packaging	   #
+# http://yum.pgsqlrpms.org #
+#			   #
+# Devrim Gunduz		   #
+# devrim@CommandPrompt.com #
+############################
+
+
+srpm:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+rpm:
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "dist $(ARCH)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)

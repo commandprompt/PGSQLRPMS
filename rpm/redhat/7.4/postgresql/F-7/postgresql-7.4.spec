@@ -43,7 +43,7 @@
 
 Summary: PostgreSQL client programs and libraries
 Name: postgresql
-Version: 7.4.19
+Version: 7.4.21
 
 # Conventions for PostgreSQL Global Development Group RPM releases:
 
@@ -784,6 +784,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 7.4.21-1PGDG
+- Update to 7.4.21 (7.4.20 was skipped by upstream) 
+
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 7.4.19-1PGDG
 - Update to 7.4.19, which also includes security fixes for CVE-2007-4769,
   CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601

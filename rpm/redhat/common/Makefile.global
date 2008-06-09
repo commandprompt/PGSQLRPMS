@@ -7,16 +7,22 @@
 # devrim@CommandPrompt.com #
 ############################
 
+prep:
+	# Checkout Makefile.global before doing anything else.
+	svn up ../../../common/
 
-srpm:
+	# Use spectool to download source files, especially tarballs.
+	spectool -g -S $(SPECFILE)
+
+srpm: prep
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir ." \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
-rpm:
+rpm: prep
 	rpmbuild --define "_sourcedir $(PWD)" \
 	--define "_specdir $(PWD)" \
 	--define  "_builddir $(PWD)" \
 	--define "_srcrpmdir $(PWD)" \
 	--define "_rpmdir $(PWD)" \
-	--define "dist $(ARCH)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)

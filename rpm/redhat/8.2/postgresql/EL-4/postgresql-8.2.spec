@@ -85,7 +85,7 @@ Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/8.2/postgresql-8.2.6-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/8.2/postgresql-8.2-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh

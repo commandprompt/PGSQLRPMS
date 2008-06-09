@@ -73,8 +73,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.3.1
-Release:	2PGDG%{?dist}
+Version:	8.3.3
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -718,6 +718,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-1PGDG
+- Update to 8.3.3 (8.3.2 was skipped by upstream)
+
 * Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-2PGDG
 - Enable LDAP support, per gripe from Bartek Siebab.
 - Use -Wl,--as-needed to suppress bogus dependencies for libraries that

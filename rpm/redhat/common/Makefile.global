@@ -14,6 +14,10 @@ prep:
 	# Use spectool to download source files, especially tarballs.
 	spectool -g -S $(SPECFILE)
 
+clean:	
+	rm -rf i386/ x86_64
+	rm -f *.src.rpm
+
 srpm: prep
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir ." \

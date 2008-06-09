@@ -72,7 +72,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.1.11
+Version:	8.1.13
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -648,6 +648,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.13-1PGDG
+- Update to 8.1.13 (8.1.12 was skipped by upstream)
+
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.11-1PGDG
 - Update to 8.1.11, which also includes security fixes for CVE-2007-4769,
   CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601

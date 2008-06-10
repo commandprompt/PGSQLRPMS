@@ -310,10 +310,6 @@ CFLAGS="${CFLAGS} -I%{_includedir}/et" ; export CFLAGS
 
 CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
 
-# Use --as-needed to eliminate unnecessary link dependencies.
-# Hopefully upstream will do this for itself in some future release.
-LDFLAGS="-Wl,--as-needed"; export LDFLAGS
-
 export LIBNAME=%{_lib}
 %configure --disable-rpath \
 %if %beta
@@ -720,6 +716,7 @@ rm -rf %{buildroot}
 %changelog
 * Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-1PGDG
 - Update to 8.3.3 (8.3.2 was skipped by upstream)
+- Remove -Wl,--as-needed from F-7 spec.
 
 * Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-2PGDG
 - Enable LDAP support, per gripe from Bartek Siebab.

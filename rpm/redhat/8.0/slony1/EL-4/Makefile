@@ -10,9 +10,8 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f9
-SPECFILE="postgresql-8.3.spec"
-HOMEDIR=$HOMEDIR
+DIST=.rhel4
+SPECFILE="slony1.spec"
 
 # Now, include global Makefile
 include ../../../common/Makefile.global

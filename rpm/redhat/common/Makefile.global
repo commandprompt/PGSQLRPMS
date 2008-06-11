@@ -49,5 +49,5 @@ build: prep
 	--define "_specdir $(PWD)" \
 	--define  "_builddir $(HOME)/rpm/BUILD" \
 	--define "_srcrpmdir $(HOME)/rpm/SRPMS" \
-	--define "_rpmdir $(HOME)/rpm/RPMS/" \
+	--define "_rpmdir $(HOME)/rpm/RPMS/" --sign \
 	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)

@@ -24,6 +24,8 @@ aclocal
 libtoolize --force
 autoconf
 
+sed -i.strip -e 's|strip|true strip|' makefile.in
+
 %build
 
 %configure --with-ssl

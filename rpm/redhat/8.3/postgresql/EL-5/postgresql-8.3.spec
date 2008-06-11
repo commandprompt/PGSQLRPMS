@@ -68,7 +68,7 @@
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
-%{!?uuid:%define uuid 0}
+%{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
 
 Summary:	PostgreSQL client programs and libraries
@@ -717,6 +717,7 @@ rm -rf %{buildroot}
 * Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-1PGDG
 - Update to 8.3.3 (8.3.2 was skipped by upstream)
 - Remove -Wl,--as-needed from EL-5 spec.
+- Re-enable uuid for EL-5
 
 * Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-2PGDG
 - Enable LDAP support, per gripe from Bartek Siebab.

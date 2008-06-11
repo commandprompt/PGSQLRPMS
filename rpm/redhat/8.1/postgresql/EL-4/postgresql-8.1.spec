@@ -98,7 +98,7 @@ BuildRequires:	perl glibc-devel bison flex
 Requires:	/sbin/ldconfig initscripts
 
 %if %plperl
-BuildRequires:	perl-devel
+BuildRequires:	perl
 %endif
 
 %if %python
@@ -650,6 +650,7 @@ rm -rf %{buildroot}
 %changelog
 * Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.13-1PGDG
 - Update to 8.1.13 (8.1.12 was skipped by upstream)
+- Revoke dependency on perl-devel on EL-4
 
 * Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.11-1PGDG
 - Update to 8.1.11, which also includes security fixes for CVE-2007-4769,

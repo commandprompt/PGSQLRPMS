@@ -6,7 +6,7 @@ Summary: GEOS is a C++ port of the Java Topology Suite
 Group: Applications/Engineering
 License: LGPL
 URL: http://geos.refractions.net
-Source0: http://geos.refractions.net/%{name}-%{version}.tar.bz2
+Source0: http://geos.refractions.net/downloads/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: doxygen
 

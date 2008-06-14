@@ -43,13 +43,8 @@ rpm: prep
 	--define "_rpmdir $(PWD)" \
 	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
 
-build: prep
-	# Make sure that SRPM is writable -- actually this is not needed, but still...
-	rpmbuild --define "_sourcedir ." --define "_specdir ." \
-	--define "_builddir ." --define "_srcrpmdir  $(HOME)/rpm/SRPMS" \
-	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+build: bfsrpm
 
-	# Now, do it!
 	rpmbuild --define "_sourcedir $(PWD)" \
 	--define "_specdir $(PWD)" \
 	--define  "_builddir $(HOME)/rpm/BUILD" \

@@ -4,12 +4,12 @@
 
 Summary:	Fast data loader for PostgreSQL
 Name:		pgloader
-Version:	2.3.0
+Version:	2.3.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgfoundry.org/projects/pgloader/
-Source0:	http://pgfoundry.org/frs/download.php/1679/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1814/%{name}-%{version}.tar.gz
 Patch1:		pgloader-makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 %{_mandir}/man1/pgloader.1.gz
 
 %changelog
+* Sun Jun 15 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.3.1-1
+- Update to 2.3.1
+
 * Wed Apr 9 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.3.0-1
 - Update to 2.3.0
 - Various spec file fixes

@@ -1,0 +1,32 @@
+diff -Naur pg_filedump.orig/Makefile pg_filedump/Makefile
+--- pg_filedump.orig/Makefile	2005-11-21 11:29:01.000000000 -0500
++++ pg_filedump/Makefile	2005-11-21 11:36:47.000000000 -0500
+@@ -1,16 +1,10 @@
+ # View README.pg_filedump first
+ 
+ CC=gcc
+-CFLAGS=-g -O -Wall -Wmissing-prototypes -Wmissing-declarations
++CFLAGS+=-Wall -Wmissing-prototypes -Wmissing-declarations
+ 
+ INCLUDE=/usr/include/pgsql/server
+ 
+-# PGSQL MUST POINT TO pgsql SOURCE DIRECTORY
+-PGSQL=../../../../postgres/pgsql
+-
+-CRC_SRC=${PGSQL}/src/backend/utils/hash
+-CRC_INCLUDE=${PGSQL}/src
+-
+ all: pg_filedump
+ 
+ pg_filedump: pg_filedump.o pg_crc.o 
+@@ -19,8 +13,8 @@
+ pg_filedump.o: pg_filedump.c
+ 	${CC} ${CFLAGS} -I${INCLUDE} pg_filedump.c -c
+ 
+-pg_crc.o: ${CRC_SRC}/pg_crc.c
+-	${CC} ${CFLAGS} -I${CRC_INCLUDE} -I${INCLUDE} ${CRC_SRC}/pg_crc.c -c 
++pg_crc.o: pg_crc.c
++	${CC} ${CFLAGS} -I${INCLUDE} pg_crc.c -c 
+ 
+ clean:
+ 	rm -rf *.o pg_filedump

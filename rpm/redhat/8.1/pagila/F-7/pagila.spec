@@ -1,13 +1,13 @@
 Summary:	A sample database for PostgreSQL
 Name:		pagila
-Version:	0.10.0
+Version:	0.10.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgfoundry.org/projects/dbsamples
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:	http://pgfoundry.org/frs/download.php/1556/%{name}-%{version}.zip
+Source0:	http://pgfoundry.org/frs/download.php/1719/%{name}-%{version}.zip
 
 Requires:	postgresql
 Buildarch:	noarch
@@ -40,5 +40,8 @@ rm -rf %{buildroot}
 %attr(644,root,root) %{_pagiladir}/*.sql
 
 %changelog
+* Sat Jun 14 2008 Devrim Gunduz <devrim@commandprompt.com> 0.10.1-1
+- Update to 0.10.1
+
 * Fri Feb 1 2008 Devrim Gunduz <devrim@commandprompt.com> 0.10.0-1
 - Initial packaging for Fedora/EPEL

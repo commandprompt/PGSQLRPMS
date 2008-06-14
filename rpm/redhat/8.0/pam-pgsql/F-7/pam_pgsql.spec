@@ -1,8 +1,9 @@
 Summary:	PAM module to authenticate using a PostgreSQL database 
 Name:		pam_pgsql
-Version:	0.6.3
+Version:	0.6.4
 Release:	1%{dist}
-Source0:	libpam-pgsql-%{version}.tar.bz2
+Source0:	http://easynews.dl.sourceforge.net/sourceforge/pam-pgsql/pam-pgsql_%{version}.tar.gz
+
 License:	GPLv2
 URL:		http://sourceforge.net/projects/pam-pgsql/
 Group:		System Environment/Base
@@ -44,5 +45,8 @@ rm -rf %{buildroot}
 %doc README CREDITS
 
 %changelog
+* Sat Jun 14 2008 Devrim Gunduz <devrim@commandprompt.com> - 0.6.4-1
+- Update to 0.6.4-1
+
 * Sun Feb 3 2008 Devrim Gunduz <devrim@commandprompt.com> - 0.6.3-1
 - Initial packaging for Fedora

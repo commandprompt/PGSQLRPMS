@@ -11,7 +11,7 @@
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
 DIST=.f8
-SPECFILE="pam-pgsql.spec"
+SPECFILE="pam_pgsql.spec"
 
 # Now, include global Makefile
 include ../../../common/Makefile.global

@@ -1,0 +1,23 @@
+--- pgfouine_vacuum.php.orig	2006-08-11 00:13:57.797229593 +0200
++++ pgfouine_vacuum.php	2006-08-11 00:15:16.800770504 +0200
+@@ -30,6 +30,8 @@
+ 	error_reporting(E_ALL);
+ }
+ 
++ini_set('include_path', '@INCLUDEPATH@');
++
+ include('version.php');
+ require_once('include/lib/common.lib.php');
+ require_once('include/base.lib.php');
+
+--- pgfouine.php.orig	2006-08-11 00:17:07.628330143 +0200
++++ pgfouine.php	2006-08-11 00:18:39.298492488 +0200
+@@ -30,6 +30,8 @@
+ 	error_reporting(E_ALL);
+ }
+ 
++ini_set('include_path', '@INCLUDEPATH@');
++
+ include('version.php');
+ require_once('include/lib/common.lib.php');
+ require_once('include/base.lib.php');

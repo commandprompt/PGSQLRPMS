@@ -1,0 +1,116 @@
+Installation instructions & Tutorial
+Installation
+
+You can either untar the pgFouine tarball or install the RPM package.
+
+    * If you use the tarball, pgFouine is installed locally and can be 
+run with ./pgfouine.php in the directory where you installed it.
+    * If you install the RPM package, pgFouine is installed globally 
+and you can run pgFouine with pgfouine.php.
+
+How to enable query logging
+PostgreSQL 7.x
+
+Edit your postgresql.conf file (usually located in 
+/var/lib/pgsql/data/) and set the following configuration directives:
+
+    * To log queries slower than n milliseconds:
+
+      syslog = 2
+      log_min_duration_statement = n
+      log_duration = false
+      log_statement = false
+
+      To log every query executed, set log_min_duration_statement to 0. 
+Set it to -1 to disable query logging.
+    * To log queries slower than n milliseconds AND duration for ALL 
+queries (it only works with PostgreSQL 7.x; pgFouine counts every 
+duration only once):
+
+      syslog = 2
+      log_min_duration_statement = n
+      log_duration = true
+      log_statement = false
+
+Then edit your /etc/syslog.conf to set up a PostgreSQL facility:
+
+local0.*		-/var/log/pgsql
+
+You should also ignore PostgreSQL facility for the default log file otherwise you will log the queries twice:
+
+*.info;mail.none;authpriv.none;cron.none;local0.none                /var/log/messages
+
+Restart syslogd and PostgreSQL.
+
+Apart from the extra I/O, the overhead of logging is barely noticeable. 
+You can set syslog to send the log to another server through the 
+network with @ip.ad.dr.ess.
+
+
+PostgreSQL 8.x
+Syslog configuration
+
+Edit your postgresql.conf file (usually located in 
+/var/lib/pgsql/data/) and set the following configuration directives:
+
+    * To enable syslog logging:
+
+      log_destination = 'syslog'
+      redirect_stderr = off
+      silent_mode = on
+
+    * To log queries slower than n milliseconds:
+
+      log_min_duration_statement = n
+      log_duration = off
+      log_statement = 'none'
+
+      To log every query executed, set log_min_duration_statement to 0. Set it to -1 to disable query logging.
+
+Then edit your /etc/syslog.conf to set up a PostgreSQL facility:
+
+local0.*		-/var/log/pgsql
+
+You should also ignore PostgreSQL facility for the default log file 
+otherwise you will log the queries twice:
+
+*.info;mail.none;authpriv.none;cron.none;local0.none                /var/log/messages
+
+Restart syslogd and PostgreSQL.
+
+Apart from the extra I/O, the overhead of logging is barely noticeable. 
+You can set syslog to send the log to another server through the 
+network with @ip.ad.dr.ess.
+
+
+Filter on database and/or user
+
+You can filter your log file on database and user using the -database 
+and -user options. To do so, you need to configure the following 
+log_line_prefix:
+
+log_line_prefix = 'user=%u,db=%d'
+
+Using stderr log file
+
+Using the following configuration, you can log to stderr instead of 
+syslog. This is not recommended as we cannot guarantee the consistency 
+of statements if they are multilines.
+
+log_destination = 'stderr'
+redirect_stderr = on
+log_line_prefix = '%t [%p]: [%l-1] '
+
+Usage
+
+pgFouine is an easy to use command line tool. The following command 
+generates an HTML report with all default options:
+
+$ pgfouine.php -file your/log/file.log > your-report.html
+
+The following command line displays a text report with only 10 queries 
+in each list to the standard output:
+
+$ pgfouine.php -file your/log/file.log -top 10 -format text
+
+By using pgfouine.php -help, you can display the usage information.

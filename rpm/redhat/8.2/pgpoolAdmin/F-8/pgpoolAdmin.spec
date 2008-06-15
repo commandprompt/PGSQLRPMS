@@ -1,15 +1,13 @@
-%define short_name	pgpoolAdmin
-
 Summary:	PgpoolAdmin - web-based pgpool administration
-Name:		postgresql-pgpoolAdmin
-Version:	1.0.0
-Release:	9%{?dist}
+Name:		pgpoolAdmin
+Version:	2.1
+Release:	beta1.1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.postgresql.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:	http://pgfoundry.org/frs/download.php/980/%{short_name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1716/%{name}-%{version}-beta1.tar.gz
 Source1:	%{name}.conf
 
 Requires:	php >= 4.3.9
@@ -29,7 +27,7 @@ The pgpool Administration Tool is management tool of pgpool-II. It is
 possible to monitor, start, stop pgpool and change settings of pgpool-II.
 
 %prep
-%setup -q -n %{short_name}-%{version}
+%setup -q -n %{name}-%{version}-beta1
 %patch1 -p1
 %build
 
@@ -62,8 +60,8 @@ rm -rf %{buildroot}
 %doc README README.euc_jp
 %dir %{_pgpoolAdmindir}
 %config(noreplace) %{_sysconfdir}/httpd/conf.d/%{name}.conf
-%attr(644,apache,apache,0644) %config(noreplace) %{_sysconfdir}/%{name}/*
-%attr(644,root,root) %{_pgpoolAdmindir}/*.php
+%attr(0644,apache,apache) %config(noreplace) %{_sysconfdir}/%{name}/*
+%attr(0644,root,root) %{_pgpoolAdmindir}/*.php
 %{_pgpoolAdmindir}/conf
 %{_pgpoolAdmindir}/doc
 %{_pgpoolAdmindir}/images
@@ -75,6 +73,9 @@ rm -rf %{buildroot}
 %{_pgpoolAdmindir}/screen.css
 
 %changelog
+* Sun Jun 15 2008 Devrim Gunduz <devrim@commandprompt.com> 2.1-beta1-1
+- Update to 2.1 beta1
+
 * Tue Oct 16 2007 Devrim Gunduz <devrim@commandprompt.com> 1.0.0-9
 - Fixed smarty error caused by wrong ownership
 - Change php requires version for EL-4

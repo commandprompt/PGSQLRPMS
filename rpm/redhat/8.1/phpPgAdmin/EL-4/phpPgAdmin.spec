@@ -7,7 +7,8 @@ Group:		Applications/Databases
 URL:		http://phppgadmin.sourceforge.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:	http://osdn.dl.sourceforge.net/sourceforge/phppgadmin/%{name}-%{version}.tar.bz2
+Source0:	http://easynews.dl.sourceforge.net/sourceforge/phppgadmin/%{name}-%{version}.tar.bz2
+
 Source1:	%{name}.conf
 
 Requires:	php >= 4.2, gawk

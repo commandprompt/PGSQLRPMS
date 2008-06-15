@@ -23,13 +23,13 @@
 
 Name:		postgresql-odbc
 Summary:	PostgreSQL ODBC driver
-Version:	08.02.0500
+Version:	08.03.0200
 Release:	1PGDG%{?dist}
 License:	LGPL
 Group:		Applications/Databases
 Url:		http://pgfoundry.org/projects/psqlodbc/
 
-Source0:	ftp://ftp.us.postgresql.org/pub/mirrors/postgresql/odbc/versions/src/psqlodbc-%{version}.tar.gz
+Source0:	ftp://ftp.postgresql.org/pub/odbc/versions/src/psqlodbc-%{version}.tar.gz
 Source1:	acinclude.m4
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -90,6 +90,13 @@ rm -rf %{buildroot}
 %doc license.txt readme.txt 
 
 %changelog
+* Mon Jun 16 2008 Devrim GUNDUZ <devrim@commandprompt.com> 08.03.0200-1PGDG
+- Update to 08.03.0200
+- Fix download URL
+
+* Thu Jan 31 2008 Devrim GUNDUZ <devrim@commandprompt.com> 08.03.0100-1PGDG
+- Update to 08.03.0100
+
 * Sun Nov 04 2007 Devrim GUNDUZ <devrim@commandprompt.com> 08.02.0500-1PGDG
 - Update to 08.02.0500
 - Updated project URL

@@ -1,14 +1,14 @@
 Summary:	Pgpool-HA uses heartbeat to keep pgpool from being a single point of failure
 Name:		pgpool-ha
 Version:	1.1.0
-Release:	4%{?dist}
+Release:	5%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org
 Source0:	http://pgfoundry.org/frs/download.php/1400/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	heartbeat >= 2.0
-BuildRequires:	heartbeat-devel >= 2.0 postgresql-pgpool-II
+BuildRequires:	heartbeat-devel >= 2.0 pgpool-II
 
 %description
 Pgpool-HA combines pgpool with heartbeat. Pgpool is a replication
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 %doc AUTHORS COPYING INSTALL README.ja ChangeLog doc README 
 
 %changelog
+* Sun Jun 15 2008 Devrim GUNDUZ <devrim@CommandPrompt.com> 1.1.0-5
+- Fix BuildRequires.
+
 * Mon Jul 9 2007 Devrim GUNDUZ <devrim@CommandPrompt.com> 1.1.0-4
 - Made package arch, per bz review.
 - Move ocf path back to datadir/ocf/resource.d .

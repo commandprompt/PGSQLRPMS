@@ -8,7 +8,7 @@ License:	BSD
 Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/1534/%{name}-%{version}.tar.gz
 Patch1:		%{name}-makefile.patch
-URL:		http://pgfoundry.org/projects/pgplsh
+URL:		http://pgfoundry.org/projects/plsh
 BuildRequires:	postgresql-devel >= 8.2
 Requires:	postgresql-server >= 8.2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

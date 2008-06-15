@@ -1,11 +1,11 @@
 Name:		plproxy
-Version:	2.0.4
+Version:	2.0.5
 Release:	1%{?dist}
 Summary:	PL/Proxy is database partitioning system implemented as PL language.
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/plproxy/
-Source0:	http://pgfoundry.org/frs/download.php/1552/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1818/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	postgresql-devel >= 8.1 flex >= 2.5.4
@@ -43,9 +43,9 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/%{name}.so*
 
 %changelog
-* Mon Jun 2 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.4-1
-- Update to 2.0.4
-- Remove source1,2 and patch1
+* Sun Jun 15 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.5-1
+- Update to 2.0.5
+- Remove scanner.c and scanner.h, they are no longer needed.
 
 * Tue Aug 28 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.2-2
 - Add pre-generated scanner.c and scanner.h as sources. Only very

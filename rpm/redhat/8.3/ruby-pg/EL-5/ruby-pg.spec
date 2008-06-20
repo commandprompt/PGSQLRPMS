@@ -1,7 +1,7 @@
 %{!?ruby_sitearch: %define ruby_sitearch %(ruby -rrbconfig -e "puts Config::CONFIG['sitearchdir']")}
 
 Name:		ruby-pg
-Version:	0.7.9.2008.13.18
+Version:	0.7.9.2008.03.18
 Release:	1%{?dist}
 Summary:	A Ruby interface for the PostgreSQL database engine
 Group:		Development/Languages

@@ -4,14 +4,14 @@
 
 Summary:	PostgreSQL database management tools from Skype
 Name:		skytools
-Version:	2.1.6
-Release:	2%{?dist}
+Version:	2.1.7
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1727/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1813/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/skytools
 BuildRequires:	postgresql-devel, python-devel
-Requires:	python-psycopg
+Requires:	python-psycopg2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch1:		%{name}-setup.patch
@@ -62,6 +62,10 @@ rm -rf %{buildroot}
 %{python_sitearch}/*.egg-info
 
 %changelog
+* Mon Jun 13 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.7-1
+- Need to require python-psycopg v2, not v1.
+- Update to 2.1.7
+
 * Mon Jun 2 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.6-2
 - Fix build for Fedora 9
 

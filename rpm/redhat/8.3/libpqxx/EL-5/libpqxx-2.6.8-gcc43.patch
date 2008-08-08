@@ -1,0 +1,60 @@
+diff -up libpqxx-2.6.8/src/transaction_base.cxx.gcc43 libpqxx-2.6.8/src/transaction_base.cxx
+--- libpqxx-2.6.8/src/transaction_base.cxx.gcc43	2006-09-04 06:36:58.000000000 -0500
++++ libpqxx-2.6.8/src/transaction_base.cxx	2008-02-19 08:19:47.000000000 -0600
+@@ -20,6 +20,8 @@
+ 
+ #include <stdexcept>
+ 
++#include <string.h>
++
+ #include "pqxx/connection_base"
+ #include "pqxx/result"
+ #include "pqxx/tablestream"
+diff -up libpqxx-2.6.8/src/result.cxx.gcc43 libpqxx-2.6.8/src/result.cxx
+--- libpqxx-2.6.8/src/result.cxx.gcc43	2006-08-29 09:18:37.000000000 -0500
++++ libpqxx-2.6.8/src/result.cxx	2008-02-19 08:18:12.000000000 -0600
+@@ -19,6 +19,9 @@
+ 
+ #include <stdexcept>
+ 
++#include <stdlib.h>
++#include <string.h>
++
+ #include "libpq-fe.h"
+ 
+ #include "pqxx/except"
+diff -up libpqxx-2.6.8/src/cursor.cxx.gcc43 libpqxx-2.6.8/src/cursor.cxx
+--- libpqxx-2.6.8/src/cursor.cxx.gcc43	2006-09-04 06:36:58.000000000 -0500
++++ libpqxx-2.6.8/src/cursor.cxx	2008-02-19 08:07:51.000000000 -0600
+@@ -19,6 +19,8 @@
+ 
+ #include <cstdlib>
+ 
++#include <string.h>
++
+ #include "pqxx/cursor"
+ #include "pqxx/result"
+ #include "pqxx/transaction"
+diff -up libpqxx-2.6.8/src/connection_base.cxx.gcc43 libpqxx-2.6.8/src/connection_base.cxx
+--- libpqxx-2.6.8/src/connection_base.cxx.gcc43	2006-09-04 06:36:58.000000000 -0500
++++ libpqxx-2.6.8/src/connection_base.cxx	2008-02-19 08:05:04.000000000 -0600
+@@ -40,6 +40,8 @@
+ #include <poll.h>
+ #endif
+ 
++#include <string.h>
++
+ #include "libpq-fe.h"
+ 
+ #include "pqxx/binarystring"
+diff -up libpqxx-2.6.8/src/binarystring.cxx.gcc43 libpqxx-2.6.8/src/binarystring.cxx
+--- libpqxx-2.6.8/src/binarystring.cxx.gcc43	2006-03-30 21:28:22.000000000 -0600
++++ libpqxx-2.6.8/src/binarystring.cxx	2008-02-19 08:04:33.000000000 -0600
+@@ -18,6 +18,7 @@
+ 
+ #include <new>
+ #include <stdexcept>
++#include <string.h>
+ 
+ #include "libpq-fe.h"
+ 

@@ -2,13 +2,13 @@
 %{?debug:%define __os_install_post /usr/lib/rpm/brp-compress}
 
 Name:		pgbouncer
-Version:	1.1.2
-Release:	3%{?dist}
+Version:	1.2.3
+Release:	1%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/pgbouncer/
-Source0:	http://pgfoundry.org/frs/download.php/1532/%{name}-%{version}.tgz
+Source0:	http://pgfoundry.org/frs/download.php/1873/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-ini.patch
@@ -69,6 +69,9 @@ rm -rf %{buildroot}
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Fri Aug 8 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-1
+- Update to 1.2.3
+
 * Sun Mar 23 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.2-3
 - Mark sysconfig file as config file, per Guillaume Smet.
 

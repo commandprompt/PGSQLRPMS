@@ -1,0 +1,36 @@
+diff -up libpqxx-2.6.8/configure.ac.in.visibility libpqxx-2.6.8/configure.ac.in
+--- libpqxx-2.6.8/configure.ac.in.visibility	2006-09-04 06:36:59.000000000 -0500
++++ libpqxx-2.6.8/configure.ac.in	2008-02-19 08:33:36.000000000 -0600
+@@ -129,7 +129,7 @@ if test "$GCC" = "yes" ; then
+ AC_MSG_CHECKING([g++ visibility attribute])
+ gcc_visibility=yes
+ SAVE_CXXFLAGS="$CXXFLAGS"
+-CXXFLAGS="$CXXFLAGS -Werror"
++#CXXFLAGS="$CXXFLAGS -Werror"
+ AC_TRY_COMPILE([
+ struct __attribute__ ((visibility("hidden"))) d { d() {} void f() {} };
+ 	],
+diff -up libpqxx-2.6.8/configure.ac.visibility libpqxx-2.6.8/configure.ac
+--- libpqxx-2.6.8/configure.ac.visibility	2006-09-06 04:53:36.000000000 -0500
++++ libpqxx-2.6.8/configure.ac	2008-02-19 08:33:44.000000000 -0600
+@@ -129,7 +129,7 @@ if test "$GCC" = "yes" ; then
+ AC_MSG_CHECKING([g++ visibility attribute])
+ gcc_visibility=yes
+ SAVE_CXXFLAGS="$CXXFLAGS"
+-CXXFLAGS="$CXXFLAGS -Werror"
++#CXXFLAGS="$CXXFLAGS -Werror"
+ AC_TRY_COMPILE([
+ struct __attribute__ ((visibility("hidden"))) d { d() {} void f() {} };
+ 	],
+diff -up libpqxx-2.6.8/configure.visibility libpqxx-2.6.8/configure
+--- libpqxx-2.6.8/configure.visibility	2006-09-06 04:53:48.000000000 -0500
++++ libpqxx-2.6.8/configure	2008-02-19 08:33:47.000000000 -0600
+@@ -20203,7 +20203,7 @@ if test "$GCC" = "yes" ; then
+ echo $ECHO_N "checking g++ visibility attribute... $ECHO_C" >&6; }
+ gcc_visibility=yes
+ SAVE_CXXFLAGS="$CXXFLAGS"
+-CXXFLAGS="$CXXFLAGS -Werror"
++#CXXFLAGS="$CXXFLAGS -Werror"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF

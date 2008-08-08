@@ -25,7 +25,7 @@
 Summary:	Tcl client library for PostgreSQL
 Name:		postgresql-tcl
 Version:	1.6.2
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
@@ -38,7 +38,7 @@ Source1:	http://pgfoundry.org/frs/download.php/1228/pgtcldocs-20070115.zip
 Patch0:		pgtcl-no-rpath.patch
 
 BuildRequires:	tcl-devel postgresql-devel
-Requires:	libpq.so tcl >= 8.3
+Requires:	libpq.so tcl >= 8.5
 
 %description
 PostgreSQL is an advanced Object-Relational database management
@@ -74,20 +74,35 @@ popd
 
 %install
 rm -rf %{buildroot}
-install -d -m 755 %{buildroot}%{_libdir}/Pgtcl
-cp Pgtcl/pkgIndex.tcl %{buildroot}%{_libdir}/Pgtcl
-strip Pgtcl/libpgtcl*.so
-cp Pgtcl/libpgtcl*.so %{buildroot}%{_libdir}/Pgtcl
+TCL_VERSION=`echo 'puts $tcl_version' | tclsh`
+TCLLIBDIR="%{_libdir}/tcl$TCL_VERSION"
+# check the target directory is a dir, not a symlink
+if [ -h "$TCLLIBDIR" ] ; then
+	echo "$TCLLIBDIR must not be a symlink"
+	exit 1
+fi
+PGTCL_DIR="${RPM_BUILD_ROOT}${TCLLIBDIR}/Pgtcl"
+install -d -m 755 "$PGTCL_DIR"
+cp Pgtcl/pkgIndex.tcl "$PGTCL_DIR"
+cp Pgtcl/libpgtcl*.so "$PGTCL_DIR"
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%{_libdir}/Pgtcl/
+%{_libdir}/tcl*/Pgtcl/
 %doc Pgtcl-docs/*
 
 %changelog
+* Fri Aug 8 2008 Devrim Gunduz <devrim@commandprompt.com> 0:1.6.2-2PGDG
+- Install Pgtcl in /usr/lib/tcl$TCL_VERSION, not directly in /usr/lib.
+Needed because tcl 8.5 no longer puts /usr/lib into its package search path.
+NOTE: do not back-port this change into branches using pre-8.5 tcl, because
+/usr/lib/tcl8.4 had been a symlink to /usr/share/tcl8.4, and /usr/share
+is exactly where we must not put Pgtcl. Resolves: #228263. Patch and changelog
+text is from Tom.
+  	 
 * Sun Dec 30 2007 Devrim Gunduz <devrim@commandprompt.com> 0:1.6.2-1PGDG
 - Update to 1.6.2
 

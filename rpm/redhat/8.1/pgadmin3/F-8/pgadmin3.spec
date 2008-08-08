@@ -74,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/*
 
 %changelog
-* Wed Jun 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-1
+* Thu Jun 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-1
 - Update to 1.8.4
 
 * Tue Jun 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.3-1

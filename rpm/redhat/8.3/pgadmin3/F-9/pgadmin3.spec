@@ -5,6 +5,7 @@ Release:	1%{?dist}
 License:	Artistic
 Group:		Applications/Databases
 Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
+Patch0:		%{name}-1.8.4-optflags.patch
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	wxGTK-devel postgresql-devel desktop-file-utils openssl-devel libxml2-devel libxslt-devel
@@ -38,10 +39,14 @@ which are in html format.
 
 %prep
 %setup -q
+# touch to avoid autotools re-run
+for f in configure{,.ac} ; do touch -r $f $f.stamp ; done
+%patch0 -p1
+for f in configure{,.ac} ; do touch -r $f.stamp $f ; done
 
 %build
 export LIBS="-lwx_gtk2u_core-2.8"
-%configure --disable-debug --with-wx-version=2.8 --with-wx=/usr
+%configure --disable-debug --disable-dependency-tracking --with-wx-version=2.8 --with-wx=/usr
 make %{?_smp_mflags} all
 
 %install
@@ -74,6 +79,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/*
 
 %changelog
+* Tue Jul 15 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-
+- Use $RPM_OPT_FLAGS, build with dependency tracking disabled 
+(#229054). Patch from Ville Skyttä
+
 * Thu Jun 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-1
 - Update to 1.8.4
 

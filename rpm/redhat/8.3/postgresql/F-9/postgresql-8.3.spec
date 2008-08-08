@@ -74,7 +74,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.3.3
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -94,7 +94,6 @@ Patch1:		rpm-pgsql.patch
 Patch3:		postgresql-logging.patch
 Patch4:		postgresql-test.patch
 Patch6:		postgresql-perl-rpath.patch
-Patch8:		postgresql-prefer-ncurses.patch
 
 Buildrequires:	perl glibc-devel bison flex 
 Requires:	/sbin/ldconfig initscripts
@@ -288,7 +287,6 @@ popd
 %patch4 -p1
 # patch5 is applied later
 %patch6 -p1
-%patch8 -p1
 
 pushd doc
 tar -zcf postgres.tar.gz *.html stylesheet.css
@@ -718,6 +716,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Aug 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-2PGDG
+- Update pam file -- current file does not work on recent Fedora releases :-(
+- Remove patch8 -- it is no longer needed in recent Fedora releases. Per Tom.
+
 * Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-1PGDG
 - Update to 8.3.3 (8.3.2 was skipped by upstream)
 - Re-enable uuid for F-9

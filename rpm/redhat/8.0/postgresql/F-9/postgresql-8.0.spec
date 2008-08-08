@@ -55,7 +55,7 @@ Version:	8.0.17
 # Test releases are where PostgreSQL itself is not in beta, but certain parts of
 # the RPM packaging (such as the spec file, the initscript, etc) are in beta.
 
-Release: 	1PGDG%{?dist}
+Release: 	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0: 	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
@@ -643,6 +643,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Aug 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.17-2PGDG
+- Update pam file -- current file does not work on recent Fedora releases :-(
+
 * Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.17-1PGDG
 - Update to 8.0.17 (8.0.16 was skipped by upstream)
 

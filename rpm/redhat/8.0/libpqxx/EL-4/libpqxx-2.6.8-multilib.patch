@@ -1,0 +1,13 @@
+diff -up libpqxx-2.6.8/pqxx-config.in.multilib libpqxx-2.6.8/pqxx-config.in
+--- libpqxx-2.6.8/pqxx-config.in.multilib	2006-09-04 06:36:59.000000000 -0500
++++ libpqxx-2.6.8/pqxx-config.in	2008-02-19 08:46:56.000000000 -0600
+@@ -1,9 +1,6 @@
+ #! /bin/sh
+ 
+ prefix=@prefix@
+-exec_prefix=@exec_prefix@
+-includedir=@includedir@
+-libdir=@libdir@
+ pkgconfig=@PKG_CONFIG@
+ 
+ deprecated() {

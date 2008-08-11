@@ -24,6 +24,7 @@ prep:
 clean:	
 	rm -rf i386/ x86_64
 	rm -f *.src.rpm
+	rm -f *.tar *.tar.gz *.tar.bz2 *.tgz
 
 srpm: prep
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \

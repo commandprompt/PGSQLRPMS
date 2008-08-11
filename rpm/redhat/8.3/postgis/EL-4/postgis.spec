@@ -5,7 +5,7 @@
 Summary:	Geographic Information Systems Extensions to PostgreSQL
 Name:		postgis
 Version:	1.3.3
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	GPL
 Group:		Applications/Databases
 Source0:	http://postgis.refractions.net/download/%{name}-%{version}.tar.gz
@@ -84,6 +84,11 @@ install -m 644 *.sql %{buildroot}%{_datadir}/pgsql/contrib/
 rm -f  %{buildroot}%{_libdir}/liblwgeom.so*
 rm -f  %{buildroot}%{_datadir}/*.sql
 
+if [ "%{_libdir}" = "/usr/lib64" ] ; then
+	mv %{buildroot}%{_datadir}/pgsql/contrib/lwpostgis.sql %{buildroot}%{_datadir}/pgsql/contrib/lwpostgis-64.sql
+	mv %{buildroot}%{_datadir}/pgsql/contrib/lwpostgis_upgrade.sql %{buildroot}%{_datadir}/pgsql/contrib/lwpostgis_upgrade-64.sql
+fi
+
 %if %javabuild
 install -d %{buildroot}%{_javadir}
 install -m 755 java/jdbc/%{name}_%{version}.jar %{buildroot}%{_javadir}
@@ -141,6 +146,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Aug 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.3-2
+- Fix #451387. Patch from Toshio.
+
 * Sun Apr 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.3-1
 - Update to 1.3.3
 

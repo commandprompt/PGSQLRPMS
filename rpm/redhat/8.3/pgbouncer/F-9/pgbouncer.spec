@@ -1,12 +1,11 @@
 %define debug 0
-%{?debug:%define __os_install_post /usr/lib/rpm/brp-compress}
 
 Name:		pgbouncer
 Version:	1.2.3
 Release:	1%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
-License:	BSD
+License:	MIT and BSD
 URL:		http://pgfoundry.org/projects/pgbouncer/
 Source0:	http://pgfoundry.org/frs/download.php/1873/%{name}-%{version}.tgz
 Source1:	%{name}.init
@@ -16,6 +15,9 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	libevent-devel
 Requires:	initscripts
+
+Requires(post):         chkconfig
+Requires(preun):        chkconfig
 
 %description
 pgbouncer is a lightweight connection pooler for PostgreSQL.
@@ -33,7 +35,7 @@ pgbouncer uses libevent for low-level socket handling.
 %endif
 --datadir=%{_datadir} 
 
-make %{?_smp_mflags}
+make %{?_smp_mflags} V=1
 
 %install
 rm -rf %{buildroot}
@@ -60,7 +62,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc README NEWS
+%doc README NEWS AUTHORS
 %{_bindir}/*
 %config(noreplace) %{_sysconfdir}/%{name}.ini
 %{_initrddir}/%{name}
@@ -71,6 +73,7 @@ rm -rf %{buildroot}
 %changelog
 * Fri Aug 8 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-1
 - Update to 1.2.3
+- Final fixes for Fedora review
 
 * Sun Mar 23 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.2-3
 - Mark sysconfig file as config file, per Guillaume Smet.

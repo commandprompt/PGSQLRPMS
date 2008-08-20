@@ -1,5 +1,5 @@
 Name:		perl-DBD-Pg
-Version:	2.6.1
+Version:	2.9.2
 Release:	1%{?dist}
 Summary:	PostgreSQL database driver for the DBI module
 Group:		Development/Libraries
@@ -54,8 +54,17 @@ rm -rf %{buildroot}
 %{_mandir}/man3/*.3*
 
 %changelog
-* Wed Feb 27 2008 Tom "spot" Callaway <tcallawa@redhat.com> - 2.6.1-1
-- Update to 2.6.1
+* Wed Aug 20 2008 Devrim GUNDUZ <devrim@commandprompt.com - 2.9.2-1
+- Update to 2.9.2
+
+* Fri Aug 8 2008 Devrim GUNDUZ <devrim@commandprompt.com - 2.9.0-1
+- Update to 2.9.0
+
+* Sat Jul 26 2008 May 16 2008 Devrim GUNDUZ <devrim@commandprompt.com - 2.8.7-1
+- Update to 2.8.7
+
+* Fri May 16 2008 Devrim GUNDUZ <devrim@commandprompt.com - 2.7.2-1
+- Update to 2.7.2
 - Initial build for PGDG Yum Repository, based on Fedora spec.
 
 

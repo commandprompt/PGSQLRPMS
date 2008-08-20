@@ -1,10 +1,10 @@
 Summary:	Implementation of some Oracle functions into PostgreSQL
 Name:		orafce
-Version:	2.1.3
-Release:	2%{?dist}
+Version:	2.1.4
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1549/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1839/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/orafce/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -45,6 +45,9 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/orafunc.so
 
 %changelog
+* Wed Aug 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.4-1
+- Update to 2.1.4
+
 * Sun Jan 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.3-2
 - Spec file fixes, per bz review #251805
 

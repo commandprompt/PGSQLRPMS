@@ -1,6 +1,6 @@
 Summary:	Web-based PostgreSQL administration
 Name:		phpPgAdmin
-Version:	4.2
+Version:	4.2.1
 Release:	1%{?dist}
 License:	GPL
 Group:		Applications/Databases
@@ -86,6 +86,9 @@ rm -rf %{buildroot}
 %{_phppgadmindir}/conf/config.inc.php*
 
 %changelog
+* Wed Aug 20 2008 Devrim Gunduz <devrim@commandprompt.com> 4.2.1-1
+- Update to 4.2.1
+
 * Sun Apr 6 2008 Devrim Gunduz <devrim@commandprompt.com> 4.2-1
 - Update to 4.2
 - Removed patch #2

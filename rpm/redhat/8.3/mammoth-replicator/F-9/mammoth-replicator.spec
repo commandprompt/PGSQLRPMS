@@ -240,7 +240,7 @@ CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
 
 export LIBNAME=%{_lib}
 
-./configure --disable-rpath \
+%configure --disable-rpath \
 	--enable-replication \
 %if %cmdmrssl
 	--with-mcp-openssl \
@@ -479,40 +479,40 @@ rm -rf %{buildroot}
 %doc doc/src/*
 #%doc *-A4.pdf
 %doc src/tutorial
-%{_libdir}/tutorial/
+%{_libdir}/pgsql/tutorial/
 
 %files contrib
 %defattr(-,root,root)
-%{_libdir}/_int.so
-%{_libdir}/autoinc.so
-%{_libdir}/btree_gist.so
-%{_libdir}/chkpass.so
-%{_libdir}/cube.so
-%{_libdir}/dblink.so
-%{_libdir}/earthdistance.so
-%{_libdir}/fti.so
-%{_libdir}/fuzzystrmatch.so
-%{_libdir}/insert_username.so
-%{_libdir}/int_aggregate.so
-%{_libdir}/isbn_issn.so
-%{_libdir}/lo.so
-%{_libdir}/ltree.so
-%{_libdir}/moddatetime.so
-%{_libdir}/pending.so
-%{_libdir}/pg_buffercache.so
-%{_libdir}/pgcrypto.so
-%{_libdir}/pgstattuple.so
-%{_libdir}/pg_trgm.so
-%{_libdir}/refint.so
-%{_libdir}/seg.so
-%{_libdir}/tablefunc.so
-%{_libdir}/timetravel.so
-%{_libdir}/tsearch2.so
-%{_libdir}/user_locks.so
+%{_libdir}/pgsql/_int.so
+%{_libdir}/pgsql/autoinc.so
+%{_libdir}/pgsql/btree_gist.so
+%{_libdir}/pgsql/chkpass.so
+%{_libdir}/pgsql/cube.so
+%{_libdir}/pgsql/dblink.so
+%{_libdir}/pgsql/earthdistance.so
+%{_libdir}/pgsql/fti.so
+%{_libdir}/pgsql/fuzzystrmatch.so
+%{_libdir}/pgsql/insert_username.so
+%{_libdir}/pgsql/int_aggregate.so
+%{_libdir}/pgsql/isbn_issn.so
+%{_libdir}/pgsql/lo.so
+%{_libdir}/pgsql/ltree.so
+%{_libdir}/pgsql/moddatetime.so
+%{_libdir}/pgsql/pending.so
+%{_libdir}/pgsql/pg_buffercache.so
+%{_libdir}/pgsql/pgcrypto.so
+%{_libdir}/pgsql/pgstattuple.so
+%{_libdir}/pgsql/pg_trgm.so
+%{_libdir}/pgsql/refint.so
+%{_libdir}/pgsql/seg.so
+%{_libdir}/pgsql/tablefunc.so
+%{_libdir}/pgsql/timetravel.so
+%{_libdir}/pgsql/tsearch2.so
+%{_libdir}/pgsql/user_locks.so
 %if %xml
-%{_libdir}/pgxml.so
+%{_libdir}/pgsql/pgxml.so
 %endif
-%{_datadir}/contrib
+%{_datadir}/pgsql/contrib
 %{_bindir}/DBMirror.pl
 %{_bindir}/clean_pending.pl
 %{_bindir}/dbf2pg
@@ -520,8 +520,7 @@ rm -rf %{buildroot}
 %{_bindir}/oid2name
 %{_bindir}/pgbench
 %{_bindir}/vacuumlo
-%doc %prefix/docs/contrib/README.* 
-%doc %prefix/docs/contrib/*.example
+%doc contrib/*/README.* contrib/spi/*.example
 
 %files libs -f libpq.lang
 %defattr(-,root,root)
@@ -539,17 +538,17 @@ rm -rf %{buildroot}
 %{_bindir}/mcp_server
 %{_bindir}/mcp_stat
 %{_bindir}/slave_stat
-%{_datadir}/mammoth_pk_indexes.sql
-%{_datadir}/replicator-functions.sql
-%{_datadir}/globals-install.sql
-%attr(644,postgres,postgres) %config(noreplace) %{_datadir}/mcp_server.conf*
+%{_datadir}/pgsql/mammoth_pk_indexes.sql
+%{_datadir}/pgsql/replicator-functions.sql
+%{_datadir}/pgsql/globals-install.sql
+%attr(644,postgres,postgres) %config(noreplace) %{_datadir}/pgsql/mcp_server.conf*
 
 %files server -f server.lst
 %defattr(-,root,root)
 %if %pam
 %config(noreplace) /etc/pam.d/mammoth
 %endif
-%attr (755,root,root) %dir %prefix/etc/sysconfig/mammoth
+%attr (755,root,root) %dir /etc/sysconfig/postgresql
 %{_initrddir}/mammoth-replicator
 %{_initrddir}/mcp_server
 %{_bindir}/initdb
@@ -566,23 +565,24 @@ rm -rf %{buildroot}
 %{_mandir}/man1/pg_resetxlog.*
 %{_mandir}/man1/postgres.*
 %{_mandir}/man1/postmaster.*
-%{_datadir}/mammoth.bki
-%{_datadir}/postgres.bki
-%{_datadir}/postgres.description
-%{_datadir}/system_views.sql
-%{_datadir}/*.sample
-%{_datadir}/timezone/
-%{_libdir}/plpgsql.so
-%dir %{_libdir}
-%dir %{_datadir}/
-%attr(700,postgres,postgres) %dir %prefix
-%attr(700,postgres,postgres) %dir %prefix/data
-%attr(700,postgres,postgres) %dir %prefix/backups
-%attr(644,postgres,postgres) %config(noreplace) %prefix/.bash_profile
-%{_libdir}/*_and_*.so
-%{_datadir}/conversion_create.sql
-%{_datadir}/information_schema.sql
-%{_datadir}/sql_features.txt
+%{_datadir}/pgsql/mammoth.bki
+%{_datadir}/pgsql/postgres.bki
+%{_datadir}/pgsql/postgres.description
+%{_datadir}/pgsql/system_views.sql
+%{_datadir}/pgsql/*.sample
+%{_datadir}/pgsql/timezone/
+%{_libdir}/pgsql/plpgsql.so
+%dir %{_libdir}/pgsql
+%dir %{_datadir}/pgsql
+%attr(700,postgres,postgres) %dir /var/lib/pgsql
+
+%attr(700,postgres,postgres) %dir /var/lib/pgsql/data
+%attr(700,postgres,postgres) %dir /var/lib/pgsql/backups
+%attr(644,postgres,postgres) %config(noreplace) /var/lib/pgsql/.bash_profile
+%{_libdir}/pgsql/*_and_*.so
+%{_datadir}/pgsql/conversion_create.sql
+%{_datadir}/pgsql/information_schema.sql
+%{_datadir}/pgsql/sql_features.txt
 
 %files devel -f pg_config.lst
 %defattr(-,root,root)
@@ -613,7 +613,7 @@ rm -rf %{buildroot}
 %{_bindir}/pltcl_delmod
 %{_bindir}/pltcl_listmod
 %{_bindir}/pltcl_loadmod
-%{_datadir}/unknown.pltcl
+%{_datadir}/pgsql/unknown.pltcl
 %endif
 %endif
 

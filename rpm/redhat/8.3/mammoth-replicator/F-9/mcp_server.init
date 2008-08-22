@@ -4,7 +4,7 @@
 # chkconfig: - 64 36
 # description: Starts and stops the Mammoth Replicator Process
 # processname: mcp_server
-# pidfile: /opt/mammoth/mcp_data/mcp_server.pid
+# pidfile: /var/run/mcp_server.pid
 
 # Version 1.0 Devrim Gunduz <devrim@CommandPrompt.com>
 # Initial script
@@ -37,9 +37,9 @@ else
 fi
 
 # Set defaults for configuration variables
-MCPENGINE=/opt/mammoth/bin
-MCPTXLOGPATH=/opt/mammoth/mcp_data
-MCPLOG=/opt/mammoth/mcp_data/mcp_server.log
+MCPENGINE=/usr/bin
+MCPTXLOGPATH=/var/lib/pgsql/data/mcp_data
+MCPLOG=/var/lib/pgsql/data/mcp_data/mcp_server.log
 
 export MCPTXLOGPATH
 

@@ -1,5 +1,5 @@
---- src/Makefile.global.in.old	2007-03-04 15:54:06.000000000 +0200
-+++ src/Makefile.global.in	2007-03-04 15:57:10.000000000 +0200
+--- mammoth-replicator-8.1.13/src/Makefile.global.in.old	2005-10-13 20:35:18.000000000 +0300
++++ mammoth-replicator-8.1.13/src/Makefile.global.in	2005-10-13 20:37:01.000000000 +0300
 @@ -53,7 +53,7 @@
  # Installation directories
  #
@@ -9,46 +9,45 @@
  # contain "pgsql" or "postgres", in order to avoid directory clutter.
  #
  # In a PGXS build, we cannot use the values inserted into Makefile.global
-@@ -74,7 +74,7 @@
+@@ -73,14 +73,14 @@
+ datadir := @datadir@
  ifeq "$(findstring pgsql, $(datadir))" ""
  ifeq "$(findstring postgres, $(datadir))" ""
- ifeq "$(findstring mammoth, $(datadir))" ""
 -override datadir := $(datadir)/postgresql
 +override datadir := $(datadir)/pgsql
  endif
  endif
- endif
-@@ -83,7 +83,7 @@
+ 
+ sysconfdir := @sysconfdir@
  ifeq "$(findstring pgsql, $(sysconfdir))" ""
  ifeq "$(findstring postgres, $(sysconfdir))" ""
- ifeq "$(findstring mammoth, $(sysconfdir))" ""
 -override sysconfdir := $(sysconfdir)/postgresql
 +override sysconfdir := $(sysconfdir)/pgsql
  endif
  endif
- endif
-@@ -94,7 +94,7 @@
+ 
+@@ -89,7 +89,7 @@
+ pkglibdir = $(libdir)
  ifeq "$(findstring pgsql, $(pkglibdir))" ""
  ifeq "$(findstring postgres, $(pkglibdir))" ""
- ifeq "$(findstring mammoth, $(pkglibdir))" ""
 -override pkglibdir := $(pkglibdir)/postgresql
 +override pkglibdir := $(pkglibdir)/pgsql
  endif
  endif
- endif
-@@ -105,7 +105,7 @@
+ 
+@@ -98,7 +98,7 @@
+ pkgincludedir = $(includedir)
  ifeq "$(findstring pgsql, $(pkgincludedir))" ""
  ifeq "$(findstring postgres, $(pkgincludedir))" ""
- ifeq "$(findstring mammoth, $(pkgincludedir))" ""
 -override pkgincludedir := $(pkgincludedir)/postgresql
 +override pkgincludedir := $(pkgincludedir)/pgsql
  endif
  endif
- endif
-@@ -118,7 +118,7 @@
+ 
+@@ -109,7 +109,7 @@
+ ifneq (,$(docdir))
  ifeq "$(findstring pgsql, $(docdir))" ""
  ifeq "$(findstring postgres, $(docdir))" ""
- ifeq "$(findstring mammoth, $(docdir))" ""
 -override docdir := $(docdir)/postgresql
 +override docdir := $(docdir)/pgsql
  endif

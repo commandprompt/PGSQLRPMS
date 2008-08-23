@@ -349,11 +349,11 @@ install -d -m 700 %{buildroot}/var/lib/pgsql/backups
 install -m 644 %{SOURCE15} %{buildroot}/var/lib/pgsql/.bash_profile
 
 # Create the multiple postmaster startup directory
-install -d -m 700 %{buildroot}/etc/sysconfig/pgsql
+install -d -m 700 %{buildroot}/etc/sysconfig/postgresql
 
 # Install MCP conf files 
-install -m 644 src/bin/mammoth/mcp_server.conf %{buildroot}%{_datadir}
-install -m 644 src/bin/mammoth/mcp_server.conf.sample %{buildroot}%{_datadir}
+install -m 644 src/bin/mammoth/mcp_server.conf %{buildroot}%{_datadir}/pgsql
+install -m 644 src/bin/mammoth/mcp_server.conf.sample %{buildroot}%{_datadir}/pgsql
 /bin/rm -f %{buildroot}/%{_bindir}/mcp_server.conf*
 
 %if %test
@@ -531,13 +531,10 @@ rm -rf %{buildroot}
 
 %files replicator
 %defattr(-,root,root)
-%{_bindir}/dump-table
 %{_bindir}/mcp_ctl
-%{_bindir}/queuechg
 %{_bindir}/init-mammoth-database
 %{_bindir}/mcp_server
 %{_bindir}/mcp_stat
-%{_bindir}/slave_stat
 %{_datadir}/pgsql/mammoth_pk_indexes.sql
 %{_datadir}/pgsql/replicator-functions.sql
 %{_datadir}/pgsql/globals-install.sql
@@ -598,7 +595,7 @@ rm -rf %{buildroot}
 %{_libdir}/libpgport.a
 %{_libdir}/libpgtypes.so
 %{_libdir}/libpgtypes.a
-%{_libdir}/pgxs/*
+%{_libdir}/pgsql/pgxs/*
 %{_mandir}/man1/ecpg.*
 %{_mandir}/man1/pg_config.*
 
@@ -606,7 +603,7 @@ rm -rf %{buildroot}
 %files pl
 %defattr(-,root,root)
 %if %plperl
-%{_libdir}/plperl.so
+%{_libdir}/pgsql/plperl.so
 %endif
 %if %pltcl
 %{_libdir}/pltcl.so

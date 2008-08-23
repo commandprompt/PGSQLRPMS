@@ -85,6 +85,10 @@ BuildRequires:	pam-devel
 BuildRequires:	libxml2-devel libxslt-devel
 %endif
 
+Obsoletes:	postgresql, postgresql-server, postgresql-libs,postgresql-docs
+Obsoletes:	postgresql-contrib, postgresql-pl, postgresql-devel
+Obsoletes:	postgresql-test
+
 %description
 PostgreSQL is an advanced Object-Relational database management system
 (DBMS) that supports almost all SQL constructs (including

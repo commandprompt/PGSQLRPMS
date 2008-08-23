@@ -29,7 +29,7 @@ License:	BSD
 Group:		Applications/Databases
 Buildroot: 	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0: 	http://www.commandprompt.com/download/%{name}-%{version}.tar.bz2
+Source0: 	http://www.commandprompt.com/files/replicator//%{name}-%{version}.tar.bz2
 Source3:	%{name}.init
 Source4:	Makefile.regress
 Source5:	mcp_server.init

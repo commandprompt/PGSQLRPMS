@@ -6,8 +6,8 @@ License:	BSD
 Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/1581/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/ip4r
-BuildRequires:	postgresql-devel >= 8.1
-Requires:	postgresql-server >= 8.1
+BuildRequires:	postgresql-devel >= 8.0
+Requires:	postgresql-server >= 8.0
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description

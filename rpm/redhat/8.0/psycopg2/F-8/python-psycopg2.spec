@@ -86,7 +86,7 @@ rm -rf %{buildroot}
 #%{ZPsycopgDAdir}/icons/*
 
 %changelog
-* Wed Apr 30 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.7-1
+* Wed Apr 30 2008 Devrim GUNDUZ <devrim@commandprompt.com> 2.0.7-1
 - Update to 2.0.7
 
 * Tue Aug 28 2007 Fedora Release Engineering <rel-eng at fedoraproject dot org> - 2.0.6-2

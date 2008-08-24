@@ -5,7 +5,7 @@
 Summary:	PostgreSQL database management tools from Skype
 Name:		skytools
 Version:	2.1.7
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/1813/%{name}-%{version}.tar.gz
@@ -25,14 +25,14 @@ The tools are named walmgr, PgQ and Londiste, respectively.
 %patch1 -p1
 
 %build
-%configure --with-asciidoc
+%configure --with-asciidoc 
 
 make %{?_smp_mflags} 
 
 %install
 rm -rf %{buildroot}
 
-python setup.py install --no-compile --root %{buildroot}
+make %{?_smp_mflags} DESTDIR=%{buildroot} python-install
 
 %clean
 rm -rf %{buildroot}
@@ -46,6 +46,7 @@ rm -rf %{buildroot}
 %{_docdir}/%{name}/conf/*.templ
 %{_docdir}/%{name}/conf/*.ini
 %{_datadir}/%{name}/*.sql
+%{_datadir}/%{name}/upgrade/final/*.sql
 %{_bindir}/*.py
 %{_bindir}/*.pyo
 %{_bindir}/*.pyc
@@ -60,8 +61,23 @@ rm -rf %{buildroot}
 %ghost %{python_sitearch}/pgq/*.pyo
 %ghost %{python_sitearch}/skytools/*.pyo
 %{python_sitearch}/*.egg-info
+%{_mandir}/man1/bulk_loader.*
+%{_mandir}/man1/cube_dispatcher.*
+%{_mandir}/man1/londiste.*
+%{_mandir}/man1/pgqadm.*
+%{_mandir}/man1/queue_mover.*
+%{_mandir}/man1/queue_splitter.*
+%{_mandir}/man1/scriptmgr.*
+%{_mandir}/man1/skytools_upgrade.*
+%{_mandir}/man1/table_dispatcher.*
+%{_mandir}/man1/walmgr.*
+%{_mandir}/man5/londiste.*
 
 %changelog
+* Sun Aug 24 2008 - David Fetter <david@fetter.org> 2.1.7-2
+- Added man pages.
+- Fix man builds (Devrim)
+
 * Mon Jun 13 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.7-1
 - Need to require python-psycopg v2, not v1.
 - Update to 2.1.7

@@ -1,16 +1,16 @@
 Name:		odbcng
 Summary:	PostgreSQL ODBCng driver
 Version:	0.90.101
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	GPLv2
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/%{name}
-Source0:	http://projects.commandprompt.com/public/%{name}/attachment/wiki/Downloads/%{name}-%{version}.tar.gz
+Source0:	http://www.commandprompt.com/files/odbcng/%{name}-%{version}.tar.gz
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	openssl-devel
-BuildRequires:	libtool automake autoconf 
+BuildRequires:  openssl-devel, unixODBC-devel
+BuildRequires:  libtool automake autoconf
 
 %description
 ODBCng is a written from scratch ODBC driver for PostgreSQL 8.x.
@@ -53,5 +53,9 @@ rm -rf %{buildroot}
 %doc COPYING COPYRIGHT LICENSE.txt
 
 %changelog
+* Mon Aug 25 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 0.90.101-2
+- Add buildrequires for unixODBC-devel
+- Update download URL.
+
 * Sat May 17 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 0.90.101-1
 - initial build for Fedora

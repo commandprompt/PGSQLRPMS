@@ -1,0 +1,11 @@
+--- libpqxx-2.6.9/include/pqxx/result.hxx.old	2008-08-26 22:00:26.000000000 +0300
++++ libpqxx-2.6.9/include/pqxx/result.hxx	2008-08-26 22:00:40.000000000 +0300
+@@ -60,7 +60,7 @@
+   ~result_data();
+ };
+ 
+-void freemem_result_data(result_data *) throw ();
++void PQXX_LIBEXPORT freemem_result_data(result_data *) throw ();
+ template<> inline
+ void PQAlloc<result_data>::freemem() throw () { freemem_result_data(m_Obj); }
+ } // namespace internal

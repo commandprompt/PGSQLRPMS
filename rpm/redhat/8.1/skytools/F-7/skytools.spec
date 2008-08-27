@@ -60,7 +60,6 @@ rm -rf %{buildroot}
 %ghost %{python_sitearch}/londiste/*.pyo
 %ghost %{python_sitearch}/pgq/*.pyo
 %ghost %{python_sitearch}/skytools/*.pyo
-%{python_sitearch}/*.egg-info
 %{_mandir}/man1/bulk_loader.*
 %{_mandir}/man1/cube_dispatcher.*
 %{_mandir}/man1/londiste.*
@@ -77,6 +76,7 @@ rm -rf %{buildroot}
 * Sun Aug 24 2008 - David Fetter <david@fetter.org> 2.1.7-2
 - Added man pages.
 - Fix man builds (Devrim)
+- copy paste is evil -- remove egg-info thing.
 
 * Mon Jun 13 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.7-1
 - Need to require python-psycopg v2, not v1.

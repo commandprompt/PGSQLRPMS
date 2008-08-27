@@ -1,6 +1,6 @@
 Name:           libpqxx
 Version:        2.6.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        C++ client API for PostgreSQL
 
 Group:          System Environment/Libraries
@@ -15,6 +15,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Patch1:         libpqxx-2.6.8-visibility.patch
 Patch2:         libpqxx-2.6.8-gcc43.patch
 Patch3:         libpqxx-2.6.8-multilib.patch
+Patch5:		libpqxx-2.6.9-resulthxx.patch
 
 BuildRequires:  automake libtool
 BuildRequires:  postgresql-devel
@@ -45,6 +46,7 @@ chmod -x COPYING INSTALL
 #endif
 %patch2 -p1 -b .gcc43
 %patch3 -p1 -b .multilib
+%patch5 -p1
 
 # better fix/hack for current rpath issues
 autoreconf
@@ -95,6 +97,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Aug 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 2.6.9-2
+- Add a new patch to fix func definition (Probably will be removed
+  in next version)
+
 * Sat Jun 28 2008 Devrim GUNDUZ <devrim@commandprompt.com> 2.6.9-1
 - Initial build for PGDG Yum Repository, based on Fedora spec.
   Please note that this build probably won't work with koffice,

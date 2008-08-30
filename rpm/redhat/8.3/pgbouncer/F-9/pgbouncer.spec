@@ -13,7 +13,7 @@ Source2:	%{name}.sysconfig
 Patch0:		%{name}-ini.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	libevent-devel
+BuildRequires:	libevent-devel >= 1.3b
 Requires:	initscripts
 
 Requires(post):	chkconfig

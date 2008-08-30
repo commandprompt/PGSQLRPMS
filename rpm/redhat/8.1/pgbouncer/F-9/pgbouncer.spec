@@ -1,12 +1,11 @@
 %define debug 0
-%{?debug:%define __os_install_post /usr/lib/rpm/brp-compress}
 
 Name:		pgbouncer
 Version:	1.2.3
-Release:	1%{?dist}
+Release:	3%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
-License:	BSD
+License:	MIT and BSD
 URL:		http://pgfoundry.org/projects/pgbouncer/
 Source0:	http://pgfoundry.org/frs/download.php/1873/%{name}-%{version}.tgz
 Source1:	%{name}.init
@@ -14,8 +13,12 @@ Source2:	%{name}.sysconfig
 Patch0:		%{name}-ini.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	libevent-devel
+BuildRequires:	libevent-devel >= 1.3b
 Requires:	initscripts
+
+Requires(post):	chkconfig
+Requires(preun):	chkconfig, initscripts
+Requires(postun):	initscripts
 
 %description
 pgbouncer is a lightweight connection pooler for PostgreSQL.
@@ -26,6 +29,11 @@ pgbouncer uses libevent for low-level socket handling.
 %patch0 -p0
 
 %build
+sed -i.fedora \
+ -e 's|-fomit-frame-pointer||' \
+ -e '/BININSTALL/s|-s||' \
+ configure
+
 %configure \
 %if %debug
 	--enable-debug \
@@ -33,18 +41,18 @@ pgbouncer uses libevent for low-level socket handling.
 %endif
 --datadir=%{_datadir} 
 
-make %{?_smp_mflags}
+make %{?_smp_mflags} V=1
 
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
-install -d %{buildroot}%{_sysconfdir}/
-install -d %{buildroot}%{_sysconfdir}/sysconfig
-install -m 644 etc/pgbouncer.ini %{buildroot}%{_sysconfdir}/
+install -p -d %{buildroot}%{_sysconfdir}/
+install -p -d %{buildroot}%{_sysconfdir}/sysconfig
+install -p -m 644 etc/pgbouncer.ini %{buildroot}%{_sysconfdir}/
 rm -f %{buildroot}%{_docdir}/%{name}/pgbouncer.ini
-install -d %{buildroot}%{_initrddir}
-install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
-install -m 755 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
+install -p -d %{buildroot}%{_initrddir}
+install -p -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
+install -p -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 
 %post
 chkconfig --add pgbouncer
@@ -55,22 +63,34 @@ if [ $1 = 0 ] ; then
 	chkconfig --del pgbouncer
 fi
 
+%postun
+if [ "$1" -ge "1" ] ; then
+	/sbin/service pgbouncer condrestart >/dev/null 2>&1 || :
+fi
+
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc README NEWS
+%doc README NEWS AUTHORS
 %{_bindir}/*
 %config(noreplace) %{_sysconfdir}/%{name}.ini
 %{_initrddir}/%{name}
-%config %{_sysconfdir}/sysconfig/%{name}
+%config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 %{_mandir}/man1/%{name}.*
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Fri Aug 29 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-3
+- More fixes, per Fedora review.
+
+* Fri Aug 29 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-2
+- More fixes, per Fedora review.
+
 * Fri Aug 8 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-1
 - Update to 1.2.3
+- Final fixes for Fedora review
 
 * Sun Mar 23 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.1.2-3
 - Mark sysconfig file as config file, per Guillaume Smet.

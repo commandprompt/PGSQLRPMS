@@ -73,8 +73,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel
-Release:	1_03092008_PGDG%{?dist}
+Version:	8.4devel_03092008
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -713,7 +713,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Wed Sep 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel-1_03092008PGDG
-- Initial cut for 8.4devel
+- Initial cut for 8.4devel, Sep 3 2008 CVS snapshot
 - Remove patch4, it is already in 8.4
 - Update logging patch, so that logs will be rotated weekly.
 

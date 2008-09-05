@@ -61,7 +61,7 @@
 %{!?pltcl:%define pltcl 1}
 %{!?plperl:%define plperl 1}
 %{!?ssl:%define ssl 1}
-%{!?intdatetimes:%define intdatetimes 0}
+%{!?intdatetimes:%define intdatetimes 1}
 %{!?kerberos:%define kerberos 1}
 %{!?nls:%define nls 1}
 %{!?xml:%define xml 1}
@@ -710,7 +710,11 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Wed Sep 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_03092008-1PGDG
+* Fri Sep 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_03092008-2PGDG
+- Enable integer datetimes by default. This is a 8.4+ change.
+
+* Wed Sep 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 
+8.4devel_03092008-1PGDG
 - Initial cut for 8.4devel, Sep 3 2008 CVS snapshot
 - Remove patch4, it is already in 8.4
 - Update logging patch, so that logs will be rotated weekly.

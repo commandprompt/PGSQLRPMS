@@ -1,0 +1,33 @@
+--- pgpool.conf.sample.old	2007-10-05 17:16:23.000000000 -0700
++++ pgpool.conf.sample	2007-10-05 17:18:11.000000000 -0700
+@@ -12,16 +12,14 @@
+ # Port number for pgpool communication manager
+ pcp_port = 9898
+ 
+-# Unix domain socket path.  (The Debian package defaults to
+-# /var/run/postgresql.)
+-socket_dir = '/tmp'
++# Unix domain socket path.
++socket_dir = '/var/run'
+ 
+ # Unix domain socket path for pgpool communication manager.
+-# (Debian package defaults to /var/run/postgresql)
+-pcp_socket_dir = '/tmp'
++pcp_socket_dir = '/var/run'
+ 
+-# Unix domain socket path for the backend. Debian package defaults to /var/run/postgresql!
+-backend_socket_dir = '/tmp'
++# Unix domain socket path for the backend.
++backend_socket_dir = '/var/run'
+ 
+ # pgpool communication manager timeout. 0 means no timeout, but strongly not recommended!
+ pcp_timeout = 10
+@@ -44,7 +42,7 @@
+ child_max_connections = 0
+ 
+ # Logging directory
+-logdir = '/tmp'
++logdir = '/var/run'
+ 
+ # Replication mode
+ replication_mode = false

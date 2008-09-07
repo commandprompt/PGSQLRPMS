@@ -73,8 +73,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_03092008
-Release:	2PGDG%{?dist}
+Version:	8.4devel_07092008
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -712,6 +712,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Sep 7 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_07092008-1PGDG
+- Update to Sep 7 2008 CVS snapshot 
+
 * Fri Sep 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_03092008-2PGDG
 - Enable integer datetimes by default. This is a 8.4+ change.
 

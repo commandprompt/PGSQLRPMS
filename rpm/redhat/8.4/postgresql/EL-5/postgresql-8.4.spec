@@ -74,7 +74,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.4devel_07092008
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -339,8 +339,8 @@ export LIBNAME=%{_lib}
 %if %nls
 	--enable-nls \
 %endif
-%if %intdatetimes
-	--enable-integer-datetimes \
+%if !%intdatetimes
+	--disable-integer-datetimes \
 %endif
 %if %pgfts
 	--enable-thread-safety \
@@ -710,7 +710,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Fri Sep 7 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_07092008-1PGDG
+* Mon Sep 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_07092008-2PGDG
+- Use intdatetimes macro properly.
+
+* Sun Sep 7 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_07092008-1PGDG
 - Update to Sep 7 2008 CVS snapshot 
 
 * Fri Sep 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_03092008-2PGDG

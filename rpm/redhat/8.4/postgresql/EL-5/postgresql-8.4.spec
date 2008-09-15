@@ -73,8 +73,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_07092008
-Release:	2PGDG%{?dist}
+Version:	8.4devel_15092008
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -710,6 +710,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Sep 15 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_15092008-1PGDG
+- Update to Sep 15 2008 CVS snapshot
+
 * Mon Sep 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_07092008-2PGDG
 - Use intdatetimes macro properly.
 

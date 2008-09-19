@@ -73,7 +73,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.3.1
+Version:	8.3.4
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -124,7 +124,7 @@ BuildRequires:	gettext >= 0.10.35
 %endif
 
 %if %xml
-BuildRequires:	libxml2-devel libxslt-devel
+BuildRequires:	libxml2-devel >= 2.6.23,  libxslt-devel
 %endif
 
 %if %pam
@@ -709,6 +709,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Sep 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.4-1PGDG
+- Update to 8.3.4 
+
 * Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-1PGDG
 - Set the buildrhel3 macro to 1 
 - Update to 8.3.1

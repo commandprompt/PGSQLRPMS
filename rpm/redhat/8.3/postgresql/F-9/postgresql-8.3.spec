@@ -73,8 +73,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.3.3
-Release:	2PGDG%{?dist}
+Version:	8.3.4
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -123,7 +123,7 @@ BuildRequires:	gettext >= 0.10.35
 %endif
 
 %if %xml
-BuildRequires:	libxml2-devel libxslt-devel
+BuildRequires:	libxml2-devel >= 2.6.23, libxslt-devel
 %endif
 
 %if %pam
@@ -716,6 +716,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Sep 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.4-1PGDG
+- Update to 8.3.4 
+
 * Fri Aug 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-2PGDG
 - Update pam file -- current file does not work on recent Fedora releases :-(
 - Remove patch8 -- it is no longer needed in recent Fedora releases. Per Tom.

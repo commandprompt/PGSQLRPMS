@@ -1,6 +1,6 @@
 README.rpm-dist
 -----------------------------------------------------------------------------
-Version 8.0, for the PostgreSQL 8.0.15-0.1PGDG RPMset.
+Version 8.0, for the PostgreSQL 8.0.18-0.1PGDG RPMset.
 Lamar Owen <lamar.owen@wgcr.org> 
 -----------------------------------------------------------------------------
 
@@ -289,7 +289,7 @@ runselftest	1	#do "make check" during the build.
 To use these defines, invoke a rebuild like this:
 rpm --rebuild --define 'perl 0' --define 'tcl 0' \
 	--define 'test 0' --define 'runselftest 1' --define 'kerberos 0' \
-	postgresql-8.0.15-1PGDG.src.rpm
+	postgresql-8.0.18-1PGDG.src.rpm
 This line would disable the perl, tcl, and test subpackages, enable the
 regression test run during build, and disable kerberos support.
 

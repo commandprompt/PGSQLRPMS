@@ -74,7 +74,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.2.7
+Version:	8.2.10
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -680,6 +680,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Sep 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.10-1PGDG
+- Update to 8.2.10
+
 * Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.7-1PGDG
 - Update to 8.2.7
 - Enable buildrhel3 macro by default

@@ -72,8 +72,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.1.13
-Release:	2PGDG%{?dist}
+Version:	8.1.14
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -648,6 +648,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Sep 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.14-1PGDG
+- Update to 8.1.14 
+
 * Fri Aug 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.13-2PGDG
 - Update pam file -- current file does not work on recent Fedora releases :-(
 

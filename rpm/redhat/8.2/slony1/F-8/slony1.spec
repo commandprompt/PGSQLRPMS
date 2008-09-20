@@ -4,7 +4,7 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	1.2.14
+Version:	1.2.15
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -80,6 +80,7 @@ install -m 0755 src/xxid/xxid.so %{buildroot}%{_libdir}/pgsql/xxid.so
 install -m 0644 src/backend/*.sql %{buildroot}%{_datadir}/pgsql/
 install -m 0644 src/xxid/*.sql %{buildroot}%{_datadir}/pgsql/
 install -m 0755 tools/*.sh  %{buildroot}%{_bindir}/
+install -m 0755 tools/*.pl  %{buildroot}%{_bindir}/
 install -m 0644 share/slon.conf-sample %{buildroot}%{_sysconfdir}/slon.conf
 /bin/chmod 644 COPYRIGHT UPGRADING SAMPLE HISTORY-1.1 RELEASE
 
@@ -140,6 +141,10 @@ fi
 %endif
 
 %changelog
+* Fri Sep 12 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-1
+- Update to 1.2.15
+- Install tools written in perl, too.
+
 * Fri May 16 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.14-1
 - Update to 1.2.14
 

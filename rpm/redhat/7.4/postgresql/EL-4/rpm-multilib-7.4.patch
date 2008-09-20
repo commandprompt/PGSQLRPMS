@@ -37,7 +37,7 @@
 +dnl Now use both docdir and infodir to work properly with RPM macros
 +dnl (courtesy, Elliott Lee <sopwith@redhat.com>)
 +dnl - Andrew Overholt <overholt@redhat.com> 10 December 2002
- AC_INIT([PostgreSQL], [7.4.21], [pgsql-bugs@postgresql.org])
+ AC_INIT([PostgreSQL], [7.4.22], [pgsql-bugs@postgresql.org])
 -m4_undefine([infodir])
 -m4_undefine([info])
  AC_SUBST(docdir)

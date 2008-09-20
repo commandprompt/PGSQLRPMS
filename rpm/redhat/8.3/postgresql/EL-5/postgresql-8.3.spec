@@ -68,7 +68,11 @@
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
+%ifnarch x86_64
 %{!?uuid:%define uuid 1}
+%else
+%{!?uuid:%define uuid 0}
+%endif
 %{!?ldap:%define ldap 1}
 
 Summary:	PostgreSQL client programs and libraries
@@ -716,6 +720,7 @@ rm -rf %{buildroot}
 %changelog
 * Fri Sep 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.4-1PGDG
 - Update to 8.3.4 
+- Disable uuid for x86_64, until EPEL fixes their packages.
 
 * Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-1PGDG
 - Update to 8.3.3 (8.3.2 was skipped by upstream)

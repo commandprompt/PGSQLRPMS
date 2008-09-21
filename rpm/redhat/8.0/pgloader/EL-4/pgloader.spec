@@ -53,11 +53,7 @@ rm -rf %{buildroot}
 %dir %{python_sitearch}/%{name}/
 %dir %{python_sitearch}/%{name}/reformat
 %{python_sitearch}/%{name}/*.py
-%{python_sitearch}/%{name}/*.pyo
-%{python_sitearch}/%{name}/*.pyc
 %{python_sitearch}/%{name}/reformat/*.py
-%{python_sitearch}/%{name}/reformat/*.pyo
-%{python_sitearch}/%{name}/reformat/*.pyc
 %{_mandir}/man1/pgloader.1.gz
 
 %changelog

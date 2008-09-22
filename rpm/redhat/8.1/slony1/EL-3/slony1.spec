@@ -5,7 +5,7 @@
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
 Version:	1.2.15
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -13,7 +13,7 @@ Source0:	http://main.slony.info/downloads/1.2/source/slony1-%{version}.tar.bz2
 Source2:	filter-requires-perl-Pg.sh
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
-Requires:	postgresql-server 
+Requires:	postgresql-server, perl-DBD-Pg
 
 %if %docs
 BuildRequires:	docbook-style-dsssl
@@ -144,6 +144,9 @@ fi
 %endif
 
 %changelog
+* Mon Sep 22 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-3
+- Add dependency for perl-DBD-Pg, per Xavier Bergade.
+
 * Sun Sep 21 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-2
 - Fix dependency issues caused by latest commit.
 

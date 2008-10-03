@@ -8,32 +8,31 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-
+%define pg_minor_version %(echo %version | cut -f1-2 -d.)
 
 Name:		postgresql
-Summary:        Basic Clients and Utilities for PostgreSQL
+Summary:	Basic Clients and Utilities for PostgreSQL
 Url:		http://www.postgresql.org/
 Version:	8.3.4
 Release:	1
-%define pg_minor_version %(echo %version | cut -f1-2 -d.)
-License:        BSD 3-Clause
-Group:          Productivity/Databases/Tools
-Source0:        postgresql-%version.tar.bz2
-Source2:        postgresql-README.SuSE.de
-Source3:        postgresql-README.SuSE.en
-Source8:        postgresql-sysconfig
-Source9:        postgresql-init
-Source15:       postgresql-bashprofile
-Source16:       postgresql-firewall
-Source17:       postgresql-rpmlintrc
-Source99:       postgresql-pl.spec
-Patch1:         postgresql-8.3-conf.patch
-PreReq:         postgresql-libs = %pg_minor_version
+License:	BSD 3-Clause
+Group:		Productivity/Databases/Tools
+Source0:	postgresql-%version.tar.bz2
+Source2:	postgresql-README.SuSE.de
+Source3:	postgresql-README.SuSE.en
+Source8:	postgresql-sysconfig
+Source9:	postgresql-init
+Source15:	postgresql-bashprofile
+Source16:	postgresql-firewall
+Source17:	postgresql-rpmlintrc
+Source99:	postgresql-pl.spec
+Patch1:		postgresql-8.3-conf.patch
+PreReq:		postgresql-libs = %pg_minor_version
 BuildRequires:	bison flex gettext-devel krb5-devel libxslt-devel
 BuildRequires:	openldap2-devel openssl-devel pam-devel readline-devel zlib-devel
 BuildRequires:	ncurses-devel
-Provides:       postgresql = %pg_minor_version
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+Provides:	postgresql = %pg_minor_version
+BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 
 %description
 PostgreSQL is an advanced object-relational database management system
@@ -48,7 +47,6 @@ HTML documentation for PostgreSQL can be found in the postgresql-docs
 package.
 
 
-
 Authors:
 --------
     Marc G. Fournier <scrappy@hub.org>
@@ -58,11 +56,11 @@ Authors:
     Jan Wieck <JanWieck@Yahoo.com>
 
 %package libs
-License:        BSD 3-Clause
-Summary:        Shared Libraries Required for PostgreSQL Clients
-Group:          Productivity/Databases/Clients
-Provides:       postgresql-libs = %pg_minor_version
-PreReq:         sh-utils fileutils
+License:	BSD 3-Clause
+Summary:	Shared Libraries Required for PostgreSQL Clients
+Group:		Productivity/Databases/Clients
+Provides:	postgresql-libs = %pg_minor_version
+PreReq:		sh-utils fileutils
 
 %description libs
 PostgreSQL is an advanced object-relational database management system
@@ -77,37 +75,29 @@ that need to connect to a PostgreSQL server.
 
 
 %package pl
-License:        BSD 3-Clause
-Summary:        Procedural Languages for PostgreSQL
-Group:          Productivity/Databases/Clients
-Provides:       plperl.so plpython.so
+License:	BSD 3-Clause
+Summary:	Procedural Languages for PostgreSQL
+Group:		Productivity/Databases/Clients
+Provides:	plperl.so plpython.so
 
 %description pl
 This package includes procedural language support for PostgreSQL.
 
-Authors:
---------
-    Marc G. Fournier <scrappy@hub.org>
-    Tom Lane <tgl@sss.pgh.pa.us>
-    Vadim B. Mikheev <vadim4o@yahoo.com>
-    Bruce Momjian <pgman@candle.pha.pa.us>
-    Jan Wieck <JanWieck@Yahoo.com>
-
 %package server
-License:        BSD 3-Clause
-Summary:        The Programs Needed to Create and Run a PostgreSQL Server
-Group:          Productivity/Databases/Servers
-PreReq:         %insserv_prereq %fillup_prereq
-PreReq:         /usr/sbin/useradd /usr/sbin/groupadd /sbin/chkconfig
-PreReq:         /usr/bin/strings /bin/sed
-PreReq:         postgresql = %pg_minor_version
-Requires:       glibc-locale
-Provides:       postgresql-server = %pg_minor_version
+License:	BSD 3-Clause
+Summary:	The Programs Needed to Create and Run a PostgreSQL Server
+Group:		Productivity/Databases/Servers
+PreReq:		%insserv_prereq %fillup_prereq
+PreReq:		/usr/sbin/useradd /usr/sbin/groupadd /sbin/chkconfig
+PreReq:		/usr/bin/strings /bin/sed
+PreReq:		postgresql = %pg_minor_version
+Requires:	glibc-locale
+Provides:	postgresql-server = %pg_minor_version
 
 %package docs
-License:        BSD 3-Clause
-Summary:        HTML Documentation for PostgreSQL
-Group:          Productivity/Databases/Tools
+License:	BSD 3-Clause
+Summary:	HTML Documentation for PostgreSQL
+Group:		Productivity/Databases/Tools
 
 %description docs
 PostgreSQL is an advanced object-relational database management system
@@ -120,21 +110,11 @@ page is: file:///usr/share/doc/packages/postgresql/html/index.html .
 Manual pages for the PostgreSQL SQL statements can be found in the
 postgresql package.
 
-
-
-Authors:
---------
-    Marc G. Fournier <scrappy@hub.org>
-    Tom Lane <tgl@sss.pgh.pa.us>
-    Vadim B. Mikheev <vadim4o@yahoo.com>
-    Bruce Momjian <pgman@candle.pha.pa.us>
-    Jan Wieck <JanWieck@Yahoo.com>
-
 %package contrib
-License:        BSD 3-Clause
-Summary:        Contributed Extensions and Additions to PostgreSQL
-Group:          Productivity/Databases/Tools
-Requires:       postgresql-server = %pg_minor_version
+License:	BSD 3-Clause
+Summary:	Contributed Extensions and Additions to PostgreSQL
+Group:		Productivity/Databases/Tools
+Requires:	postgresql-server = %pg_minor_version
 
 %description contrib
 PostgreSQL is an advanced object-relational database management system
@@ -149,16 +129,6 @@ officially part of the PostgreSQL core.
 Documentation for the modules contained in this package can be found in
 /usr/share/doc/packages/postgresql/contrib.
 
-
-
-Authors:
---------
-    Marc G. Fournier <scrappy@hub.org>
-    Tom Lane <tgl@sss.pgh.pa.us>
-    Vadim B. Mikheev <vadim4o@yahoo.com>
-    Bruce Momjian <pgman@candle.pha.pa.us>
-    Jan Wieck <JanWieck@Yahoo.com>
-
 %description server
 PostgreSQL is an advanced object-relational database management system
 that supports an extended subset of the SQL standard, including
@@ -169,21 +139,11 @@ This package includes the programs needed to create and run a
 PostgreSQL server, which will in turn allow you to create and maintain
 PostgreSQL databases.
 
-
-
-Authors:
---------
-    Marc G. Fournier <scrappy@hub.org>
-    Tom Lane <tgl@sss.pgh.pa.us>
-    Vadim B. Mikheev <vadim4o@yahoo.com>
-    Bruce Momjian <pgman@candle.pha.pa.us>
-    Jan Wieck <JanWieck@Yahoo.com>
-
 %package devel
-License:        BSD 3-Clause
-Summary:        PostgreSQL development header files and libraries
-Group:          Productivity/Databases/Tools
-Requires:       postgresql-libs = %pg_minor_version
+License:	BSD 3-Clause
+Summary:	PostgreSQL development header files and libraries
+Group:		Productivity/Databases/Tools
+Requires:	postgresql-libs = %pg_minor_version
 
 %description devel
 PostgreSQL is an advanced object-relational database management system
@@ -197,19 +157,8 @@ management server and the ECPG Embedded C Postgres preprocessor. You
 need to install this package if you want to develop applications in C
 which will interact with a PostgreSQL server.
 
-
-
-Authors:
---------
-    Marc G. Fournier <scrappy@hub.org>
-    Tom Lane <tgl@sss.pgh.pa.us>
-    Vadim B. Mikheev <vadim4o@yahoo.com>
-    Bruce Momjian <pgman@candle.pha.pa.us>
-    Jan Wieck <JanWieck@Yahoo.com>
-
 %prep
 %setup -q
-#%patch
 %patch1
 
 %build

@@ -205,7 +205,7 @@ rm -rf %{buildroot}
 
 %files php
 %defattr(-,root,root,-)
-%{_libdir}/php/modules/*
+%{_libdir}/php4/*
 
 %files dce
 %defattr(-,root,root,-)

@@ -8,6 +8,7 @@ Source0:	http://bucardo.org/%{name}/%{name}.pl
 Source2:	http://bucardo.org/%{name}/%{name}.pl.html
 URL:		http://bucardo.org/check_postgres/
 Requires:	postgresql-server >= 7.4
+Buildarch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -38,6 +39,7 @@ rm -rf %{buildroot}
 %changelog
 * Tue Oct 7 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.3.0-1
 - Update to 2.3.0
+- Make package noarch
 
 * Mon Sep 29 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.2.1-1
 - Update to 2.2.1

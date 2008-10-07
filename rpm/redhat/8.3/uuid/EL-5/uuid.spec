@@ -67,17 +67,6 @@ Requires:	%{name} = %{version}-%{release}
 %description php
 PHP OSSP uuid module.
 
-%package pgsql
-Summary:	PostgreSQL support for Universally Unique Identifier library
-Group:		Development/Libraries
-BuildRequires:	/usr/bin/pg_config
-Requires:	%{_libdir}/pgsql
-Requires:	%{_datadir}/pgsql
-Requires:	%{name} = %{version}-%{release}
-
-%description pgsql
-PostgreSQL OSSP uuid module.
-
 %package dce
 Summary:	DCE support for Universally Unique Identifier library
 Group:		Development/Libraries
@@ -105,14 +94,13 @@ export LIB_NAME=libossp-uuid.la
 export DCE_NAME=libossp-uuid_dce.la
 export CXX_NAME=libossp-uuid++.la
 export PHP_NAME=$RPM_SOURCE_DIR/php/modules/ossp-uuid.so
-export PGSQL_NAME=$RPM_SOURCE_DIR/pgsql/libossp-uuid.so
 %configure \
     --disable-static \
     --without-perl \
     --without-php \
     --with-dce \
     --with-cxx \
-    --with-pgsql
+    --without-pgsql
 
 make LIBTOOL=/usr/bin/libtool %{?_smp_mflags}
 
@@ -218,11 +206,6 @@ rm -rf %{buildroot}
 %files php
 %defattr(-,root,root,-)
 %{_libdir}/php/modules/*
-
-%files pgsql
-%defattr(-,root,root,-)
-%{_libdir}/pgsql/*
-%{_datadir}/pgsql/*
 
 %files dce
 %defattr(-,root,root,-)

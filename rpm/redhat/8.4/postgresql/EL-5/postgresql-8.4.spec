@@ -459,6 +459,7 @@ rm -rf %{buildroot}%{_docdir}/pgsql
 %find_lang pg_config
 %find_lang pg_ctl
 %find_lang pg_dump
+%find_lang plpgsql
 %find_lang postgres
 %find_lang psql
 %find_lang pg_resetxlog
@@ -468,7 +469,7 @@ rm -rf %{buildroot}%{_docdir}/pgsql
 cat libpq.lang > libpq.lst
 cat pg_config.lang > pg_config.lst
 cat initdb.lang pg_ctl.lang psql.lang pg_dump.lang pgscripts.lang > main.lst
-cat postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
+cat postgres.lang pg_resetxlog.lang pg_controldata.lang plpgsql.lang > server.lst
 
 %post libs -p /sbin/ldconfig 
 %postun libs -p /sbin/ldconfig 
@@ -712,6 +713,7 @@ rm -rf %{buildroot}
 %changelog
 * Sat Oct 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_11102008-1PGDG
 - Update to Oct 11 2008 CVS snapshot
+- Add plpgsql translations.
 
 * Mon Sep 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_29092008-1PGDG
 - Update to Sep 29 2008 CVS snapshot

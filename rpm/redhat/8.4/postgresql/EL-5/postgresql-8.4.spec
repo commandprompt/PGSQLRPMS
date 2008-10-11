@@ -525,7 +525,7 @@ rm -rf %{buildroot}
 %files -f main.lst
 %defattr(-,root,root)
 %doc doc/FAQ doc/KNOWN_BUGS doc/MISSING_FEATURES doc/README* 
-%doc COPYRIGHT README HISTORY doc/bug.template
+%doc COPYRIGHT README doc/bug.template
 %doc README.rpm-dist
 %{_bindir}/clusterdb
 %{_bindir}/createdb

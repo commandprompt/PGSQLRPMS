@@ -50,6 +50,8 @@ Patch3:		%{name}-logging.patch
 Patch4:		%{name}-test.patch
 Patch6:		%{name}-perl-rpath.patch
 Patch8:		%{name}-init-mammoth-database.patch
+# Temp patch for beta1
+Patch10:		%{name}-keywords.patch
 
 Buildrequires:	perl glibc-devel bison flex 
 Requires:	/sbin/ldconfig initscripts
@@ -250,9 +252,9 @@ popd
 %patch1 -p1
 %patch3 -p1
 %patch4 -p1
-# patch5 is applied later
 %patch6 -p1
 %patch8 -p1
+%patch10 -p1
 
 pushd doc
 tar -zcf postgres.tar.gz *.html stylesheet.css
@@ -610,7 +612,8 @@ rm -rf %{buildroot}
 
 %files server -f server.lst
 %defattr(-,root,root)
-/etc/rc.d/init.d/mammoth
+/etc/rc.d/init.d/mammoth-replicator
+/etc/rc.d/init.d/mcp_server
 %if %pam
 %config(noreplace) /etc/pam.d/mammoth
 %endif
@@ -630,6 +633,7 @@ rm -rf %{buildroot}
 %{_mandir}/man1/postgres.*
 %{_mandir}/man1/postmaster.*
 %{_datadir}/pgsql/postgres.bki
+%{_datadir}/pgsql/mammoth.bki
 %{_datadir}/pgsql/postgres.description
 %{_datadir}/pgsql/postgres.shdescription
 %{_datadir}/pgsql/system_views.sql

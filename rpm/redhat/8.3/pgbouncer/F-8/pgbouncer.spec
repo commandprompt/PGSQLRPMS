@@ -2,7 +2,7 @@
 
 Name:		pgbouncer
 Version:	1.2.3
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	MIT and BSD
@@ -10,6 +10,7 @@ URL:		http://pgfoundry.org/projects/pgbouncer/
 Source0:	http://pgfoundry.org/frs/download.php/1873/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
+Source3:	%{name}.logrotate
 Patch0:		%{name}-ini.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -48,11 +49,13 @@ rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -p -d %{buildroot}%{_sysconfdir}/
 install -p -d %{buildroot}%{_sysconfdir}/sysconfig
+install -p -d %{buildroot}%{_sysconfdir}/logrotate.d
 install -p -m 644 etc/pgbouncer.ini %{buildroot}%{_sysconfdir}/
 rm -f %{buildroot}%{_docdir}/%{name}/pgbouncer.ini
 install -p -d %{buildroot}%{_initrddir}
 install -p -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 install -p -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
+install -p -m 644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
 %post
 chkconfig --add pgbouncer
@@ -78,10 +81,14 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/%{name}.ini
 %{_initrddir}/%{name}
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
+%{_sysconfdir}/logrotate.d/%{name}
 %{_mandir}/man1/%{name}.*
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Tue Oct 28 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-4
+- Add a logrotate conf file.
+
 * Fri Aug 29 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-3
 - More fixes, per Fedora review.
 

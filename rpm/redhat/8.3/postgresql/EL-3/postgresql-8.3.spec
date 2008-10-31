@@ -73,7 +73,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.3.4
+Version:	8.3.5
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -709,6 +709,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Oct 31 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.5-1PGDG
+- Update to 8.3.5
+
 * Fri Sep 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.4-1PGDG
 - Update to 8.3.4 
 

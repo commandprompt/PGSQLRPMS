@@ -73,7 +73,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_11102008
+Version:	8.4devel_13112008
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -713,6 +713,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Nov 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_13112008-1PGDG
+- Update to Nov 13  2008 CVS snapshot
+
 * Sat Oct 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_11102008-1PGDG
 - Update to Oct 11 2008 CVS snapshot
 - Add plpgsql translations.

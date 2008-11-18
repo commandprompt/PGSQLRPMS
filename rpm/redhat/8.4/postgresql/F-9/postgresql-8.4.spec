@@ -73,7 +73,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_13112008
+Version:	8.4devel_20081118
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -713,6 +713,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Nov 18 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081118-1PGDG
+- Update to Nov 18, 2008 CVS snapshot
+- Fix version number, so that yum can pick up updates, per Guillaume Smet.
+
 * Thu Nov 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_13112008-1PGDG
 - Update to Nov 13  2008 CVS snapshot
 

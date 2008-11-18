@@ -575,7 +575,6 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/earthdistance.so
 %{_libdir}/pgsql/fuzzystrmatch.so
 %{_libdir}/pgsql/insert_username.so
-%{_libdir}/pgsql/int_aggregate.so
 %{_libdir}/pgsql/isn.so
 %{_libdir}/pgsql/hstore.so
 %{_libdir}/pgsql/pg_freespacemap.so
@@ -712,7 +711,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Tue Nov 18 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081118-1PGDG
-- Update to Nov 18, 2008 CVS snapshot
+- Update to Nov 18, 2008 CVS snapshot, and fix spec file for that.
 - Fix version number, so that yum can pick up updates, per Guillaume Smet.
 
 * Sat Oct 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_11102008-1PGDG

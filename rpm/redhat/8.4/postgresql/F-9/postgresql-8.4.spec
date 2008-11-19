@@ -73,7 +73,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_20081118
+Version:	8.4devel_20081119
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -569,6 +569,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{_libdir}/pgsql/_int.so
 %{_libdir}/pgsql/autoinc.so
+%{_libdir}/pgsql/auto_explain.so
 %{_libdir}/pgsql/btree_gist.so
 %{_libdir}/pgsql/chkpass.so
 %{_libdir}/pgsql/citext.so
@@ -712,6 +713,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Nov 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081119-1PGDG
+- Update to Nov 19, 2008 CVS snapshot, to test auto-contrib module.
+
 * Tue Nov 18 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081118-1PGDG
 - Update to Nov 18, 2008 CVS snapshot, and fix spec file for that.
 - Fix version number, so that yum can pick up updates, per Guillaume Smet.

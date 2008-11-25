@@ -73,7 +73,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_20081119
+Version:	8.4devel_20081126
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -713,6 +713,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Nov 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081126-1PGDG
+- Update to Nov 26, 2008 CVS snapshot
+
 * Wed Nov 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081119-1PGDG
 - Update to Nov 19, 2008 CVS snapshot, to test auto-contrib module.
 

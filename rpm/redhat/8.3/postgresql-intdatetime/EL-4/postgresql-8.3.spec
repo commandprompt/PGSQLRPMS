@@ -61,7 +61,7 @@
 %{!?pltcl:%define pltcl 1}
 %{!?plperl:%define plperl 1}
 %{!?ssl:%define ssl 1}
-%{!?intdatetimes:%define intdatetimes 0}
+%{!?intdatetimes:%define intdatetimes 1}
 %{!?kerberos:%define kerberos 1}
 %{!?nls:%define nls 1}
 %{!?xml:%define xml 0}
@@ -74,7 +74,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.3.5
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -714,6 +714,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Nov 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.5-2PGDG_id
+- Build with --enable-integer-datetimes enabled.
+
 * Fri Oct 31 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.5-1PGDG
 - Update to 8.3.5
 

@@ -1,11 +1,11 @@
 Name:		plproxy
-Version:	2.0.6
+Version:	2.0.7
 Release:	1%{?dist}
 Summary:	PL/Proxy is database partitioning system implemented as PL language.
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/plproxy/
-Source0:	http://pgfoundry.org/frs/download.php/1894/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1919/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	postgresql-devel >= 8.1 flex >= 2.5.4
@@ -28,7 +28,6 @@ install -d %{buildroot}%{_libdir}/pgsql
 install -m 644 plproxy.sql %{buildroot}%{_datadir}/%{name}-%{version}/
 %{__cp} -rp sql/ %{buildroot}%{_datadir}/%{name}-%{version}/
 %{__cp} -rp config/ %{buildroot}%{_datadir}/%{name}-%{version}/
-%{__cp} libplproxy.so.0.0 %{buildroot}%{_libdir}/pgsql/%{name}.so.0.0
 ln -s %{name}.so.0.0 %{buildroot}%{_libdir}/pgsql/%{name}.so.0
 ln -s %{name}.so.0.0 %{buildroot}%{_libdir}/pgsql/%{name}.so
 %{__rm} -f %{buildroot}/%{_datadir}/pgsql/contrib/%{name}.sql
@@ -43,6 +42,9 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/%{name}.so*
 
 %changelog
+* Tue Oct 7 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.7-1
+- Update to 2.0.7
+
 * Sat Sep 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.6-1
 - Update to 2.0.6
 

@@ -5,6 +5,13 @@ enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 
+[pgdg83-id]
+name=PostgreSQL 8.3 $releasever - $basearch with integer datetimes.
+baseurl=http://yum.pgsqlrpms.org/8.3/fedora/fedora-$releasever-$basearch-id
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
+
 [pgdg83-source]
 name=PostgreSQL 8.3 $releasever - $basearch - Source
 failovermethod=priority

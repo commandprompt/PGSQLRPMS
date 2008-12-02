@@ -1,19 +1,19 @@
 Name:           libpqxx
-Version:        2.6.9
+Version:        3.0
 Release:        1%{?dist}
 Summary:        C++ client API for PostgreSQL
 
 Group:          System Environment/Libraries
 License:        BSD
 URL:            http://pqxx.org/
-Source0:        http://pqxx.org/download/software/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://pqxx.org/download/software/%{name}/%{name}-%{version}.tar.gz
 Source1:        http://pqxx.org/download/software/%{name}/%{name}-%{version}.tar.gz.md5sum
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # drop -Werror for now, since we get -fvisibility warnings using gcc-4.1.1/fc6+
 # http://thaiopensource.org/development/libpqxx/ticket/83
 Patch1:         libpqxx-2.6.8-visibility.patch
-Patch2:         libpqxx-2.6.8-gcc43.patch
+Patch2:         libpqxx-3.0-gcc43.patch
 Patch3:         libpqxx-2.6.8-multilib.patch
 
 BuildRequires:  automake libtool
@@ -95,6 +95,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Dec 2 2008 Devrim GUNDUZ <devrim@commandprompt.com> 3.0.0-1
+- Update to 3.0.0
+- Update gcc 4.3 patch
+
 * Sat Jun 28 2008 Devrim GUNDUZ <devrim@commandprompt.com> 2.6.9-1
 - Initial build for PGDG Yum Repository, based on Fedora spec.
   Please note that this build probably won't work with koffice,

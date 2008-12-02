@@ -1,0 +1,20 @@
+--- postgresql-8.1beta1/src/bin/mammoth/init-mammoth-database	(revision 1178)
++++ postgresql-8.1beta1/src/bin/mammoth/init-mammoth-database/init-mammoth-database	(working copy)
+@@ -32,7 +32,7 @@
+ 
+ basedir=`dirname $0`/..
+ 
+-for pg_command in pg_config postgres mcp_server; do
++for pg_command in postgres mcp_server; do
+ 	if [ ! -x "$basedir/bin/$pg_command" ]; then 
+ 		echo "$my_name: can't find $basedir/bin/$pg_command executable" >&2
+ 		exit 1
+@@ -50,7 +50,7 @@
+ 	exit 1
+ fi
+ 
+-share_dir=`$basedir/bin/pg_config --sharedir 2>/dev/null`
++share_dir='/opt/mammoth/share'
+ if [ $? -ne 0 ]; then
+ 	echo "$basedir does not seem to be a Mammoth Replicator $my_version installation" >&2
+ 	exit 1

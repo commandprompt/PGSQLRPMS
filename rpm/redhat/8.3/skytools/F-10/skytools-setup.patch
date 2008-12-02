@@ -1,0 +1,10 @@
+--- skytools-2.1.4/setup.py.old	2007-11-14 16:11:46.000000000 -0800
++++ skytools-2.1.4/setup.py	2007-11-14 16:12:03.000000000 -0800
+@@ -23,6 +23,7 @@
+     data_files = [ ('share/doc/skytools/conf', [
+         'python/conf/londiste.ini',
+         'python/conf/pgqadm.ini',
++        'python/conf/skylog.ini',
+         'python/conf/wal-master.ini',
+         'python/conf/wal-slave.ini',
+         'scripts/queue_mover.ini.templ',

@@ -38,7 +38,6 @@ Group:		Applications/Databases
 URL:		http://jdbc.postgresql.org/
 
 Source0:	http://jdbc.postgresql.org/download/%{name}-%{upstreamver}.src.tar.gz
-Patch1:		postgresql-jdbc-version.patch
 
 %if ! %{gcj_support}
 BuildArch:	noarch
@@ -68,8 +67,6 @@ rmdir %{name}-%{upstreamver}.src
 
 # remove any binary libs
 find -name "*.jar" -or -name "*.class" | xargs rm -f
-
-%patch1 -p1
 
 %build
 export OPT_JAR_LIST="ant/ant-junit junit"
@@ -118,6 +115,7 @@ rm -rf %{buildroot}
 %changelog
 * Tue Dec 2 2008 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.3.604-1PGDG
 - Update to build 604
+- Remove patch1, it is now in upstream.
 
 * Mon Jun 2 2008 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.3.603-2PGDG
 - Fix F-8+ builds.

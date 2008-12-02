@@ -1,5 +1,5 @@
 Name:		plproxy
-Version:	2.0.6
+Version:	2.0.7
 Release:	1%{?dist}
 Summary:	PL/Proxy is database partitioning system implemented as PL language.
 Group:		Applications/Databases
@@ -43,6 +43,9 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/%{name}.so*
 
 %changelog
+* Tue Oct 7 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.7-1
+- Update to 2.0.7
+
 * Sat Sep 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.6-1
 - Update to 2.0.6
 

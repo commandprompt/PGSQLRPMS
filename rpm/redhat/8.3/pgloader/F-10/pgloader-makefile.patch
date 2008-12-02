@@ -1,8 +1,8 @@
---- Makefile.old	2008-02-02 01:49:03.000000000 -0800
-+++ Makefile	2008-02-02 01:49:38.000000000 -0800
-@@ -6,11 +6,18 @@
- CVSROOT = $(shell cat CVS/Root)
- VERSION = $(shell ./pgloader.py --version | cut -d' ' -f3)
+--- Makefile.old	2008-03-10 17:29:45.000000000 +0200
++++ Makefile	2008-12-02 22:21:34.000000000 +0200
+@@ -9,11 +9,19 @@
+ VERSION = $(shell ./pgloader.py --version |cut -d' ' -f3)
+ SHORTVER= $(shell ./pgloader.py --version |cut -d' ' -f3 |cut -d '~' -f1)
  
 +# for RPMs
 +ifdef RPMDESTDIR
@@ -10,6 +10,7 @@
 +libdir = $(LIBDIR)
 +exdir =  $(EXDIR)
 +else
++
  # debian setting
  DESTDIR =
  

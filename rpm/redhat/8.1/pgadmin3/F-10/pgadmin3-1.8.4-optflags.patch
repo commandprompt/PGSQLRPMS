@@ -1,0 +1,27 @@
+diff -up pgadmin3-1.8.4/configure~ pgadmin3-1.8.4/configure
+--- pgadmin3-1.8.4/configure~	2008-06-04 11:20:25.000000000 +0300
++++ pgadmin3-1.8.4/configure	2008-07-09 21:58:35.000000000 +0300
+@@ -6932,11 +6932,6 @@ echo "${ECHO_T}ok" >&6; }
+ 
+ 
+ 
+-	# CFLAGS/CXXFLAGS may well contain unwanted settings, so clear them.
+-	CFLAGS=""
+-	CXXFLAGS=""
+-
+-
+ ac_config_files="$ac_config_files Makefile branding/Makefile i18n/Makefile pgadmin/Makefile pkg/Makefile pkg/debian/Makefile pkg/mac/Makefile pkg/mandrake/Makefile pkg/redhat/Makefile pkg/slackware/Makefile pkg/src/Makefile pkg/suse/Makefile pkg/win32/Makefile xtra/Makefile xtra/pgaevent/Makefile xtra/pgagent/Makefile xtra/wx-build/Makefile"
+ 
+ cat >confcache <<\_ACEOF
+diff -up pgadmin3-1.8.4/configure.ac~ pgadmin3-1.8.4/configure.ac
+--- pgadmin3-1.8.4/configure.ac~	2008-06-04 11:20:19.000000000 +0300
++++ pgadmin3-1.8.4/configure.ac	2008-07-09 21:58:16.000000000 +0300
+@@ -58,8 +58,6 @@ CHECK_LIBXML2
+ LOCATE_LIBXSLT
+ SETUP_LIBXSLT
+ 
+-CLEANUP
+-
+ AC_CONFIG_FILES([Makefile
+ 		 branding/Makefile
+ 		 i18n/Makefile

@@ -10,8 +10,8 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f10
-SPECFILE="geos.spec"
+DIST=.f9
+SPECFILE="mammoth-replicator.spec"
 
 # Now, include global Makefile
 include ../../../common/Makefile.global

@@ -11,7 +11,7 @@
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
 DIST=.f10
-SPECFILE="geos.spec"
+SPECFILE="postgresql-python.spec"
 
 # Now, include global Makefile
 include ../../../common/Makefile.global

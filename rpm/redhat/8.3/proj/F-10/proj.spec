@@ -1,14 +1,14 @@
 Name:		proj
-Version:	4.6.0
+Version:	4.6.1
 Release:	1%{?dist}
 Epoch:		0
 Summary:	Cartographic projection software (PROJ.4)
 
 Group:		Applications/Engineering
 License:	MIT
-URL:		http://www.remotesensing.org/proj/
-Source0:	ftp://ftp.remotesensing.org/pub/%{name}/%{name}-%{version}.tar.gz
-Source1:	ftp://ftp.remotesensing.org/pub/proj/proj-datumgrid-1.3.zip
+URL:		http://trac.osgeo.org/proj
+Source0:	http://download.osgeo.org/%{name}/%{name}-%{version}.tar.gz
+Source1:	http://download.osgeo.org//proj/proj-datumgrid-1.3.zip
 Source2:	http://packages.debian.org/changelogs/pool/main/p/proj/proj_4.4.8-3/proj.copyright
 Patch0:		proj.copyright.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -125,6 +125,10 @@ rm -rf %{buildroot}
 %attr(0644,root,root) %{_datadir}/%{name}/epsg
 
 %changelog
+* Tue Dec 2 2008 - Devrim GUNDUZ <devrim@commandprompt.com> - 0:4.6.1-1
+- Update to 4.6.1
+- Update URLs
+
 * Thu Apr 3 2008 - Devrim GUNDUZ <devrim@commandprompt.com> - 0:4.6.0-1
 - Initial build for pgsqlrpms.org, based on Fedora/EPEL spec.
 

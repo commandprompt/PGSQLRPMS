@@ -1,7 +1,7 @@
 Summary:	R-Tree implementation using GiST for spherical objects
 Name:		pgsphere
 Version:	1.0.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/1869/%{name}-%{version}.tar.gz
@@ -28,7 +28,7 @@ install -d %{buildroot}%{_libdir}/pgsql/
 install -d %{buildroot}%{_datadir}/%{name}
 install -d %{buildroot}%{_docdir}/%{name}-%{version}
 
-install -m 755 libpg_sphere.so.0.0 %{buildroot}%{_libdir}/pgsql/pg_sphere.so
+install -m 755 pg_sphere.so %{buildroot}%{_libdir}/pgsql/
 install -m 644 pg_sphere.sql %{buildroot}%{_datadir}/%{name}/
 install -m 644 README.pg_sphere %{buildroot}%{_docdir}/%{name}-%{version}/
 
@@ -45,6 +45,9 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/pg_sphere.so
 
 %changelog
+* Tue Dec 2 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.0.1-2
+- Fixes for f-10
+
 * Wed Aug 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.0.1-1
 - Update to 1.0.1
 

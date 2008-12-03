@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f9
+DIST=.f10
 SPECFILE="pagila.spec"
 
 # Now, include global Makefile

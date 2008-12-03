@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f9
+DIST=.f10
 SPECFILE="postgresql-odbc.spec"
 
 # Now, include global Makefile

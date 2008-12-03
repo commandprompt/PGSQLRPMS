@@ -14,7 +14,7 @@ BuildArch:	noarch
 If you've ever wanted to treat DBI-accessible data sources as though
 they were PostgreSQL tables, you now can.
 
-You can do gradual, low-risk migrations from other DBMSs, add speed
+You can do gradual, low-risk migrations from other databases, add speed
 and accuracy to your ETL processes...your imagination is the only
 limit.
 

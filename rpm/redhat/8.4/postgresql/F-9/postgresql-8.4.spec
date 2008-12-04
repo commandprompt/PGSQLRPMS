@@ -713,7 +713,7 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Thu Dec 4 28 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081204-1PGDG
+* Thu Dec 4 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081204-1PGDG
 - Update to Dec 04, 2008 CVS snapshot
 
 * Fri Nov 28 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081128-1PGDG

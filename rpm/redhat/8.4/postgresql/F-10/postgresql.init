@@ -70,6 +70,7 @@
 # Version 8.3 Devrim Gunduz <devrim@CommandPrompt.com>
 
 # Version 8.4 Devrim Gunduz <devrim@CommandPrompt.com>
+# Remove "sameuser" from initdb, to match the new hba conf file.
 
 # PGVERSION is the full package version, e.g., 8.4.0
 # Note: the specfile ordinarily updates this during install
@@ -237,7 +238,7 @@ initdb(){
 			# Clean up SELinux tagging for PGDATA
 			[ -x /sbin/restorecon ] && /sbin/restorecon "$PGDATA"
 			# Initialize the database
-			$SU -l postgres -c "$PGENGINE/initdb --pgdata='$PGDATA' --auth='ident sameuser'" >> "$PGLOG" 2>&1 < /dev/null
+			$SU -l postgres -c "$PGENGINE/initdb --pgdata='$PGDATA' --auth='ident'" >> "$PGLOG" 2>&1 < /dev/null
 			# Create directory for postmaster log
 			mkdir "$PGDATA/pg_log"
 			chown postgres:postgres "$PGDATA/pg_log"

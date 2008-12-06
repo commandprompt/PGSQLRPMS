@@ -25,11 +25,11 @@
 %define beta 0
 %{?beta:%define __os_install_post /usr/lib/rpm/brp-compress}
 
-%{!?upstreamserver:%define upstreamver	8.0-322}
+%{!?upstreamserver:%define upstreamver	8.0-323}
 
 Summary:	JDBC driver for PostgreSQL
 Name:		postgresql-jdbc
-Version:	8.0.322
+Version:	8.0.323
 Release:	1PGDG%{?dist}
 BuildArch:	noarch
 Epoch:		0
@@ -67,6 +67,9 @@ rm -rf %{buildroot}
 %{_javadir}/postgresql-%{upstreamver}.jdbc3.jar
 
 %changelog
+* Sat Dec 6 2008 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.0.323-1PGDG
+- Update to build 323
+
 * Tue Mar 4 2008 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.0.322-1PGDG
 - Use non-src versions for EL-4 and EL-5, they don't have build 
   environment from source.

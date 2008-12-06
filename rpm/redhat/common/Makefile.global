@@ -52,3 +52,15 @@ build: bfsrpm
 	--define "_srcrpmdir $(HOME)/rpm/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm/RPMS/" --sign \
 	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+
+noprepbuild: 
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm/SRPMS" --sign \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm/BUILD" \
+	--define "_srcrpmdir $(HOME)/rpm/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm/RPMS/" --sign \
+	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)

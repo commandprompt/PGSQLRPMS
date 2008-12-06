@@ -5,7 +5,7 @@ Summary:	PL/Proxy is database partitioning system implemented as PL language.
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/plproxy/
-Source0:	http://pgfoundry.org/frs/download.php/1894/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/1919/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	postgresql-devel >= 8.1 flex >= 2.5.4

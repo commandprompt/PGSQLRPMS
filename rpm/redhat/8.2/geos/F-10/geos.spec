@@ -1,13 +1,12 @@
 Name:		geos
-Version:	3.0.0
-Release:	4%{?dist}
+Version:	3.0.3
+Release:	1%{?dist}
 Summary:	GEOS is a C++ port of the Java Topology Suite
 
 Group:		Applications/Engineering
 License:	LGPLv2
-URL:		http://geos.refractions.net
-Source0:	http://geos.refractions.net/downloads/%{name}-%{version}.tar.bz2
-Patch0: 	geos-gcc43.patch
+URL:		http://trac.osgeo.org/geos/
+Source0:	http://download.osgeo.org/geos/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	doxygen libtool
 %if "%{?dist}" != ".el4"
@@ -60,7 +59,6 @@ Ruby module to build applications using GEOS and ruby
 
 %prep
 %setup -q
-%patch0 -p0 -b .gcc43
 
 %build
 
@@ -138,6 +136,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Dec 2 2008 Devrim GUNDUZ <devrim@CommandPrompt.com> - 3.0.3-1
+- Update to 3.0.3
+- Remove patch 1 -- it is now in upstream.
+
 * Mon Jun 2 2008 Devrim GUNDUZ <devrim@CommandPrompt.com> - 3.0.0-4
 - Sync with Fedora spec file.
 

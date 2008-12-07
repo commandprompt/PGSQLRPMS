@@ -1,5 +1,5 @@
 Name:		perl-DBD-Pg
-Version:	2.9.2
+Version:	2.11.6
 Release:	1%{?dist}
 Summary:	PostgreSQL database driver for the DBI module
 Group:		Development/Libraries
@@ -54,6 +54,9 @@ rm -rf %{buildroot}
 %{_mandir}/man3/*.3*
 
 %changelog
+* Mon Dec 8 2008 Devrim GUNDUZ <devrim@commandprompt.com - 2.11.6
+- Update to 2.11.6
+
 * Wed Aug 20 2008 Devrim GUNDUZ <devrim@commandprompt.com - 2.9.2-1
 - Update to 2.9.2
 

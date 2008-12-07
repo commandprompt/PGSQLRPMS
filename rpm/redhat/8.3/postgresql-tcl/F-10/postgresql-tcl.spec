@@ -55,8 +55,8 @@ unzip %{SOURCE1}
 PGTCLDOCDIR=`basename %{SOURCE1} .zip`
 mv $PGTCLDOCDIR Pgtcl-docs
 
-%patch0 -p0
-	pushd Pgtcl
+pushd Pgtcl
+%patch0 -p1
 %aconfver
 	popd
 

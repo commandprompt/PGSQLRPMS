@@ -1,6 +1,6 @@
 Name:		postgresql_autodoc
-Version:	1.30
-Release:	2%{?dist}
+Version:	1.31
+Release:	1%{?dist}
 Summary:	PostgreSQL AutoDoc Utility
 Group:		Applications/Databases
 License:	BSD
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/%{name}
 
 %changelog
+* Mon Mar 17 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.31-1
+- Update to 1.31
+
 * Sat Jun 9 2007 - Devrim GUNDUZ <devrim@commandprompt.com> 1.30-2
 - Some more fixes ber bugzilla review #200630
 

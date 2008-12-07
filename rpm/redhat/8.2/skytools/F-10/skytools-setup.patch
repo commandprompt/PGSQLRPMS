@@ -1,7 +1,7 @@
---- skytools-2.1.4/setup.py.old	2007-11-14 16:11:46.000000000 -0800
-+++ skytools-2.1.4/setup.py	2007-11-14 16:12:03.000000000 -0800
-@@ -23,6 +23,7 @@
-     data_files = [ ('share/doc/skytools/conf', [
+--- skytools-2.1.7/setup.py.old	2008-12-08 00:45:33.000000000 +0200
++++ skytools-2.1.7/setup.py	2008-12-08 00:46:39.000000000 +0200
+@@ -44,6 +44,7 @@
+       ('share/doc/skytools/conf', [
          'python/conf/londiste.ini',
          'python/conf/pgqadm.ini',
 +        'python/conf/skylog.ini',

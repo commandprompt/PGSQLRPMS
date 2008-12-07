@@ -55,8 +55,8 @@ unzip %{SOURCE1}
 PGTCLDOCDIR=`basename %{SOURCE1} .zip`
 mv $PGTCLDOCDIR Pgtcl-docs
 
-%patch0 -p0
-	pushd Pgtcl
+pushd Pgtcl
+%patch0 -p1
 %aconfver
 	popd
 
@@ -64,7 +64,7 @@ mv $PGTCLDOCDIR Pgtcl-docs
 pushd Pgtcl
 # pgtcl's configure only handles one include directory :-(
 ./configure \
-	--libdir=%{_libdir} \
+	--libdir=%{_libdir} --disable-rpath \
 	--with-tcl=%{_libdir} \
 	--with-postgres-include="../src/interfaces/libpq -I../src/include" \
 	--with-postgres-lib=../src/interfaces/libpq

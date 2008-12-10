@@ -1,19 +1,41 @@
+# Conventions for PostgreSQL Global Development Group RPM releases:
+
+# Official PostgreSQL Development Group RPMS have a PGDG after the release number.
+# Integer releases are stable -- 0.1.x releases are Pre-releases, and x.y are
+# test releases.
+
+# Pre-releases are those that are built from CVS snapshots or pre-release
+# tarballs from postgresql.org.  Official beta releases are not
+# considered pre-releases, nor are release candidates, as their beta or
+# release candidate status is reflected in the version of the tarball. Pre-
+# releases' versions do not change -- the pre-release tarball of 7.0.3, for
+# example, has the same tarball version as the final official release of 7.0.3:
+# but the tarball is different.
+
+# Test releases are where PostgreSQL itself is not in beta, but certain parts of
+# the RPM packaging (such as the spec file, the initscript, etc) are in beta.
+
+# Pre-release RPM's should not be put up on the public ftp.postgresql.org server
+# -- only test releases or full releases should be.
+# This is the PostgreSQL Global Development Group Official RPMset spec file,
+# or a derivative thereof.
+# Copyright 2008-2009 Devrim GUNDUZ <devrim@gunduz.org> and others listed.
 #
-# spec file for package postgresql (Version 8.3.4)
-#
-# Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
-#
-# Please submit bugfixes or comments via http://bugs.opensuse.org/
-#
+# This spec file and ancilliary files are licensed in accordance with
+# The PostgreSQL license.
+
+# In this file you can find the default build package list macros.  These can be overridden by defining
+# on the rpm command line:
+# rpm --define 'packagename 1' .... to force the package to build.
+# rpm --define 'packagename 0' .... to force the package NOT to build.
+# The base package, the lib package, the devel package, and the server package always get built.
 
 %define pg_minor_version %(echo %version | cut -f1-2 -d.)
 
 Name:		postgresql
 Summary:	Basic Clients and Utilities for PostgreSQL
 Url:		http://www.postgresql.org/
-Version:	8.3.4
+Version:	8.3.5
 Release:	1
 License:	BSD 3-Clause
 Group:		Productivity/Databases/Tools

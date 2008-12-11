@@ -47,7 +47,7 @@
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
-%{!?uuid:%define uuid 1}
+%{!?uuid:%define uuid 0}
 %{!?ldap:%define ldap 1}
 
 Name:		postgresql
@@ -65,14 +65,29 @@ Source9:	postgresql-init
 Source15:	postgresql-bashprofile
 Source16:	postgresql-firewall
 Source17:	postgresql-rpmlintrc
-#Source99:	postgresql-pl.spec
 Patch1:		postgresql-8.3-conf.patch
 PreReq:		postgresql-libs = %pg_minor_version
-BuildRequires:	bison flex gettext-devel krb5-devel libxslt-devel
-BuildRequires:	openldap2-devel openssl-devel pam-devel readline-devel zlib-devel
+BuildRequires:	bison flex
+BuildRequires:	readline-devel zlib-devel
 BuildRequires:	ncurses-devel
 Provides:	postgresql = %pg_minor_version
 BuildRoot:	%{_tmppath}/%{name}-%{version}-build
+
+%if %kerberos
+BuildRequires:  krb5-devel
+%endif
+
+%if %ldap
+BuildRequires:  openldap2-devel
+%endif
+
+%if %nls
+BuildRequires:  gettext-devel
+%endif
+
+%if %pam
+BuildRequires:  pam-devel
+%endif
 
 %if %plpython
 BuildRequires:  python-devel
@@ -80,6 +95,14 @@ BuildRequires:  python-devel
 
 %if %pltcl
 BuildRequires:  tcl-devel
+%endif
+
+%if %ssl
+BuildRequires:  openssl-devel
+%endif
+
+%if %xml
+BuildRequires:  libxml2-devel libxslt-devel
 %endif
 
 %description

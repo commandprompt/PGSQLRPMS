@@ -278,6 +278,7 @@ export CFLAGS="%optflags $SP"
 %endif
 %if %uuid
 	--with-ossp-uuid \
+	--with-includes=%_includedir/uuid/
 %endif
 %if %xml
 	--with-libxml \

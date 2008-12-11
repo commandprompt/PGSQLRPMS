@@ -1,0 +1,66 @@
+############################
+# General Makefile 	   #
+# for RPM packaging	   #
+# http://yum.pgsqlrpms.org #
+#			   #
+# Devrim Gunduz		   #
+# devrim@CommandPrompt.com #
+############################
+#			   #
+#			   #
+# build target is for      #
+# RPM buildfarm		   #
+#			   #
+#			   #
+############################
+
+prep:
+	# Checkout Makefile.global before doing anything else.
+	#svn up ../../../common/
+
+	# Use spectool to download source files, especially tarballs.
+	#spectool -g -S $(SPECFILE)
+
+clean:	
+	rm -rf i386/ x86_64
+	rm -f *.src.rpm
+	rm -f *.tar *.tar.gz *.tar.bz2 *.tgz
+
+srpm: prep
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." --sign \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfsrpm: prep
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm/SRPMS" --sign \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+rpm: prep
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+
+build: bfsrpm
+
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm/BUILD" \
+	--define "_srcrpmdir $(HOME)/rpm/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm/RPMS/" --sign \
+	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+
+noprepbuild: 
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm/SRPMS" --sign \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm/BUILD" \
+	--define "_srcrpmdir $(HOME)/rpm/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm/RPMS/" --sign \
+	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)

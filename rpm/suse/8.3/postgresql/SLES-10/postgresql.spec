@@ -30,6 +30,9 @@
 # rpm --define 'packagename 0' .... to force the package NOT to build.
 # The base package, the lib package, the devel package, and the server package always get built.
 
+%define beta 0
+%{?beta:%define __os_install_post /usr/lib/rpm/brp-compress}
+
 %define pg_minor_version %(echo %version | cut -f1-2 -d.)
 
 %{!?test:%define test 1}
@@ -51,7 +54,7 @@ Name:		postgresql
 Summary:	Basic Clients and Utilities for PostgreSQL
 Url:		http://www.postgresql.org/
 Version:	8.3.5
-Release:	1PGDG
+Release:	1PGDG%{?dist}
 License:	BSD 3-Clause
 Group:		Productivity/Databases/Tools
 Source0:	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%version.tar.bz2
@@ -62,7 +65,7 @@ Source9:	postgresql-init
 Source15:	postgresql-bashprofile
 Source16:	postgresql-firewall
 Source17:	postgresql-rpmlintrc
-Source99:	postgresql-pl.spec
+#Source99:	postgresql-pl.spec
 Patch1:		postgresql-8.3-conf.patch
 PreReq:		postgresql-libs = %pg_minor_version
 BuildRequires:	bison flex gettext-devel krb5-devel libxslt-devel

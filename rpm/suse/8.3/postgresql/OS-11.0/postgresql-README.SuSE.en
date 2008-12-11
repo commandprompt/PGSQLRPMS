@@ -1,0 +1,38 @@
+The configuration variables for the PostgreSQL server are now stored
+in the /etc/sysconfig/postgresql file. Now, you can set many commando
+line parameters in /var/lib/pgsql/data/postgresql.conf.
+
+
+Before updating PostgreSQL packages whose version numbers are to
+increase by at least the second decimal place or higher (for example,
+6.4.x to 7.0.x or 7.1.x to 7.2.x), use the pg_dumpall program to back
+up your PostgreSQL databases. A typical command for doing this is:
+
+        pg_dumpall > SAVE
+
+Backups should be performed as user "postgres". Once the backup is
+completed successfully, shut down the PostgreSQL server (as root:
+"rcpostgresql stop"). Further configuration files in
+/var/lib/pgsql/data, including pg_hba.conf and postgresql.conf,
+may need to be backed up as well.
+
+Afterwards, delete the previous database files
+
+        rm -r /var/lib/pgsql/data/*
+
+or, if you have enough space, move it to
+
+        mv /var/lib/pgsql/data /var/lib/pgsql/data.old
+
+so that the new database structure can be created under
+/var/lib/pgsql/data when you start the new database server for the
+first time (as root:"rcpostgresql start").
+
+The saved contents of the database and the configuration files will
+then have to be played back as user postgres:
+
+        psql template1 -f SAVE
+
+If, following exhaustive testing, you are certain that everything is
+still available and functioning properly after the migration, delete
+the backup file and the old database files.

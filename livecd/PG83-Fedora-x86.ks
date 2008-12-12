@@ -371,7 +371,7 @@ ColSeparator=;
 Quote=Strings
 EOF
 
-chown postgres:/var/lib/pgsql/.pgadmin3
+chown postgres: /var/lib/pgsql/.pgadmin3
 
 %end
 

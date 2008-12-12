@@ -5,12 +5,13 @@
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
 Version:	2.0.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
 Source0:	http://main.slony.info/downloads/2.0/source/slony1-%{version}.tar.bz2
 Source2:	filter-requires-perl-Pg.sh
+Patch0:		%{name}-getridofusrbinsh.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
 Requires:	postgresql-server, perl-DBD-Pg
@@ -48,6 +49,8 @@ documentation for Slony-I.
 
 %prep
 %setup -q -n slony1-%{version}
+
+%patch0 -p1
 
 %build
 
@@ -143,16 +146,20 @@ fi
 %endif
 
 %changelog
+* Sat Dec 13 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.0-2
+- Add a patch to fix build errors
+- Temporarily update Source2, so that it will silence a dependency error.
+
 * Tue Dec 2 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.0-1
 - Update to 2.0.0
 
 * Mon Sep 22 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-3
-- Add dependency for perl-DBD-Pg, per Xavier Bergade.
+- Add dependency for perl-DBD-Pg, paer Xavier Bergade.
 
 * Sun Sep 21 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-2
 - Fix dependency issues caused by latest commit.
 
-* Fri Sep 12 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-1
+* Fri Sep 12 2008 Devrim Gunduz <devtrim@CommandPrompt.com> 1.2.15-1
 - Update to 1.2.15
 - Install tools written in perl, too.
 

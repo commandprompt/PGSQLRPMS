@@ -16,7 +16,7 @@ BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
 Requires:	postgresql-server, perl-DBD-Pg
 
 %if %docs
-BuildRequires:	docbook-style-dsssl
+BuildRequires:	docbook-style-dsssl postgresql_autodoc
 %endif
 
 %description

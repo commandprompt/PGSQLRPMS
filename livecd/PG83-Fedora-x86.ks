@@ -42,15 +42,15 @@ part / --size 4096
 # List of repositories. We want to stick to x86 builds only.
 
 # These are the private mirror list for local builds (Devrim).
-#repo --name=released --baseurl=http://fedora.mirror.homenet.dbitech.bc.ca/releases/8/Everything/i386/os/
-#repo --name=updates --baseurl=http://fedora.mirror.homenet.dbitech.bc.ca/updates/8/i386/
+#repo --name=released --baseurl=http://fedora.mirror.homenet.dbitech.bc.ca/releases/10/Everything/i386/os/
+#repo --name=updates --baseurl=http://fedora.mirror.homenet.dbitech.bc.ca/updates/10/i386/
 
 # These are the public repositories
-repo --name=released --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-8&arch=i386
-repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f8&arch=i386
+repo --name=released --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-10&arch=i386
+repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f10&arch=i386
 
 # PGDG RPM Repository
-repo --name=pgdg83  --baseurl=http://yum.pgsqlrpms.org/8.3/fedora/fedora-8-i386
+repo --name=pgdg83  --baseurl=http://yum.pgsqlrpms.org/8.3/fedora/fedora-10-i386
 
 %packages
 @base-x
@@ -65,6 +65,7 @@ kernel
 @hardware-support
 @sql-server
 @graphical-internet
+check_postgres
 esc
 evolution
 evolution-webcal
@@ -72,38 +73,46 @@ dejavu-fonts
 dejavu-fonts-experimental
 dejavu-fonts
 dejavu-fonts-experimental
-postgresql-tcl
-postgresql-contrib
-postgresql-test
-postgresql-jdbc
-postgresql-odbc
-postgresql-docs
-postgresql-server
-postgresql
-postgresql-plpython
-postgresql-plperl
-postgresql-pltcl
+httpd
+ip4r
 table_log
 orafce
-pgfouine
-pgpool-II
 pagila
-plruby
+pam_pgsql
+phpPgAdmin
+pg_top
+pg_filedump
 pgadmin3
+pgbouncer
+pgfouine
+pgloader
+pgplsh
+pgsphere
+pgpool-II
+plproxy
+plruby
 postgis
 postgis-utils
-ptop
-python-psycopg2
 postgis-jdbc
-phpPgAdmin
-httpd
-pagila
-pgplsh
-ip4r
-usda-r18
-pgbouncer
+postgresql
+postgresql-docs
+postgresql-contrib
+postgresql-jdbc
+postgresql-odbc
+postgresql-plperl
+postgresql-plpython
+postgresql-pltcl
+postgresql-python
+postgresql-server
+postgresql-tcl
+postgresql-test
+prefix
+python-psycopg2
 ruby-pg
-pg_filedump
+skytools
+slony1
+table_log
+usda-r18
 
 # Save some space
 -bittorrent

@@ -1,0 +1,12 @@
+--- mammoth-replicator-8.3-1.8-beta1/src/backend/parser/keywords.c.old	2008-10-13 18:47:22.000000000 +0300
++++ mammoth-replicator-8.3-1.8-beta1/src/backend/parser/keywords.c	2008-10-13 18:47:28.000000000 +0300
+@@ -54,8 +54,8 @@
+ 	{"assignment", ASSIGNMENT, UNRESERVED_KEYWORD},
+ 	{"asymmetric", ASYMMETRIC, RESERVED_KEYWORD},
+ 	{"at", AT, UNRESERVED_KEYWORD},
+-	{"back", BACK, UNRESERVED_KEYWORD},
+ 	{"authorization", AUTHORIZATION, TYPE_FUNC_NAME_KEYWORD},
++	{"back", BACK, UNRESERVED_KEYWORD},
+ 	{"backward", BACKWARD, UNRESERVED_KEYWORD},
+ 	{"batchupdate", BATCHUPDATE, UNRESERVED_KEYWORD},
+ 	{"before", BEFORE, UNRESERVED_KEYWORD},

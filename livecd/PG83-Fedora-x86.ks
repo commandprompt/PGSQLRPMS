@@ -138,7 +138,6 @@ usda-r18
 -bug-buddy
 -gnome-vfs2-obexftp
 -nautilus-sendto
--fast-user-switch-applet
 -gnome-media
 -gnome-vfs2-smb
 -gcalctool

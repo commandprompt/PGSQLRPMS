@@ -110,7 +110,6 @@ prefix
 python-psycopg2
 ruby-pg
 skytools
-slony1
 table_log
 usda-r18
 
@@ -154,7 +153,6 @@ usda-r18
 -gutenprint
 -foomatic
 -gthumb
--bluez-utils
 -foomatic
 -system-config-printer-libs
 -system-config-printer 

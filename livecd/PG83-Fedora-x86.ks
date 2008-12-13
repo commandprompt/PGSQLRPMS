@@ -255,7 +255,9 @@ if ! strstr "\`cat /proc/cmdline\`" noswap -a [ -n "\$swaps" ] ; then
 fi
 
 # configure X, allowing user to override xdriver
-exists system-config-display --noui --reconfig --set-depth=24 \$xdriver
+if [ -n "\$xdriver" ]; then
+   exists system-config-display --noui --reconfig --set-depth=24 \$xdriver
+fi
 
 # add set no password for postgres user. It is already created with postgresql-server RPM.
 passwd -d postgres > /dev/null
@@ -265,6 +267,17 @@ echo "RUN_FIRSTBOOT=NO" > /etc/sysconfig/firstboot
 
 # don't start yum-updatesd for livecd boots
 chkconfig --level 345 yum-updatesd off 2>/dev/null
+
+# don't do packagekit checking by default
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/frequency_get_updates never >/dev/null
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/frequency_refresh_cache never >/dev/null
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/notify_available false >/dev/null
+
+# apparently, the gconf keys aren't enough
+mkdir -p /var/lib/pgsql/.config/autostart
+echo "X-GNOME-Autostart-enabled=false" >> /var/lib/pgsql/.config/autostart/gpk-update-icon.desktop
+chown -R fedora:fedora /var/lib/pgsql/.config
+
 
 # don't start cron/at as they tend to spawn things which are
 # disk intensive that are painful on a live image
@@ -319,13 +332,6 @@ rm -f /core*
 
 # disable screensaver locking
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-screensaver/lock_enabled false >/dev/null
-# set up timed auto-login for after 60 seconds
-sed -i -e 's/\[daemon\]/[daemon]\nTimedLoginEnable=true\nTimedLogin=fedora\nTimedLoginDelay=60/' /etc/gdm/custom.conf
-if [ -e /usr/share/icons/hicolor/96x96/apps/fedora-logo-icon.png ] ; then
-    cp /usr/share/icons/hicolor/96x96/apps/fedora-logo-icon.png /home/fedora/.face
-    chown fedora:fedora /home/fedora/.face
-    # TODO: would be nice to get e-d-s to pick this one up too... but how?
-fi
 
 # Create a conf file for pgadmin3. 
 cat > /var/lib/pgsql/.pgadmin3 << EOF
@@ -381,6 +387,8 @@ cp $INSTALL_ROOT/usr/share/doc/HTML/readme-live-image/en_US/readme-live-image-en
 
 # only works on x86, x86_64
 if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
+  if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
   cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
 fi
 %end
+

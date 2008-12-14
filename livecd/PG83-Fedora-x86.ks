@@ -75,7 +75,6 @@ dejavu-fonts
 dejavu-fonts-experimental
 httpd
 ip4r
-table_log
 orafce
 pagila
 pam_pgsql
@@ -114,66 +113,64 @@ table_log
 usda-r18
 
 # Save some space
--bittorrent
--fetchmail
--slrn
--cadaver
--mutt
--tomboy
--vino
--zenity
--xdg-user-dirs-gtk
--gnome-power-manager
+-a2ps
 -alacarte
--gnome-backgrounds
 -at-spi
--gnome-bluetooth
--gucharmap
--gok
--gnome-audio
--gnome-phone-manager
--nautilus-cd-burner
+-bittorrent
 -bluez-gnome
 -bug-buddy
--gnome-vfs2-obexftp
--nautilus-sendto
--gnome-media
--gnome-vfs2-smb
--gcalctool
--gnome-pilot
--orca
--sendmail
--rsh
--mtr
--transmission
--evolution-help
+-cadaver
 -ekiga
--smolt
+-esc
+-evolution-help
+-festival
+-fetchmail
 -firstboot
--gutenprint
 -foomatic
--gthumb
--foomatic
--system-config-printer-libs
--system-config-printer 
+-gcalctool
+-gok
+-gnome-audio
+-gnome-backgrounds
+-gnome-bluetooth
+-gnome-phone-manager
+-gnome-media
+-gnome-pilot
+-gnome-power-manager
+-gnome-vfs2-obexftp
+-gnome-vfs2-smb
 -gstreamer-plugins-base 
 -gstreamer-plugins-good
 -gstreamer
--nautilus-cd-burner
--isdn4k-utils
--system-config-printer 
--specspo
--esc
--samba-client
--a2ps
--mpage
--redhat-lsb
--sox
--hplip
+-gthumb
+-gucharmap
+-gutenprint
 -hpijs
+-hplip
+-isdn4k-utils
+-mpage
+-mtr
+-mutt
+-nautilus-cd-burner
+-nautilus-sendto
+-orca
+-redhat-lsb
+-rsh
+-samba-client
+-sane-backends
+-sendmail
+-slrn
+-sox
+-smolt
+-specspo
+-system-config-printer 
+-system-config-printer-libs
+-tomboy
+-transmission
+-vino
+-xdg-user-dirs-gtk
 -xsane
 -xsane-gimp
--sane-backends
+-zenity
 # smartcards won't really work on the livecd.
 -coolkey
 -ccid
@@ -276,7 +273,7 @@ gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults
 # apparently, the gconf keys aren't enough
 mkdir -p /var/lib/pgsql/.config/autostart
 echo "X-GNOME-Autostart-enabled=false" >> /var/lib/pgsql/.config/autostart/gpk-update-icon.desktop
-chown -R fedora:fedora /var/lib/pgsql/.config
+chown -R postgres:postgres /var/lib/pgsql/.config
 
 
 # don't start cron/at as they tend to spawn things which are

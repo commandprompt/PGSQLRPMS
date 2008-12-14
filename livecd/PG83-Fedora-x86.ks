@@ -329,11 +329,13 @@ rm -f /core*
 
 # disable screensaver locking
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-screensaver/lock_enabled false >/dev/null
-# set up timed auto-login for after 60 seconds 
-sed -i -e 's/\[daemon\]/[daemon]\nTimedLoginEnable=true\nTimedLogin=fedora\nTimedLoginDelay=0/' /etc/gdm/custom.conf 
-if [ -e /usr/share/icons/hicolor/96x96/apps/fedora-logo-icon.png ] ; then 
-    # TODO: would be nice to get e-d-s to pick this one up too... but how? 
-fi 
+# set up timed auto-login with no delay. 
+cat >> /etc/gdm/custom.conf << EOF
+[daemon]
+TimedLoginEnable=true
+TimedLogin=postgres
+TimedLoginDelay=0
+EOF
 
 # Create a conf file for pgadmin3. 
 cat > /var/lib/pgsql/.pgadmin3 << EOF

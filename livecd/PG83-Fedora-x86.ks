@@ -32,7 +32,7 @@ cdrom
 # System timezone
 timezone  America/New_York
 # X Window System configuration information
-xconfig  --defaultdesktop=GNOME 
+xconfig  --defaultdesktop=GNOME  --depth=32 --resolution=1024x768 --startxonboot 
 # System bootloader configuration
 bootloader --location=mbr
 # Partition clearing information

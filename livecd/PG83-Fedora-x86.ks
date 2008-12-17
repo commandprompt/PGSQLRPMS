@@ -73,6 +73,7 @@ dejavu-fonts
 dejavu-fonts-experimental
 dejavu-fonts
 dejavu-fonts-experimental
+glom
 httpd
 ip4r
 orafce

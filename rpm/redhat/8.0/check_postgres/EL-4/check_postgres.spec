@@ -1,6 +1,6 @@
 Summary:	PostgreSQL monitoring script
 Name:		check_postgres
-Version:	2.5.0
+Version:	2.5.2
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -37,6 +37,9 @@ rm -rf %{buildroot}
 %{_bindir}/%{name}.pl
 
 %changelog
+* Wed Dec 17 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.5.2-1
+- Update to 2.5.2
+
 * Sun Dec 7 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.5.0-1
 - Update to 2.5.0
 

@@ -12,10 +12,10 @@ enabled=0
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 
-[pgdg83-source]
-name=PostgreSQL 8.3 $releasever - $basearch - Source
+[pgdg83-id-source]
+name=PostgreSQL 8.3 $releasever - $basearch - integer-datetimes Source
 failovermethod=priority
-baseurl=http://yum.pgsqlrpms.org/srpms/8.3/redhat/rhel-$releasever-$basearch
+baseurl=http://yum.pgsqlrpms.org/srpms/8.3/redhat/rhel-$releasever-$basearch-id
 enabled=0
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG

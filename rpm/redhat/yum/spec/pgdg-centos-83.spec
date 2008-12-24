@@ -1,6 +1,6 @@
 Name:		pgdg-centos
 Version:	8.3
-Release:	5
+Release:	6
 Summary:	PostgreSQL 8.3.X PGDG RPMs for CentOS - Yum Repository Configuration
 Group:		System Environment/Base 
 License:	BSD
@@ -44,6 +44,10 @@ rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 %{_sysconfdir}/pki/rpm-gpg/*
 
 %changelog
+* Fri Dec 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 8.3-6
+- Enable new channel: pgdg83-id and pgdg83-id-source for the packages
+  with --integer-datetimes support.
+
 * Sat Jun 14 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 8.3-5
 - Fix srpm path.
 

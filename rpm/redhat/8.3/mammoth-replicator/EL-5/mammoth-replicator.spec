@@ -32,7 +32,7 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3
-Release:	1.8_beta1%{?dist}
+Release:	1.8_beta1%{?dist}.1
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
@@ -711,8 +711,8 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Thu Dec 25 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1-2
+* Thu Dec 25 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.1
 - Fix dependency errors, per Lou Felix
 
-* Mon Oct 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1-1
+* Mon Oct 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1
 - Initial cut for replicator 8.3 packages.

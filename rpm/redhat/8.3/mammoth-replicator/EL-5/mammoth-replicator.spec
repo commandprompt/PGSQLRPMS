@@ -145,7 +145,7 @@ Mammoth Replicator.
 Summary:	The programs needed to create and run a PostgreSQL server
 Group:		Applications/Databases
 Requires:	/usr/sbin/useradd /sbin/chkconfig 
-Requires:	postgresql = %{version}-%{release}
+Requires:	mammoth-replicator = %{version}-%{release}
 Conflicts:	postgresql < 7.4
 
 %description server
@@ -172,7 +172,7 @@ includes HTML version of the documentation.
 %package contrib
 Summary:	Contributed source and binaries distributed with PostgreSQL
 Group:		Applications/Databases
-Requires:	postgresql = %{version}
+Requires:	mammoth-replicator = %{version}
 %description contrib
 The postgresql-contrib package contains contributed packages that are
 included in the PostgreSQL distribution.
@@ -180,7 +180,7 @@ included in the PostgreSQL distribution.
 %package devel
 Summary:	PostgreSQL development header files and libraries
 Group:		Development/Libraries
-Requires:	postgresql = %{version}-%{release}
+Requires:	mammoth-replicator = %{version}-%{release}
 
 %description devel
 The postgresql-devel package contains the header files and libraries
@@ -209,7 +209,7 @@ for the backend.
 %package plpython
 Summary:	The Python procedural language for PostgreSQL
 Group:		Applications/Databases
-Requires:	postgresql = %{version}
+Requires:	mammoth-replicator = %{version}
 Requires:	postgresql-server = %{version}
 Obsoletes:	postgresql-pl
 
@@ -223,7 +223,7 @@ for the backend.
 %package pltcl
 Summary:	The Tcl procedural language for PostgreSQL
 Group:		Applications/Databases
-Requires:	postgresql = %{version}
+Requires:	mammoth-replicator = %{version}
 Requires:	postgresql-server = %{version}
 Obsoletes:	postgresql-pl
 
@@ -711,5 +711,8 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Mon Oct 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1
+* Thu Dec 25 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1-2
+- Fix dependency errors, per Lou Felix
+
+* Mon Oct 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1-1
 - Initial cut for replicator 8.3 packages.

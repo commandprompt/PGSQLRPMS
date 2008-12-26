@@ -28,7 +28,7 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3
-Release:	1.8_beta1%{?dist}
+Release:	1.8_beta1%{?dist}.2
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
@@ -96,7 +96,7 @@ BuildRequires:	uuid-devel
 BuildRequires:	openldap-devel
 %endif
 
-Requires:	postgresql-libs = %{version}-%{release}
+Requires:	mammoth-replicator-libs = %{version}-%{release}
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -115,7 +115,7 @@ utilities for managing PostgreSQL databases on a PostgreSQL server.
 
 If you want to manipulate a PostgreSQL database on a local or remote PostgreSQL
 server, you need this package. You also need to install this package
-if you're installing the postgresql-server package.
+if you're installing the mammoth-replicator-server package.
 
 %package libs
 Summary:	The shared libraries required for any PostgreSQL clients
@@ -123,7 +123,7 @@ Group:		Applications/Databases
 Provides:	libpq.so
 
 %description libs
-The postgresql-libs package provides the essential shared libraries for any 
+The mammoth-replicator-libs package provides the essential shared libraries for any 
 PostgreSQL client program or interface. You will need to install this package
 to use any other PostgreSQL package or any clients that need to connect to a
 PostgreSQL server.
@@ -141,25 +141,25 @@ Mammoth Replicator.
 Summary:	The programs needed to create and run a PostgreSQL server
 Group:		Applications/Databases
 Requires:	/usr/sbin/useradd /sbin/chkconfig 
-Requires:	postgresql = %{version}-%{release}
+Requires:	mammoth-replicator = %{version}-%{release}
 Conflicts:	postgresql < 7.4
 
 %description server
-The postgresql-server package includes the programs needed to create
+The mammoth-replicator-server package includes the programs needed to create
 and run a PostgreSQL server, which will in turn allow you to create
 and maintain PostgreSQL databases.  PostgreSQL is an advanced
 Object-Relational database management system (DBMS) that supports
 almost all SQL constructs (including transactions, subselects and
 user-defined types and functions). You should install
-postgresql-server if you want to create and maintain your own
+mammoth-replicator-server if you want to create and maintain your own
 PostgreSQL databases and/or your own PostgreSQL server. You also need
 to install the postgresql package.
 
 %package docs
-Summary:	Extra documentation for PostgreSQL
+Summary:	Extra documentation for Mammoth Replicator
 Group:		Applications/Databases
 %description docs
-The postgresql-docs package includes the SGML source for the documentation
+The mammoth-replicator-docs package includes the SGML source for the documentation
 as well as the documentation in PDF format and some extra documentation.
 Install this package if you want to help with the PostgreSQL documentation
 project, or if you want to generate printed documentation. This package also 
@@ -168,18 +168,18 @@ includes HTML version of the documentation.
 %package contrib
 Summary:	Contributed source and binaries distributed with PostgreSQL
 Group:		Applications/Databases
-Requires:	postgresql = %{version}
+Requires:	mammoth-replicator = %{version}
 %description contrib
-The postgresql-contrib package contains contributed packages that are
+The mammoth-replicator-contrib package contains contributed packages that are
 included in the PostgreSQL distribution.
 
 %package devel
 Summary:	PostgreSQL development header files and libraries
 Group:		Development/Libraries
-Requires:	postgresql = %{version}-%{release}
+Requires:	mammoth-replicator = %{version}-%{release}
 
 %description devel
-The postgresql-devel package contains the header files and libraries
+The mammoth-replicator-devel package contains the header files and libraries
 needed to compile C or C++ applications which will directly interact
 with a PostgreSQL database management server and the ecpg Embedded C
 Postgres preprocessor. You need to install this package if you want to
@@ -187,45 +187,45 @@ develop applications which will interact with a PostgreSQL server.
 
 %if %plperl
 %package plperl
-Summary:	The Perl procedural language for PostgreSQL
+Summary:	The Perl procedural language for Mammoth Replicator
 Group:		Applications/Databases
-Requires:	postgresql-server = %{version}-%{release}
+Requires:	mammoth-replicator-server = %{version}-%{release}
 %ifarch ppc ppc64
 BuildRequires:  perl-devel
 %endif
-Obsoletes:	postgresql-pl
+Obsoletes:	mammoth-replicator-pl
 
 %description plperl
 PostgreSQL is an advanced Object-Relational database management
-system. The postgresql-plperl package contains the PL/Perl language
+system. The mammoth-replicator-plperl package contains the PL/Perl language
 for the backend.
 %endif
 
 %if %plpython
 %package plpython
-Summary:	The Python procedural language for PostgreSQL
+Summary:	The Python procedural language for Mammoth Replicator
 Group:		Applications/Databases
-Requires:	postgresql = %{version}
-Requires:	postgresql-server = %{version}
-Obsoletes:	postgresql-pl
+Requires:	mammoth-replicator = %{version}
+Requires:	mammoth-replicator-server = %{version}
+Obsoletes:	mammoth-replicator-pl
 
 %description plpython
 PostgreSQL is an advanced Object-Relational database management
-system. The postgresql-plpython package contains the PL/Python language
+system. The mammoth-replicator-plpython package contains the PL/Python language
 for the backend.
 %endif
 
 %if %pltcl
 %package pltcl
-Summary:	The Tcl procedural language for PostgreSQL
+Summary:	The Tcl procedural language for Mammoth Replicator
 Group:		Applications/Databases
-Requires:	postgresql = %{version}
-Requires:	postgresql-server = %{version}
-Obsoletes:	postgresql-pl
+Requires:	mammoth-replicator = %{version}
+Requires:	mammoth-replicator-server = %{version}
+Obsoletes:	mammoth-replicator-pl
 
 %description pltcl
 PostgreSQL is an advanced Object-Relational database management
-system. The postgresql-pltcl package contains the PL/Tcl language
+system. The mammoth-replicator-pltcl package contains the PL/Tcl language
 for the backend.
 %endif
 
@@ -233,11 +233,11 @@ for the backend.
 %package test
 Summary:	The test suite distributed with PostgreSQL
 Group:		Applications/Databases
-Requires:	postgresql-server = %{version}-%{release}
+Requires:	mammoth-replicator-server = %{version}-%{release}
 
 %description test
 PostgreSQL is an advanced Object-Relational database management
-system. The postgresql-test package includes the sources and pre-built
+system. The mammoth-replicator-test package includes the sources and pre-built
 binaries of various tests for the PostgreSQL database management
 system, including regression tests and benchmarks.
 %endif
@@ -470,7 +470,7 @@ chown postgres:postgres /var/log/mammoth
 chmod 0700 /var/log/mammoth
 
 %post server
-chkconfig --add mammoth
+chkconfig --add mammoth-replicator
 /sbin/ldconfig
 
 %preun server
@@ -711,5 +711,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Dec 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.2
+- Fix service name
+- Fix dependency errors, per Lou Felix
+
 * Mon Oct 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1
 - Initial cut for replicator 8.3 packages.

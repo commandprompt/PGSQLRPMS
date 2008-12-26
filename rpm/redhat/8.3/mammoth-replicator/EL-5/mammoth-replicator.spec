@@ -32,7 +32,7 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3
-Release:	1.8_beta1%{?dist}.1
+Release:	1.8_beta1%{?dist}.2
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
@@ -470,7 +470,7 @@ chown postgres:postgres /var/log/mammoth
 chmod 0700 /var/log/mammoth
 
 %post server
-chkconfig --add mammoth
+chkconfig --add mammoth-replicator
 /sbin/ldconfig
 
 %preun server
@@ -711,6 +711,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Dec 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.2
+- Fix service name
+
 * Thu Dec 25 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.1
 - Fix dependency errors, per Lou Felix
 

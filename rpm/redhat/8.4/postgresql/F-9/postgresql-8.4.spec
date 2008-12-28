@@ -459,6 +459,8 @@ cp %{SOURCE6} README.rpm-dist
 mv %{buildroot}%{_docdir}/pgsql/html doc
 rm -rf %{buildroot}%{_docdir}/pgsql
 
+# Change the %{majorversion} macro to 
+# %{version} when 8.4 is released.
 %find_lang libpq5-%{majorversion}
 %find_lang initdb-%{majorversion}
 %find_lang pg_config-%{majorversion}

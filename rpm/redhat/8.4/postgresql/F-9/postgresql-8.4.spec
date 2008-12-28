@@ -71,9 +71,12 @@
 %{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
 
+# This is a temp macro, which will be removed when 8.4 gold will be released.
+%define majorversion 8.4
+
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_20081204
+Version:	8.4devel_20081229
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -456,22 +459,22 @@ cp %{SOURCE6} README.rpm-dist
 mv %{buildroot}%{_docdir}/pgsql/html doc
 rm -rf %{buildroot}%{_docdir}/pgsql
 
-%find_lang libpq
-%find_lang initdb
-%find_lang pg_config
-%find_lang pg_ctl
-%find_lang pg_dump
-%find_lang plpgsql
-%find_lang postgres
-%find_lang psql
-%find_lang pg_resetxlog
-%find_lang pg_controldata
-%find_lang pgscripts
+%find_lang libpq5-%{majorversion}
+%find_lang initdb-%{majorversion}
+%find_lang pg_config-%{majorversion}
+%find_lang pg_ctl-%{majorversion}
+%find_lang pg_dump-%{majorversion}
+%find_lang plpgsql-%{majorversion}
+%find_lang postgres-%{majorversion}
+%find_lang psql-%{majorversion}
+%find_lang pg_resetxlog-%{majorversion}
+%find_lang pg_controldata-%{majorversion}
+%find_lang pgscripts-%{majorversion}
 
-cat libpq.lang > libpq.lst
-cat pg_config.lang > pg_config.lst
-cat initdb.lang pg_ctl.lang psql.lang pg_dump.lang pgscripts.lang > main.lst
-cat postgres.lang pg_resetxlog.lang pg_controldata.lang plpgsql.lang > server.lst
+cat libpq5-%{majorversion}.lang > libpq5.lst
+cat pg_config-%{majorversion}.lang > pg_config.lst
+cat initdb-%{majorversion}.lang pg_ctl-%{majorversion}.lang psql-%{majorversion}.lang pg_dump-%{majorversion}.lang pgscripts-%{majorversion}.lang > main.lst
+cat postgres-%{majorversion}.lang pg_resetxlog-%{majorversion}.lang pg_controldata-%{majorversion}.lang plpgsql-%{majorversion}.lang > server.lst
 
 %post libs -p /sbin/ldconfig 
 %postun libs -p /sbin/ldconfig 
@@ -650,9 +653,12 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/dict_int.so
 %{_libdir}/pgsql/dict_snowball.so
 %{_libdir}/pgsql/dict_xsyn.so
+%{_libdir}/pgsql/dummy_fdw.so
+%{_libdir}/pgsql/plpgsql.so
+%{_libdir}/pgsql/postgresql_fdw.so
 %{_libdir}/pgsql/test_parser.so
 %{_libdir}/pgsql/tsearch2.so
-%{_libdir}/pgsql/plpgsql.so
+
 %dir %{_libdir}/pgsql
 %dir %{_datadir}/pgsql
 %attr(700,postgres,postgres) %dir /var/lib/pgsql
@@ -713,6 +719,11 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Dec 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081229-1PGDG
+- Update to Dec 29, 2008 CVS snapshot
+- Update spec for new translation layout.
+- Update spec for new files.
+
 * Thu Dec 4 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081204-1PGDG
 - Update to Dec 04, 2008 CVS snapshot
 

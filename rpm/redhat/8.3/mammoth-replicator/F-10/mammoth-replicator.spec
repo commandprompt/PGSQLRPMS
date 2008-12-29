@@ -454,7 +454,6 @@ rm -rf %{buildroot}%{_docdir}/pgsql
 %find_lang pgscripts
 
 cat libpq.lang > libpq.lst
-cat pg_config.lang > pg_config.lst
 cat initdb.lang pg_ctl.lang psql.lang pg_dump.lang pgscripts.lang > main.lst
 cat pg_config.lang postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
 

@@ -226,7 +226,7 @@ Summary:	The Perl procedural language for PostgreSQL
 Group:		Applications/Databases
 Requires:	postgresql-server = %{version}-%{release}
 %ifarch ppc ppc64
-BuildRequires:  perl-devel
+BuildRequires:  perl-devel perl-ExtUtils-Embed
 %endif
 Obsoletes:	postgresql-pl
 
@@ -725,6 +725,7 @@ rm -rf %{buildroot}
 - Update to Dec 29, 2008 CVS snapshot
 - Update spec for new translation layout.
 - Update spec for new files.
+- Add perl-ExtUtils-Embed as a new BR.
 
 * Thu Dec 4 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081204-1PGDG
 - Update to Dec 04, 2008 CVS snapshot

@@ -612,7 +612,7 @@ rm -rf %{buildroot}
 %{_bindir}/pg_standby
 %doc contrib/*/README.* contrib/spi/*.example contrib/*/*.sql
 
-%files libs -f libpq.lang
+%files libs -f libpq5.lst
 %defattr(-,root,root)
 %{_libdir}/libpq.so.*
 %{_libdir}/libecpg.so.*

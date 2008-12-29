@@ -32,7 +32,7 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3
-Release:	1.8_beta1%{?dist}.2
+Release:	1.8_beta1%{?dist}.3
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
@@ -471,17 +471,22 @@ chmod 0700 /var/log/mammoth
 
 %post server
 chkconfig --add mammoth-replicator
+chkconfig --add mcp_server
 /sbin/ldconfig
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service mammoth condstop >/dev/null 2>&1
-	chkconfig --del mammoth
+	/sbin/service mcp_server condstop >/dev/null 2>&1
+	chkconfig --del mcp_server
+
+	/sbin/service mammoth-replicator condstop >/dev/null 2>&1
+	chkconfig --del mammoth-replicator
 
 %postun server
 /sbin/ldconfig 
 if [ $1 -ge 1 ]; then
-  /sbin/service mammoth condrestart >/dev/null 2>&1
+  /sbin/service mcp_server condrestart >/dev/null 2>&1
+  /sbin/service mammoth-replicator condrestart >/dev/null 2>&1
 fi
 
 %if %plperl
@@ -711,6 +716,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Dec 30 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.3
+- Add mcp_server under chkconfig management.
+- Remove patch8 -- we no longer use /opt/mammoth directory.
+
 * Fri Dec 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.2
 - Fix service name
 

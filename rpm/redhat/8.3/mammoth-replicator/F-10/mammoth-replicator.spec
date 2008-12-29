@@ -28,7 +28,7 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3
-Release:	1.8_beta1%{?dist}.2
+Release:	1.8_beta1%{?dist}.3
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
@@ -49,7 +49,7 @@ Patch1:		rpm-pgsql.patch
 Patch3:		%{name}-logging.patch
 Patch4:		%{name}-test.patch
 Patch6:		%{name}-perl-rpath.patch
-Patch8:		%{name}-init-mammoth-database.patch
+#Patch8:		%{name}-init-mammoth-database.patch
 # Temp patch for beta1
 Patch10:		%{name}-keywords.patch
 
@@ -253,7 +253,7 @@ popd
 %patch3 -p1
 %patch4 -p1
 %patch6 -p1
-%patch8 -p1
+#%patch8 -p1
 %patch10 -p1
 
 pushd doc
@@ -471,6 +471,7 @@ chmod 0700 /var/log/mammoth
 
 %post server
 chkconfig --add mammoth-replicator
+chkconfig --add mcp_server
 /sbin/ldconfig
 
 %preun server
@@ -711,6 +712,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Dec 30 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.3
+- Add mcp_server under chkconfig management.
+- Remove patch8 -- we no longer use /opt/mammoth directory.
+
 * Fri Dec 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.2
 - Fix service name
 - Fix dependency errors, per Lou Felix

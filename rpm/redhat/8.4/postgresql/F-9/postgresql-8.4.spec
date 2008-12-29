@@ -100,6 +100,10 @@ Patch6:		postgresql-perl-rpath.patch
 Buildrequires:	perl glibc-devel bison flex 
 Requires:	/sbin/ldconfig initscripts
 
+%if %plperl
+BuildRequires:  perl-ExtUtils-Embed
+%endif
+
 %if %plpython
 BuildRequires:	python-devel
 %endif
@@ -226,7 +230,7 @@ Summary:	The Perl procedural language for PostgreSQL
 Group:		Applications/Databases
 Requires:	postgresql-server = %{version}-%{release}
 %ifarch ppc ppc64
-BuildRequires:  perl-devel perl-ExtUtils-Embed
+BuildRequires:  perl-devel
 %endif
 Obsoletes:	postgresql-pl
 

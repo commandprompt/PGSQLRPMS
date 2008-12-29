@@ -629,6 +629,7 @@ rm -rf %{buildroot}
 %{_bindir}/postmaster
 %{_mandir}/man1/initdb.*
 %{_mandir}/man1/ipcclean.*
+%{_mandir}/man1/pg_config.*
 %{_mandir}/man1/pg_controldata.*
 %{_mandir}/man1/pg_ctl.*
 %{_mandir}/man1/pg_resetxlog.*
@@ -680,7 +681,6 @@ rm -rf %{buildroot}
 %{_libdir}/libpgtypes.a
 %{_libdir}/pgsql/pgxs/*
 %{_mandir}/man1/ecpg.*
-%{_mandir}/man1/pg_config.*
 
 %if %plperl
 %files plperl

@@ -32,7 +32,7 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3
-Release:	1.8_beta1%{?dist}.3
+Release:	1.8_beta1%{?dist}.4
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
@@ -53,7 +53,6 @@ Patch1:		rpm-pgsql.patch
 Patch3:		%{name}-logging.patch
 Patch4:		%{name}-test.patch
 Patch6:		%{name}-perl-rpath.patch
-Patch8:		%{name}-init-mammoth-database.patch
 # Temp patch for beta1
 Patch10:		%{name}-keywords.patch
 
@@ -122,7 +121,7 @@ server, you need this package. You also need to install this package
 if you're installing the mammoth-replicator-server package.
 
 %package libs
-Summary:	The shared libraries required for any PostgreSQL clients
+Summary:	The shared libraries required for any Mammoth Replicator clients
 Group:		Applications/Databases
 Provides:	libpq.so
 
@@ -142,7 +141,7 @@ The replicator package provides the essential software by required for
 Mammoth Replicator.
 
 %package server
-Summary:	The programs needed to create and run a PostgreSQL server
+Summary:	The programs needed to create and run a Mammoth Replicator server
 Group:		Applications/Databases
 Requires:	/usr/sbin/useradd /sbin/chkconfig 
 Requires:	mammoth-replicator = %{version}-%{release}
@@ -160,7 +159,7 @@ PostgreSQL databases and/or your own PostgreSQL server. You also need
 to install the postgresql package.
 
 %package docs
-Summary:	Extra documentation for PostgreSQL
+Summary:	Extra documentation for Mammoth Replicator
 Group:		Applications/Databases
 %description docs
 The mammoth-replicator-docs package includes the SGML source for the documentation
@@ -170,7 +169,7 @@ project, or if you want to generate printed documentation. This package also
 includes HTML version of the documentation.
 
 %package contrib
-Summary:	Contributed source and binaries distributed with PostgreSQL
+Summary:	Contributed source and binaries distributed with Mammoth Replicator
 Group:		Applications/Databases
 Requires:	mammoth-replicator = %{version}
 %description contrib
@@ -178,7 +177,7 @@ The mammoth-replicator-contrib package contains contributed packages that are
 included in the PostgreSQL distribution.
 
 %package devel
-Summary:	PostgreSQL development header files and libraries
+Summary:	Mammoth Replicator development header files and libraries
 Group:		Development/Libraries
 Requires:	mammoth-replicator = %{version}-%{release}
 
@@ -191,7 +190,7 @@ develop applications which will interact with a PostgreSQL server.
 
 %if %plperl
 %package plperl
-Summary:	The Perl procedural language for PostgreSQL
+Summary:	The Perl procedural language for Mammoth Replicator
 Group:		Applications/Databases
 Requires:	mammoth-replicator-server = %{version}-%{release}
 %ifarch ppc ppc64
@@ -207,7 +206,7 @@ for the backend.
 
 %if %plpython
 %package plpython
-Summary:	The Python procedural language for PostgreSQL
+Summary:	The Python procedural language for Mammoth Replicator
 Group:		Applications/Databases
 Requires:	mammoth-replicator = %{version}
 Requires:	mammoth-replicator-server = %{version}
@@ -221,7 +220,7 @@ for the backend.
 
 %if %pltcl
 %package pltcl
-Summary:	The Tcl procedural language for PostgreSQL
+Summary:	The Tcl procedural language for Mammoth Replicator
 Group:		Applications/Databases
 Requires:	mammoth-replicator = %{version}
 Requires:	mammoth-replicator-server = %{version}
@@ -235,14 +234,14 @@ for the backend.
 
 %if %test
 %package test
-Summary:	The test suite distributed with PostgreSQL
+Summary:	The test suite distributed with Mammoth Replicator
 Group:		Applications/Databases
 Requires:	mammoth-replicator-server = %{version}-%{release}
 
 %description test
 PostgreSQL is an advanced Object-Relational database management
 system. The mammoth-replicator-test package includes the sources and pre-built
-binaries of various tests for the PostgreSQL database management
+binaries of various tests for the Mammoth Replicator replication 
 system, including regression tests and benchmarks.
 %endif
 
@@ -257,7 +256,6 @@ popd
 %patch3 -p1
 %patch4 -p1
 %patch6 -p1
-%patch8 -p1
 %patch10 -p1
 
 pushd doc
@@ -454,9 +452,8 @@ rm -rf %{buildroot}%{_docdir}/pgsql
 %find_lang pgscripts
 
 cat libpq.lang > libpq.lst
-cat pg_config.lang > pg_config.lst
 cat initdb.lang pg_ctl.lang psql.lang pg_dump.lang pgscripts.lang > main.lst
-cat postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
+cat pg_config.lang postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
 
 %post libs -p /sbin/ldconfig 
 %postun libs -p /sbin/ldconfig 
@@ -526,6 +523,7 @@ rm -rf %{buildroot}
 %{_bindir}/dropdb
 %{_bindir}/droplang
 %{_bindir}/dropuser
+%{_bindir}/pg_config
 %{_bindir}/pg_dump
 %{_bindir}/pg_dumpall
 %{_bindir}/pg_restore
@@ -539,6 +537,7 @@ rm -rf %{buildroot}
 %{_mandir}/man1/dropdb.*
 %{_mandir}/man1/droplang.*
 %{_mandir}/man1/dropuser.*
+%{_mandir}/man1/pg_config.*
 %{_mandir}/man1/pg_dump.*
 %{_mandir}/man1/pg_dumpall.*
 %{_mandir}/man1/pg_restore.*
@@ -668,11 +667,10 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/snowball_create.sql
 %{_datadir}/pgsql/sql_features.txt
 
-%files devel -f pg_config.lst
+%files devel
 %defattr(-,root,root)
 /usr/include/*
 %{_bindir}/ecpg
-%{_bindir}/pg_config
 %{_libdir}/libpq.so
 %{_libdir}/libecpg.so
 %{_libdir}/libpq.a
@@ -684,7 +682,6 @@ rm -rf %{buildroot}
 %{_libdir}/libpgtypes.a
 %{_libdir}/pgsql/pgxs/*
 %{_mandir}/man1/ecpg.*
-%{_mandir}/man1/pg_config.*
 
 %if %plperl
 %files plperl
@@ -716,7 +713,11 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Mon Dec 30 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.3
+* Mon Dec 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.4
+- Move pg_config to server package, per Alvaro. This is a Replicator-only
+  change.
+
+* Mon Dec 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.3
 - Add mcp_server under chkconfig management.
 - Remove patch8 -- we no longer use /opt/mammoth directory.
 

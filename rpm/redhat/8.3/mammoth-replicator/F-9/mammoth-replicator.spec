@@ -28,7 +28,7 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3
-Release:	1.8_beta1%{?dist}.3
+Release:	1.8_beta1%{?dist}.4
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
@@ -454,9 +454,8 @@ rm -rf %{buildroot}%{_docdir}/pgsql
 %find_lang pgscripts
 
 cat libpq.lang > libpq.lst
-cat pg_config.lang > pg_config.lst
 cat initdb.lang pg_ctl.lang psql.lang pg_dump.lang pgscripts.lang > main.lst
-cat postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
+cat pg_config.lang postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
 
 %post libs -p /sbin/ldconfig 
 %postun libs -p /sbin/ldconfig 
@@ -622,12 +621,14 @@ rm -rf %{buildroot}
 %{_bindir}/initdb
 %{_bindir}/ipcclean
 %{_bindir}/pg_controldata
+%{_bindir}/pg_config
 %{_bindir}/pg_ctl
 %{_bindir}/pg_resetxlog
 %{_bindir}/postgres
 %{_bindir}/postmaster
 %{_mandir}/man1/initdb.*
 %{_mandir}/man1/ipcclean.*
+%{_mandir}/man1/pg_config.*
 %{_mandir}/man1/pg_controldata.*
 %{_mandir}/man1/pg_ctl.*
 %{_mandir}/man1/pg_resetxlog.*
@@ -664,11 +665,10 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/snowball_create.sql
 %{_datadir}/pgsql/sql_features.txt
 
-%files devel -f pg_config.lst
+%files devel 
 %defattr(-,root,root)
 /usr/include/*
 %{_bindir}/ecpg
-%{_bindir}/pg_config
 %{_libdir}/libpq.so
 %{_libdir}/libecpg.so
 %{_libdir}/libpq.a
@@ -680,7 +680,6 @@ rm -rf %{buildroot}
 %{_libdir}/libpgtypes.a
 %{_libdir}/pgsql/pgxs/*
 %{_mandir}/man1/ecpg.*
-%{_mandir}/man1/pg_config.*
 
 %if %plperl
 %files plperl
@@ -712,7 +711,11 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Mon Dec 30 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.3
+* Mon Dec 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.4
+- Move pg_config to server package, per Alvaro. This is a Replicator-only 
+  change.
+
+* Mon Dec 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.3
 - Add mcp_server under chkconfig management.
 - Remove patch8 -- we no longer use /opt/mammoth directory.
 

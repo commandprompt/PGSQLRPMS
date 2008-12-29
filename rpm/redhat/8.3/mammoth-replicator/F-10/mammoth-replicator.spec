@@ -665,7 +665,7 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/snowball_create.sql
 %{_datadir}/pgsql/sql_features.txt
 
-%files devel -f pg_config.lst
+%files devel 
 %defattr(-,root,root)
 /usr/include/*
 %{_bindir}/ecpg

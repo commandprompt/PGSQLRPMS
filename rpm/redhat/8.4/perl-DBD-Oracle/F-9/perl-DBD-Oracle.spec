@@ -23,6 +23,10 @@ Oracle database driver for the DBI module.
 %setup -n %{real_name}-%{version} -q
 
 %build
+export ORACLE_HOME=/usr/lib/oracle/xe/app/oracle/product/10.2.0/server
+export ORACLE_SID=XE
+export PATH=$PATH:$ORACLE_HOME/bin
+
 CFLAGS="%{optflags}" %{__perl} Makefile.PL INSTALLDIRS="vendor" PREFIX="%{buildroot}%{_prefix}"
 %{__make} %{?_smp_mflags} OPTIMIZE="%{optflags}"
 

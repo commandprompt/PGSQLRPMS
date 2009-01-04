@@ -76,7 +76,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_20081229
+Version:	8.4devel_20090105
 Release:	1PGDG%{?dist}.1
 License:	BSD
 Group:		Applications/Databases
@@ -584,6 +584,7 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/isn.so
 %{_libdir}/pgsql/hstore.so
 %{_libdir}/pgsql/pg_freespacemap.so
+%{_libdir}/pgsql/pg_stat_statements.so
 %{_libdir}/pgsql/pgrowlocks.so
 %{_libdir}/pgsql/sslinfo.so
 %{_libdir}/pgsql/lo.so
@@ -719,6 +720,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Jan 5 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090105-1PGDG
+- Update to Jan 5, 2009 CVS snapshot
+
 * Mon Dec 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081229-1PGDG.1
 - Fix init script.
 

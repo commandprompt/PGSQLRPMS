@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f10
+DIST=.rhel5
 SPECFILE="libnss-pgsql.spec"
 
 # Now, include global Makefile

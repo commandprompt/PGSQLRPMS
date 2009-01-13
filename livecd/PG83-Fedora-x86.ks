@@ -76,6 +76,7 @@ dejavu-fonts-experimental
 glom
 httpd
 ip4r
+libnss_pgsql
 orafce
 pagila
 pam_pgsql

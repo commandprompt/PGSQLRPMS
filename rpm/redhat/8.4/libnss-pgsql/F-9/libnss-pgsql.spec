@@ -8,7 +8,7 @@ Source0:	http://pgfoundry.org/frs/download.php/1878/%{name}-%{version}-beta.tgz
 Patch0:		libnss-pgsql-includepath.patch
 URL: 		http://pgfoundry.org/projects/sysauth/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	xmlto
+BuildRequires:	xmlto, postgresql-devel >= 8.1
 
 %description
 libnss-pgsql is a name service switch module that allows the 

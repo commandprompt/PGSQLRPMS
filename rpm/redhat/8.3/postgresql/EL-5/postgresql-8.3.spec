@@ -68,17 +68,13 @@
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
-%ifnarch x86_64
 %{!?uuid:%define uuid 1}
-%else
-%{!?uuid:%define uuid 0}
-%endif
 %{!?ldap:%define ldap 1}
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.3.5
-Release:	1PGDG%{?dist}
+Release:	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -718,6 +714,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Jan 19 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.5-2PGDG
+- Re-enable uuid support in 64 bit packages. The uuid packages in our 
+repository are not broken.
+
 * Fri Oct 31 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.5-1PGDG
 - Update to 8.3.5
 

@@ -5,7 +5,7 @@
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
 Version:	2.0.0
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -17,7 +17,7 @@ BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
 Requires:	postgresql-server, perl-DBD-Pg
 
 %if %docs
-BuildRequires:	docbook-style-dsssl postgresql_autodoc
+BuildRequires:	docbook-style-dsssl postgresql_autodoc docbook-utils
 %endif
 
 %description
@@ -146,6 +146,9 @@ fi
 %endif
 
 %changelog
+* Thu Jan 29 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.0-3
+- Add docbook-utils to BR.
+
 * Sat Dec 13 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.0-2
 - Add a patch to fix build errors
 - Temporarily update Source2, so that it will silence a dependency error.

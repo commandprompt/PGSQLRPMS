@@ -9,7 +9,7 @@ Release:	3%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
-Source0:	http://main.slony.info/downloads/2.0/source/slony1-%{version}.tar.bz2
+Source0:	http://main.slony.info/downloads/2.0/source/%{name}-%{version}.tar.bz2
 Source2:	filter-requires-perl-Pg.sh
 Patch0:		%{name}-getridofusrbinsh.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -48,7 +48,7 @@ documentation for Slony-I.
 %define __perl_requires %{SOURCE2}
 
 %prep
-%setup -q -n slony1-%{version}
+%setup -q -n %{name}-%{version}
 
 %patch0 -p1
 

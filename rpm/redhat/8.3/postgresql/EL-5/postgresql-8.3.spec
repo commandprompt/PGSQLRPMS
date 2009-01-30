@@ -73,8 +73,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.3.5
-Release:	2PGDG%{?dist}
+Version:	8.3.6
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -714,6 +714,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Jan 30 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.6-1PGDG
+- Update to 8.3.6
+
 * Mon Jan 19 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.5-2PGDG
 - Re-enable uuid support in 64 bit packages. The uuid packages in our 
 repository are not broken.

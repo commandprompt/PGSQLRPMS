@@ -1,6 +1,6 @@
 README.rpm-dist
 -----------------------------------------------------------------------------
-Version 7.4, for the PostgreSQL 7.4.22.1PGDG RPMset.
+Version 7.4, for the PostgreSQL 7.4.24.1PGDG RPMset.
 Lamar Owen <lamar.owen@wgcr.org> 
 -----------------------------------------------------------------------------
 
@@ -299,7 +299,7 @@ pam		1	#build with PAM support.
 To use these defines, invoke a rebuild like this:
 rpmbuild --rebuild --define 'perl 0' --define 'tcl 0' --define 'tkpkg 0'\
 	--define 'test 0' --define 'newintarray 1' --define 'kerberos 0' \
-	postgresql-7.4.22-1PGDG.src.rpm
+	postgresql-7.4.24-1PGDG.src.rpm
 This line would disable the perl, tcl, tk, and test subpackages, enable the
 newer intarray code, and disable kerberos support.
 

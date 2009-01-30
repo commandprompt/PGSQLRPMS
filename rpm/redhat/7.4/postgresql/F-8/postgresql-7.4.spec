@@ -43,7 +43,7 @@
 
 Summary: PostgreSQL client programs and libraries
 Name: postgresql
-Version: 7.4.23
+Version: 7.4.24
 
 # Conventions for PostgreSQL Global Development Group RPM releases:
 
@@ -134,7 +134,7 @@ Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # This is the PostgreSQL Global Development Group Official RPMset spec file,
 # or a derivative thereof.
-# Copyright 2003-2008 Lamar Owen <lowen@pari.edu> <lamar.owen@wgcr.org>
+# Copyright 2003-2009 Lamar Owen <lowen@pari.edu> <lamar.owen@wgcr.org>
 # and others listed.
 
 # Major Contributors:
@@ -785,6 +785,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Jan 30 2009 Devrim GUNDUZ <devrim@commandprompt.com> 7.4.24-1PGDG
+- Update to 7.4.24
+
 * Sat Nov 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> 7.4.23-1PGDG
 - Update to 7.4.23
 

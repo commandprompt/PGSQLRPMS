@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.rhel5
+DIST=.rhel4
 SPECFILE="mhash.spec"
 
 # Now, include global Makefile

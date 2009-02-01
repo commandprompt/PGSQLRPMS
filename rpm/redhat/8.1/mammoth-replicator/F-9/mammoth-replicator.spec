@@ -24,7 +24,7 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.1.13
-Release: 	1.8_2CMDMR%{?dist}
+Release: 	1.8_3CMDMR%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Buildroot: 	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -107,7 +107,7 @@ if you're installing the postgresql-server package.
 Summary:	The shared libraries required for any PostgreSQL clients.
 Group:		Applications/Databases
 Provides:	libpq.so
-Obsoletes:	postgresql-libs
+Conflicts:	postgresql-libs
 
 %description libs
 The postgresql-libs package provides the essential shared libraries for any 
@@ -129,7 +129,7 @@ Summary:	The programs needed to create and run a PostgreSQL server.
 Group:		Applications/Databases
 Requires:	/usr/sbin/useradd /sbin/chkconfig
 Requires:	%{name} = %{version} libpq.so
-Obsoletes:	postgresql-server
+Conflicts:	postgresql-server
 
 %description server
 The postgresql-server package includes the programs needed to create
@@ -145,7 +145,7 @@ to install the postgresql package.
 %package docs
 Summary:	Extra documentation for PostgreSQL
 Group:		Applications/Databases
-Obsoletes:	postgresql-docs
+Conflicts:	postgresql-docs
 
 %description docs
 The postgresql-docs package includes the SGML source for the documentation
@@ -157,7 +157,7 @@ project, or if you want to generate printed documentation.
 Summary:	Contributed source and binaries distributed with PostgreSQL
 Group:		Applications/Databases
 Requires:	%{name} = %{version}
-Obsoletes:	postgresql-contrib
+Conflicts:	postgresql-contrib
 
 %description contrib
 The postgresql-contrib package contains contributed packages that are
@@ -167,7 +167,7 @@ included in the PostgreSQL distribution.
 Summary: PostgreSQL development header files and libraries
 Group: Development/Libraries
 Requires:	%{name}-libs = %{version}
-Obsoletes:	postgresql-devel
+Conflicts:	postgresql-devel
 
 %description devel
 The postgresql-devel package contains the header files and libraries
@@ -184,7 +184,7 @@ Summary:	The PL procedural languages for PostgreSQL.
 Group:		Applications/Databases
 Requires:	%{name} = %{version}
 Requires:	%{name}-server = %{version}
-Obsoletes:	postgresql-pl, postgresql-plperl, postgresql-pltcl, postgresql-plpython
+Conflicts:	postgresql-pl, postgresql-plperl, postgresql-pltcl, postgresql-plpython
 
 %description pl
 PostgreSQL is an advanced Object-Relational database management
@@ -198,7 +198,7 @@ Summary:	The test suite distributed with PostgreSQL.
 Group:		Applications/Databases
 Requires:	%{name} = %{version}
 Requires:	%{name}-server = %{version}
-Obsoletes:	postgresql-test
+Conflicts:	postgresql-test
 
 %description test
 PostgreSQL is an advanced Object-Relational database management
@@ -629,6 +629,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Feb 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.13-1.8_3
+- Use Conflicts, instead of Obsoletes.
+
 * Mon Aug 25 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.13-1.8_2
 - Use better Obsoletes
 

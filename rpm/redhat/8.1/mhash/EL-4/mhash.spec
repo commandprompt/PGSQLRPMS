@@ -1,6 +1,6 @@
 Summary:	Thread-safe hash algorithms library
 Name:		mhash
-Version:	0.9.9
+Version:	0.9.9.9
 Release:	1%{dist}
 URL:		http://mhash.sourceforge.net/
 License:	LGPL
@@ -68,5 +68,8 @@ rm -rf %{buildroot}
 %{_mandir}/man3/*
 
 %changelog
-* Tue Jan 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 0.9.9-1
+* Sun Feb 1 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 0.9.9.9-1
+- Update to 0.9.9.9
+
+* Tue Jan 13 2008  Devrim GUNDUZ <devrim@commandprompt.com> - 0.9.9-1
 - Initial build for PostgreSQL RPM Repository, based on EPEL spec.

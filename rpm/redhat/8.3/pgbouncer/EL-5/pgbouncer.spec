@@ -2,7 +2,7 @@
 
 Name:		pgbouncer
 Version:	1.2.3
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	MIT and BSD
@@ -15,7 +15,7 @@ Patch0:		%{name}-ini.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	libevent-devel >= 1.3b
-Requires:	initscripts
+Requires:	initscripts, postgresql-libs
 
 Requires(post):	chkconfig
 Requires(preun):	chkconfig, initscripts
@@ -86,6 +86,10 @@ rm -rf %{buildroot}
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Mon Feb 2 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-5
+- Explicitly add postgresql-libs as Requires -- otherwise, yum is 
+  picking up mammoth-libs :( Fixes PGCore #63.
+
 * Tue Oct 28 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-4
 - Add a logrotate conf file.
 

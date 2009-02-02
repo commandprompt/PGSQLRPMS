@@ -89,6 +89,7 @@ rm -rf %{buildroot}
 * Mon Feb 2 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-5
 - Explicitly add postgresql-libs as Requires -- otherwise, yum is 
   picking up mammoth-libs :( Fixes PGCore #63.
+- Update and fix init script. Fixes PGCore #64.
 
 * Tue Oct 28 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-4
 - Add a logrotate conf file.

@@ -100,6 +100,10 @@ Patch9:		postgresql-use-zoneinfo.patch
 Buildrequires:	perl glibc-devel bison flex
 Requires:	/sbin/ldconfig initscripts
 
+%if %plperl
+BuildRequires:  perl-ExtUtils-Embed
+%endif
+
 %if %plpython
 BuildPrereq:	python-devel
 %endif
@@ -681,6 +685,7 @@ rm -rf %{buildroot}
 %changelog
 * Fri Jan 30 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.12-1PGDG
 - Update to 8.2.12
+- Add perl-ExtUtils-Embed as Requires for plperl.
 
 * Fri Oct 31 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.2.11-1PGDG
 - Update to 8.2.11

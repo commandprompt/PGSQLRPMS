@@ -98,6 +98,10 @@ Patch6:		postgresql-perl-rpath.patch
 Buildrequires:	perl glibc-devel bison flex 
 Requires:	/sbin/ldconfig initscripts
 
+%if %plperl
+BuildRequires:  perl-ExtUtils-Embed
+%endif
+
 %if %plpython
 BuildRequires:	python-devel
 %endif
@@ -718,6 +722,7 @@ rm -rf %{buildroot}
 %changelog
 * Fri Jan 30 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.6-1PGDG
 - Update to 8.3.6
+- Add perl-ExtUtils-Embed as Requires for plperl.
 
 * Fri Oct 31 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.5-1PGDG
 - Update to 8.3.5

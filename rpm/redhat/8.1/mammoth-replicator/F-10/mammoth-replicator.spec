@@ -23,11 +23,12 @@
 
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
-Version:	8.1.13
-Release: 	1.8_3CMDMR%{?dist}
+Version:	8.1
+Release: 	1.8_beta2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Buildroot: 	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+URL:		http://projects.commandprompt.com/public/replicator
 
 Source0: 	http://www.commandprompt.com/files/replicator//%{name}-%{version}.tar.bz2
 Source3:	%{name}.init
@@ -413,19 +414,24 @@ chown postgres:postgres /var/log/mammoth
 chmod 0700 /var/log/mammoth
 
 %post server
-chkconfig --add mammoth
+chkconfig --add mammoth-replicator
+chkconfig --add mcp_server
 /sbin/ldconfig
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service mammoth condstop >/dev/null 2>&1
-	chkconfig --del mammoth
+	/sbin/service mammoth-replicator condstop >/dev/null 2>&1
+	chkconfig --del mammoth-replicator
+
+	/sbin/service mcp_server condstop >/dev/null 2>&1
+	chkconfig --del mcp_server
 fi
 
 %postun server
 /sbin/ldconfig 
 if [ $1 -ge 1 ]; then
-  /sbin/service mammoth condrestart >/dev/null 2>&1
+ /sbin/service mcp_server condrestart >/dev/null 2>&1
+ /sbin/service mammoth-replicator condrestart >/dev/null 2>&1
 fi
 if [ $1 = 0 ] ; then
 	userdel postgres >/dev/null 2>&1 || :
@@ -629,6 +635,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Feb 4 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.1-1.8-beta2
+- Add mcp_server under chkconfig management.
+- Update to beta2
+
 * Mon Feb 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.13-1.8_3
 - Use Conflicts, instead of Obsoletes.
 

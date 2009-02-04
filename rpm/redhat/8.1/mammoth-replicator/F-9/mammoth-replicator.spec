@@ -23,13 +23,14 @@
 
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
-Version:	8.1.13
-Release: 	1.8_3CMDMR%{?dist}
+Version:	8.1
+Release: 	1.8_beta2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Buildroot: 	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+URL:		http://projects.commandprompt.com/public/replicator
 
-Source0: 	http://www.commandprompt.com/files/replicator//%{name}-%{version}.tar.bz2
+Source0: 	http://www.commandprompt.com/files/replicator/%{name}-%{version}-1.8-beta2.tar.bz2
 Source3:	%{name}.init
 Source4:	Makefile.regress
 Source5:	mcp_server.init
@@ -210,7 +211,7 @@ system, including regression tests and benchmarks.
 %define __perl_requires %{SOURCE16}
 
 %prep
-%setup -q 
+%setup -q -n %{name}-%{version}-1.8-beta2
 pushd doc
 tar zxf postgres.tar.gz
 popd
@@ -629,6 +630,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Feb 4 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.1-1.8-beta2
+- Add mcp_server under chkconfig management.
+- Update to beta2
+
 * Mon Feb 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.13-1.8_3
 - Use Conflicts, instead of Obsoletes.
 

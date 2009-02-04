@@ -28,12 +28,12 @@
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3
-Release:	1.8_beta1%{?dist}.4
+Release:	1.8_beta2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
 
-Source0:	http://www.commandprompt.com/files/replicator/%{name}-%{version}-1.8-beta1.tar.bz2
+Source0:	http://www.commandprompt.com/files/replicator/%{name}-%{version}-1.8-beta2.tar.bz2
 Source2:	mcp_server.init
 Source3:	%{name}.init
 Source4:	Makefile.regress
@@ -49,12 +49,13 @@ Patch1:		rpm-pgsql.patch
 Patch3:		%{name}-logging.patch
 Patch4:		%{name}-test.patch
 Patch6:		%{name}-perl-rpath.patch
-#Patch8:		%{name}-init-mammoth-database.patch
-# Temp patch for beta1
-Patch10:		%{name}-keywords.patch
 
 Buildrequires:	perl glibc-devel bison flex 
 Requires:	/sbin/ldconfig initscripts
+
+%if %plperl
+BuildRequires:	perl-ExtUtils-Embed
+%endif
 
 %if %plpython
 BuildRequires:	python-devel
@@ -245,7 +246,7 @@ system, including regression tests and benchmarks.
 %define __perl_requires %{SOURCE16}
 
 %prep
-%setup -q -n %{name}-%{version}-1.8-beta1
+%setup -q -n %{name}-%{version}-1.8-beta2
 pushd doc
 tar zxf postgres.tar.gz
 popd
@@ -253,8 +254,6 @@ popd
 %patch3 -p1
 %patch4 -p1
 %patch6 -p1
-#%patch8 -p1
-%patch10 -p1
 
 pushd doc
 tar -zcf postgres.tar.gz *.html stylesheet.css
@@ -711,6 +710,11 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Feb 3 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta2
+- Update to beta 2
+- Remove patch 10
+- Add perl-ExtUtils-Embed as a BR for plperl
+
 * Mon Dec 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1.8-beta1.4
 - Move pg_config to server package, per Alvaro. This is a Replicator-only 
   change.

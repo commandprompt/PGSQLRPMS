@@ -1,13 +1,13 @@
 %define debug 0
 
 Name:		pgbouncer
-Version:	1.2.3
-Release:	5%{?dist}
+Version:	1.3
+Release:	1%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	MIT and BSD
 URL:		http://pgfoundry.org/projects/pgbouncer/
-Source0:	http://pgfoundry.org/frs/download.php/1873/%{name}-%{version}.tgz
+Source0:	http://pgfoundry.org/frs/download.php/2092/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	%{name}.logrotate
@@ -86,10 +86,12 @@ rm -rf %{buildroot}
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Mon Feb 23 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.3-1
+- Update to 1.3
+
 * Mon Feb 2 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-5
 - Explicitly add postgresql-libs as Requires -- otherwise, yum is 
   picking up mammoth-libs :( Fixes PGCore #63.
-- Update and fix init script. Fixes PGCore #64.
 
 * Tue Oct 28 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-4
 - Add a logrotate conf file.

@@ -1,7 +1,7 @@
 Summary:	PAM module to authenticate using a PostgreSQL database 
 Name:		pam_pgsql
 Version:	0.6.4
-Release:	1%{dist}
+Release:	2%{dist}
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/pam-pgsql/pam-pgsql_%{version}.tar.gz
 
 License:	GPLv2
@@ -45,6 +45,9 @@ rm -rf %{buildroot}
 %doc README CREDITS
 
 %changelog
+* Sun Feb 1 2009 Devrim Gunduz <devrim@commandprompt.com> - 0.6.4-2
+- Rebuilt against new mhash. 
+
 * Sat Jun 14 2008 Devrim Gunduz <devrim@commandprompt.com> - 0.6.4-1
 - Update to 0.6.4-1
 

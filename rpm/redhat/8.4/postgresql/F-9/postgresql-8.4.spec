@@ -76,8 +76,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_20090126
-Release:	1PGDGHS%{?dist}
+Version:	8.4devel_20090207
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -617,7 +617,7 @@ rm -rf %{buildroot}
 %{_bindir}/pgbench
 %{_bindir}/vacuumlo
 %{_bindir}/pg_standby
-%doc contrib/*/README.* contrib/spi/*.example contrib/*/*.sql
+%doc contrib/spi/*.example contrib/*/*.sql
 
 %files libs -f libpq5.lst
 %defattr(-,root,root)
@@ -726,8 +726,8 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Mon Jan 26 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090126-1PGDGHS
-- Update to Jan 26, 2009 CVS snapshot + Hot Standby v9g patch.
+* Sat Feb 7 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090207-1PGDG
+- Update to Feb 7, 2009 CVS snapshot
 
 * Fri Jan 23 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090123-1PGDG
 - Update to Jan 23, 2009 CVS snapshot

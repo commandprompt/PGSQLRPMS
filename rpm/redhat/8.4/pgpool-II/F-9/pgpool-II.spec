@@ -1,11 +1,11 @@
 Summary:	Pgpool is a connection pooling/replication server for PostgreSQL
 Name:		pgpool-II
-Version:	2.1
+Version:	2.2
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-URL:		http://pgpool.projects.PostgreSQL.org/pgpool-II/en
-Source0:	http://pgfoundry.org/frs/download.php/1843/%{name}-%{version}.tar.gz
+URL:		http://pgpool.projects.PostgreSQL.org
+Source0:	http://pgfoundry.org/frs/download.php/2108/%{name}-%{version}.tar.gz
 Source1:        pgpool.init
 Source2:        pgpool.sysconfig
 Patch1:		pgpool.conf.sample.patch
@@ -74,6 +74,7 @@ chkconfig --add pgpool
 
 %files
 %defattr(-,root,root,-)
+%dir %{_datadir}/%{short_name}
 %doc README README.euc_jp TODO COPYING INSTALL AUTHORS ChangeLog NEWS doc/pgpool-en.html doc/pgpool-ja.html doc/pgpool.css doc/tutorial-en.html doc/tutorial-ja.html
 %{_bindir}/pgpool
 %{_bindir}/pcp_attach_node
@@ -101,6 +102,11 @@ chkconfig --add pgpool
 %{_libdir}/libpcp.so
 
 %changelog
+* Sun Mar 1 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.2-1
+- Update to 2.2
+- Fix URL
+- Own /usr/share/pgpool-II directory.
+
 * Fri Aug 8 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.1-1
 - Update to 2.1
 - Removed temp patch #4.

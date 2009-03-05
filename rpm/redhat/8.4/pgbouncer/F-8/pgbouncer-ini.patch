@@ -1,6 +1,6 @@
---- etc/pgbouncer.ini.old	2008-03-07 15:04:43.000000000 -0800
-+++ etc/pgbouncer.ini	2008-03-07 15:37:18.000000000 -0800
-@@ -17,8 +17,8 @@
+--- etc/pgbouncer.ini.old	2009-03-05 13:00:29.000000000 +0200
++++ etc/pgbouncer.ini	2009-03-05 13:02:18.000000000 +0200
+@@ -22,8 +22,8 @@
  ;;; Administrative settings
  ;;;
  
@@ -11,16 +11,7 @@
  
  ;;;
  ;;; Where to wait for clients
-@@ -26,7 +26,7 @@
- 
- ; ip address or * which means all ip-s
- listen_addr = 127.0.0.1
--listen_port = 6000
-+listen_port = 5450
- unix_socket_dir = /tmp
- 
- ;;;
-@@ -35,15 +35,15 @@
+@@ -40,15 +40,15 @@
  
  ; any, trust, plain, crypt, md5
  auth_type = trust

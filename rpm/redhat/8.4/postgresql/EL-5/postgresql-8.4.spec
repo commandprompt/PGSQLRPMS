@@ -76,8 +76,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_20090210
-Release:	1PGDG%{?dist}.1
+Version:	8.4devel_20090310
+Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -654,9 +654,7 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/dict_int.so
 %{_libdir}/pgsql/dict_snowball.so
 %{_libdir}/pgsql/dict_xsyn.so
-%{_libdir}/pgsql/dummy_fdw.so
 %{_libdir}/pgsql/plpgsql.so
-%{_libdir}/pgsql/postgresql_fdw.so
 %{_libdir}/pgsql/test_parser.so
 %{_libdir}/pgsql/tsearch2.so
 
@@ -720,6 +718,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Mar 10 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090310-1PGDG
+- Update to Mar 10, 2009 CVS snapshot
+
 * Tue Feb 10 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090210-1PGDG
 - Update to Jan 10, 2009 CVS snapshot
 

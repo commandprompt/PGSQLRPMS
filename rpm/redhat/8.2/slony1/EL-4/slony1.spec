@@ -5,7 +5,7 @@
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
 Version:	1.2.15
-Release:	3%{?dist}
+Release:	4%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -114,6 +114,8 @@ rm -rf %{buildroot}
 
 %post
 chkconfig --add slony1
+mkdir /var/log/slony1
+chown postgres:postgres /var/log/slony1
 
 %preun
 if [ $1 = 0 ] ; then
@@ -144,6 +146,9 @@ fi
 %endif
 
 %changelog
+* Sat Mar 14 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-4
+- Create log directory, per pgcore #77.
+
 * Mon Sep 22 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-3
 - Add dependency for perl-DBD-Pg, per Xavier Bergade.
 

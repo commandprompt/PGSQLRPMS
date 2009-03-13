@@ -4,8 +4,8 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	2.0.0
-Release:	3%{?dist}
+Version:	2.0.1
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -115,6 +115,8 @@ rm -rf %{buildroot}
 
 %post
 chkconfig --add slony1
+mkdir /var/log/slony1
+chown postgres:postgres /var/log/slony1
 
 %preun
 if [ $1 = 0 ] ; then
@@ -146,6 +148,10 @@ fi
 %endif
 
 %changelog
+* Sat Mar 14 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.1-1
+- Update to 2.0.1
+- Create log directory,	per pgcore #77.
+
 * Thu Jan 29 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.0-3
 - Add docbook-utils to BR.
 

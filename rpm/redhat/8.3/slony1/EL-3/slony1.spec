@@ -4,16 +4,15 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	1.2.15
-Release:	3%{?dist}
+Version:	1.2.14
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
 Source0:	http://main.slony.info/downloads/1.2/source/slony1-%{version}.tar.bz2
-Source2:	filter-requires-perl-Pg.sh
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
-Requires:	postgresql-server, perl-DBD-Pg
+Requires:	postgresql-server 
 
 %if %docs
 BuildRequires:	docbook-style-dsssl
@@ -43,8 +42,6 @@ BuildRequires:	libjpeg, netpbm-progs, groff, docbook-style-dsssl, ghostscript
 The postgresql-slony1-docs package includes some 
 documentation for Slony-I.
 %endif
-
-%define __perl_requires %{SOURCE2}
 
 %prep
 %setup -q -n slony1-%{version}
@@ -83,7 +80,6 @@ install -m 0755 src/xxid/xxid.so %{buildroot}%{_libdir}/pgsql/xxid.so
 install -m 0644 src/backend/*.sql %{buildroot}%{_datadir}/pgsql/
 install -m 0644 src/xxid/*.sql %{buildroot}%{_datadir}/pgsql/
 install -m 0755 tools/*.sh  %{buildroot}%{_bindir}/
-install -m 0755 tools/*.pl  %{buildroot}%{_bindir}/
 install -m 0644 share/slon.conf-sample %{buildroot}%{_sysconfdir}/slon.conf
 /bin/chmod 644 COPYRIGHT UPGRADING SAMPLE HISTORY-1.1 RELEASE
 
@@ -144,16 +140,6 @@ fi
 %endif
 
 %changelog
-* Mon Sep 22 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-3
-- Add dependency for perl-DBD-Pg, per Xavier Bergade.
-
-* Sun Sep 21 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-2
-- Fix dependency issues caused by latest commit.
-
-* Fri Sep 12 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-1
-- Update to 1.2.15
-- Install tools written in perl, too.
-
 * Fri May 16 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.14-1
 - Update to 1.2.14
 

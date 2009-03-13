@@ -4,17 +4,15 @@
 
 Summary:	PostgreSQL database management tools from Skype
 Name:		skytools
-Version:	2.1.7
-Release:	2%{?dist}
+Version:	2.1.9
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1813/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/2129/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/skytools
 BuildRequires:	postgresql-devel, python-devel
 Requires:	python-psycopg2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-Patch1:		%{name}-setup.patch
 
 %description
 Database management tools from Skype:WAL shipping, queueing, replication. 
@@ -22,7 +20,6 @@ The tools are named walmgr, PgQ and Londiste, respectively.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch1 -p1
 
 %build
 %configure --with-asciidoc 
@@ -68,6 +65,13 @@ rm -rf %{buildroot}
 %{_mandir}/man5/londiste.*
 
 %changelog
+* Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 2.1.9-1
+- Update to 2.1.9
+
+* Thu Mar 12 2009 Devrim GUNDUZ <devrim@commandprompt.com> 2.1.8-1
+- Update to 2.1.8
+- Remove patch 1, it is now in upstream.
+
 * Sun Aug 24 2008 - David Fetter <david@fetter.org> 2.1.7-2
 - Added man pages.
 - Fix man builds (Devrim)

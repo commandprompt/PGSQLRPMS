@@ -37,7 +37,7 @@ This package contains documentation for various languages,
 which are in html format.
 
 %prep
-%setup -q %{name}-%{version}-beta1
+%setup -q -n %{name}-%{version}-beta1
 
 %build
 export LIBS="-lwx_gtk2u_core-2.8"

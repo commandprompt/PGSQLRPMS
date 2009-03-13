@@ -1,5 +1,5 @@
---- postgresql-7.4.24/config/python.m4.orig	2005-12-12 09:56:04.000000000 +0200
-+++ postgresql-7.4.24/config/python.m4	2005-12-12 09:57:14.000000000 +0200
+--- postgresql-7.4.25/config/python.m4.orig	2005-12-12 09:56:04.000000000 +0200
++++ postgresql-7.4.25/config/python.m4	2005-12-12 09:57:14.000000000 +0200
 @@ -25,7 +25,11 @@
  python_version=`${PYTHON} -c "import sys; print sys.version[[:3]]"`
  python_prefix=`${PYTHON} -c "import sys; print sys.prefix"`
@@ -25,8 +25,8 @@
  fi
  ])# _PGAC_CHECK_PYTHON_DIRS
  
---- postgresql-7.4.24/configure.in.orig	2005-12-12 09:57:31.000000000 +0200
-+++ postgresql-7.4.24/configure.in	2005-12-12 10:01:45.000000000 +0200
+--- postgresql-7.4.25/configure.in.orig	2005-12-12 09:57:31.000000000 +0200
++++ postgresql-7.4.25/configure.in	2005-12-12 10:01:45.000000000 +0200
 @@ -19,11 +19,11 @@
  dnl
  dnl The GNU folks apparently haven't heard that some people don't use
@@ -37,7 +37,7 @@
 +dnl Now use both docdir and infodir to work properly with RPM macros
 +dnl (courtesy, Elliott Lee <sopwith@redhat.com>)
 +dnl - Andrew Overholt <overholt@redhat.com> 10 December 2002
- AC_INIT([PostgreSQL], [7.4.24], [pgsql-bugs@postgresql.org])
+ AC_INIT([PostgreSQL], [7.4.25], [pgsql-bugs@postgresql.org])
 -m4_undefine([infodir])
 -m4_undefine([info])
  AC_SUBST(docdir)

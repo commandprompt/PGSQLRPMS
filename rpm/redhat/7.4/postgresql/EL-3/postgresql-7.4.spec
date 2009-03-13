@@ -43,7 +43,7 @@
 
 Summary: PostgreSQL client programs and libraries
 Name: postgresql
-Version: 7.4.24
+Version: 7.4.25
 
 # Conventions for PostgreSQL Global Development Group RPM releases:
 
@@ -784,6 +784,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 7.4.25-1PGDG
+- Update to 7.4.25
+
 * Fri Jan 30 2009 Devrim GUNDUZ <devrim@commandprompt.com> 7.4.24-1PGDG
 - Update to 7.4.24
 

@@ -1,10 +1,10 @@
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
-Version:	1.8.4
-Release:	1%{?dist}
+Version:	1.10.0
+Release:	beta1_1%{?dist}
 License:	Artistic
 Group:		Applications/Databases
-Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
+Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}-beta1.tar.gz
 Patch2:		%{name}-rhel4libxml.patch
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -39,7 +39,7 @@ This package contains documentation for various languages,
 which are in html format.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-beta1
 %patch2 -p0
 %build
 export LIBS="-lwx_gtk2u_core-2.8"
@@ -76,8 +76,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/*
 
 %changelog
-* Thu Jun 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-1
-- Update to 1.8.4
+* Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-beta1
+- Update to 1.10.0 beta1
 
 * Tue Jun 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.3-1
 - Update to 1.8.3

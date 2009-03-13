@@ -1,10 +1,10 @@
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
-Version:	1.8.4
-Release:	1%{?dist}
+Version:	1.10.0
+Release:	beta1_1%{?dist}
 License:	Artistic
 Group:		Applications/Databases
-Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
+Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}-beta1.tar.gz
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	wxGTK-devel postgresql-devel desktop-file-utils openssl-devel libxml2-devel libxslt-devel
@@ -37,7 +37,7 @@ This package contains documentation for various languages,
 which are in html format.
 
 %prep
-%setup -q
+%setup -q %{name}-%{version}-beta1
 
 %build
 export LIBS="-lwx_gtk2u_core-2.8"
@@ -45,14 +45,14 @@ export LIBS="-lwx_gtk2u_core-2.8"
 make %{?_smp_mflags} all
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make DESTDIR=$RPM_BUILD_ROOT install
+rm -rf %{buildroot}
+make DESTDIR=%{buildroot} install
 
-cp -f ./pkg/debian/pgadmin3.xpm $RPM_BUILD_ROOT/%{_datadir}/%{name}/%{name}.xpm
+cp -f ./pkg/debian/pgadmin3.xpm %{buildroot}/%{_datadir}/%{name}/%{name}.xpm
 
-mkdir -p $RPM_BUILD_ROOT/%{_datadir}/applications
+mkdir -p %{buildroot}/%{_datadir}/applications
 
-desktop-file-install --vendor fedora --dir $RPM_BUILD_ROOT/%{_datadir}/applications \
+desktop-file-install --vendor fedora --dir %{buildroot}/%{_datadir}/applications \
 	--add-category X-Fedora\
 	--add-category Application\
 	--add-category Development\
@@ -60,7 +60,7 @@ desktop-file-install --vendor fedora --dir $RPM_BUILD_ROOT/%{_datadir}/applicati
 
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root)
@@ -74,7 +74,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/*
 
 %changelog
-* Wed Jun 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-1
+* Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-beta1
+- Update to 1.10.0
+
+* Thu Jun 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-1
 - Update to 1.8.4
 
 * Tue Jun 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.3-1

@@ -51,14 +51,14 @@ export LIBS="-lwx_gtk2u_core-2.8"
 make %{?_smp_mflags} all
 
 %install
-rm -rf $%{buildroot}
-make DESTDIR=$%{buildroot} install
+rm -rf %{buildroot}
+make DESTDIR=%{buildroot} install
 
-cp -f ./pkg/debian/pgadmin3.xpm $%{buildroot}/%{_datadir}/%{name}/%{name}.xpm
+cp -f ./pkg/debian/pgadmin3.xpm %{buildroot}/%{_datadir}/%{name}/%{name}.xpm
 
-mkdir -p $%{buildroot}/%{_datadir}/applications
+mkdir -p %{buildroot}/%{_datadir}/applications
 
-desktop-file-install --vendor fedora --dir $%{buildroot}/%{_datadir}/applications \
+desktop-file-install --vendor fedora --dir %{buildroot}/%{_datadir}/applications \
 	--add-category X-Fedora\
 	--add-category Application\
 	--add-category Development\
@@ -66,7 +66,7 @@ desktop-file-install --vendor fedora --dir $%{buildroot}/%{_datadir}/application
 
 
 %clean
-rm -rf $%{buildroot}
+rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root)

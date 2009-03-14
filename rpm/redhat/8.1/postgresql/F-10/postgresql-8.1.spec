@@ -99,6 +99,7 @@ Requires:	/sbin/ldconfig initscripts
 
 %if %plperl
 BuildRequires:	perl-devel
+BuildRequires:  perl-ExtUtils-Embed
 %endif
 
 %if %python
@@ -650,6 +651,7 @@ rm -rf %{buildroot}
 %changelog
 * Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.17-1PGDG
 - Update to 8.1.17 
+- Add perl-ExtUtils-Embed as BR.
 
 * Fri Jan 30 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.1.16-1PGDG
 - Update to 8.1.16

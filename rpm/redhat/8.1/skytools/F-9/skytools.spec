@@ -22,7 +22,7 @@ The tools are named walmgr, PgQ and Londiste, respectively.
 %setup -q -n %{name}-%{version}
 
 %build
-%configure --with-asciidoc 
+%configure
 
 make %{?_smp_mflags} 
 

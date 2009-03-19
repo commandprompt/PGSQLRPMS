@@ -22,7 +22,7 @@ The tools are named walmgr, PgQ and Londiste, respectively.
 %setup -q -n %{name}-%{version}
 
 %build
-%configure --with-asciidoc 
+%configure
 
 make %{?_smp_mflags} 
 
@@ -73,10 +73,12 @@ rm -rf %{buildroot}
 %changelog
 * Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 2.1.9-1
 - Update to 2.1.9
+- Remove pg84 patch, it	is now in upstream.
 
 * Thu Mar 12 2009 Devrim GUNDUZ <devrim@commandprompt.com> 2.1.8-1
 - Update to 2.1.8
 - Remove patch 1, it is now in upstream.
+- Add a new patch to compile skytools against PostgreSQL 8.4.
 
 * Sun Aug 24 2008 - David Fetter <david@fetter.org> 2.1.7-2
 - Added man pages.

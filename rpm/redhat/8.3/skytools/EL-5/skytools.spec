@@ -54,7 +54,6 @@ rm -rf %{buildroot}
 %{python_sitearch}/skytools/*.py
 %{python_sitearch}/skytools/_cquoting.so
 %{python_sitearch}/skytools/*.pyc
-%{python_sitearch}/%{name}-%{version}-py%{pyver}.egg-info
 %ghost %{python_sitearch}/londiste/*.pyo
 %ghost %{python_sitearch}/pgq/*.pyo
 %ghost %{python_sitearch}/skytools/*.pyo

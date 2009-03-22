@@ -28,22 +28,20 @@ TYPESET=`typeset -f|grep "declare"`
 [ "${NETWORKING}" = "no" ] && exit 0
 
 # Find the name of the script
-NAME=pgpool
+NAME=`basename $0`
+if [ ${NAME:0:1} = "S" -o ${NAME:0:1} = "K" ]
+then
+	NAME=${NAME:3}
+fi
 
 # Set defaults for configuration variables
 PGPOOLENGINE=/usr/bin
 PGPOOLDAEMON=$PGPOOLENGINE/pgpool
 PGPOOLCONF=/etc/pgpool.conf
-PGPOOLPID=/var/run/pgpool/pgpool.pid
+PGPOOLPIDDIR=/var/run/pgpool
 PGPOOLLOG=/var/log/pgpool.log
 
 test -x $PGPOOLDAEMON || exit 5
-
-# Create the log file if it does not exist
-if [ ! -r $PGPOOLLOG ]
-then
-	touch $PGPOOLLOG
-fi
 
 # Check whether the config file exists or not
 if [ ! -r /etc/pgpool.conf ]
@@ -54,22 +52,23 @@ then
 	exit
 fi
 
+# Create the log file if it does not exist
+if [ ! -x $PGPOOLLOG ]
+then
+	touch $PGPOOLLOG
+	chown postgres: $PGPOOLLOG
+fi
+
+if [ ! -d $PGPOOLPIDDIR ]
+then
+	mkdir $PGPOOLPIDDIR
+	chown postgres: $PGPOOLPIDDIR
+fi
+
 script_result=0
 
 start(){
-	if [ ! -d /var/log/pgpool ]
-	then
-		mkdir /var/log/pgpool
-		chown postgres: /var/log/pgpool
-	fi
-
-	if [ ! -d /var/run/pgpool ]
-	then
-		mkdir /var/run/pgpool
-		chown postgres: /var/run/pgpool
-	fi
-
-	 pid=`pidof -s "$PGPOOLDAEMON"`
+	pid=`pidof -s "$PGPOOLDAEMON"`
 	if [ $pid ]
 	then
 		echo "pgpool is already running with pid $pid"
@@ -134,22 +133,23 @@ restart(){
 }
 
 reload(){
-echo -n $"Reloading ${NAME}: "
-   if [ -n "`pidfileofproc $PGPOOLDAEMON`" ] ; then
-      killproc $PGPOOLDAEMON -HUP
-   else
-      failure $"Reloading ${NAME}"
-   fi
-   RETVAL=$?
-   echo
+	echo -n $"Reloading ${NAME}: "
+
+	if [ -n "`pidfileofproc $PGPOOLDAEMON`" ] ; then
+		killproc $PGPOOLDAEMON -HUP
+	else
+		failure $"Reloading ${NAME}"
+	fi
+	RETVAL=$?
+	echo
 }
 
 condrestart(){
-    [ -e /var/lock/subsys/${NAME} ] && restart
+	[ -e /var/lock/subsys/${NAME} ] && restart
 }
 
 condstop(){
-    [ -e /var/lock/subsys/${NAME} ] && stop
+	[ -e /var/lock/subsys/${NAME} ] && stop
 }
 
 # See how we were called.

@@ -70,9 +70,6 @@ rm -rf %{buildroot}
 %post 
 /sbin/ldconfig
 chkconfig --add pgpool
-# Create pid file path, and chown it to postgres:
-mkdir /var/run/pgpool
-chown postgres: /var/run/pgpool
 
 %postun -p /sbin/ldconfig
 
@@ -113,6 +110,7 @@ chown postgres: /var/run/pgpool
 - Fix pid file path in init script, per	pgcore #81.
 - Fix spec file -- we don't use short_name macro in pgcore spec file.
 - Create pgpool pid file directory, per pgcore #81.
+- Fix stop/start routines, also improve init script a bit.
 
 * Fri Aug 8 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.1-1
 - Update to 2.1

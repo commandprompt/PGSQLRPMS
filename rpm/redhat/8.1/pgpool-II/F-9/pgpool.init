@@ -37,14 +37,14 @@ fi
 # Set defaults for configuration variables
 PGPOOLENGINE=/usr/bin
 PGPOOLDAEMON=$PGPOOLENGINE/pgpool
-PGPOOLCONF=/etc/pgpool.conf
+PGPOOLCONF=/etc/pgpool-II/pgpool.conf
 PGPOOLPIDDIR=/var/run/pgpool
 PGPOOLLOG=/var/log/pgpool.log
 
 test -x $PGPOOLDAEMON || exit 5
 
 # Check whether the config file exists or not
-if [ ! -r /etc/pgpool.conf ]
+if [ ! -r $PGPOOLCONF ]
 then
 	echo "$PGPOOLCONF not found"
 	RETVAL=1

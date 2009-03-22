@@ -45,7 +45,7 @@ Development headers and libraries for pgpool-II.
 %patch1 -p0
 
 %build
-%configure --with-pgsql-includedir=%{_includedir}/pgsql --with-pgsql-lib=%{_libdir}/pgsql --disable-static --with-pam --disable-rpath
+%configure --with-pgsql-includedir=%{_includedir}/pgsql --with-pgsql-lib=%{_libdir}/pgsql --disable-static --with-pam --disable-rpath --sysconfdir=%{_sysconfdir}/%{name}/
 
 make %{?_smp_flags}
 
@@ -53,8 +53,10 @@ make %{?_smp_flags}
 rm -rf %{buildroot}
 make %{?_smp_flags} DESTDIR=%{buildroot} install
 install -d %{buildroot}%{_datadir}/%{name}
-mv %{buildroot}/%{_sysconfdir}/*.conf.sample %{buildroot}%{_datadir}/%{name}
-#mv %{buildroot}%{_datadir}/%{name}/system_db.sql %{buildroot}%{_datadir}/%{name}
+install -d %{buildroot}%{_sysconfdir}/%{name}
+mv %{buildroot}/%{_sysconfdir}/%{name}/pcp.conf.sample %{buildroot}%{_sysconfdir}/%{name}/pcp.conf
+mv %{buildroot}/%{_sysconfdir}/%{name}/pgpool.conf.sample %{buildroot}%{_sysconfdir}/%{name}/pgpool.conf
+mv %{buildroot}/%{_sysconfdir}/%{name}/pool_hba.conf.sample %{buildroot}%{_sysconfdir}/%{name}/pool_hba.conf
 install -d %{buildroot}%{_initrddir}
 install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/pgpool
 install -d %{buildroot}%{_sysconfdir}/sysconfig
@@ -62,7 +64,6 @@ install -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/pgpool
 
 # nuke libtool archive and static lib
 rm -f %{buildroot}%{_libdir}/libpcp.{a,la}
-
 
 %clean
 rm -rf %{buildroot}
@@ -91,9 +92,9 @@ chkconfig --add pgpool
 %{_mandir}/man8/pgpool*
 %{_datadir}/%{name}/system_db.sql
 %{_libdir}/libpcp.so.*
-%attr(764,root,apache) %{_datadir}/%{name}/*.conf.sample
 %{_datadir}/%{name}/pgpool.pam
 %{_initrddir}/pgpool
+%attr(764,root,apache) %config(noreplace) %{_sysconfdir}/%{name}/*.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/pgpool
 
 %files devel
@@ -111,6 +112,8 @@ chkconfig --add pgpool
 - Fix spec file -- we don't use short_name macro in pgcore spec file.
 - Create pgpool pid file directory, per pgcore #81.
 - Fix stop/start routines, also improve init script a bit.
+- Install conf files to a new directory (/etc/pgpool-II), and get rid 
+  of sample conf files.
 
 * Fri Aug 8 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.1-1
 - Update to 2.1

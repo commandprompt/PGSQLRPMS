@@ -34,7 +34,7 @@ NAME=pgpool
 PGPOOLENGINE=/usr/bin
 PGPOOLDAEMON=$PGPOOLENGINE/pgpool
 PGPOOLCONF=/etc/pgpool.conf
-PGPOOLPID=/var/run/pgpool.pid
+PGPOOLPID=/var/run/pgpool/pgpool.pid
 PGPOOLLOG=/var/log/pgpool.log
 
 test -x $PGPOOLDAEMON || exit 5

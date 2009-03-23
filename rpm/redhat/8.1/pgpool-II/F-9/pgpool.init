@@ -8,6 +8,9 @@
 #
 # v1.0.0 Devrim GUNDUZ <devrim@CommandPrompt.com>
 # - Initial version of Red Hat / Fedora init script
+#
+# v2.2 Devrim GUNDUZ <devrim@CommandPrompt.com>
+# - New and improved version which has some fixes.
 
 if [ -r /etc/sysconfig/pgpool ]; then
     . /etc/sysconfig/pgpool

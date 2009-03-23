@@ -1,19 +1,19 @@
 Summary:	PgpoolAdmin - web-based pgpool administration
 Name:		pgpoolAdmin
-Version:	2.1
-Release:	beta1.1%{?dist}
+Version:	2.2
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.postgresql.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:	http://pgfoundry.org/frs/download.php/1716/%{name}-%{version}-beta1.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/2109/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
 
 Requires:	php >= 4.3.9
 Requires:	php-pgsql >= 4.3.9
 Requires:	webserver
-Requires:	postgresql-pgpool-II
+Requires:	pgpool-II
 
 Buildarch:	noarch
 BuildRequires:	httpd
@@ -27,7 +27,7 @@ The pgpool Administration Tool is management tool of pgpool-II. It is
 possible to monitor, start, stop pgpool and change settings of pgpool-II.
 
 %prep
-%setup -q -n %{name}-%{version}-beta1
+%setup -q 
 %patch1 -p1
 %build
 
@@ -49,8 +49,15 @@ fi
 
 %post
 	/sbin/service httpd reload > /dev/null 2>&1
+	chgrp apache /var/log/pgpool
+	chgrp apache /var/run/pgpool
+	chmod g+rwx /var/run/pgpool/
+	chmod g+rwx /var/log/pgpool/
+	
 %postun 
 	/sbin/service httpd reload > /dev/null 2>&1
+	chmod g-rwx /var/run/pgpool
+	chmod g-rwx /var/log/pgpool
 
 %clean
 rm -rf %{buildroot}
@@ -73,6 +80,10 @@ rm -rf %{buildroot}
 %{_pgpoolAdmindir}/screen.css
 
 %changelog
+* Mon Mar 23 2009 Devrim Gunduz <devrim@commandprompt.com> 2.2-1
+- Update to 2.2
+- Update spec and patches so that pgpoolAdmin works against pgpool 2.2
+
 * Sun Jun 15 2008 Devrim Gunduz <devrim@commandprompt.com> 2.1-beta1-1
 - Update to 2.1 beta1
 

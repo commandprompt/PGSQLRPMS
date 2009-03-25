@@ -1,10 +1,10 @@
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
 Version:	1.10.0
-Release:	beta1_1%{?dist}
+Release:	beta2_1%{?dist}
 License:	Artistic
 Group:		Applications/Databases
-Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}-beta1.tar.gz
+Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}-beta2.tar.gz
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	wxGTK-devel postgresql-devel desktop-file-utils openssl-devel libxml2-devel libxslt-devel
@@ -37,7 +37,7 @@ This package contains documentation for various languages,
 which are in html format.
 
 %prep
-%setup -q -n %{name}-%{version}-beta1
+%setup -q -n %{name}-%{version}-beta2
 
 %build
 export LIBS="-lwx_gtk2u_core-2.8"
@@ -74,8 +74,11 @@ rm -rf %{buildroot}
 %doc docs/*
 
 %changelog
+* Wed Mar 25 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-beta2
+- Update to 1.10.0 beta2
+
 * Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-beta1
-- Update to 1.10.0
+- Update to 1.10.0-beta1
 
 * Thu Jun 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-1
 - Update to 1.8.4

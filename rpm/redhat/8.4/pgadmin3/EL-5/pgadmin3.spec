@@ -78,7 +78,7 @@ rm -rf %{buildroot}
 - Update to 1.10.0 beta2
 
 * Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-beta1
-- Update to 1.10.0
+- Update to 1.10.0-beta1
 
 * Thu Jun 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 1.8.4-1
 - Update to 1.8.4

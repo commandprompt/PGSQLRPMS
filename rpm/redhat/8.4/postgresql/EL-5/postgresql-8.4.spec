@@ -76,7 +76,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_20090310
+Version:	8.4devel_20090327
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases

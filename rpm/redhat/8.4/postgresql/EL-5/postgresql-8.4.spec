@@ -573,6 +573,7 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/_int.so
 %{_libdir}/pgsql/autoinc.so
 %{_libdir}/pgsql/auto_explain.so
+%{_libdir}/pgsql/btree_gin.so
 %{_libdir}/pgsql/btree_gist.so
 %{_libdir}/pgsql/chkpass.so
 %{_libdir}/pgsql/citext.so
@@ -718,6 +719,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Mar 27 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090327-1PGDG
+- Update to Mar 27 2009 CVS snapshot
+
 * Tue Mar 10 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090310-1PGDG
 - Update to Mar 10, 2009 CVS snapshot
 

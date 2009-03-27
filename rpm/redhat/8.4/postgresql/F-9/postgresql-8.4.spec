@@ -579,8 +579,8 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/_int.so
 %{_libdir}/pgsql/autoinc.so
 %{_libdir}/pgsql/auto_explain.so
-%{_libdir}/pgsql/btree_gist.so
 %{_libdir}/pgsql/btree_gin.so
+%{_libdir}/pgsql/btree_gist.so
 %{_libdir}/pgsql/chkpass.so
 %{_libdir}/pgsql/citext.so
 %{_libdir}/pgsql/cube.so

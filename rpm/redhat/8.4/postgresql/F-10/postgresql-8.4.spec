@@ -618,7 +618,7 @@ rm -rf %{buildroot}
 %{_bindir}/pgbench
 %{_bindir}/vacuumlo
 %{_bindir}/pg_standby
-%doc contrib/*/README.* contrib/spi/*.example contrib/*/*.sql
+%doc contrib/spi/*.example contrib/*/*.sql
 
 %files libs -f libpq5.lst
 %defattr(-,root,root)

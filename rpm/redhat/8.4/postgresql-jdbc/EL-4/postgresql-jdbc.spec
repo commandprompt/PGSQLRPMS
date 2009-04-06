@@ -25,11 +25,11 @@
 %define beta 0
 %{?beta:%define __os_install_post /usr/lib/rpm/brp-compress}
 
-%{!?upstreamserver:%define upstreamver	8.3-604}
+%{!?upstreamserver:%define upstreamver	8.4dev-700}
 
 Summary:	JDBC driver for PostgreSQL
 Name:		postgresql-jdbc
-Version:	8.3.604
+Version:	8.4dev.700
 Release:	1PGDG%{?dist}
 BuildArch:	noarch
 Epoch:		0
@@ -70,6 +70,9 @@ rm -rf %{buildroot}
 %{_javadir}/postgresql-%{upstreamver}.jdbc4.jar
 
 %changelog
+* Mon Apr 6 2009 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.4dev.700-1PGDG
+- Update to build 700 for 8.4 beta
+
 * Wed Nov 19 2008 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.3.604-1PGDG
 - Update to build 604
 

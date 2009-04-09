@@ -77,8 +77,8 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.3.5
-Release:	2PGDG_id%{?dist}
+Version:	8.3.7
+Release:	1PGDG_id%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -718,6 +718,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Apr 9 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.7-1PGDG_id
+- Update to 8.3.7
+
 * Wed Nov 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.5-2PGDG_id
 - Build with --enable-integer-datetimes enabled.
 

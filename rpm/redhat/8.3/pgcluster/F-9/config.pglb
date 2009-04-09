@@ -1,0 +1,4 @@
+PGLBUSER="postgres"
+CONFDIR="/var/lib/pgsql/clusterconf"
+WORKDIR="/var/lib/pgsql/clusterdata"
+OPTIONS="-v -l"

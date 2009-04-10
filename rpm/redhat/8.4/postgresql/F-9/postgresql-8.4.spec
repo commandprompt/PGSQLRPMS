@@ -19,7 +19,7 @@
 # -- only test releases or full releases should be.
 # This is the PostgreSQL Global Development Group Official RPMset spec file,
 # or a derivative thereof.
-# Copyright 2003-2008 Lamar Owen <lowen@pari.edu> <lamar.owen@wgcr.org>
+# Copyright 2003-2009 Lamar Owen <lowen@pari.edu> <lamar.owen@wgcr.org>
 # and others listed.
 
 # Major Contributors:
@@ -47,10 +47,6 @@
 # rpm --define 'packagename 0' .... to force the package NOT to build.
 # The base package, the lib package, the devel package, and the server package always get built.
 
-# We support RHEL 3+, and Fedora 7+ .
-# RHEL 3 builds need a special macro to build.
-%{?buildrhel3:%define kerbdir /usr/kerberos}
-
 %define beta 1
 %{?beta:%define __os_install_post /usr/lib/rpm/brp-compress}
 
@@ -76,7 +72,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4devel_20090327
+Version:	8.4beta1
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -88,7 +84,7 @@ Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/8.4/postgresql-8.4devel-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/8.4/postgresql-8.4beta1-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh
@@ -101,7 +97,7 @@ Buildrequires:	perl glibc-devel bison flex
 Requires:	/sbin/ldconfig initscripts
 
 %if %plperl
-BuildRequires:  perl-ExtUtils-Embed
+BuildRequires:	perl-ExtUtils-Embed
 %endif
 
 %if %plpython
@@ -465,22 +461,31 @@ rm -rf %{buildroot}%{_docdir}/pgsql
 
 # Change the %{majorversion} macro to 
 # %{version} when 8.4 is released.
-%find_lang libpq5-%{majorversion}
+%find_lang ecpg-%{majorversion}
+%find_lang ecpglib6-%{majorversion}
 %find_lang initdb-%{majorversion}
+%find_lang libpq5-%{majorversion}
 %find_lang pg_config-%{majorversion}
+%find_lang pg_controldata-%{majorversion}
 %find_lang pg_ctl-%{majorversion}
 %find_lang pg_dump-%{majorversion}
+%find_lang pg_resetxlog-%{majorversion}
+%find_lang pgscripts-%{majorversion}
+%find_lang plperl-%{majorversion}
 %find_lang plpgsql-%{majorversion}
+%find_lang plpython-%{majorversion}
+%find_lang pltcl-%{majorversion}
 %find_lang postgres-%{majorversion}
 %find_lang psql-%{majorversion}
-%find_lang pg_resetxlog-%{majorversion}
-%find_lang pg_controldata-%{majorversion}
-%find_lang pgscripts-%{majorversion}
 
-cat libpq5-%{majorversion}.lang > libpq5.lst
-cat pg_config-%{majorversion}.lang > pg_config.lst
-cat initdb-%{majorversion}.lang pg_ctl-%{majorversion}.lang psql-%{majorversion}.lang pg_dump-%{majorversion}.lang pgscripts-%{majorversion}.lang > main.lst
-cat postgres-%{majorversion}.lang pg_resetxlog-%{majorversion}.lang pg_controldata-%{majorversion}.lang plpgsql-%{majorversion}.lang > server.lst
+cat libpq5-%{majorversion}.lang > pg_libpq5.lst
+#cat pg_config-%{majorversion}.lang ecpg-%{majorversion} ecpglib6-%{majorversion}> pg_devel.lst
+cat pg_config-%{majorversion}.lang ecpg-%{majorversion}.lang ecpglib6-%{majorversion}.lang > pg_devel.lst
+cat initdb-%{majorversion}.lang pg_ctl-%{majorversion}.lang psql-%{majorversion}.lang pg_dump-%{majorversion}.lang pgscripts-%{majorversion}.lang > pg_main.lst
+cat postgres-%{majorversion}.lang pg_resetxlog-%{majorversion}.lang pg_controldata-%{majorversion}.lang plpgsql-%{majorversion}.lang > pg_server.lst
+cat plperl-%{majorversion}.lang > pg_plperl.lst
+cat pltcl-%{majorversion}.lang > pg_pltcl.lst
+cat plpython-%{majorversion}.lang > pg_plpython.lst
 
 %post libs -p /sbin/ldconfig 
 %postun libs -p /sbin/ldconfig 
@@ -534,9 +539,9 @@ rm -rf %{buildroot}
 
 # FILES section.
 
-%files -f main.lst
+%files -f pg_main.lst
 %defattr(-,root,root)
-%doc doc/FAQ doc/KNOWN_BUGS doc/MISSING_FEATURES doc/README* 
+%doc doc/KNOWN_BUGS doc/MISSING_FEATURES doc/README* 
 %doc COPYRIGHT README doc/bug.template
 %doc README.rpm-dist
 %{_bindir}/clusterdb
@@ -620,14 +625,14 @@ rm -rf %{buildroot}
 %{_bindir}/pg_standby
 %doc contrib/spi/*.example contrib/*/*.sql
 
-%files libs -f libpq5.lst
+%files libs -f pg_libpq5.lst
 %defattr(-,root,root)
 %{_libdir}/libpq.so.*
 %{_libdir}/libecpg.so.*
 %{_libdir}/libpgtypes.so.*
 %{_libdir}/libecpg_compat.so.*
 
-%files server -f server.lst
+%files server -f pg_server.lst
 %defattr(-,root,root)
 /etc/rc.d/init.d/postgresql
 %if %pam
@@ -677,7 +682,7 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/snowball_create.sql
 %{_datadir}/pgsql/sql_features.txt
 
-%files devel -f pg_config.lst
+%files devel -f pg_devel.lst
 %defattr(-,root,root)
 /usr/include/*
 %{_bindir}/ecpg
@@ -696,13 +701,13 @@ rm -rf %{buildroot}
 %{_mandir}/man1/pg_config.*
 
 %if %plperl
-%files plperl
+%files plperl -f pg_plperl.lst
 %defattr(-,root,root)
 %{_libdir}/pgsql/plperl.so
 %endif
 
 %if %pltcl
-%files pltcl
+%files pltcl -f pg_pltcl.lst
 %defattr(-,root,root)
 %{_libdir}/pgsql/pltcl.so
 %{_bindir}/pltcl_delmod
@@ -712,7 +717,7 @@ rm -rf %{buildroot}
 %endif
 
 %if %plpython
-%files plpython
+%files plpython -f pg_plpython.lst
 %defattr(-,root,root)
 %{_libdir}/pgsql/plpython.so
 %endif
@@ -725,6 +730,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Apr 10 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4beta1-1PGDG
+- Update to 8.4 beta1
+- Remove buildrhel3 macro
+
 * Fri Mar 27 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090327-1PGDG
 - Update to Mar 27 2009 CVS snapshot
 

@@ -1,6 +1,6 @@
---- postgresql-8.4devel/src/backend/utils/misc/postgresql.conf.sample.old	2008-09-03 08:39:19.000000000 +0300
-+++ postgresql-8.4devel/src/backend/utils/misc/postgresql.conf.sample	2008-09-03 08:40:06.000000000 +0300
-@@ -231,23 +231,23 @@
+--- postgresql-8.4beta1//src/backend/utils/misc/postgresql.conf.sample.old	2009-04-10 08:19:29.000000000 +0300
++++ postgresql-8.4beta1//src/backend/utils/misc/postgresql.conf.sample	2009-04-10 08:20:13.000000000 +0300
+@@ -228,23 +228,23 @@
  
  # - Where to Log -
  
@@ -29,15 +29,15 @@
  					# same name as the new log file will be
  					# truncated rather than appended to.
  					# But such truncation only occurs on
-@@ -255,9 +255,9 @@
+@@ -252,9 +252,9 @@
  					# or size-driven rotation.  Default is
  					# off, meaning append to existing files
  					# in all cases.
 -#log_rotation_age = 1d			# Automatic rotation of logfiles will
 +log_rotation_age = 1d			# Automatic rotation of logfiles will
- 					# happen after that time.  0 to disable.
+ 					# happen after that time.  0 disables.
 -#log_rotation_size = 10MB		# Automatic rotation of logfiles will 
 +log_rotation_size = 0			# Automatic rotation of logfiles will 
  					# happen after that much log output.
- 					# 0 to disable.
+ 					# 0 disables.
  

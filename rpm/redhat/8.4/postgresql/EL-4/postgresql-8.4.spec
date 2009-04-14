@@ -354,7 +354,6 @@ export LIBNAME=%{_lib}
 %if %ldap
 	--with-ldap \
 %endif
-	--with-system-tzdata=%{_datadir}/zoneinfo \
 	--sysconfdir=/etc/sysconfig/pgsql \
 	--datadir=/usr/share/pgsql \
 	--with-docdir=%{_docdir}
@@ -649,6 +648,7 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/postgres.shdescription
 %{_datadir}/pgsql/system_views.sql
 %{_datadir}/pgsql/*.sample
+%{_datadir}/pgsql/timezone/*
 %{_datadir}/pgsql/timezonesets/*
 %{_datadir}/pgsql/tsearch_data/*.affix
 %{_datadir}/pgsql/tsearch_data/*.dict

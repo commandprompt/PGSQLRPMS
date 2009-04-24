@@ -57,7 +57,7 @@ rm -rf %{buildroot}
 %doc Changes README.en plruby.html 
 %dir %{ruby_sitearch}/plruby
 %{ruby_sitearch}/plruby/plruby_*.so
-%{ruby_sitearch}/plruby.so
+#%{ruby_sitearch}/plruby.so
 
 %files doc
 %defattr(-,root,root,-)

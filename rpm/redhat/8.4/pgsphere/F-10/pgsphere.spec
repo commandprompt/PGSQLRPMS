@@ -28,7 +28,7 @@ install -d %{buildroot}%{_libdir}/pgsql/
 install -d %{buildroot}%{_datadir}/%{name}
 install -d %{buildroot}%{_docdir}/%{name}-%{version}
 
-install -m 755 libpg_sphere.so %{buildroot}%{_libdir}/pgsql/pg_sphere.so
+install -m 755 pg_sphere.so %{buildroot}%{_libdir}/pgsql/pg_sphere.so
 install -m 644 pg_sphere.sql %{buildroot}%{_datadir}/%{name}/
 install -m 644 README.pg_sphere %{buildroot}%{_docdir}/%{name}-%{version}/
 
@@ -46,7 +46,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Tue Dec 2 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.0.1-2
-- Fixes for f-10
+- Fixes for F-10
 
 * Wed Aug 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.0.1-1
 - Update to 1.0.1

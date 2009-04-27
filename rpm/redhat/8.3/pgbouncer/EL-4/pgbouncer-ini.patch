@@ -1,5 +1,5 @@
---- etc/pgbouncer.ini.old	2009-02-23 11:40:21.000000000 +0200
-+++ etc/pgbouncer.ini	2009-02-23 11:41:27.000000000 +0200
+--- etc/pgbouncer.ini.old	2009-03-05 13:00:29.000000000 +0200
++++ etc/pgbouncer.ini	2009-03-05 13:02:18.000000000 +0200
 @@ -22,8 +22,8 @@
  ;;; Administrative settings
  ;;;

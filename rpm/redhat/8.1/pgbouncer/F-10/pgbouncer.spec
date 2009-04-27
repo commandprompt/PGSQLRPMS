@@ -10,12 +10,11 @@ URL:		http://pgfoundry.org/projects/pgbouncer/
 Source0:	http://pgfoundry.org/frs/download.php/2092/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
-Source3:	%{name}.logrotate
 Patch0:		%{name}-ini.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	libevent-devel >= 1.3b
-Requires:	initscripts, postgresql-libs
+Requires:	initscripts
 
 Requires(post):	chkconfig
 Requires(preun):	chkconfig, initscripts
@@ -49,13 +48,11 @@ rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -p -d %{buildroot}%{_sysconfdir}/
 install -p -d %{buildroot}%{_sysconfdir}/sysconfig
-install -p -d %{buildroot}%{_sysconfdir}/logrotate.d
 install -p -m 644 etc/pgbouncer.ini %{buildroot}%{_sysconfdir}/
 rm -f %{buildroot}%{_docdir}/%{name}/pgbouncer.ini
 install -p -d %{buildroot}%{_initrddir}
 install -p -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 install -p -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
-install -p -m 644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
 %post
 chkconfig --add pgbouncer
@@ -81,20 +78,12 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/%{name}.ini
 %{_initrddir}/%{name}
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
-%{_sysconfdir}/logrotate.d/%{name}
 %{_mandir}/man1/%{name}.*
 %{_mandir}/man5/%{name}.*
 
 %changelog
-* Mon Feb 23 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.3-1
+* Thu Mar 5 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.3-1
 - Update to 1.3
-
-* Mon Feb 2 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-5
-- Explicitly add postgresql-libs as Requires -- otherwise, yum is 
-  picking up mammoth-libs :( Fixes PGCore #63.
-
-* Tue Oct 28 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-4
-- Add a logrotate conf file.
 
 * Fri Aug 29 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2.3-3
 - More fixes, per Fedora review.

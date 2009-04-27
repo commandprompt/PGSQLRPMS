@@ -1,0 +1,35 @@
+--- postgresql-8.2beta1/src/backend/utils/misc/postgresql.conf.sample.old	2006-09-25 16:47:58.000000000 +0300
++++ postgresql-8.2beta1/src/backend/utils/misc/postgresql.conf.sample	2006-09-25 16:49:13.000000000 +0300
+@@ -226,16 +226,16 @@
+ 					# depending on platform.
+ 
+ # This is used when logging to stderr:
+-#redirect_stderr = off			# Enable capturing of stderr into log 
++redirect_stderr = on			# Enable capturing of stderr into log 
+ 					# files
+ 					# (change requires restart)
+ 
+ # These are only used if redirect_stderr is on:
+-#log_directory = 'pg_log'		# Directory where log files are written
++log_directory = 'pg_log'		# Directory where log files are written
+ 					# Can be absolute or relative to PGDATA
+ #log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log' # Log file name pattern.
+ 					# Can include strftime() escapes
+-#log_truncate_on_rotation = off # If on, any existing log file of the same 
++log_truncate_on_rotation = on		# If on, any existing log file of the same 
+ 					# name as the new log file will be
+ 					# truncated rather than appended to. But
+ 					# such truncation only occurs on
+@@ -243,10 +243,10 @@
+ 					# or size-driven rotation. Default is
+ 					# off, meaning append to existing files
+ 					# in all cases.
+-#log_rotation_age = 1d			# Automatic rotation of logfiles will 
++log_rotation_age = 1d			# Automatic rotation of logfiles will 
+ 					# happen after that time.  0 to 
+ 					# disable.
+-#log_rotation_size = 10MB		# Automatic rotation of logfiles will 
++log_rotation_size = 0			# Automatic rotation of logfiles will 
+ 					# happen after that much log
+ 					# output.  0 to disable.
+ 

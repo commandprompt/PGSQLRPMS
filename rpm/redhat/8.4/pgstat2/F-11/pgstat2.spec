@@ -1,10 +1,10 @@
 Summary:	PostgreSQL monitoring script
-Name:		pgstat2
-Version:	0.8
-Release:	beta_1%{?dist}
+Name:		pgstat
+Version:	0.8beta
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/2107/%{name}-%{version}beta.tar.bz2
+Source0:	http://pgfoundry.org/frs/download.php/2107/%{name}-%{version}.tar.bz2
 Source1:	README.pgstat2
 URL:		http://pgfoundry.org/projects/pgstat2/
 Requires:	postgresql-server >= 8.1, python-psycopg2
@@ -17,7 +17,7 @@ command line similar to iostat or vmstat. This data can be used for
 monitoring or performance tuning.
 
 %prep
-%setup -q -n %{name}-%{version}beta
+%setup -q
 
 %build
 

@@ -11,7 +11,6 @@ Source:		http://rubyforge.org/frs/download.php/41380/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  ruby >= 1.8 ruby-devel >= 1.8 postgresql-devel >= 8.1
-Requires:	ruby(abi) >= 1.8
 
 Obsoletes:	ruby-postgres >= 0.7.1
 
@@ -31,10 +30,6 @@ ruby ext/extconf.rb --with-pgsql-include=%{_includedir}/pgsql/server -with-cflag
 %install
 rm -rf %{buildroot}
 CC="%{__cc} -I%{_includedir}/pgsql -I%{_includedir}/pgsql/server" make DESTDIR=%{buildroot} %{?_smp_mflags} install
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
 
 %clean
 rm -rf %{buildroot}

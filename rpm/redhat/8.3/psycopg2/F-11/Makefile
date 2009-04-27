@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f10
+DIST=.f11
 SPECFILE="python-psycopg2.spec"
 
 # Now, include global Makefile

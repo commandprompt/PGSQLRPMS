@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f10
+DIST=.f11
 SPECFILE="postgresql_autodoc.spec"
 
 # Now, include global Makefile

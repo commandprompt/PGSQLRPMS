@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f10
+DIST=.f11
 SPECFILE="phpPgAdmin.spec"
 
 # Now, include global Makefile

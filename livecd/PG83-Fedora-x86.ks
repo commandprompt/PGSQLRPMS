@@ -85,6 +85,7 @@ pgfouine
 pgloader
 pgplsh
 pgsphere
+pgstat
 pgpool-II
 plproxy
 plruby

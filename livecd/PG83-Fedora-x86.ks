@@ -41,10 +41,6 @@ part / --size 4096
 
 # List of repositories. We want to stick to x86 builds only.
 
-# These are the private mirror list for local builds (Devrim).
-#repo --name=released --baseurl=http://fedora.mirror.homenet.dbitech.bc.ca/releases/10/Everything/i386/os/
-#repo --name=updates --baseurl=http://fedora.mirror.homenet.dbitech.bc.ca/updates/10/i386/
-
 # These are the public repositories
 repo --name=released --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-10&arch=i386
 repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f10&arch=i386

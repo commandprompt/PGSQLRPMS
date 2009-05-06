@@ -1,11 +1,11 @@
 Summary:	PgFouine PostgreSQL log analyzer
 Name:		pgfouine
-Version:	1.0
-Release:	2%{?dist}
+Version:	1.1
+Release:	1%{?dist}
 BuildArch:	noarch
 License:	GPL
 Group:		Development/Tools
-Source0:	http://pgfoundry.org/frs/download.php/1334/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/2178/%{name}-%{version}.tar.gz
 Source2:	pgfouine-tutorial.txt
 URL: 		http://pgfouine.projects.postgresql.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}
 
 %changelog 
+* Wed May 6 2009 Devrim Gunduz <devrim@CommandPrompt.com> - 1.1-1
+- Update to 1.1
+
 * Sun Jun 3 2007 Devrim Gunduz <devrim@CommandPrompt.com> - 1.0-2
 - Bumped up spec version
 

@@ -73,12 +73,10 @@ glom
 httpd
 ip4r
 libnss-pgsql
-orafce
 pagila
 pam_pgsql
 phpPgAdmin
 pg_top
-pg_filedump
 pgadmin3
 pgbouncer
 pgfouine
@@ -104,7 +102,6 @@ postgresql-python
 postgresql-server
 postgresql-tcl
 postgresql-test
-prefix
 python-psycopg2
 ruby-pg
 skytools

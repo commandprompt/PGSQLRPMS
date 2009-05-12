@@ -1,5 +1,5 @@
 --- gridsql-1.1/bin/gs-agent.sh.old	2009-05-12 20:49:56.000000000 +0300
-+++ gridsql-1.1/bin/gs-agent.sh	2009-05-12 22:59:50.000000000 +0300
++++ gridsql-1.1/bin/gs-agent.sh	2009-05-13 00:58:23.000000000 +0300
 @@ -13,19 +13,14 @@
  
  EXECCLASS=com.edb.gridsql.util.XdbAgent
@@ -21,10 +21,10 @@
  
  
 -nohup java -classpath ${GSPATH}/bin/xdbengine.jar:${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > ${GSPATH}/log/agent.log 2>&1 &
-+nohup java -classpath /usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > /var/log/gridsql/agent.log 2>&1 &
++nohup java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > /var/log/gridsql/agent.log 2>&1 &
  
 --- gridsql-1.1/bin/gs-cmdline.sh.old	2009-05-12 20:49:56.000000000 +0300
-+++ gridsql-1.1/bin/gs-cmdline.sh	2009-05-12 23:00:03.000000000 +0300
++++ gridsql-1.1/bin/gs-cmdline.sh	2009-05-13 00:58:29.000000000 +0300
 @@ -12,11 +12,6 @@
  
  EXECCLASS=com.edb.gridsql.util.CmdLine
@@ -38,9 +38,9 @@
 -fi
 -
 -java -classpath ${GSPATH}/bin/xdbcmdline.jar:${GSPATH}/lib/jline-0_9_5.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar:${CLASSPATH} $EXECCLASS $* 
-+java -classpath /usr/share/java/xdbcmdline.jar:/usr/share/java/jline-0_9_5.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} $EXECCLASS $* 
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbcmdline.jar:/usr/share/java/jline-0_9_5.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} $EXECCLASS $* 
 --- gridsql-1.1/bin/gs-createdb.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-createdb.sh	2009-05-12 23:00:41.000000000 +0300
++++ gridsql-1.1/bin/gs-createdb.sh	2009-05-13 00:58:36.000000000 +0300
 @@ -12,14 +12,9 @@
  
  EXECCLASS=com.edb.gridsql.util.CreateDb
@@ -57,10 +57,10 @@
 -GSCONFIG=$GSPATH/config/gridsql.config
 -
 -java -classpath ${GSPATH}/bin/xdbengine.jar:${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
-+java -classpath /usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
  
 --- gridsql-1.1/bin/gs-createmddb.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-createmddb.sh	2009-05-12 23:10:52.000000000 +0300
++++ gridsql-1.1/bin/gs-createmddb.sh	2009-05-13 00:58:44.000000000 +0300
 @@ -12,14 +12,9 @@
  
  EXECCLASS=com.edb.gridsql.util.CreateMdDb
@@ -77,10 +77,10 @@
 -GSCONFIG=$GSPATH/config/gridsql.config
 -
 -java -classpath ${GSPATH}/bin/xdbengine.jar:${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar:${CLASSPATH} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* 
-+java -classpath /usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* 
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* 
  
 --- gridsql-1.1/bin/gs-dbstart.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-dbstart.sh	2009-05-12 23:01:51.000000000 +0300
++++ gridsql-1.1/bin/gs-dbstart.sh	2009-05-13 00:58:50.000000000 +0300
 @@ -12,13 +12,8 @@
  
  EXECCLASS=com.edb.gridsql.util.XdbDbStart
@@ -97,9 +97,9 @@
 -GSCONFIG=$GSPATH/config/gridsql.config
 -
 -java -classpath ${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* 
-+java -classpath /usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* 
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* 
 --- gridsql-1.1/bin/gs-dbstop.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-dbstop.sh	2009-05-12 23:02:17.000000000 +0300
++++ gridsql-1.1/bin/gs-dbstop.sh	2009-05-13 00:58:56.000000000 +0300
 @@ -12,14 +12,8 @@
  
  EXECCLASS=com.edb.gridsql.util.XdbDbStop
@@ -117,9 +117,9 @@
 -java -classpath ${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
 +GSCONFIG=/etc/gridsql/gridsql.config
  
-+java -classpath /usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
 --- gridsql-1.1/bin/gs-dropdb.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-dropdb.sh	2009-05-12 23:02:41.000000000 +0300
++++ gridsql-1.1/bin/gs-dropdb.sh	2009-05-13 00:59:02.000000000 +0300
 @@ -12,14 +12,9 @@
  
  EXECCLASS=com.edb.gridsql.util.DropDb
@@ -136,10 +136,10 @@
 -GSCONFIG=$GSPATH/config/gridsql.config
 -
 -java -classpath ${GSPATH}/bin/xdbengine.jar:${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
-+java -classpath /usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
  
 --- gridsql-1.1/bin/gs-execdb.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-execdb.sh	2009-05-12 23:03:06.000000000 +0300
++++ gridsql-1.1/bin/gs-execdb.sh	2009-05-13 00:59:07.000000000 +0300
 @@ -12,14 +12,9 @@
  
  EXECCLASS=com.edb.gridsql.util.ExecDb
@@ -156,10 +156,10 @@
 -GSCONFIG=$GSPATH/config/gridsql.config
 -
 -java -classpath ${GSPATH}/bin/xdbengine.jar:${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} ${EXECCLASS} "$@"
-+java -classpath /usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} ${EXECCLASS} "$@"
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} ${EXECCLASS} "$@"
  
 --- gridsql-1.1/bin/gs-impex.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-impex.sh	2009-05-12 23:03:31.000000000 +0300
++++ gridsql-1.1/bin/gs-impex.sh	2009-05-13 00:59:13.000000000 +0300
 @@ -13,12 +13,7 @@
  
  EXECCLASS=com.edb.gridsql.util.XdbImpEx
@@ -173,10 +173,10 @@
 -fi
 -
 -java -classpath ${GSPATH}/bin/xdbutil.jar:${GSPATH}/bin/xdbengine.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar $EXECCLASS "$@"
-+java -classpath /usr/share/java/xdbutil.jar:/usr/share/java/xdbengine.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar $EXECCLASS "$@"
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbutil.jar:/usr/share/java/xdbengine.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar $EXECCLASS "$@"
  
 --- gridsql-1.1/bin/gs-loader.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-loader.sh	2009-05-12 23:05:17.000000000 +0300
++++ gridsql-1.1/bin/gs-loader.sh	2009-05-13 00:59:21.000000000 +0300
 @@ -12,14 +12,9 @@
  
  EXECCLASS=com.edb.gridsql.util.XdbLoader
@@ -193,10 +193,10 @@
 -GSCONFIG=$GSPATH/config/gridsql.config
 -
 -java -classpath ${GSPATH}/bin/xdbengine.jar:${GSPATH}/bin/xdbutil.jar:${CLASSPATH}:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
-+java -classpath /usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:${CLASSPATH}:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:${CLASSPATH}:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
  
 --- gridsql-1.1/bin/gs-server.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-server.sh	2009-05-12 23:12:11.000000000 +0300
++++ gridsql-1.1/bin/gs-server.sh	2009-05-13 00:59:31.000000000 +0300
 @@ -13,14 +13,9 @@
  
  EXECCLASS=com.edb.gridsql.util.XdbServer
@@ -214,17 +214,16 @@
  
  # Adjust these if more memory is required
  MINMEMORY=512M
-@@ -30,7 +25,8 @@
+@@ -30,7 +25,7 @@
  
  echo "Starting...."
  
 -nohup java -classpath ${GSPATH}/bin/xdbengine.jar:${GSPATH}/bin/xdbprotocol.jar:${GSPATH}/bin/xdbserver.jar:${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Xss${STACKSIZE} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > ${GSPATH}/log/server.log 2>&1 &
-+nohup java -classpath 
-+/usr/share/java/xdbengine.jar:/usr/share/java/xdbprotocol.jar:/usr/share/java/xdbserver.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Xss${STACKSIZE} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > /var/log/gridsql/server.log 2>&1 &
++nohup java -classpath /usr/share/java/postgresql-jdbc.jar /usr/share/java/xdbengine.jar:/usr/share/java/xdbprotocol.jar:/usr/share/java/xdbserver.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Xss${STACKSIZE} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > /var/log/gridsql/server.log 2>&1 &
  
  PROCID=$!
  
-@@ -43,9 +39,9 @@
+@@ -43,9 +38,9 @@
  then
  	echo "Error starting XDBServer"
  	echo " server.log output:"
@@ -237,7 +236,7 @@
  fi
  
 --- gridsql-1.1/bin/gs-shutdown.sh.old	2009-05-12 20:49:57.000000000 +0300
-+++ gridsql-1.1/bin/gs-shutdown.sh	2009-05-12 23:12:16.000000000 +0300
++++ gridsql-1.1/bin/gs-shutdown.sh	2009-05-13 00:59:40.000000000 +0300
 @@ -13,14 +13,9 @@
  
  EXECCLASS=com.edb.gridsql.util.XdbShutdown
@@ -254,5 +253,5 @@
 -GSCONFIG=$GSPATH/config/gridsql.config
 -
 -java -classpath ${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
-+java -classpath /usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar -Dconfig.file.path=${GSCONFIG} $EXECCLASS "$@"
  

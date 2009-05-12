@@ -1,5 +1,5 @@
 --- gridsql-client-1.1/bin/gs-cmdline.sh.old	2009-05-12 23:16:00.000000000 +0300
-+++ gridsql-client-1.1/bin/gs-cmdline.sh	2009-05-13 00:01:28.000000000 +0300
++++ gridsql-client-1.1/bin/gs-cmdline.sh	2009-05-13 01:01:57.000000000 +0300
 @@ -12,11 +12,6 @@
  
  EXECCLASS=com.edb.gridsql.util.CmdLine
@@ -13,4 +13,4 @@
 -fi
 -
 -java -classpath ${GSPATH}/bin/xdbcmdline.jar:${GSPATH}/lib/jline-0_9_5.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar:${CLASSPATH} $EXECCLASS $* 
-+java -classpath /usr/share/java/xdbcmdline.jar:/usr/share/java/jline-0_9_5.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} $EXECCLASS $* 
++java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbcmdline.jar:/usr/share/java/jline-0_9_5.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} $EXECCLASS $* 

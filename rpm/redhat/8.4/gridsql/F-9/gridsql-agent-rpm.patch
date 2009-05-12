@@ -1,5 +1,5 @@
 --- gridsql-agent-1.1/bin/gs-agent.sh.old	2009-05-12 23:13:42.000000000 +0300
-+++ gridsql-agent-1.1/bin/gs-agent.sh	2009-05-12 23:14:51.000000000 +0300
++++ gridsql-agent-1.1/bin/gs-agent.sh	2009-05-13 01:01:17.000000000 +0300
 @@ -13,19 +13,14 @@
  
  EXECCLASS=com.edb.gridsql.util.XdbAgent
@@ -21,5 +21,5 @@
  
  
 -nohup java -classpath ${GSPATH}/bin/xdbengine.jar:${GSPATH}/bin/xdbutil.jar:${GSPATH}/lib/edb-jdbc14.jar:${GSPATH}/lib/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > ${GSPATH}/log/agent.log 2>&1 &
-+nohup java -classpath /usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > /var/log/gridsql/agent.log 2>&1 &
++nohup java -classpath /usr/share/java/postgresql-jdbc.jar:/usr/share/java/xdbengine.jar:/usr/share/java/xdbutil.jar:/usr/share/java/edb-jdbc14.jar:/usr/share/java/log4j.jar:${CLASSPATH} -Xms${MINMEMORY} -Xmx${MAXMEMORY} -Dconfig.file.path=${GSCONFIG} $EXECCLASS $* > /var/log/gridsql/agent.log 2>&1 &
  

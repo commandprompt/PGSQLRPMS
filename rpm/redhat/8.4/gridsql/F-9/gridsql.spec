@@ -6,12 +6,12 @@ License:	GPLv2
 URL:		http://sourceforge.net/projects/gridsql/
 Group:		Applications/Databases
 #Source0:	http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}beta.tar.gz
-#Source0:	http://dfn.dl.sourceforge.net/sourceforge/gridsql-src-1.1beta.tar.gz
-Source0:	http://garr.dl.sourceforge.net/sourceforge/gridsql/gridsql-1.1beta.tar.gz
-Source1:	http://garr.dl.sourceforge.net/sourceforge/gridsql/gridsql-client-1.1beta.tar.gz
-Source2:	http://garr.dl.sourceforge.net/sourceforge/gridsql/gridsql-agent-1.1beta.tar.gz
+#Source0:	http://dfn.dl.sourceforge.net/sourceforge/%{name}-src-1.1beta.tar.gz
+Source0:	http://garr.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}beta.tar.gz
+Source1:	http://garr.dl.sourceforge.net/sourceforge/%{name}/%{name}-client-%{version}beta.tar.gz
+Source2:	http://garr.dl.sourceforge.net/sourceforge/%{name}/%{name}-agent-%{version}beta.tar.gz
 
-Patch0:		gridsql_env.patch
+Patch0:		%{name}_env.patch
 
 Requires:	postgresql-server
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -92,6 +92,9 @@ install -m 755 lib/*.jar %{buildroot}%{_datadir}/java
 
 %clean
 rm -rf %{buildroot}
+
+%post
+mkdir /var/log/gridsql
 
 %files
 %defattr(0755,root,root)

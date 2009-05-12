@@ -15,6 +15,8 @@ Patch0:		%{name}_env.patch
 Patch2:		%{name}-rpm.patch
 Patch3:		%{name}-agent-rpm.patch
 Patch4:		%{name}-client-rpm.patch
+Patch6:		%{name}-config.patch
+Patch7:		%{name}-agent-config.patch
 
 Requires:	postgresql-server, postgresql-jdbc
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -57,6 +59,8 @@ documentation for GridSQL
 %patch2 -p0
 %patch3 -p0
 %patch4 -p0
+%patch6 -p0
+%patch7 -p0
 
 %build
 

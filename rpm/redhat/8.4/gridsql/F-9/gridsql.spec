@@ -12,6 +12,9 @@ Source1:	http://garr.dl.sourceforge.net/sourceforge/%{name}/%{name}-client-%{ver
 Source2:	http://garr.dl.sourceforge.net/sourceforge/%{name}/%{name}-agent-%{version}beta.tar.gz
 
 Patch0:		%{name}_env.patch
+Patch2:		%{name}-rpm.patch
+Patch3:		%{name}-agent-rpm.patch
+Patch4:		%{name}-client-rpm.patch
 
 Requires:	postgresql-server, postgresql-jdbc
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -50,7 +53,10 @@ documentation for GridSQL
 
 %prep
 %setup -q -n %{name}-%{version} -c -a 2 -a 1
-%patch -p0
+%patch0 -p0
+%patch2 -p0
+%patch3 -p0
+%patch4 -p0
 
 %build
 

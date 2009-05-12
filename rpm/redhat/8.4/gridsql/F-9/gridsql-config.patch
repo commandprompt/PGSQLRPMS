@@ -1,11 +1,11 @@
---- gridsql-1.1/config/gridsql.config	2009-05-13 01:12:26.000000000 +0300
-+++ gridsql-1.1/config/gridsql.config.old	2009-05-13 01:11:24.000000000 +0300
+--- gridsql-1.1/config/gridsql.config.old	2009-05-13 01:11:24.000000000 +0300
++++ gridsql-1.1/config/gridsql.config	2009-05-13 01:12:26.000000000 +0300
 @@ -107,7 +107,7 @@
  log4j.appender.console.maxBackupIndex=10
  log4j.appender.console.layout=org.apache.log4j.PatternLayout
  log4j.appender.console.layout.ConversionPattern=%d{ISO8601} - %-5p %m%n
--log4j.appender.console.File=/var/log/gridsql/console.log
-+log4j.appender.console.File=/usr/local/gridsql-1.1/log/console.log
+-log4j.appender.console.File=/usr/local/gridsql-1.1/log/console.log
++log4j.appender.console.File=/var/log/gridsql/console.log
  
  # Log Server messages to the console logger
  log4j.logger.Server=ALL, console
@@ -13,8 +13,8 @@
  # This logs all queries sent to the database. 
  log4j.logger.query=INFO, QUERY
  log4j.appender.QUERY=org.apache.log4j.RollingFileAppender
--log4j.appender.QUERY.File=/var/log/gridsql/query.log
-+log4j.appender.QUERY.File=/usr/local/gridsql-1.1/log/query.log
+-log4j.appender.QUERY.File=/usr/local/gridsql-1.1/log/query.log
++log4j.appender.QUERY.File=/var/log/gridsql/query.log
  log4j.appender.QUERY.maxFileSize=500KB
  log4j.appender.QUERY.maxBackupIndex=10
  log4j.appender.QUERY.layout=org.apache.log4j.PatternLayout
@@ -22,8 +22,8 @@
  # This logs grid activity 
  log4j.logger.activity=INFO, activity
  log4j.appender.activity=org.apache.log4j.RollingFileAppender
--log4j.appender.activity.File=/var/log/gridsql/activity.log
-+log4j.appender.activity.File=/usr/local/gridsql-1.1/log/activity.log
+-log4j.appender.activity.File=/usr/local/gridsql-1.1/log/activity.log
++log4j.appender.activity.File=/var/log/gridsql/activity.log
  log4j.appender.activity.maxFileSize=10MB
  log4j.appender.activity.maxBackupIndex=10
  log4j.appender.activity.layout=org.apache.log4j.PatternLayout
@@ -31,16 +31,16 @@
  
  log4j.logger.longquery=INFO, LONGQUERY
  log4j.appender.LONGQUERY=org.apache.log4j.RollingFileAppender
--log4j.appender.LONGQUERY.File=/var/log/gridsql/longqry.log
-+log4j.appender.LONGQUERY.File=/usr/local/gridsql-1.1/log/longqry.log
+-log4j.appender.LONGQUERY.File=/usr/local/gridsql-1.1/log/longqry.log
++log4j.appender.LONGQUERY.File=/var/log/gridsql/longqry.log
  log4j.appender.LONGQUERY.maxFileSize=500KB
  log4j.appender.LONGQUERY.maxBackupIndex=10
  log4j.appender.LONGQUERY.layout=org.apache.log4j.PatternLayout
-@@ -166,3 +166,7 @@
+@@ -166,7 +166,3 @@
  xdb.sqlfunction.adddate.arg1=ANYDATE
  xdb.sqlfunction.adddate.arg2=ANYNUMBER
  
-+
-+#### Redwood Style Date Setting
-+# When set to true DATE translates to TIMESTAMP(0) during DDL, default=false
-+#xdb.edb_redwood_date=false
+-
+-#### Redwood Style Date Setting
+-# When set to true DATE translates to TIMESTAMP(0) during DDL, default=false
+-#xdb.edb_redwood_date=false

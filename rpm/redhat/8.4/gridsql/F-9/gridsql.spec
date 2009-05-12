@@ -13,7 +13,7 @@ Source2:	http://garr.dl.sourceforge.net/sourceforge/%{name}/%{name}-agent-%{vers
 
 Patch0:		%{name}_env.patch
 
-Requires:	postgresql-server
+Requires:	postgresql-server, postgresql-jdbc
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:	noarch

@@ -11,6 +11,8 @@ Source0:	http://garr.dl.sourceforge.net/sourceforge/gridsql/gridsql-1.1beta.tar.
 Source1:	http://garr.dl.sourceforge.net/sourceforge/gridsql/gridsql-client-1.1beta.tar.gz
 Source2:	http://garr.dl.sourceforge.net/sourceforge/gridsql/gridsql-agent-1.1beta.tar.gz
 
+Patch0:		gridsql_env.patch
+
 Requires:	postgresql-server
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -48,6 +50,7 @@ documentation for GridSQL
 
 %prep
 %setup -q -n %{name}-%{version} -c -a 2 -a 1
+%patch -p0
 
 %build
 
@@ -72,8 +75,6 @@ install -m 644 release_notes.txt license.txt  %{buildroot}%{_docdir}/%{name}-%{v
 
 install -m 755 docs/*.PDF %{buildroot}%{_docdir}/%{name}-%{version}
 
-#FIXME: We need to patch this script before installing
-#FIXME: Also: gridsql.noarch: E: script-without-shebang /usr/bin/gridsql_env.sh
 install -m 755 gridsql_env.sh %{buildroot}%{_bindir}
 
 # Install gridsql agent files

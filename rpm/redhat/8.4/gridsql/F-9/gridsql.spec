@@ -30,7 +30,7 @@ servers, for querying large sets of data.
 %package agent
 Summary:	The agent programs needed for GridSQL
 Group:		Applications/Databases
-Requires:	gridsql %{version}-%{release}
+Requires:	gridsql = %{version}-%{release}
 
 %description agent
 Agent programs needed for GridSQL
@@ -38,7 +38,7 @@ Agent programs needed for GridSQL
 %package client
 Summary:	The client programs needed for GridSQL
 Group:		Applications/Databases
-Requires:	gridsql %{version}-%{release}
+Requires:	gridsql = %{version}-%{release}
 
 %description client
 Client programs needed for GridSQL
@@ -46,7 +46,7 @@ Client programs needed for GridSQL
 %package docs
 Summary:	Documentation for GridSQL
 Group:		Applications/Databases
-Requires:	gridsql %{version}-%{release}
+Requires:	gridsql = %{version}-%{release}
 
 %description docs
 documentation for GridSQL

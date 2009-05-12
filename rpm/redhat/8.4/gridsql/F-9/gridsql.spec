@@ -68,7 +68,8 @@ install -d %{buildroot}%{_datadir}/java
 
 # Install gridsql core files
 pushd gridsql-1.1
-install -m 755 bin/* %{buildroot}%{_bindir}
+install -m 755 bin/*.sh %{buildroot}%{_bindir}
+install -m 755 bin/*.jar %{buildroot}%{_datadir}/java
 install -m 755 config/* %{buildroot}%{_sysconfdir}/%{name}
 install -m 755 lib/*.jar %{buildroot}%{_datadir}/java
 install -m 644 release_notes.txt license.txt  %{buildroot}%{_docdir}/%{name}-%{version}/
@@ -80,14 +81,14 @@ install -m 755 gridsql_env.sh %{buildroot}%{_bindir}
 # Install gridsql agent files
 cd ../gridsql-agent-1.1
 
-install -m 755 bin/* %{buildroot}%{_bindir}
+install -m 755 bin/*.sh %{buildroot}%{_bindir}
 install -m 755 config/* %{buildroot}%{_sysconfdir}/%{name}
 install -m 755 lib/*.jar %{buildroot}%{_datadir}/java
 
 # Install gridsql client files
 cd ../gridsql-client-1.1
 
-install -m 755 bin/* %{buildroot}%{_bindir}
+install -m 755 bin/*.sh %{buildroot}%{_bindir}
 install -m 755 lib/*.jar %{buildroot}%{_datadir}/java
 
 %clean
@@ -98,11 +99,6 @@ mkdir /var/log/gridsql
 
 %files
 %defattr(0755,root,root)
-%{_bindir}/xdbcmdline.jar
-%{_bindir}/xdbengine.jar
-%{_bindir}/xdbprotocol.jar
-%{_bindir}/xdbserver.jar
-%{_bindir}/xdbutil.jar
 %{_bindir}/gs-agent.sh
 %{_bindir}/gs-cmdline.sh
 %{_bindir}/gs-createdb.sh
@@ -119,6 +115,11 @@ mkdir /var/log/gridsql
 %{_datadir}/java/edb-jdbc14.jar
 %{_datadir}/java/jline-0_9_5.jar
 %{_datadir}/java/log4j.jar
+%{_datadir}/java/xdbcmdline.jar
+%{_datadir}/java/xdbengine.jar
+%{_datadir}/java/xdbprotocol.jar
+%{_datadir}/java/xdbserver.jar
+%{_datadir}/java/xdbutil.jar
 
 %doc %attr(0644,root,root) %{_docdir}/%{name}-%{version}/*.txt
 

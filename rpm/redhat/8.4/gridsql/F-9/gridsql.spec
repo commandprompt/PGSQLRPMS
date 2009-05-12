@@ -18,7 +18,7 @@ Patch4:		%{name}-client-rpm.patch
 Patch6:		%{name}-config.patch
 Patch7:		%{name}-agent-config.patch
 
-Requires:	postgresql-server, postgresql-jdbc
+Requires:	postgresql-server, postgresql-jdbc, java
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:	noarch

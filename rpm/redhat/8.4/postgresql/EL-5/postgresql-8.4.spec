@@ -72,7 +72,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4beta1
+Version:	8.4beta2
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -84,7 +84,7 @@ Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/8.4/postgresql-8.4beta1-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/8.4/postgresql-8.4beta2-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh
@@ -723,6 +723,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat May 16 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4beta2-1PGDG
+- Update to 8.4 beta 2
+
 * Mon Apr 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4beta1-1PGDG 
 - Update to 8.4 beta1 
 - Remove buildrhel3 macro 

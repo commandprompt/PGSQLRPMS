@@ -37,8 +37,6 @@ License:	BSD
 Group:		Applications/Databases
 URL:		http://jdbc.postgresql.org/
 
-Source1:	http://jdbc.postgresql.org/download/postgresql-%{upstreamver}.jdbc2.jar
-Source2:	http://jdbc.postgresql.org/download/postgresql-%{upstreamver}.jdbc2ee.jar
 Source3:	http://jdbc.postgresql.org/download/postgresql-%{upstreamver}.jdbc3.jar
 Source4:	http://jdbc.postgresql.org/download/postgresql-%{upstreamver}.jdbc4.jar
 
@@ -54,8 +52,6 @@ Java programs to access a PostgreSQL database.
 %install
 rm -rf %{buildroot}
 install -d %{buildroot}%{_javadir}
-install -m 755 %{SOURCE1} %{buildroot}%{_javadir}
-install -m 755 %{SOURCE2} %{buildroot}%{_javadir}
 install -m 755 %{SOURCE3} %{buildroot}%{_javadir}
 install -m 755 %{SOURCE4} %{buildroot}%{_javadir}
 
@@ -64,8 +60,6 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%{_javadir}/postgresql-%{upstreamver}.jdbc2.jar
-%{_javadir}/postgresql-%{upstreamver}.jdbc2ee.jar
 %{_javadir}/postgresql-%{upstreamver}.jdbc3.jar
 %{_javadir}/postgresql-%{upstreamver}.jdbc4.jar
 

@@ -1,5 +1,5 @@
---- mammoth-replicator-8.3-1.8-beta1/src/pl/plperl/GNUmakefile.old	2008-12-29 21:02:08.000000000 +0200
-+++ mammoth-replicator-8.3-1.8-beta1/src/pl/plperl/GNUmakefile	2008-12-29 21:02:27.000000000 +0200
+--- mammoth-replicator-8.3-1.8-beta4/src/pl/plperl/GNUmakefile.old	2009-05-26 08:35:33.000000000 +0300
++++ mammoth-replicator-8.3-1.8-beta4/src/pl/plperl/GNUmakefile	2009-05-26 08:35:47.000000000 +0300
 @@ -39,6 +39,9 @@
  
  SHLIB_LINK = $(perl_embed_ldflags) $(BE_DLLLIBS)

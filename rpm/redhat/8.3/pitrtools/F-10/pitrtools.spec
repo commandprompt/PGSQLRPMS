@@ -6,7 +6,7 @@ Version:	1.2
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	http://files.commandprompt.com/pitrtools/%{name}-%{version}.tar.bz2
 URL:		https://projects.commandprompt.com/public/pitrtools
 Requires:	postgresql-server >= 8.3, postgresql-contrib >= 8.3
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

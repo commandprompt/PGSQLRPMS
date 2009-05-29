@@ -4,8 +4,8 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	1.2.15
-Release:	4%{?dist}
+Version:	1.2.16
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -146,6 +146,9 @@ fi
 %endif
 
 %changelog
+* Fri May 29 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.16-1
+- Update to 1.2.16
+
 * Sat Mar 14 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-4
 - Create log directory, per pgcore #77.
 

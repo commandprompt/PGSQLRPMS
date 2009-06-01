@@ -1,4 +1,4 @@
-%{!?javabuild:%define	javabuild 1}
+%{!?javabuild:%define	javabuild 0}
 %{!?utils:%define	utils 1}
 %{!?gcj_support:%define	gcj_support 1}
 

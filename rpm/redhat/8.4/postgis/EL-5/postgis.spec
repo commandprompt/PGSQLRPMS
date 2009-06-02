@@ -5,10 +5,11 @@
 Summary:	Geographic Information Systems Extensions to PostgreSQL
 Name:		postgis
 Version:	1.3.6
-Release:	1%{?dist}
-License:	GPL
+Release:	2%{?dist}
+License:	GPLv2+
 Group:		Applications/Databases
 Source0:	http://postgis.refractions.net/download/%{name}-%{version}.tar.gz
+Source2:	http://www.postgis.org/download/%{name}-%{version}.pdf
 Source4:	filter-requires-perl-Pg.sh
 URL:		http://postgis.refractions.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -23,6 +24,12 @@ allowing it to be used as a backend spatial database for geographic information
 systems (GIS), much like ESRI's SDE or Oracle's Spatial extension. PostGIS 
 follows the OpenGIS "Simple Features Specification for SQL" and has been 
 certified as compliant with the "Types and Functions" profile.
+
+%package docs
+Summary:	Extra documentation for PostGIS   
+Group:		Applications/Databases
+%description docs
+The postgis-docs package includes PDF documentation of PostGIS.
 
 %if %javabuild
 %package jdbc
@@ -56,6 +63,8 @@ The postgis-utils package provides the utilities for PostGIS.
 
 %prep
 %setup -q
+# Copy .pdf file to top directory before installing.
+cp -p %{SOURCE2} .
 
 %build
 %configure 
@@ -147,7 +156,15 @@ rm -rf %{buildroot}
 %attr(644,root,root) %{_datadir}/%{name}/%{name}_restore.pl
 %endif
 
+%files docs
+%defattr(-,root,root)
+%doc postgis*.pdf
+
 %changelog
+* Tue Jun 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.6-2
+- Add a new subpackage: -docs, and add postgis pdf file to it.
+- Update license.
+
 * Wed May 6 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.6-1
 - Update to 1.3.6
 

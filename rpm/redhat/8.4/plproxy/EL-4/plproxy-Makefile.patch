@@ -1,0 +1,15 @@
+--- plproxy-2.0.8/Makefile.old	2009-06-03 18:05:13.000000000 +0300
++++ plproxy-2.0.8/Makefile	2009-06-03 18:05:31.000000000 +0300
+@@ -49,10 +49,10 @@
+ src/parser.tab.h: src/parser.tab.c
+ 
+ src/parser.tab.c: src/parser.y
+-	cd src; $(BISON) -d parser.y
++	cd src; bison -d parser.y
+ 
+ src/scanner.c: src/scanner.l
+-	cd src; $(FLEX) -oscanner.c scanner.l
++	cd src; flex -oscanner.c scanner.l
+ 
+ # dependencies
+ $(OBJS): src/plproxy.h src/rowstamp.h

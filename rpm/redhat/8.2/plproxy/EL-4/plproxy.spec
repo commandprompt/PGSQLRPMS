@@ -6,9 +6,10 @@ Group:		Applications/Databases
 License:	BSD
 URL:		http://pgfoundry.org/projects/plproxy/
 Source0:	http://pgfoundry.org/frs/download.php/2053/%{name}-%{version}.tar.gz
+Patch0:		%{name}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	postgresql-devel >= 8.1 flex >= 2.5.4
+BuildRequires:	postgresql-devel >= 8.1 flex >= 2.5.4, bison
 Requires:	postgresql >= 8.1
 
 %description
@@ -16,6 +17,7 @@ PL/Proxy is database partitioning system implemented as PL language.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
 
 %build
 make %{?_smp_mflags}
@@ -45,6 +47,7 @@ rm -rf %{buildroot}
 %changelog
 * Mon Feb 2 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.8-1
 - Update to 2.0.8
+- Add a patch for EL-4, so that we can get rid of make problem.
 
 * Tue Oct 7 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.0.7-1
 - Update to 2.0.7

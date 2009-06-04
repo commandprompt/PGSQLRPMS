@@ -26,7 +26,7 @@ follows the OpenGIS "Simple Features Specification for SQL" and has been
 certified as compliant with the "Types and Functions" profile.
 
 %package docs
-Summary:	Extra documentation for PostGIS   
+Summary:	Extra documentation for PostGIS
 Group:		Applications/Databases
 %description docs
 The postgis-docs package includes PDF documentation of PostGIS.
@@ -37,7 +37,7 @@ Summary:	The JDBC driver for PostGIS
 Group:		Applications/Databases
 License:	LGPL
 Requires:	%{name} = %{version}-%{release}, postgresql-jdbc
-BuildRequires:  ant >= 0:1.6.2, junit >= 0:3.7
+BuildRequires:	ant >= 0:1.6.2, junit >= 0:3.7
 
 %if %{gcj_support}
 BuildRequires:		gcc-java, postgresql-jdbc
@@ -126,7 +126,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc COPYING CREDITS NEWS TODO README.%{name} doc/html loader/README.* doc/%{name}.xml  doc/ZMSgeoms.txt 
+%doc COPYING CREDITS NEWS TODO README.%{name} doc/html loader/README.* doc/%{name}.xml doc/ZMSgeoms.txt
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/pgsql/postgis.so*
 %attr(755,root,root) %{_libdir}/pgsql/liblwgeom.so*
@@ -163,7 +163,8 @@ rm -rf %{buildroot}
 %changelog
 * Tue Jun 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.6-2
 - Add a new subpackage: -docs, and add postgis pdf file to it.
-- Update license.
+- Update license.
+- Fix some very minor rpmlint problems.
 
 * Wed May 6 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.6-1
 - Update to 1.3.6
@@ -232,7 +233,7 @@ rm -rf %{buildroot}
 - Fixed all build errors except jdbc (so, defaulted to 0)
 - Added new files under %%utils
 - Removed postgis-jdbc2-makefile.patch (applied to -head)
-                                                                                                    
+
 * Tue Sep 27 2005 - Devrim GUNDUZ <devrim@gunduz.org>
 - Update to 1.0.4
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-# postgresql    This is the init script for starting up the pgbouncer
+# pgbouncer    This is the init script for starting up the pgbouncer
 #
 # chkconfig: - 64 36
 # description: Starts and stops the pgbouncer daemon.

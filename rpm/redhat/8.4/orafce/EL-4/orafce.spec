@@ -8,7 +8,7 @@ Source0:	http://pgfoundry.org/frs/download.php/1839/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/orafce/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	postgresql-devel
+BuildRequires:	postgresql-devel, openssl-devel, krb5-devel, bison, flex 
 Requires:	postgresql
 
 %description 	

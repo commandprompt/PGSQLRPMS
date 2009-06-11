@@ -5,10 +5,11 @@
 Summary:	Geographic Information Systems Extensions to PostgreSQL
 Name:		postgis
 Version:	1.3.6
-Release:	1%{?dist}
-License:	GPL
+Release:	2%{?dist}
+License:	GPLv2+
 Group:		Applications/Databases
 Source0:	http://postgis.refractions.net/download/%{name}-%{version}.tar.gz
+Source2:	http://www.postgis.org/download/%{name}-%{version}.pdf
 Source4:	filter-requires-perl-Pg.sh
 URL:		http://postgis.refractions.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -24,13 +25,19 @@ systems (GIS), much like ESRI's SDE or Oracle's Spatial extension. PostGIS
 follows the OpenGIS "Simple Features Specification for SQL" and has been 
 certified as compliant with the "Types and Functions" profile.
 
+%package docs
+Summary:	Extra documentation for PostGIS
+Group:		Applications/Databases
+%description docs
+The postgis-docs package includes PDF documentation of PostGIS.
+
 %if %javabuild
 %package jdbc
 Summary:	The JDBC driver for PostGIS
 Group:		Applications/Databases
 License:	LGPL
 Requires:	%{name} = %{version}-%{release}, postgresql-jdbc
-BuildRequires:  ant >= 0:1.6.2, junit >= 0:3.7
+BuildRequires:	ant >= 0:1.6.2, junit >= 0:3.7
 
 %if %{gcj_support}
 BuildRequires:		gcc-java, postgresql-jdbc
@@ -56,6 +63,8 @@ The postgis-utils package provides the utilities for PostGIS.
 
 %prep
 %setup -q
+# Copy .pdf file to top directory before installing.
+cp -p %{SOURCE2} .
 
 %build
 %configure 
@@ -117,7 +126,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc COPYING CREDITS NEWS TODO README.%{name} doc/html loader/README.* doc/%{name}.xml  doc/ZMSgeoms.txt 
+%doc COPYING CREDITS NEWS TODO README.%{name} doc/html loader/README.* doc/%{name}.xml doc/ZMSgeoms.txt
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/pgsql/postgis.so*
 %attr(755,root,root) %{_libdir}/pgsql/liblwgeom.so*
@@ -147,7 +156,16 @@ rm -rf %{buildroot}
 %attr(644,root,root) %{_datadir}/%{name}/%{name}_restore.pl
 %endif
 
+%files docs
+%defattr(-,root,root)
+%doc postgis*.pdf
+
 %changelog
+* Tue Jun 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.6-2
+- Add a new subpackage: -docs, and add postgis pdf file to it.
+- Update license.
+- Fix some very minor rpmlint problems.
+
 * Wed May 6 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.6-1
 - Update to 1.3.6
 
@@ -215,7 +233,7 @@ rm -rf %{buildroot}
 - Fixed all build errors except jdbc (so, defaulted to 0)
 - Added new files under %%utils
 - Removed postgis-jdbc2-makefile.patch (applied to -head)
-                                                                                                    
+
 * Tue Sep 27 2005 - Devrim GUNDUZ <devrim@gunduz.org>
 - Update to 1.0.4
 

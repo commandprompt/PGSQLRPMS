@@ -1,14 +1,14 @@
 Summary:	Implementation of some Oracle functions into PostgreSQL
 Name:		orafce
 Version:	2.1.4
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/1839/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/orafce/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	postgresql-devel
+BuildRequires:	postgresql-devel, openssl-devel, krb5-devel, bison, flex
 Requires:	postgresql
 
 %description 	
@@ -45,6 +45,9 @@ rm -rf %{buildroot}
 %{_libdir}/pgsql/orafunc.so
 
 %changelog
+* Thu Jun 11 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.4-2
+- Add new BR, per pgcore #87.
+
 * Wed Aug 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.4-1
 - Update to 2.1.4
 

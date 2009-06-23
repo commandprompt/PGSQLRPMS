@@ -1,7 +1,7 @@
 README.rpm-dist
 -----------------------------------------------------------------------------
-Version 8.4devel, for the PostgreSQL 8.4devel-1PGDG RPMset.
-Devrim Gündüz <devrim@CommandPrompt.com>, Lamar Owen <lowen@pari.edu>
+Version 8.4.0, for the PostgreSQL 8.4.0-1PGDG RPMset.
+Devrim Gündüz <devrim@CommandPrompt.com>
 -----------------------------------------------------------------------------
 
 Contents:
@@ -137,7 +137,7 @@ various subdirectories.
 Different distributions have different ideas of some of these file locations.
 In particular, the documentation directory can be /usr/doc, /usr/doc/packages,
 /usr/share/doc, /usr/share/doc/packages, or some other similar path.  The
-Red Hat / Fedora Core locations are listed below. 
+Red Hat / Fedora locations are listed below. 
 
 However, the RPM's install the files like this:
 Executables:		/usr/bin
@@ -146,7 +146,7 @@ Documentation:		/usr/share/doc/postgresql-x.y.z
 Contrib:		/usr/share/doc/postgresql-x.y.z/contrib
 Source:			not installed
 Data:			/var/lib/pgsql/data
-Backup area:		/var/lib/pgsql/backup
+Backup area:		/var/lib/pgsql/backups
 Templates:		/usr/share/pgsql
 Procedural Languages:	/usr/lib/pgsql
 Development Headers:	/usr/include/pgsql
@@ -154,7 +154,7 @@ Other shared data:	/usr/share/pgsql
 Regression tests:	/usr/lib/pgsql/test/regress  (in the -test package)
 Documentation SGML:	/usr/share/doc/postgresql-docs-x.y.z
 
-The above list references the Red Hat / Fedora Core structure.  These locations
+The above list references the Red Hat / Fedora structure.  These locations
 may change for other distributions.  Use of 'rpm -ql' for each package is
 recommended as the 'Official' location source.
 
@@ -266,7 +266,7 @@ release.  You will need to be root to rebuild, unless you have already set up
 a non-root build environment.
 
 Install the source RPM with rpm -i, then CD to the rpm building area (on Red Hat
-or Fedora Core this is /usr/src/redhat by default).  You will have to have a full
+or Fedora this is /usr/src/redhat by default).  You will have to have a full
 development environment to rebuild the full RPM set.
 
 This release of the RPMset includes the ability to conditionally build 
@@ -301,10 +301,6 @@ build.  The self test tends to pick up the installed libpq.so shared library
 in place of the one being built :-(, so if that isn't compatible the test will
 fail.  Also, you can't use runselftest when doing the build as root.
 
-RHEL 3 has a wrong directory for Kerberos header files. We have a macro "buildrhel3"
-to override kerberos directory name for RHEL 3. Use that macro for building SRPMS on
-RHEL 3.
-
 More of these conditionals will be added in the future.
 
 CONTRIB FILES
@@ -319,16 +315,10 @@ and dependencies.
 MORE INFORMATION
 -------------------------------------------------------------------------------
 You can get more information at http://www.postgresql.org and 
-http://pgfoundry.org/projects/pgsqlrpms
+http://yum.pgsqlrpms.org
 
 Please help make this packaging better -- let us know if you find problems, or
 better ways of doing thing. You can reach us by e-mail at 
-pgsqlrpms-hackers@pgfoundry.org
-
-SUSE products usually ship with the latest version of PostgreSQL that
-was available at the time they were released. RPMs for newer versions
-of PostgreSQL can be found on the SUSE FTP server and it's mirrors.
-
-ftp://ftp.suse.com/pub/projects/postgresql
-http://www.novell.com/products/linuxprofessional/downloads/ftp/int_mirrors.html
+pgsqlrpms-hackers @@ pgfoundry dot org or devrim @@ commandprompt dot com
 -------------------------------------------------------------------------------
+

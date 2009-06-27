@@ -47,7 +47,7 @@
 # rpm --define 'packagename 0' .... to force the package NOT to build.
 # The base package, the lib package, the devel package, and the server package always get built.
 
-%define beta 1
+%define beta 0
 %{?beta:%define __os_install_post /usr/lib/rpm/brp-compress}
 
 %{!?kerbdir:%define kerbdir "/usr"}
@@ -67,12 +67,12 @@
 %{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
 
-# This is a temp macro, which will be removed when 8.4 gold will be released.
+# This is a macro to be used with find_lang
 %define majorversion 8.4
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.4rc2
+Version:	8.4.0
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -84,7 +84,7 @@ Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/8.4/postgresql-8.4rc1-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/8.4/postgresql-%{version}-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh
@@ -459,8 +459,6 @@ cp %{SOURCE6} README.rpm-dist
 mv %{buildroot}%{_docdir}/pgsql/html doc
 rm -rf %{buildroot}%{_docdir}/pgsql
 
-# Change the %{majorversion} macro to 
-# %{version} when 8.4 is released.
 %find_lang ecpg-%{majorversion}
 %find_lang ecpglib6-%{majorversion}
 %find_lang initdb-%{majorversion}
@@ -729,6 +727,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Jun 27 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4.0-1PGDG
+- Update to 8.4.0
+
 * Tue Ju2 23 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4rc2-1PGDG
 - Update to 8.4 rc2
 

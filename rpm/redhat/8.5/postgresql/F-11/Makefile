@@ -11,7 +11,7 @@
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
 DIST=.f11
-SPECFILE="postgresql-8.4.spec"
+SPECFILE="postgresql-8.5.spec"
 HOMEDIR=$HOMEDIR
 
 # Now, include global Makefile

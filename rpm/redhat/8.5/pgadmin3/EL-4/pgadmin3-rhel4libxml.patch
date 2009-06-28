@@ -1,0 +1,27 @@
+--- /configure.old	2009-03-13 19:24:56.000000000 +0200
++++ /configure	2009-03-13 19:25:21.000000000 +0200
+@@ -7338,18 +7338,18 @@
+ 	XML2_MINOR=`expr ${XML2_VERSION} : '[0-9]*\.\([0-9]*\)'`
+ 	XML2_REVISION=`expr ${XML2_VERSION} : '[0-9]*\.[0-9]*\.\([0-9]*\)'`
+ 		if test "$XML2_MAJOR" -lt 2; then
+-		{ { $as_echo "$as_me:$LINENO: error: libxml2 2.6.18 or newer is require to build pgAdmin" >&5
+-$as_echo "$as_me: error: libxml2 2.6.18 or newer is require to build pgAdmin" >&2;}
++		{ { $as_echo "$as_me:$LINENO: error: libxml2 2.6.16 or newer is require to build pgAdmin" >&5
++$as_echo "$as_me: error: libxml2 2.6.16 or newer is require to build pgAdmin" >&2;}
+    { (exit 1); exit 1; }; }
+ 	fi
+ 	if test "$XML2_MAJOR" -eq 2 && test "$XML2_MINOR" -lt 6; then
+-		{ { $as_echo "$as_me:$LINENO: error: libxml2 2.6.18 or newer is require to build pgAdmin" >&5
+-$as_echo "$as_me: error: libxml2 2.6.18 or newer is require to build pgAdmin" >&2;}
++		{ { $as_echo "$as_me:$LINENO: error: libxml2 2.6.16 or newer is require to build pgAdmin" >&5
++$as_echo "$as_me: error: libxml2 2.6.16 or newer is require to build pgAdmin" >&2;}
+    { (exit 1); exit 1; }; }
+ 	fi
+ 	if test "$XML2_MAJOR" -eq 2 && test "$XML2_MINOR" -eq 6 && test "$XML2_REVISION" -lt 18; then
+-		{ { $as_echo "$as_me:$LINENO: error: libxml2 2.6.18 or newer is require to build pgAdmin" >&5
+-$as_echo "$as_me: error: libxml2 2.6.18 or newer is require to build pgAdmin" >&2;}
++		{ { $as_echo "$as_me:$LINENO: error: libxml2 2.6.16 or newer is require to build pgAdmin" >&5
++$as_echo "$as_me: error: libxml2 2.6.16 or newer is require to build pgAdmin" >&2;}
+    { (exit 1); exit 1; }; }
+ 	fi
+ 	{ $as_echo "$as_me:$LINENO: result: ok" >&5

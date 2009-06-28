@@ -1,0 +1,12 @@
+--- DBD-Pg-1.31/t/lib/App/Info/RDBMS/PostgreSQL.pm.fixver	2003-12-19 09:48:23.000000000 -0500
++++ DBD-Pg-1.31/t/lib/App/Info/RDBMS/PostgreSQL.pm	2003-12-19 09:48:47.000000000 -0500
+@@ -254,6 +254,9 @@
+         } elsif ($version =~ /(\d+)\.(\d+)\w+\d+/) {
+             @{$self}{qw(version major minor patch)} =
+               ($version, $1, $2, 0);
++        } elsif ($version =~ /(\d+)\.(\d+)/) {
++            @{$self}{qw(version major minor patch)} =
++              ($version, $1, $2, 0);
+         } else {
+             $self->error("Failed to parse PostgreSQL version parts from " .
+                          "string '$version'");

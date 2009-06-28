@@ -1,0 +1,21 @@
+--- Makefile.old	2008-02-02 01:49:03.000000000 -0800
++++ Makefile	2008-02-02 01:49:38.000000000 -0800
+@@ -6,11 +6,18 @@
+ CVSROOT = $(shell cat CVS/Root)
+ VERSION = $(shell ./pgloader.py --version | cut -d' ' -f3)
+ 
++# for RPMs
++ifdef RPMDESTDIR
++
++libdir = $(LIBDIR)
++exdir =  $(EXDIR)
++else
+ # debian setting
+ DESTDIR =
+ 
+ libdir   = $(DESTDIR)/usr/share/python-support/pgloader
+ exdir    = $(DESTDIR)/usr/share/doc/pgloader
++endif
+ 
+ pgloader = pgloader.py
+ examples = examples

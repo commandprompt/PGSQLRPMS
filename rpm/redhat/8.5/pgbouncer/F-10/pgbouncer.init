@@ -1,0 +1,165 @@
+#!/bin/sh
+# pgbouncer    This is the init script for starting up the pgbouncer
+#
+# chkconfig: - 64 36
+# description: Starts and stops the pgbouncer daemon.
+#
+# processname: pgbouncer
+# pidfile: /var/run/pgbouncer/pgbouncer.pid
+
+# Source function library.
+INITD=/etc/rc.d/init.d
+. $INITD/functions
+
+# Get function listing for cross-distribution logic.
+TYPESET=`typeset -f|grep "declare"`
+
+# Get config.
+. /etc/sysconfig/network
+
+# Find the name of the script
+NAME=`basename $0`
+if [ ${NAME:0:1} = "S" -o ${NAME:0:1} = "K" ]
+then
+	NAME=${NAME:3}
+fi
+
+# For SELinux we need to use 'runuser' not 'su'
+if [ -x /sbin/runuser ]
+then
+    SU=runuser
+else
+    SU=su
+fi
+
+# Override defaults from /etc/sysconfig/pgbouncer if file is present
+[ -f /etc/sysconfig/${NAME} ] && . /etc/sysconfig/${NAME}
+
+# Check that networking is up.
+[ "${NETWORKING}" = "no" ] && exit 0
+
+script_result=0
+
+start(){
+	BOUNCER_START=$"Starting ${NAME} service: "
+
+	# Make sure startup-time log file is valid
+	if [ ! -e "$BOUNCERLOG" -a ! -h "$BOUNCERLOG" ]
+	then
+		touch "$BOUNCERLOG" || exit 1
+		chown postgres:postgres "$BOUNCERLOG"
+		chmod go-rwx "$BOUNCERLOG"
+		[ -x /usr/bin/chcon ] && /usr/bin/chcon -u system_u -r object_r -t postgresql_log_t "$BOUNCERLOG" 2>/dev/null
+	fi
+
+	# Make sure that pgbouncer is not already running:	
+	if [ -f /var/run/${NAME}/${NAME}.pid ]
+	then
+		echo "${NAME} is already running"
+		echo_failure
+		echo
+		exit 1
+	fi
+
+	echo -n "$BOUNCER_START"
+	[ -d /var/run/${NAME} ] || mkdir /var/run/${NAME}
+	chown postgres: /var/run/${NAME}
+
+	$SU -l postgres -c "pgbouncer '$BOUNCERCONF' & " >> "$BOUNCERLOG" 2>&1 < /dev/null
+	sleep 2
+	pid=`pidof -s pgbouncer`
+        if [ $pid ]
+        then
+          success "$BOUNCER_START"
+          touch /var/lock/subsys/${NAME}
+          echo "$pid" > "/var/run/${NAME}/${NAME}.pid"
+          echo
+        else
+          failure "$BOUNCER_START"
+          echo
+          script_result=1
+        fi
+}
+
+stop(){
+        echo -n $"Stopping ${NAME} service: "
+	if [ -f /var/run/${NAME}/${NAME}.pid ]
+	then
+	        kill -TERM `cat "/var/run/${NAME}/${NAME}.pid"`
+	        ret=$? 
+	        if [ $ret -eq 0 ]
+	        then
+	                echo_success
+	        else
+	                echo_failure
+	                script_result=1
+	        fi
+	        echo
+	          rm -f "/var/run/${NAME}/${NAME}.pid"
+	          rm -f "/var/lock/subsys/${NAME}"
+	else
+		echo "   ${NAME} is not running."
+		echo_failure
+		echo
+		exit 1
+	fi
+}
+
+restart(){
+    stop
+    start
+}
+
+condrestart(){
+    [ -e /var/lock/subsys/${NAME} ] && restart
+}
+
+condstop(){
+    [ -e /var/lock/subsys/${NAME} ] && stop
+}
+
+reload(){
+    $SU -l postgres -c "kill -HUP `cat /var/run/${NAME}/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
+}
+pause(){
+    $SU -l postgres -c "kill -USR1 `cat /var/run/${NAME}/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
+}
+resum(){
+   $SU -l postgres -c "kill -USR2 `cat /var/run/${NAME}/${NAME}.pid`" > /dev/null 2>&1 < /dev/null
+}
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  status)
+	status pgbouncer 
+	script_result=$?
+	;;
+  restart)
+	restart
+	;;
+  pause)
+	pause
+	;;
+  continue)
+	resum
+	;;
+  condrestart)
+	condrestart
+	;;
+  condstop)
+	condstop
+	;;
+  reload|force-reload)
+	reload
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|status|restart|pause|continue|reload|force-reload|condrestart|condstop}"
+	exit 1
+esac
+
+exit $script_result

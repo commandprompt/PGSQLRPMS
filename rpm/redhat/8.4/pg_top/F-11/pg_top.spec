@@ -7,7 +7,7 @@ Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/1780/%{name}-%{version}.tar.bz2
 Patch1:		%{name}-makefile.patch
 URL:		http://pgfoundry.org/projects/ptop
-BuildRequires:	postgresql-devel >= 8.1, libtermcap-devel
+BuildRequires:	postgresql-devel >= 8.1, libtermcap-devel, systemtap-sdt-devel
 Requires:	postgresql-server >= 8.1
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 

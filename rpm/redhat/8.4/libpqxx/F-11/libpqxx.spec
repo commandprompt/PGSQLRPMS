@@ -1,5 +1,5 @@
 Name:           libpqxx
-Version:        3.0
+Version:        3.0.1
 Release:        1%{?dist}
 Summary:        C++ client API for PostgreSQL
 
@@ -95,6 +95,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jun 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 3.0.1-1
+- Update to 3.0.1
+
 * Tue Dec 2 2008 Devrim GUNDUZ <devrim@commandprompt.com> 3.0.0-1
 - Update to 3.0.0
 - Update gcc 4.3 patch

@@ -1,5 +1,5 @@
 Name:           libevent
-Version:        1.4.9
+Version:        1.4.11
 Release:        1%{?dist}
 Summary:        Abstract asynchronous event notification library
 
@@ -79,5 +79,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Mon Jun 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.4.11-1
+- Update to 1.4.11
+
 * Tue Jan 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.4.9-1
 - Initial build for PostgreSQL RPM Repository, based on Fedora spec.

@@ -414,11 +414,6 @@ install -m 644 %{SOURCE15} %{buildroot}/var/lib/pgsql/.bash_profile
 # Create the multiple postmaster startup directory
 install -d -m 700 %{buildroot}/etc/sysconfig/pgsql
 
-# Install MCP conf files
-install -m 644 src/bin/mammoth/mcp_server.conf %{buildroot}%{_datadir}/pgsql
-install -m 644 src/bin/mammoth/mcp_server.conf.sample %{buildroot}%{_datadir}/pgsql
-/bin/rm -f %{buildroot}/%{_bindir}/mcp_server.conf*
-
 %if %test
 	# tests. There are many files included here that are unnecessary,
 	# but include them anyway for completeness.  We replace the original
@@ -607,7 +602,6 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/mammoth_pk_indexes.sql
 %{_datadir}/pgsql/replicator-functions.sql
 %{_datadir}/pgsql/globals-install.sql
-%attr(644,postgres,postgres) %config(noreplace) %{_datadir}/pgsql/mcp_server.conf*
 
 %files server -f server.lst
 %defattr(-,root,root)

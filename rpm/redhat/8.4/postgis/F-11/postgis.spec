@@ -44,6 +44,7 @@ BuildRequires:	ant >= 0:1.6.2, junit >= 0:3.7, postgresql-jdbc
 
 %if %{gcj_support}
 BuildRequires:		gcc-java
+BuildRequires:		java-1.5.0-gcj-devel
 Requires(post):		%{_bindir}/rebuild-gcj-db
 Requires(postun):	%{_bindir}/rebuild-gcj-db
 %endif
@@ -94,7 +95,6 @@ make install DESTDIR=%{buildroot}
 install -d %{buildroot}%{_libdir}/pgsql/
 install -d  %{buildroot}%{_datadir}/pgsql/contrib/
 install -m 644 *.sql %{buildroot}%{_datadir}/pgsql/contrib/
-#rm -f  %{buildroot}%{_libdir}/liblwgeom.so*
 rm -f  %{buildroot}%{_datadir}/*.sql
 
 if [ "%{_libdir}" = "/usr/lib64" ] ; then
@@ -149,6 +149,7 @@ rm -rf %{buildroot}
 %files utils
 %defattr(-,root,root)
 %doc utils/README
+%dir %{_datadir}/%{name}/
 %attr(755,root,root) %{_datadir}/%{name}/test_estimation.pl
 %attr(755,root,root) %{_datadir}/%{name}/profile_intersects.pl
 %attr(755,root,root) %{_datadir}/%{name}/test_joinestimation.pl
@@ -161,7 +162,6 @@ rm -rf %{buildroot}
 %files docs
 %defattr(-,root,root)
 %doc postgis*.pdf
-
 
 %changelog
 * Sat Jul 4 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.4.0rc1-1

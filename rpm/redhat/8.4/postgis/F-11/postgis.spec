@@ -4,19 +4,21 @@
 
 Summary:	Geographic Information Systems Extensions to PostgreSQL
 Name:		postgis
-Version:	1.3.6
-Release:	2%{?dist}
+Version:	1.4.0rc1
+Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/Databases
 Source0:	http://postgis.refractions.net/download/%{name}-%{version}.tar.gz
 Source2:	http://www.postgis.org/download/%{name}-%{version}.pdf
 Source4:	filter-requires-perl-Pg.sh
+# 1.4rc1 only patch.
+Patch0:		postgis-loader-makefile.patch
 URL:		http://postgis.refractions.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	postgresql-devel, proj-devel, geos-devel, byacc, proj-devel, flex, sinjdoc, java, java-devel, ant
+BuildRequires:	postgresql-devel >= 8.2, proj-devel, geos-devel >= 3.1.1, byacc, proj-devel, flex, sinjdoc, java, java-devel, ant
 
-Requires:	postgresql, geos, proj
+Requires:	postgresql >= 8.2, geos >= 3.1.1, proj
 
 %description
 PostGIS adds support for geographic objects to the PostgreSQL object-relational
@@ -64,6 +66,7 @@ The postgis-utils package provides the utilities for PostGIS.
 
 %prep
 %setup -q
+%patch0 -p0
 # Copy .pdf file to top directory before installing.
 cp -p %{SOURCE2} .
 
@@ -89,11 +92,9 @@ popd
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -d %{buildroot}%{_libdir}/pgsql/
-install lwgeom/liblwgeom.so* %{buildroot}%{_libdir}/pgsql/
-install lwgeom/postgis.so* %{buildroot}%{_libdir}/pgsql/
 install -d  %{buildroot}%{_datadir}/pgsql/contrib/
 install -m 644 *.sql %{buildroot}%{_datadir}/pgsql/contrib/
-rm -f  %{buildroot}%{_libdir}/liblwgeom.so*
+#rm -f  %{buildroot}%{_libdir}/liblwgeom.so*
 rm -f  %{buildroot}%{_datadir}/*.sql
 
 if [ "%{_libdir}" = "/usr/lib64" ] ; then
@@ -103,7 +104,7 @@ fi
 
 %if %javabuild
 install -d %{buildroot}%{_javadir}
-install -m 755 java/jdbc/%{name}_%{version}.jar %{buildroot}%{_javadir}
+install -m 755 java/jdbc/%{name}-%{version}.jar %{buildroot}%{_javadir}
 %if %{gcj_support}
 aot-compile-rpm
 %endif
@@ -129,15 +130,14 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc COPYING CREDITS NEWS TODO README.%{name} doc/html loader/README.* doc/%{name}.xml doc/ZMSgeoms.txt
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/pgsql/postgis.so*
-%attr(755,root,root) %{_libdir}/pgsql/liblwgeom.so*
+%attr(755,root,root) %{_libdir}/pgsql/postgis-*.so
 %{_datadir}/pgsql/contrib/*.sql
 
 %if %javabuild
 %files jdbc
 %defattr(-,root,root)
 %doc java/jdbc/COPYING_LGPL java/jdbc/README
-%attr(755,root,root) %{_javadir}/%{name}_%{version}.jar
+%attr(755,root,root) %{_javadir}/%{name}-%{version}.jar
 %if %{gcj_support}
 %dir %{_libdir}/gcj/%{name}
 %{_libdir}/gcj/%{name}/*.jar.so
@@ -155,6 +155,7 @@ rm -rf %{buildroot}
 %attr(644,root,root) %{_datadir}/%{name}/create_undef.pl
 %attr(644,root,root) %{_datadir}/%{name}/%{name}_proc_upgrade.pl
 %attr(644,root,root) %{_datadir}/%{name}/%{name}_restore.pl
+%attr(644,root,root) %{_datadir}/%{name}/new_postgis_restore.pl
 %endif
 
 %files docs
@@ -163,6 +164,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jul 4 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.4.0rc1-1
+- Update to 1.4.0rc1
+- Fix spec for 1.4
+
 * Tue Jun 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.3.6-2
 - Add a new subpackage: -docs, and add postgis pdf file to it.
 - Update license.

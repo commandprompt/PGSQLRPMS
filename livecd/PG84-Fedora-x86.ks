@@ -2,7 +2,7 @@
 #    Kickstart file for Fedora PostgreSQL Spin, with PGDG packages. 	 #
 #            Devrim GUNDUZ <devrim@commandprompt.com>		 	 #
 #									 #
-# $Id: PG83-Fedora-x86.ks 733 2009-05-05 21:33:26Z devrim $									 #
+# $Id: PG84-Fedora-x86.ks 733 2009-05-05 21:33:26Z devrim $									 #
 #									 #
 # Some parts of this ks file is based on livecd-fedora-8-base-desktop.ks #
 ##########################################################################
@@ -42,11 +42,11 @@ part / --size 4096
 # List of repositories. We want to stick to x86 builds only.
 
 # These are the public repositories
-repo --name=released --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-10&arch=i386
-repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f10&arch=i386
+repo --name=released --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-11&arch=i386
+repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f11&arch=i386
 
 # PGDG RPM Repository
-repo --name=pgdg83  --baseurl=http://yum.pgsqlrpms.org/8.4/fedora/fedora-10-i386
+repo --name=pgdg84  --baseurl=http://yum.pgsqlrpms.org/8.4/fedora/fedora-11-i386
 
 %packages
 @base-x

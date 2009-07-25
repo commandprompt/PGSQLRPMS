@@ -93,7 +93,7 @@ Patch1:		rpm-pgsql.patch
 Patch3:		postgresql-logging.patch
 Patch6:		postgresql-perl-rpath.patch
 
-Buildrequires:	perl glibc-devel bison flex 
+Buildrequires:	perl glibc-devel bison flex >= 2.5.31
 Requires:	/sbin/ldconfig initscripts
 
 %if %plperl

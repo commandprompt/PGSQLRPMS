@@ -115,7 +115,6 @@ rm -rf %{buildroot}
 %{_includedir}/*
 %{_libdir}/libgeos.so
 %{_libdir}/libgeos_c.so
-%exclude %{_bindir}/XMLTester
 %exclude %{_libdir}/*.la
 %exclude %{_libdir}/*.a
 

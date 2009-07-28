@@ -4,15 +4,13 @@
 
 Summary:	Geographic Information Systems Extensions to PostgreSQL
 Name:		postgis
-Version:	1.4.0rc1
+Version:	1.4.0
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/Databases
 Source0:	http://postgis.refractions.net/download/%{name}-%{version}.tar.gz
 Source2:	http://www.postgis.org/download/%{name}-%{version}.pdf
 Source4:	filter-requires-perl-Pg.sh
-# 1.4rc1 only patch.
-Patch0:		postgis-loader-makefile.patch
 URL:		http://postgis.refractions.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -67,7 +65,6 @@ The postgis-utils package provides the utilities for PostGIS.
 
 %prep
 %setup -q
-%patch0 -p0
 # Copy .pdf file to top directory before installing.
 cp -p %{SOURCE2} .
 
@@ -164,6 +161,9 @@ rm -rf %{buildroot}
 %doc postgis*.pdf
 
 %changelog
+* Mon Jul 27 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.4.0-1
+- Release 1.4.0
+
 * Sat Jul 4 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.4.0rc1-1
 - Update to 1.4.0rc1
 - Fix spec for 1.4

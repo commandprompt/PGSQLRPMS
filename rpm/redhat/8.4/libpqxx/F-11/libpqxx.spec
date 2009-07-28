@@ -7,7 +7,6 @@ Group:          System Environment/Libraries
 License:        BSD
 URL:            http://pqxx.org/
 Source0:	http://pqxx.org/download/software/%{name}/%{name}-%{version}.tar.gz
-Source1:        http://pqxx.org/download/software/%{name}/%{name}-%{version}.tar.gz.md5sum
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # drop -Werror for now, since we get -fvisibility warnings using gcc-4.1.1/fc6+

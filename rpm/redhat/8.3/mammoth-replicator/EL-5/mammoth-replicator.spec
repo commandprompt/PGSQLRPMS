@@ -246,7 +246,7 @@ system, including regression tests and benchmarks.
 %define __perl_requires %{SOURCE16}
 
 %prep
-%setup -q -n %{name}-%{version}-1.8
+%setup -q -n %{name}-%{version}-1.8.0
 pushd doc
 tar zxf postgres.tar.gz
 popd

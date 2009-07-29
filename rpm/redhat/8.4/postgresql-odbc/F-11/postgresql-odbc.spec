@@ -23,7 +23,7 @@
 
 Name:		postgresql-odbc
 Summary:	PostgreSQL ODBC driver
-Version:	08.03.0400
+Version:	08.04.0100
 Release:	1PGDG%{?dist}
 License:	LGPL
 Group:		Applications/Databases
@@ -90,6 +90,9 @@ rm -rf %{buildroot}
 %doc license.txt readme.txt 
 
 %changelog
+* Tue Jul 28 2009 Devrim GUNDUZ <devrim@commandprompt.com> 08.04.0100-1PGDG
+- Update to 08.04.0100
+
 * Tue Dec 2 2008 Devrim GUNDUZ <devrim@commandprompt.com> 08.03.0400-1PGDG
 - Update to 08.03.0400
 

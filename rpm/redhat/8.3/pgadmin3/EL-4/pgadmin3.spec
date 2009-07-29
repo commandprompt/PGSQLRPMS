@@ -40,7 +40,7 @@ which are in html format.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch2 -p0
+%patch2 -p1
 %build
 export LIBS="-lwx_gtk2u_core-2.8"
 %configure --disable-debug --with-wx-version=2.8 --with-wx=/usr

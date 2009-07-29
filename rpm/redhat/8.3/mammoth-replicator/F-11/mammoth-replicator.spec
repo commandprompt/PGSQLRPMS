@@ -53,6 +53,10 @@ Patch6:		%{name}-perl-rpath.patch
 Buildrequires:	perl glibc-devel bison flex 
 Requires:	/sbin/ldconfig initscripts
 
+%if %plperl
+BuildRequires:  perl-ExtUtils-Embed
+%endif
+
 %if %plpython
 BuildRequires:	python-devel
 %endif

@@ -1,13 +1,13 @@
 %define debug 0
 
 Name:		pgbouncer
-Version:	1.3
+Version:	1.3.1
 Release:	1%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	MIT and BSD
 URL:		http://pgfoundry.org/projects/pgbouncer/
-Source0:	http://pgfoundry.org/frs/download.php/2092/%{name}-%{version}.tgz
+Source0:	http://pgfoundry.org/frs/download.php/2284/%{name}-%{version}.tgz
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-ini.patch
@@ -82,6 +82,9 @@ rm -rf %{buildroot}
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Wed Jul 29 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.3.1-1
+- Update to 1.3.1
+
 * Thu Mar 5 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.3-1
 - Update to 1.3
 

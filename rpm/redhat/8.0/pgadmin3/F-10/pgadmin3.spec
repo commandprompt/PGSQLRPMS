@@ -2,7 +2,7 @@ Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
 Version:	1.10.0
 Release:	1%{?dist}
-License:	Artistic
+License:	BSD
 Group:		Applications/Databases
 Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}-optflags.patch

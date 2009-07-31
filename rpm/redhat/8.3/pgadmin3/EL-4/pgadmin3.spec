@@ -2,7 +2,7 @@ Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
 Version:	1.10.0
 Release:	1%{?dist}
-License:	Artistic
+License:	BSD
 Group:		Applications/Databases
 Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
 Patch2:		%{name}-rhel4libxml.patch
@@ -40,7 +40,7 @@ which are in html format.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch2 -p1
+%patch2 -p0
 %build
 export LIBS="-lwx_gtk2u_core-2.8"
 %configure --disable-debug --with-wx-version=2.8 --with-wx=/usr

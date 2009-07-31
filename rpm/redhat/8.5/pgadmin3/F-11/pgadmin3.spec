@@ -1,10 +1,14 @@
+%define	pgagentver	3.0.0  
+
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
 Version:	1.10.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	Artistic
 Group:		Applications/Databases
-Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
+Source1:	ftp://ftp.postgresql.org/pub/pgadmin3/release/pgagent/pgAgent-%{pgagentver}-Linux.tar.gz
+Source2:	pgagent.init
 Patch0:		%{name}-%{version}-optflags.patch
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -37,6 +41,15 @@ Requires:	%{name} = %{version}
 This package contains documentation for various languages,
 which are in html format.
 
+%package pgagent
+Summary:	Job scheduler for PostgreSQL
+Group:		Applications/Databases
+Requires:	%{name} = %{version}
+
+%description pgagent
+pgAgent is a job scheduler for PostgreSQL which may be managed 
+using pgAdmin.
+
 %prep
 %setup -q -n %{name}-%{version}
 
@@ -64,6 +77,16 @@ desktop-file-install --vendor fedora --dir %{buildroot}/%{_datadir}/applications
 	--add-category Development\
 	./pkg/%{name}.desktop
 
+tar -zxf %{SOURCE1}
+cd pgAgent-%{pgagentver}-Linux
+install -d %{buildroot}/%{_bindir}
+install -d %{buildroot}/%{_datadir}/%{name}/pgagent
+install -m 755 bin/pgagent %{buildroot}/%{_bindir}
+install -m 755 share/*.sql %{buildroot}/%{_datadir}/%{name}/pgagent
+
+# Install pgagent init script
+install -d %{buildroot}/etc/rc.d/init.d
+install -m 755 pagent.init %{buildroot}/etc/rc.d/init.d/pgagent
 
 %clean
 rm -rf %{buildroot}
@@ -71,7 +94,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-, root, root)
 %doc BUGS CHANGELOG LICENSE README
-%{_bindir}/*
+%{_bindir}/pgadmin3
 %{_datadir}/%{name}
 %{_datadir}/applications/*
 
@@ -79,11 +102,16 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc docs/*
 
-%changelog
-* Mon Jun 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0
-- Update to 1.10.0 Gold
+%files pgagent
+%defattr(-,root,root)
+%{_bindir}/pgagent
+%{_datadir}/%{name}/pgagent/*.sql
 
-* Mon Jun 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0
+%changelog
+* Fri Jul 31 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-2
+- Add pgAgent.
+
+* Mon Jun 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-1
 - Update to 1.10.0 Gold
 
 * Wed Mar 25 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-beta2

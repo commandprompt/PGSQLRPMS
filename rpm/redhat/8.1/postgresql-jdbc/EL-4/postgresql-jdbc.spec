@@ -25,11 +25,11 @@
 %define beta 0
 %{?beta:%define __os_install_post /usr/lib/rpm/brp-compress}
 
-%{!?upstreamserver:%define upstreamver	8.1-413}
+%{!?upstreamserver:%define upstreamver	8.1-414}
 
 Summary:	JDBC driver for PostgreSQL
 Name:		postgresql-jdbc
-Version:	8.1.413
+Version:	8.1.414
 Release:	1PGDG%{?dist}
 BuildArch:	noarch
 Epoch:		0
@@ -67,6 +67,9 @@ rm -rf %{buildroot}
 %{_javadir}/postgresql-%{upstreamver}.jdbc3.jar
 
 %changelog
+* Tue Aug 4 2009 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.1.414-1PGDG
+- Update to build 414
+
 * Fri Nov 28 2008 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.1.413-1PGDG
 - Update to build 413
 

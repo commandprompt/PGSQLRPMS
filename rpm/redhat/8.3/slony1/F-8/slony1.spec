@@ -4,14 +4,13 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	1.2.16
+Version:	1.2.17
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
 Source0:	http://main.slony.info/downloads/1.2/source/slony1-%{version}.tar.bz2
 Source2:	filter-requires-perl-Pg.sh
-Patch2:		%{name}-%{version}-doc.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
 Requires:	postgresql-server, perl-DBD-Pg
@@ -49,7 +48,7 @@ documentation for Slony-I.
 
 %prep
 %setup -q -n slony1-%{version}
-%patch2 -p1
+
 %build
 
 # Temporary measure for 1.2.10
@@ -147,9 +146,11 @@ fi
 %endif
 
 %changelog
+* Mon Aug 17 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.17-1
+- Update to 1.2.17
+
 * Sat May 9 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.16-1
 - Update to 1.2.16
-- Add a temp doc patch.
 
 * Sat Mar 14 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-4
 - Create log directory, per pgcore #77.

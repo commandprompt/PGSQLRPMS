@@ -4,20 +4,19 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	2.0.2
+Version:	1.2.17
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
-Source0:	http://main.slony.info/downloads/2.0/source/%{name}-%{version}.tar.bz2
+Source0:	http://main.slony.info/downloads/1.2/source/slony1-%{version}.tar.bz2
 Source2:	filter-requires-perl-Pg.sh
-Patch1:		slony1-2.0.2-doc.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
 Requires:	postgresql-server, perl-DBD-Pg
 
 %if %docs
-BuildRequires:	docbook-style-dsssl postgresql_autodoc docbook-utils
+BuildRequires:	docbook-style-dsssl
 %endif
 
 %description
@@ -48,9 +47,7 @@ documentation for Slony-I.
 %define __perl_requires %{SOURCE2}
 
 %prep
-%setup -q -n %{name}-%{version}
-
-%patch1 -p1
+%setup -q -n slony1-%{version}
 
 %build
 
@@ -82,14 +79,16 @@ install -d %{buildroot}%{_datadir}/pgsql/
 install -d %{buildroot}%{_libdir}/pgsql/
 make %{?_smp_mflags} DESTDIR=%{buildroot} install
 install -m 0755 src/backend/slony1_funcs.so %{buildroot}%{_libdir}/pgsql/slony1_funcs.so
+install -m 0755 src/xxid/xxid.so %{buildroot}%{_libdir}/pgsql/xxid.so
 install -m 0644 src/backend/*.sql %{buildroot}%{_datadir}/pgsql/
+install -m 0644 src/xxid/*.sql %{buildroot}%{_datadir}/pgsql/
 install -m 0755 tools/*.sh  %{buildroot}%{_bindir}/
 install -m 0755 tools/*.pl  %{buildroot}%{_bindir}/
 install -m 0644 share/slon.conf-sample %{buildroot}%{_sysconfdir}/slon.conf
 /bin/chmod 644 COPYRIGHT UPGRADING SAMPLE HISTORY-1.1 RELEASE
 
 install -d %{buildroot}%{_initrddir}
-install -m 755 redhat/slon.init %{buildroot}%{_initrddir}/slony1
+install -m 755 redhat/postgresql-slony1.init %{buildroot}%{_initrddir}/slony1
 
 # Temporary measure for 1.2.X
 %if %docs
@@ -134,13 +133,12 @@ fi
 %attr(644,root,root) %doc COPYRIGHT UPGRADING HISTORY-1.1 INSTALL SAMPLE RELEASE
 %{_bindir}/*
 %{_libdir}/pgsql/slony1_funcs.so
+%{_libdir}/pgsql/xxid.so
 %{_datadir}/pgsql/*.sql
 %config(noreplace) %{_sysconfdir}/slon.conf
 %{_libdir}/pgsql/slon-tools.pm
 %config(noreplace) %{_sysconfdir}/slon_tools.conf
 %attr(755,root,root) %{_initrddir}/slony1
-%{_mandir}/man1/*
-%{_mandir}/man7/*
 
 %if %docs
 %files docs
@@ -148,33 +146,24 @@ fi
 %endif
 
 %changelog
-* Sat May 9 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.2-1
-- Update to 2.0.2
-- Removed patch0 -- it is no longer needed.
-- Added a temp patch to get rid of sgml error.
-- Re-enable doc builds
+* Mon Aug 17 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.17-1
+- Update to 1.2.17
+- Remove patch2.
 
-* Sat Mar 14 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.1-1
-- Update to 2.0.1
-- Create log directory,	per pgcore #77.
+* Mon Jun 1 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.16-1
+- Update to 1.2.16
+- Add a temp patch for doc builds.
 
-* Thu Jan 29 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.0-3
-- Add docbook-utils to BR.
-
-* Sat Dec 13 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.0-2
-- Add a patch to fix build errors
-- Temporarily update Source2, so that it will silence a dependency error.
-
-* Tue Dec 2 2008 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.0-1
-- Update to 2.0.0
+* Sat Mar 14 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-4
+- Create log directory, per pgcore #77.
 
 * Mon Sep 22 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-3
-- Add dependency for perl-DBD-Pg, paer Xavier Bergade.
+- Add dependency for perl-DBD-Pg, per Xavier Bergade.
 
 * Sun Sep 21 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-2
 - Fix dependency issues caused by latest commit.
 
-* Fri Sep 12 2008 Devrim Gunduz <devtrim@CommandPrompt.com> 1.2.15-1
+* Fri Sep 12 2008 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.15-1
 - Update to 1.2.15
 - Install tools written in perl, too.
 

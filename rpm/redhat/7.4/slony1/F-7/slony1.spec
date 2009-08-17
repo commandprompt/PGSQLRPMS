@@ -114,8 +114,8 @@ rm -rf %{buildroot}
 
 %post
 chkconfig --add slony1
-mkdir /var/log/slony1
-chown postgres:postgres /var/log/slony1
+mkdir /var/log/slony
+chown postgres:postgres /var/log/slony
 
 %preun
 if [ $1 = 0 ] ; then

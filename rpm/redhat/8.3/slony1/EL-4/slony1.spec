@@ -5,7 +5,7 @@
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
 Version:	1.2.17
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -114,8 +114,8 @@ rm -rf %{buildroot}
 
 %post
 chkconfig --add slony1
-mkdir /var/log/slony1
-chown postgres:postgres /var/log/slony1
+mkdir /var/log/slony
+chown postgres:postgres /var/log/slony
 
 %preun
 if [ $1 = 0 ] ; then
@@ -146,6 +146,9 @@ fi
 %endif
 
 %changelog
+* Mon Aug 17 2009 Devrim GÜNDÜZ <devrim@gunduz.org> - 1.2.17-2
+- Rename log directory to slony, to match upstream default
+
 * Mon Aug 17 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.2.17-1
 - Update to 1.2.17
 

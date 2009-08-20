@@ -61,6 +61,8 @@
 # fooling the postmaster's stale-lockfile check by having too many
 # postgres-owned processes laying about.
 
+# Version 8.0 Devrim GUNDUZ <devrim@commandprompt.com>
+# Get rid of duplicate PGDATA assignment.
 
 # PGVERSION is:
 PGVERSION=8.0
@@ -97,12 +99,6 @@ fi
 PGENGINE=/usr/bin
 PGPORT=5432
 PGDATA=/var/lib/pgsql
-if [ -f "$PGDATA/PG_VERSION" ] && [ -d "$PGDATA/base/template1" ]
-then
-	echo "Using old-style directory structure"
-else
-	PGDATA=/var/lib/pgsql/data
-fi
 PGLOG=/var/lib/pgsql/pgstartup.log
 
 # Override defaults from /etc/sysconfig/pgsql if file is present

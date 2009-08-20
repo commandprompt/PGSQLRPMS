@@ -71,6 +71,7 @@
 
 # Version 8.4 Devrim Gunduz <devrim@CommandPrompt.com>
 # Remove "sameuser" from initdb, to match the new hba conf file.
+# Get rid of duplicate PGDATA assignment.
 
 # PGVERSION is the full package version, e.g., 8.4.0
 # Note: the specfile ordinarily updates this during install
@@ -108,13 +109,6 @@ fi
 PGENGINE=/usr/bin
 PGPORT=5432
 PGDATA=/var/lib/pgsql/data
-
-if [ -f "$PGDATA/PG_VERSION" ] && [ -d "$PGDATA/base/template1" ]
-then
-	echo "Using old-style directory structure"
-else
-	PGDATA=/var/lib/pgsql/data
-fi
 PGLOG=/var/lib/pgsql/pgstartup.log
 
 # Override defaults from /etc/sysconfig/pgsql if file is present

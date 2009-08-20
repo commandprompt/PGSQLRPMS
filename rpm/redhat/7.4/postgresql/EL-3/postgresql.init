@@ -60,6 +60,7 @@
 # Rewrite to start postmaster directly, rather than via pg_ctl; this avoids
 # fooling the postmaster's stale-lockfile check by having too many
 # postgres-owned processes laying about.
+# Get rid of duplicate PGDATA assignment.
 
 
 # PGVERSION is the full package version, e.g., 7.4.7
@@ -98,12 +99,6 @@ fi
 PGENGINE=/usr/bin
 PGPORT=5432
 export PGDATA=/var/lib/pgsql
-if [ -f $PGDATA/PG_VERSION ] && [ -d $PGDATA/base/template1 ]
-then
-	echo "Using old-style directory structure"
-else
-	export PGDATA=/var/lib/pgsql/data
-fi
 PGLOG=/dev/null
 
 # Override defaults from /etc/sysconfig/pgsql if file is present

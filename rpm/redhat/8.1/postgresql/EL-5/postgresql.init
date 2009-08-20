@@ -63,6 +63,7 @@
 
 # Version 8.1 Devrim Gunduz <devrim@PostgreSQL.org>
 # Increased sleep time from 1 sec to 2 sec.
+# Get rid of duplicate PGDATA assignment.
 
 # PGVERSION is the full package version, e.g., 8.1.1
 # Note: the specfile ordinarily updates this during install
@@ -100,12 +101,6 @@ fi
 PGENGINE=/usr/bin
 PGPORT=5432
 PGDATA=/var/lib/pgsql
-if [ -f "$PGDATA/PG_VERSION" ] && [ -d "$PGDATA/base/template1" ]
-then
-	echo "Using old-style directory structure"
-else
-	PGDATA=/var/lib/pgsql/data
-fi
 PGLOG=/var/lib/pgsql/pgstartup.log
 
 # Override defaults from /etc/sysconfig/pgsql if file is present

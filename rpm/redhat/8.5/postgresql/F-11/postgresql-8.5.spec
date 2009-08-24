@@ -67,7 +67,7 @@
 %{!?xml:%define xml 1}
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
-%{!?runselftest:%define runselftest 0}
+%{!?runselftest:%define runselftest 1}
 %{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
 
@@ -422,11 +422,10 @@ install -m 644 %{SOURCE14} %{buildroot}/etc/pam.d/postgresql
 %endif
 
 # PGDATA needs removal of group and world permissions due to pg_pwd hole.
-install -d -m 700 %{buildroot}/var/lib/pgsql/data
-install -d -m 700 %{buildroot}/var/lib/pgsql/data/%{majorversion}
+install -d -m 700 %{buildroot}/var/lib/pgsql/%{majorversion}/data
 
 # backups of data go here...
-install -d -m 700 %{buildroot}/var/lib/pgsql/backups/%{majorversion}
+install -d -m 700 %{buildroot}/var/lib/pgsql/%{majorversion}/backups
 
 # postgres' .bash_profile
 install -m 644 %{SOURCE15} %{buildroot}/var/lib/pgsql/.bash_profile
@@ -670,8 +669,9 @@ rm -rf %{buildroot}
 %dir %{pgbaseinstdir}/lib
 %dir %{pgbaseinstdir}/share
 %attr(700,postgres,postgres) %dir /var/lib/pgsql
-%attr(700,postgres,postgres) %dir /var/lib/pgsql/data
-%attr(700,postgres,postgres) %dir /var/lib/pgsql/backups
+%attr(700,postgres,postgres) %dir /var/lib/pgsql/%{majorversion}
+%attr(700,postgres,postgres) %dir /var/lib/pgsql/%{majorversion}/data
+%attr(700,postgres,postgres) %dir /var/lib/pgsql/%{majorversion}/backups
 %attr(644,postgres,postgres) %config(noreplace) /var/lib/pgsql/.bash_profile
 %{pgbaseinstdir}/lib/*_and_*.so
 %{pgbaseinstdir}/share/conversion_create.sql

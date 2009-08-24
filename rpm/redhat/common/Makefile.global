@@ -69,3 +69,12 @@ noprepbuild:
 	--define "_srcrpmdir $(HOME)/rpm/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm/RPMS/" --sign \
 	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+
+nopreprpm:
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+

@@ -310,7 +310,7 @@ export LIBNAME=%{_lib}
 ./configure --disable-rpath \
 	--prefix=%{pgbaseinstdir} \
 	--includedir=%{pgbaseinstdir}/include \
-	--mandir=%{_mandir} \
+	--mandir=%{pgbaseinstdir}/share/man \
 	--datadir=%{pgbaseinstdir}/share \
 %if %beta
 	--enable-debug \
@@ -497,14 +497,14 @@ chkconfig --add postgresql
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service postgresql condstop >/dev/null 2>&1
-	chkconfig --del postgresql
+	/sbin/service postgresql-8.5 condstop >/dev/null 2>&1
+	chkconfig --del postgresql-8.5
 fi
 
 %postun server
 /sbin/ldconfig 
 if [ $1 -ge 1 ]; then
-  /sbin/service postgresql condrestart >/dev/null 2>&1
+  /sbin/service postgresql-8.5 condrestart >/dev/null 2>&1
 fi
 
 %if %plperl
@@ -550,21 +550,21 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/bin/psql
 %{pgbaseinstdir}/bin/reindexdb
 %{pgbaseinstdir}/bin/vacuumdb
-%{_mandir}/man1/clusterdb.*
-%{_mandir}/man1/createdb.*
-%{_mandir}/man1/createlang.*
-%{_mandir}/man1/createuser.*
-%{_mandir}/man1/dropdb.*
-%{_mandir}/man1/droplang.*
-%{_mandir}/man1/dropuser.*
-%{_mandir}/man1/pg_dump.*
-%{_mandir}/man1/pg_dumpall.*
-%{_mandir}/man1/pg_restore.*
-%{_mandir}/man1/psql.*
-%{_mandir}/man1/reindexdb.*
-%{_mandir}/man1/vacuumdb.*
-%{_mandir}/man3/*
-%{_mandir}/man7/*
+%{pgbaseinstdir}/share/man/man1/clusterdb.*
+%{pgbaseinstdir}/share/man/man1/createdb.*
+%{pgbaseinstdir}/share/man/man1/createlang.*
+%{pgbaseinstdir}/share/man/man1/createuser.*
+%{pgbaseinstdir}/share/man/man1/dropdb.*
+%{pgbaseinstdir}/share/man/man1/droplang.*
+%{pgbaseinstdir}/share/man/man1/dropuser.*
+%{pgbaseinstdir}/share/man/man1/pg_dump.*
+%{pgbaseinstdir}/share/man/man1/pg_dumpall.*
+%{pgbaseinstdir}/share/man/man1/pg_restore.*
+%{pgbaseinstdir}/share/man/man1/psql.*
+%{pgbaseinstdir}/share/man/man1/reindexdb.*
+%{pgbaseinstdir}/share/man/man1/vacuumdb.*
+%{pgbaseinstdir}/share/man/man3/*
+%{pgbaseinstdir}/share/man/man7/*
 
 %files docs
 %defattr(-,root,root)
@@ -641,12 +641,12 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/bin/pg_resetxlog
 %{pgbaseinstdir}/bin/postgres
 %{pgbaseinstdir}/bin/postmaster
-%{_mandir}/man1/initdb.*
-%{_mandir}/man1/pg_controldata.*
-%{_mandir}/man1/pg_ctl.*
-%{_mandir}/man1/pg_resetxlog.*
-%{_mandir}/man1/postgres.*
-%{_mandir}/man1/postmaster.*
+%{pgbaseinstdir}/share/man/man1/initdb.*
+%{pgbaseinstdir}/share/man/man1/pg_controldata.*
+%{pgbaseinstdir}/share/man/man1/pg_ctl.*
+%{pgbaseinstdir}/share/man/man1/pg_resetxlog.*
+%{pgbaseinstdir}/share/man/man1/postgres.*
+%{pgbaseinstdir}/share/man/man1/postmaster.*
 %{pgbaseinstdir}/share/postgres.bki
 %{pgbaseinstdir}/share/postgres.description
 %{pgbaseinstdir}/share/postgres.shdescription
@@ -694,8 +694,8 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/libpgtypes.so
 %{pgbaseinstdir}/lib/libpgtypes.a
 %{pgbaseinstdir}/lib/pgxs/*
-%{_mandir}/man1/ecpg.*
-%{_mandir}/man1/pg_config.*
+%{pgbaseinstdir}/share/man/man1/ecpg.*
+%{pgbaseinstdir}/share/man/man1/pg_config.*
 
 %if %plperl
 %files plperl -f pg_plperl.lst

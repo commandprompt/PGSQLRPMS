@@ -29,6 +29,7 @@
 # Peter Eisentraut
 # Alvaro Herrera
 # David Fetter
+# Greg Smith
 # and others in the Changelog....
 
 # This spec file and ancilliary files are licensed in accordance with 

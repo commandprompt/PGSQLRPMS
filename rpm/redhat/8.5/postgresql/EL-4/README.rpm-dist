@@ -1,6 +1,6 @@
 README.rpm-dist
 -----------------------------------------------------------------------------
-Version 8.4, for the PostgreSQL 8.4 RPM set.
+Version 8.5, for the PostgreSQL 8.5alpha1 RPM set.
 Devrim Gündüz <devrim@CommandPrompt.com>
 -----------------------------------------------------------------------------
 
@@ -8,7 +8,7 @@ Contents:
  0.)	Quick note about '-i'
  1.)	Introduction and QuickStart
  2.)	PostgreSQL RPM packages and rationale
- 3.)	Starting multiple postmasters
+ 3.)	Starting multiple postmasters (for the same PostgreSQL version)
  4.)	Regression Testing
  5.)	Starting postmaster automatically on startup
  6.)	Grand Unified Configuration(GUC) File
@@ -31,9 +31,9 @@ This document exists to explain the layout of the RPMs for PostgreSQL, to
 describe various RPM specifics, and to document special features found
 in the RPMset.
 
-This document is written to be applicable to version 8.4 of PostgreSQL, 
+This document is written to be applicable to version 8.5 of PostgreSQL, 
 which is the current version of the RPMs as of this writing. More to the 
-point, versions prior to 8.4 are not documented here.
+point, versions prior to 8.5 are not documented here.
 
 Official PostgreSQL Global Development Group RPMs carry a 'PGDG after the
 release number.  Other RPMsets as distributed with Linux distributions may 
@@ -57,15 +57,15 @@ QUICKSTART
 -----------------------------------------------------------------------------
 For a fresh installation, you will need to initilize the cluster first. Run:
 
-	service postgresql start
+	service postgresql-8.5 initdb
 
 as root, and it will prepare a new database cluster for you. Then you will 
 need to start PostgreSQL. Again as root, run:
 
-	service postgresql start
+	service postgresql-8.5 start
 
-This command will start a postmaster that willl listen on localhost and Unix 
-socket 5432 only.  Edit /var/lib/pgsql/data/postgresql.conf and pg_hba.conf 
+This command will start a postmaster that will listen on localhost and Unix 
+socket 5432 only.  Edit /var/lib/pgsql/8.5/data/postgresql.conf and pg_hba.conf 
 if you want to allow remote access -- see the section on Grand Unified 
 Configuration.
 
@@ -124,21 +124,21 @@ In particular, the documentation directory can be /usr/doc, /usr/doc/packages,
 However, the Red Hat / CentOS / Fedora RPM's install the files like 
 this:
 
-Executables:		/usr/bin
-Libraries:		/usr/lib (or /usr/lib64)
-Documentation:		/usr/share/doc/postgresql-docs-x.y.z/html
-Contrib			/usr/share/pgsql/contrib
-			/usr/share/doc/postgresql-contrib-x.y.z/
+Executables:		/usr/pgsql-8.5/bin
+Libraries:		/usr/pgsql-8.5/lib (or /usr/pgsql-8.5/lib64)
+Documentation:		/usr/pgsql-8.5/share/doc/postgresql-docs-x.y.z/html
+Contrib			/usr/pgsql-8.5/share/pgsql/contrib
+			/usr/pgsql-8.5/share/doc/postgresql-contrib-x.y.z/
 Source:			not installed
-Data:			/var/lib/pgsql/data
-Backup area:		/var/lib/pgsql/backups
-Templates:		/usr/share/pgsql
-Procedural Languages:	/usr/lib/pgsql or /usr/lib64/pgsql
-Development Headers:	/usr/include/pgsql
-Other shared data:	/usr/share/pgsql
-Regression tests:	/usr/lib/pgsql/test/regress  (in the -test package)
-			or /usr/lib64/pgsql/test/regress
-Documentation SGML:	/usr/share/doc/postgresql-docs-x.y.z/sgml
+Data:			/var/lib/pgsql/8.5/data
+Backup area:		/var/lib/pgsql/8.5/backups
+Templates:		/usr/pgsql-8.5/share/pgsql
+Procedural Languages:	/usr/pgsql-8.5/lib/pgsql or /usr/pgsql-8.5/lib64/pgsql
+Development Headers:	/usr/pgsql-8.5/include/pgsql
+Other shared data:	/usr/pgsql-8.5/share/pgsql
+Regression tests:	/usr/pgsql-8.5/lib/pgsql/test/regress  (in the -test package)
+			or /usr/pgsql-8.5/lib64/pgsql/test/regress
+Documentation SGML:	/usr/pgsql-8.5/share/doc/postgresql-docs-x.y.z/sgml
 
 While it may seem gratuitous to place these files in different locations, the
 FHS requires it -- distributions should not ever touch /usr/local.  It may
@@ -150,7 +150,7 @@ These RPMs are designed to be LSB-compliant -- if you find this not to be the
 case, please let us know by way of the pgsqlrpms-hackers@pgfoundry.org
 mailing list.
 
-MULTIPLE POSTMASTERS
+MULTIPLE POSTMASTERS (For the same PostgreSQL version)
 -------------------------------------------------------------------------------
 The postgresql-server RPM contains an 'initscript' that is used to start the
 postmaster.  The current version of this script has logic to be able to start
@@ -160,7 +160,7 @@ etc.  To use this functionality requires root access.
 As an example, let us create a secondary postmaster called, creatively enough,
 'secondary'.  Here are the steps:
 1.)	create a hard link in /etc/rc.d/init.d (or equivalent location)
-	to postgresql named 'secondary' : ln postgresql secondary   Pick
+	to postgresql-8.5 named 'secondary-8.5' : ln postgresql secondary   Pick
 	a name not already used in /etc/rc.d/init.d!
 2.)	create a file in /etc/sysconfig/pgsql named secondary.  This file is
 	a shell script -- typically you would define PGDATA, PGPORT, and PGOPTS
@@ -171,7 +171,7 @@ As an example, let us create a secondary postmaster called, creatively enough,
 	Automatic initdb may or may not work for you, so a manual one is
 	preferred.  This must be done as user 'postgres'
 5.)	Edit postgresql.conf to change the port, address, tcpip settings, etc.
-6.)	Start the postmaster with 'service secondary start'.
+6.)	Start the postmaster with 'service secondary-8.5 start'.
 
 Note that there may be problems with the standard symlink -- consider this
 support experimental at this point in time.
@@ -185,8 +185,8 @@ your database machine is up to the task.
 
 To run the regression tests under the RPM installation, make sure that
 postmaster has been started (if not, su to root and execute the
-"/etc/rc.d/init.d/postgresql start" init script), cd to
-/usr/lib/pgsql/test/regress (or /usr/lib64/pgsql/test/regress on 64 bit 
+"/etc/rc.d/init.d/postgresql-8.5 start" init script), cd to
+/usr/pgsql-8.5/lib/test/regress (or /usr/pgsql-8.5/lib64/test/regress on 64 bit 
 systems. su to postgres, and execute "make check". This command will 
 start the regression tests and will both show the results to the screen 
 and store the results in the file regress.out.
@@ -204,18 +204,18 @@ STARTING POSTMASTER AUTOMATICALLY AT SYSTEM STARTUP
 -------------------------------------------------------------------------------
 Fedora / Red Hat / CentOS uses the System V Init package. A startup 
 script for PostgreSQLis provided in the server package, as 
-/etc/rc.d/init.d/postgresql.  To start the postmaster, with sanity 
+/etc/rc.d/init.d/postgresql-8.5.  To start the postmaster, with sanity 
 checking, as root, run
-	service postgresql start
+	service postgresql-8.5 start
 To shut the postmaster down,
-	service postgresql stop
-There are other parameters to this script -- execute 'service postgresql' for a
+	service postgresql-8.5 stop
+There are other parameters to this script -- execute 'service postgresql-8.5' for a
 listing.
 
 To get this script to run at system startup or any time the system switches
 into runlevels 3, 4, or 5, run:
-	chkconfig --add postgresql
-	chkconfig --level 345 postgresql on
+	chkconfig --add postgresql-8.5
+	chkconfig --level 345 postgresql-8.5 on
 and the proper symlinks will be created.  See the chkconfig man page for more
 information.  Note that this is manual -- while the startup script can include
 tags to allow chkconfig to automatically perform the symlinking, this is not
@@ -224,7 +224,7 @@ done at this time.
 GRAND UNIFIED CONFIGURATION (GUC) FILE
 -------------------------------------------------------------------------------
 The PostgreSQL server has many tunable parameters -- the file 
-/var/lib/pgsql/data/postgresql.conf is the master configuration file for the
+/var/lib/pgsql/8.5/data/postgresql.conf is the master configuration file for the
 whole system.  
 
 The RPM ships with the default file -- you will need to tune the
@@ -238,7 +238,7 @@ to adjust pg_hba.conf appropriately.
 LOGGING SET UP
 -------------------------------------------------------------------------------
 By default, the postmaster's stderr log is directed into files placed in a
-pg_log subdirectory of the data directory (ie, /var/lib/pgsql/data/pg_log).
+pg_log subdirectory of the data directory (ie, /var/lib/pgsql/8.5/data/pg_log).
 The out-of-the-box configuration rotates among seven files, one for each
 day of the week.  You can adjust this by changing postgresql.conf settings.
 
@@ -269,14 +269,14 @@ nls		1	#build with national language support.
 pam		1	#build with PAM support.
 runselftest	1	#do "make check" during the build.
 xml		1	#build with XML support
-pgfts		0	#build with --enable-thread-safety
+pgfts		1	#build with --enable-thread-safety
 uuid		1	#build contrib/uuid-ossp
-intdatetimes	0	#build with --enable-integer-datetimes
+intdatetimes	1	#build with --enable-integer-datetimes
 
 To use these defines, invoke a rebuild like this:
 rpmbuild --rebuild --define 'tcl 0' \
 	--define 'test 0' --define 'runselftest 0' --define 'kerberos 0' \
-	postgresql-8.4.0-1PGDG.src.rpm
+	postgresql-8.5.0-1PGDG.src.rpm
 This line would disable the tcl, and test subpackages, disable the
 regression test run during build, and disable kerberos support.
 
@@ -293,8 +293,8 @@ CONTRIB FILES
 The contents of the contrib tree are packaged into the -contrib subpackage
 and are processed with make and make install.  There is documentation in
 /usr/share/doc/postgresql-contrib-VERSION for these modules.  Most of the
-modules are in /usr/lib/pgsql (or /usr/lib64/pgsql) for loadable 
-modules, and binaries are in /usr/bin.  In the future these files may be 
+modules are in /usr/pgsql-8.5/lib (or /usr/pgsql-8.5/lib64) for loadable 
+modules, and binaries are in /usr/pgsql-8.5/bin.  In the future these files may be 
 split out, depending upon function and dependencies.
 
 MORE INFORMATION

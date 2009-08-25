@@ -6,7 +6,7 @@
 # description: Starts and stops the PostgreSQL backend daemon that handles \
 #	       all database requests.
 # processname: postmaster
-# pidfile: /var/run/postmaster.pid
+# pidfile: /var/run/postmaster-8.5.pid
 
 # Version 6.5.3-2 Lamar Owen
 # Added code to determine if PGDATA exists, whether it is current version
@@ -108,10 +108,10 @@ fi
 
 
 # Set defaults for configuration variables
-PGENGINE=/usr/bin
-PGPORT=5432
-PGDATA=/var/lib/pgsql/data
-PGLOG=/var/lib/pgsql/pgstartup.log
+PGENGINE=/usr/pgsql-8.5/bin
+PGPORT=5433
+PGDATA=/var/lib/pgsql/8.5/data
+PGLOG=/var/lib/pgsql/8.5/pgstartup.log
 
 # Override defaults from /etc/sysconfig/pgsql if file is present
 [ -f /etc/sysconfig/pgsql/${NAME} ] && . /etc/sysconfig/pgsql/${NAME}

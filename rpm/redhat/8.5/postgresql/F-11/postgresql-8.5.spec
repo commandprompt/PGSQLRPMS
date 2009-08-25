@@ -68,7 +68,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.5
-Release:	alpha1_1PGDG%{?dist}
+Release:	alpha1_2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -521,6 +521,18 @@ fi
 chown -R postgres:postgres /usr/share/pgsql/test >/dev/null 2>&1 || :
 %endif
 
+# Create alternatives entries for common binaries:
+%post
+alternatives --install /usr/bin/psql psql /usr/pgsql-8.5/bin/psql 850
+alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-8.4/bin/pg_dump 850
+alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-8.4/bin/pg_dumpall 850
+
+# Drop alternatives entries for common binaries:
+%postun
+alternatives --remove psql /usr/pgsql-8.5/bin/psql
+alternatives --remove pg_dump /usr/pgsql-8.4/bin/pg_dump
+alternatives --remove pg_dumpall /usr/pgsql-8.4/bin/pg_dumpall
+
 %clean
 rm -rf %{buildroot}
 
@@ -721,7 +733,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Mon Aug 24 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha1-1-1PGDG
+* Tue Aug 25 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha1-2PGDG
+- More fixes for multiple version installation.
+
+* Mon Aug 24 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha1-1PGDG
 - Initial cut for 8.5 Alpha 1, which supports multiple version installation.
   WARNING: This is for testing only.
 

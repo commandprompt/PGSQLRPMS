@@ -19,23 +19,16 @@
 # -- only test releases or full releases should be.
 # This is the PostgreSQL Global Development Group Official RPMset spec file,
 # or a derivative thereof.
-# Copyright 2003-2009 Lamar Owen <lowen@pari.edu> <lamar.owen@wgcr.org>
+# Copyright 2003-2009 Devrim GÜNDÜZ <devrim@commandprompt.com>
 # and others listed.
 
 # Major Contributors:
 # ---------------
 # Lamar Owen
-# Trond Eivind Glomsrd <teg@redhat.com>
-# Thomas Lockhart
-# Reinhard Max
-# Karl DeBisschop
-# Peter Eisentraut
-# Joe Conway
-# Andrew Overholt
-# David Jee
-# Kaj J. Niemi
-# Sander Steffann
 # Tom Lane
+# Peter Eisentraut
+# Alvaro Herrera
+# David Fetter
 # and others in the Changelog....
 
 # This spec file and ancilliary files are licensed in accordance with 

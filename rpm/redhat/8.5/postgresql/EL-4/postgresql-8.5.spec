@@ -517,8 +517,8 @@ chown -R postgres:postgres /usr/share/pgsql/test >/dev/null 2>&1 || :
 # Create alternatives entries for common binaries:
 %post
 alternatives --install /usr/bin/psql psql /usr/pgsql-8.5/bin/psql 850
-alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-8.4/bin/pg_dump 850
-alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-8.4/bin/pg_dumpall 850
+alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-8.5/bin/pg_dump 850
+alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-8.5/bin/pg_dumpall 850
 
 # Drop alternatives entries for common binaries:
 %postun

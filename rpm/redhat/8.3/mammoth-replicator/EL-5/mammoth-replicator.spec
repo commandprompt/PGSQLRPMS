@@ -29,15 +29,17 @@
 %endif
 %{!?ldap:%define ldap 1}
 
+%define	minorversion	1.8.1
+
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
 Version:	8.3.7
-Release:	1.8.0%{?dist}
+Release:	%{minorversion}%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://projects.commandprompt.com/public/replicator
 
-Source0:	http://files.commandprompt.com/replicator/%{name}-%{version}-1.8.0.tar.bz2
+Source0:	http://files.commandprompt.com/replicator/%{name}-%{version}-%{minorversion}.tar.bz2
 Source2:	mcp_server.init
 Source3:	%{name}.init
 Source4:	Makefile.regress
@@ -246,7 +248,7 @@ system, including regression tests and benchmarks.
 %define __perl_requires %{SOURCE16}
 
 %prep
-%setup -q -n %{name}-%{version}-1.8.0
+%setup -q -n %{name}-%{version}-%{minorversion}
 pushd doc
 tar zxf postgres.tar.gz
 popd
@@ -704,6 +706,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Aug 26 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.7-1.8.1-1
+- Update to 8.3.7-1.8.1
+
 * Wed Jul 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.7-1.8.0-1
 - Update to 8.3.7-1.8.0
 

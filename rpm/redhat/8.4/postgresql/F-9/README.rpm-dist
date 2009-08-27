@@ -57,14 +57,14 @@ QUICKSTART
 -----------------------------------------------------------------------------
 For a fresh installation, you will need to initilize the cluster first. Run:
 
-	service postgresql start
+	service postgresql initdb
 
 as root, and it will prepare a new database cluster for you. Then you will 
 need to start PostgreSQL. Again as root, run:
 
 	service postgresql start
 
-This command will start a postmaster that willl listen on localhost and Unix 
+This command will start a postmaster that will listen on localhost and Unix 
 socket 5432 only.  Edit /var/lib/pgsql/data/postgresql.conf and pg_hba.conf 
 if you want to allow remote access -- see the section on Grand Unified 
 Configuration.

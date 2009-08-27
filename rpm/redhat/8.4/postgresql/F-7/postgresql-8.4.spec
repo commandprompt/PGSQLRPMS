@@ -296,20 +296,10 @@ cp -p %{SOURCE12} .
 
 CFLAGS="${CFLAGS:-%optflags}" ; export CFLAGS
 CXXFLAGS="${CXXFLAGS:-%optflags}" ; export CXXFLAGS
-%if %kerberos
-CPPFLAGS="${CPPFLAGS} -I%{_includedir}/et" ; export CPPFLAGS
-CFLAGS="${CFLAGS} -I%{_includedir}/et" ; export CFLAGS
-%endif
 
 # Strip out -ffast-math from CFLAGS....
-
 CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
 
-# Use --as-needed to eliminate unnecessary link dependencies.
-# Hopefully upstream will do this for itself in some future release.
-LDFLAGS="-Wl,--as-needed"; export LDFLAGS
-
-export LIBNAME=%{_lib}
 %configure --disable-rpath \
 %if %beta
 	--enable-debug \

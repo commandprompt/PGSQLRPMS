@@ -36,7 +36,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.0.21
+Version:	8.0.22
 
 # Conventions for PostgreSQL Global Development Group RPM releases:
 
@@ -643,6 +643,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Sep 3 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.22-1PGDG
+- Update to 8.0.22
+
 * Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.21-1PGDG
 - Update to 8.0.21
 

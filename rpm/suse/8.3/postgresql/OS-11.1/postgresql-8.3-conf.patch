@@ -1,0 +1,36 @@
+--- ../postgresql-8.3.0.orig/src/backend/utils/misc/postgresql.conf.sample	2008-01-30 13:35:55.000000000 -0500
++++ src/backend/utils/misc/postgresql.conf.sample	2008-02-11 12:05:51.000000000 -0500
+@@ -231,13 +231,13 @@
+ 
+ # - Where to Log -
+ 
+-#log_destination = 'stderr'		# Valid values are combinations of
++log_destination = 'stderr'		# Valid values are combinations of
+ 					# stderr, csvlog, syslog and eventlog,
+ 					# depending on platform.  csvlog
+ 					# requires logging_collector to be on.
+ 
+ # This is used when logging to stderr:
+-#logging_collector = off		# Enable capturing of stderr and csvlog
++logging_collector = on			# Enable capturing of stderr and csvlog
+ 					# into log files. Required to be on for
+ 					# csvlogs.
+ 					# (change requires restart)
+@@ -313,7 +313,7 @@
+ 					# and their durations, > 0 logs only
+ 					# statements running at least this time.
+ 
+-#silent_mode = off			# DO NOT USE without syslog or
++silent_mode = on			# DO NOT USE without syslog or
+ 					# logging_collector
+ 					# (change requires restart)
+ 
+@@ -328,7 +328,7 @@
+ #log_disconnections = off
+ #log_duration = off
+ #log_hostname = off
+-#log_line_prefix = ''			# special values:
++log_line_prefix = '%t %d %u '		# special values:
+ 					#   %u = user name
+ 					#   %d = database name
+ 					#   %r = remote host and port

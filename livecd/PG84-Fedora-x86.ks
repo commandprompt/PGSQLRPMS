@@ -334,6 +334,21 @@ TimedLogin=postgres
 TimedLoginDelay=0
 EOF
 
+# Create a conf file for psql     
+cat > /var/lib/pgsql/Desktop/psql <<EOF
+
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=true
+Name[en_US]=Command-line interface to PostgreSQL
+Exec=/usr/bin/psql postgres -U postgres
+Comment[en_US]=Command-line interface to PostgreSQL
+Name=psql
+Comment=Command-line interface to PostgreSQL
+EOF
+
 # Create a conf file for pgadmin3. 
 cat > /var/lib/pgsql/.pgadmin3 << EOF
 ShowTipOfTheDay=false

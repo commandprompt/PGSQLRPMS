@@ -53,7 +53,7 @@
 Name:		postgresql
 Summary:	Basic Clients and Utilities for PostgreSQL
 Url:		http://www.postgresql.org/
-Version:	8.3.5
+Version:	8.3.8
 Release:	1PGDG%{?dist}
 License:	BSD 3-Clause
 Group:		Productivity/Databases/Tools
@@ -568,6 +568,9 @@ rm -f %my_provides
 %endif
 
 %changelog
+* Wed Sep 2 2009 Devrim GUNDUZ >devrim@commandprompt.com> 8.3.8-1
+- Update to 8.3.8
+
 * Thu Dec 11 2008 Devrim GUNDUZ >devrim@commandprompt.com> 8.3.5-1
 - Update to 8.3.5
 - Trim spec file changelog 

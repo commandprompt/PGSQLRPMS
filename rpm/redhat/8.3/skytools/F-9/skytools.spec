@@ -4,7 +4,7 @@
 
 Summary:	PostgreSQL database management tools from Skype
 Name:		skytools
-Version:	2.1.9
+Version:	2.1.10
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -45,6 +45,8 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/*.sql
 %{_datadir}/%{name}/upgrade/final/*.sql
 %{_bindir}/*.py
+%{_bindir}/*.pyo
+%{_bindir}/*.pyc
 %{python_sitearch}/londiste/*.py
 %{python_sitearch}/londiste/*.pyc
 %{python_sitearch}/pgq/*.py
@@ -52,6 +54,10 @@ rm -rf %{buildroot}
 %{python_sitearch}/skytools/*.py
 %{python_sitearch}/skytools/_cquoting.so
 %{python_sitearch}/skytools/*.pyc
+%ghost %{python_sitearch}/londiste/*.pyo
+%ghost %{python_sitearch}/pgq/*.pyo
+%ghost %{python_sitearch}/skytools/*.pyo
+%{python_sitearch}/*.egg-info
 %{_mandir}/man1/bulk_loader.*
 %{_mandir}/man1/cube_dispatcher.*
 %{_mandir}/man1/londiste.*
@@ -65,6 +71,9 @@ rm -rf %{buildroot}
 %{_mandir}/man5/londiste.*
 
 %changelog
+* Wed Sep 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> 2.1.10-1
+- Update to 2.1.10
+
 * Fri Mar 13 2009 Devrim GUNDUZ <devrim@commandprompt.com> 2.1.9-1
 - Update to 2.1.9
 - Remove patch 1, it is now in upstream.

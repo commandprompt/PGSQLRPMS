@@ -321,7 +321,7 @@ TimedLogin=postgres
 TimedLoginDelay=0
 EOF
 
-# Create a conf file for psql
+# Create a desktop conf file for psql
 cat > /var/lib/pgsql/Desktop/psql <<EOF
 
 [Desktop Entry]
@@ -334,6 +334,24 @@ Exec=/usr/bin/psql postgres -U postgres
 Comment[en_US]=Command-line interface to PostgreSQL
 Name=psql
 Comment=Command-line interface to PostgreSQL
+EOF
+
+# Create a desktop conf file for pgadmin3
+cat > /var/lib/pgsql/Desktop/pgadmin3 <<EOF
+
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=pgAdmin III
+Exec=/usr/bin/pgadmin3
+Icon=/usr/share/pgadmin3/pgadmin3.xpm
+Type=Application
+Categories=Application;Development;
+MimeType=text/html;
+DocPath=/usr/share/pgadmin3/docs/en_US/index.html
+Comment=PostgreSQL Tools
+X-Desktop-File-Install-Version=0.15
 EOF
 
 # Create a conf file for pgadmin3. 

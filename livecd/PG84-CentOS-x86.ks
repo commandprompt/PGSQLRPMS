@@ -54,7 +54,6 @@ repo --name=pgdg84  --baseurl=http://yum.pgsqlrpms.org/8.4/redhat/rhel-5-i386
 @base
 @core
 @admin-tools
-@hardware-support
 kernel
 @gnome-desktop
 @turkish-support
@@ -75,6 +74,7 @@ phpPgAdmin
 pg_top
 pgadmin3
 pgbouncer
+pgdg-centos
 pgfouine
 pgloader
 pgplsh

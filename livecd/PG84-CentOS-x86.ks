@@ -58,7 +58,6 @@ kernel
 @gnome-desktop
 @turkish-support
 @base
-@hardware-support
 @sql-server
 @graphical-internet
 check_postgres

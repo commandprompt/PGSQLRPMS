@@ -1,0 +1,41 @@
+Die Konfigurationsvariablen für den PostgreSQL Server sind jetzt in
+der Datei /etc/sysconfig/postgresql zu finden. Viele der
+Kommandozeilenparameter können inzwischen auch in
+/var/lib/pgsql/data/postgresql.conf gesetzt werden.
+
+
+Vor einem Update der PostgreSQL Pakete, bei dem sich die Version
+zumindest an der zweiten Stelle ändert (z.B. 7.3 auf 7.4) müssen Ihre
+PostgreSQL Datenbanken mit dem Programm pg_dumpall gesichert
+werden. Der übliche Aufruf hierfür sieht so aus:
+
+	pg_dumpall > SAVE
+
+Die Sicherung sollte als Benutzer "postgres" durchgeführt werden.
+Wenn die Sicherung erfolgreich war, kann der PostgreSQL-Server
+angehalten werden (als root: "rcpostgresql stop"). Eventuell müssen
+zusätzlich noch einige Konfigurationsdateien aus /var/lib/pgsql/data
+gesichert werden, z.B. pg_hba.conf und postgresql.conf .
+
+Danach können Sie die bisherigen Datenbankdateien löschen
+
+	rm -r /var/lib/pgsql/data/*
+
+oder falls der Platz ausreicht verschieben,
+
+	mv /var/lib/pgsql/data /var/lib/pgsql/data.old
+
+damit unter /var/lib/pgsql/data die neue Datenbankstruktur angelegt
+werden kann. Diese wird beim ersten Start des neuen Datenbankservers
+(als root:"rcpostgresql start") automatisch erstellt.
+
+Das Zurückspielen der gesicherten Datenbankinhalte und
+Konfigurationsdateien muß wieder als Benutzer postgres durchgeführt
+werden:
+
+	psql template1 -f SAVE
+
+Wenn Sie nach eingehenden Tests sicher sind, daß nach der Migration
+noch alles vorhanden ist und funktioniert, können Sie die
+Sicherungsdatei und gegebenenfalls die bei Seite geschobenen alten
+Datenbankdateien löschen.

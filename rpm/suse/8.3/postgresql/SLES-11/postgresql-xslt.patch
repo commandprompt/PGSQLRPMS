@@ -1,0 +1,66 @@
+--- configure
++++ configure
+@@ -7923,9 +7923,9 @@ fi
+ 
+ if test "$with_libxslt" = yes ; then
+ 
+-echo "$as_me:$LINENO: checking for xsltLibxmlVersion in -lxslt" >&5
+-echo $ECHO_N "checking for xsltLibxmlVersion in -lxslt... $ECHO_C" >&6
+-if test "${ac_cv_lib_xslt_xsltLibxmlVersion+set}" = set; then
++echo "$as_me:$LINENO: checking for xsltInit in -lxslt" >&5
++echo $ECHO_N "checking for xsltInit in -lxslt... $ECHO_C" >&6
++if test "${ac_cv_lib_xslt_xsltInit+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+@@ -7943,11 +7943,11 @@ extern "C"
+ #endif
+ /* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+-char xsltLibxmlVersion ();
++char xsltInit ();
+ int
+ main ()
+ {
+-xsltLibxmlVersion ();
++xsltInit ();
+   ;
+   return 0;
+ }
+@@ -7974,20 +7974,20 @@ if { (eval echo "$as_me:$LINENO: \"$ac_l
+   ac_status=$?
+   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }; }; then
+-  ac_cv_lib_xslt_xsltLibxmlVersion=yes
++  ac_cv_lib_xslt_xsltInit=yes
+ else
+   echo "$as_me: failed program was:" >&5
+ sed 's/^/| /' conftest.$ac_ext >&5
+ 
+-ac_cv_lib_xslt_xsltLibxmlVersion=no
++ac_cv_lib_xslt_xsltInit=no
+ fi
+ rm -f conftest.err conftest.$ac_objext \
+       conftest$ac_exeext conftest.$ac_ext
+ LIBS=$ac_check_lib_save_LIBS
+ fi
+-echo "$as_me:$LINENO: result: $ac_cv_lib_xslt_xsltLibxmlVersion" >&5
+-echo "${ECHO_T}$ac_cv_lib_xslt_xsltLibxmlVersion" >&6
+-if test $ac_cv_lib_xslt_xsltLibxmlVersion = yes; then
++echo "$as_me:$LINENO: result: $ac_cv_lib_xslt_xsltInit" >&5
++echo "${ECHO_T}$ac_cv_lib_xslt_xsltInit" >&6
++if test $ac_cv_lib_xslt_xsltInit = yes; then
+   cat >>confdefs.h <<_ACEOF
+ #define HAVE_LIBXSLT 1
+ _ACEOF
+--- configure.in
++++ configure.in
+@@ -795,7 +795,7 @@ if test "$with_libxml" = yes ; then
+ fi
+ 
+ if test "$with_libxslt" = yes ; then
+-  AC_CHECK_LIB(xslt, xsltLibxmlVersion, [], [AC_MSG_ERROR([library 'xslt' is required for XSLT support])])
++  AC_CHECK_LIB(xslt, xsltInit, [], [AC_MSG_ERROR([library 'xslt' is required for XSLT support])])
+ fi
+ 
+ # for contrib/uuid-ossp

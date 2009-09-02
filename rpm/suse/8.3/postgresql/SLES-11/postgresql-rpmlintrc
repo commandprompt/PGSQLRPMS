@@ -1,0 +1,4 @@
+addFilter("useless-explicit-provides")
+addFilter("unnecessary-buildrequires")
+addFilter("patch-not-applied")
+addFilter("non-standard-uid")

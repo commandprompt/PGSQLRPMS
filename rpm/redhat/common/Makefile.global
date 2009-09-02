@@ -15,7 +15,7 @@
 ############################
 
 prep:
-	#if [ -e "dead.package" ]; then echo "This package is marked as dead. Build won't continue"; exit 0; fi
+	if [ -f dead.package ]; then echo "This package is marked as dead. Build won't continue"; exit 1; fi
 
 	# Checkout Makefile.global before doing anything else.
 	# svn up ../../../common/

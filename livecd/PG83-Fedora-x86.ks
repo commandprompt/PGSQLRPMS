@@ -81,6 +81,7 @@ pg_top
 pg_filedump
 pgadmin3
 pgbouncer
+pgdg-fedora
 pgfouine
 pgloader
 pgplsh
@@ -381,6 +382,16 @@ Quote=Strings
 EOF
 
 chown postgres: /var/lib/pgsql/.pgadmin3
+
+grep -q -s DontZap /etc/X11/xorg.conf
+append=$?
+if [ $append -ne 0 ]; then
+  cat >> /etc/X11/xorg.conf << EOF
+  Section "ServerFlags"
+  Option "DontZap" "false"
+  EndSection
+  EOF
+fi
 
 %end
 

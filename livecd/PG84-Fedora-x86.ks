@@ -79,6 +79,7 @@ phpPgAdmin
 pg_top
 pgadmin3
 pgbouncer
+pgdb-fedora
 pgfouine
 pgloader
 pgplsh

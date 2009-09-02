@@ -350,6 +350,7 @@ Exec=/usr/bin/psql postgres -U postgres
 Comment[en_US]=Command-line interface to PostgreSQL
 Name=psql
 Comment=Command-line interface to PostgreSQL
+Icon=utilities-terminal
 EOF
 
 # Create a desktop conf file for pgadmin3

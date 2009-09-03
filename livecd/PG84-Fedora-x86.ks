@@ -300,6 +300,11 @@ service httpd start
 su -l postgres -c "initdb -D /var/lib/pgsql/data"
 service postgresql start
 
+# Create pagila database and load pagila data into it:
+su -l postgres -c "createdb pagila"
+su -l postgres -c "psql pagila -f /usr/share/pagila/pagila-schema.sql"
+su -l postgres -c "psql pagila -f /usr/share/pagila/pagila-data.sql"
+
 # Stopgap fix for RH #217966; should be fixed in HAL instead
 touch /media/.hal-mtab
 

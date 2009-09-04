@@ -47,7 +47,7 @@ rpm: prep
 	--define  "_builddir $(PWD)" \
 	--define "_srcrpmdir $(PWD)" \
 	--define "_rpmdir $(PWD)" \
-	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+	--define "dist $(DIST)" -bb $(SPECFILE)
 
 build: bfsrpm
 
@@ -56,7 +56,7 @@ build: bfsrpm
 	--define  "_builddir $(HOME)/rpm/BUILD" \
 	--define "_srcrpmdir $(HOME)/rpm/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm/RPMS/" --sign \
-	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+	--define "dist $(DIST)" -bb $(SPECFILE)
 
 noprepbuild: 
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
@@ -68,7 +68,7 @@ noprepbuild:
 	--define  "_builddir $(HOME)/rpm/BUILD" \
 	--define "_srcrpmdir $(HOME)/rpm/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm/RPMS/" --sign \
-	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+	--define "dist $(DIST)" -bb $(SPECFILE)
 
 nopreprpm:
 	rpmbuild --define "_sourcedir $(PWD)" \
@@ -76,5 +76,5 @@ nopreprpm:
 	--define  "_builddir $(PWD)" \
 	--define "_srcrpmdir $(PWD)" \
 	--define "_rpmdir $(PWD)" \
-	--define "dist $(DIST)" --target `rpm --eval "%{_arch}"` -bb $(SPECFILE)
+	--define "dist $(DIST)" -bb $(SPECFILE)
 

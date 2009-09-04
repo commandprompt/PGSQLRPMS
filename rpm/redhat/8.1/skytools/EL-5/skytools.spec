@@ -8,7 +8,7 @@ Version:	2.1.10
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/2129/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/2370/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/skytools
 BuildRequires:	postgresql-devel, python-devel
 Requires:	python-psycopg2

@@ -63,6 +63,7 @@
 %{!?xml:%define xml 1}
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
+%{!?sdt:%define sdt 1}
 %{!?runselftest:%define runselftest 1}
 %{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
@@ -130,6 +131,10 @@ BuildRequires:	libxml2-devel libxslt-devel
 
 %if %pam
 BuildRequires:	pam-devel
+%endif
+
+%if %sdt
+BuildRequires: systemtap-sdt-devel
 %endif
 
 %if %uuid
@@ -333,6 +338,9 @@ CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
 %endif
 %if %nls
 	--enable-nls \
+%endif
+%if %sdt
+        --enable-dtrace \
 %endif
 %if !%intdatetimes
 	--disable-integer-datetimes \
@@ -719,6 +727,7 @@ rm -rf %{buildroot}
 %changelog
 * Thu Sep 3 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4.1-1PGDG
 - Update to 8.4.1
+- Enable dtrace support.
 
 * Sat Jun 27 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4.0-1PGDG
 - Update to 8.4.0

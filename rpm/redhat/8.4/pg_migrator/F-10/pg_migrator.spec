@@ -1,10 +1,10 @@
 Summary:	In-place data upgrade utility for PostgreSQL
 Name:		pg_migrator
-Version:	8.4.1
+Version:	8.4.4
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/2311/%{name}-%{version}.tgz
+Source0:	http://pgfoundry.org/frs/download.php/2323/%{name}-%{version}.tgz
 URL:		http://pgfoundry.org/projects/pg-migrator
 BuildRequires:	postgresql-devel >= 8.4
 Requires:	postgresql-server >= 8.3
@@ -47,6 +47,9 @@ rm -rf %{buildroot}
 %{_libdir}/pg_migrator.so
 
 %changelog
+* Mon Sep 7 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 8.4.4-1
+- Update to 8.4.4
+
 * Sat Jul 25 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 8.4.1-1
 - Update to 8.4.1
 - strip .so file, per rpmlint

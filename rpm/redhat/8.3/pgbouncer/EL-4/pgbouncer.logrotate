@@ -1,9 +1,0 @@
-/var/log/pgbouncer.log {
-    missingok
-    notifempty
-    sharedscripts
-    copytruncate
-    postrotate
-	/bin/kill -HUP `cat /var/run/pgbouncer/pgbouncer.pid 2>/dev/null` 2> /dev/null || true
-    endscript
-}

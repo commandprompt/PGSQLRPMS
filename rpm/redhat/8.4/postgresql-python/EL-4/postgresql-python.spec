@@ -88,8 +88,6 @@ rm -rf %{buildroot}
 %{python_sitearch}/_pgmodule.so
 %{python_sitearch}/pg.py
 %{python_sitearch}/pgdb.py
-%{python_sitearch}/*.pyc
-%ghost %{python_sitearch}/*.pyo
 
 %changelog
 * Fri Jan 4 2008 Devrim Gunduz <devrim@commandprompt.com> 0:3.8.1-7PGDG

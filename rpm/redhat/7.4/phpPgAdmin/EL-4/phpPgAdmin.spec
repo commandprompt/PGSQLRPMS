@@ -86,7 +86,7 @@ rm -rf %{buildroot}
 %{_phppgadmindir}/conf/config.inc.php*
 
 %changelog
-* Fri Dec 19 2008 Devrim Gunduz <devrim@commandprompt.com> 4.2.2-1
+* Tue Sep 8 2009 Devrim Gunduz <devrim@commandprompt.com> 4.2.2-1
 - Update to 4.2.2
 
 * Wed Aug 20 2008 Devrim Gunduz <devrim@commandprompt.com> 4.2.1-1

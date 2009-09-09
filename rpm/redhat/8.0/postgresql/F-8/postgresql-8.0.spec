@@ -55,7 +55,7 @@ Version:	8.0.22
 # Test releases are where PostgreSQL itself is not in beta, but certain parts of
 # the RPM packaging (such as the spec file, the initscript, etc) are in beta.
 
-Release: 	1PGDG%{?dist}
+Release: 	2PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0: 	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
@@ -644,6 +644,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Sep 09 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 8.0.22-2PGDG
+- Fix init script
+
 * Thu Sep 3 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.22-1PGDG
 - Update to 8.0.22
 

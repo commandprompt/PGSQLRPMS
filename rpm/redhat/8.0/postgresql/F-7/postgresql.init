@@ -98,7 +98,7 @@ fi
 # Set defaults for configuration variables
 PGENGINE=/usr/bin
 PGPORT=5432
-PGDATA=/var/lib/pgsql
+PGDATA=/var/lib/pgsql/data
 PGLOG=/var/lib/pgsql/pgstartup.log
 
 # Override defaults from /etc/sysconfig/pgsql if file is present

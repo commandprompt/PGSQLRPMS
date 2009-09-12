@@ -22,7 +22,7 @@
 # In this file you can find the default build package list macros.  These can be overridden by defining
 # on the rpm command line
 
-%{!?upstreamserver:%define upstreamver	8.4dev-700}
+%{!?upstreamserver:%define upstreamver	8.4-701}
 %{!?gcj_support:%define gcj_support	1}
 
 %define beta 0
@@ -30,7 +30,7 @@
 
 Summary:	JDBC driver for PostgreSQL
 Name:		postgresql-jdbc
-Version:	8.4dev.700
+Version:	8.4.701
 Release:	1PGDG%{?dist}
 Epoch:		0
 License:	BSD
@@ -113,6 +113,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Sep 12 2009 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.4.701-1PGDG
+- Update to build 701
+
 * Mon Apr 6 2009 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.4dev.700-1PGDG
 - Update to build 700 for 8.4 beta
 

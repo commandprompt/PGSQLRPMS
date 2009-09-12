@@ -113,7 +113,7 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Tue Jul 28 2009 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.4.701-1PGDGı
+* Sat Sep 12 2009 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.4.701-1PGDG
 - Update to build 701
 
 * Mon Apr 6 2009 Devrim Gunduz <devrim@CommandPrompt.com> 0:8.4dev.700-1PGDG

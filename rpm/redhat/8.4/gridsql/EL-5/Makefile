@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f9
+DIST=.rhel5
 SPECFILE="gridsql.spec"
 
 # Now, include global Makefile

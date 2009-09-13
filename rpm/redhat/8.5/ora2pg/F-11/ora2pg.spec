@@ -11,7 +11,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 
 BuildRequires:	perl
-Requires:	perl(DBD::Oracle) perl(DBI) perl(String::Random)
+Requires:	perl(DBD::Oracle) perl(DBI) perl(String::Random) perl(IO::Compress::Base
 
 %description
 This package contains a Perl module and a companion script to convert an

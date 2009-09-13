@@ -29,8 +29,8 @@ Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package contains the header files, static libraries and development
-documentation for %{name}. If you like to develop programs using %{name},
-you will need to install %{name}-devel.
+documentation for %{name}. If you like to develop programs using 
+%{name}, you will need to install %{name}-devel.
 
 %prep
 %setup -q -n %{oldname}-%{version}

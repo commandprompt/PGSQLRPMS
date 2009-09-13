@@ -2,7 +2,7 @@
 
 Name:		pgbouncer
 Version:	1.3.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	MIT and BSD
@@ -14,7 +14,7 @@ Patch0:		%{name}-ini.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	libevent-devel >= 1.3b
-Requires:	initscripts
+Requires:	initscripts, libevent >= 1.3b
 
 Requires(post):	chkconfig
 Requires(preun):	chkconfig, initscripts
@@ -82,6 +82,9 @@ rm -rf %{buildroot}
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Mon Sep 14 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.3.1-2
+- Add libevent as Requires.
+
 * Wed Jul 29 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.3.1-1
 - Update to 1.3.1
 

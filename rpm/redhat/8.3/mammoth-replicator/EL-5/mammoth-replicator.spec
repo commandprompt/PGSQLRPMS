@@ -29,11 +29,11 @@
 %endif
 %{!?ldap:%define ldap 1}
 
-%define	minorversion	1.8.1
+%define	minorversion	1.8.2
 
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
-Version:	8.3.7
+Version:	8.3.8
 Release:	%{minorversion}%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -706,6 +706,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Sep 23 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.8-1.8.2-1
+- Update to 8.3.8-1.8.2
+
 * Wed Aug 26 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.7-1.8.1-1
 - Update to 8.3.7-1.8.1
 

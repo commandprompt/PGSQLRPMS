@@ -74,6 +74,7 @@
 
 # Version 8.5 Devrim Gunduz <devrim@CommandPrompt.com>
 # Get rid of duplicate PGDATA assignment.
+# Ensure pgstartup.log gets the right ownership/permissions during initdb
 
 # PGVERSION is the full package version, e.g., 8.4.0
 # Note: the specfile ordinarily updates this during install
@@ -109,7 +110,7 @@ fi
 
 # Set defaults for configuration variables
 PGENGINE=/usr/pgsql-8.5/bin
-PGPORT=5433
+PGPORT=5432
 PGDATA=/var/lib/pgsql/8.5/data
 PGLOG=/var/lib/pgsql/8.5/pgstartup.log
 
@@ -136,7 +137,7 @@ start(){
 		touch "$PGLOG" || exit 1
 		chown postgres:postgres "$PGLOG"
 		chmod go-rwx "$PGLOG"
-		[ -x /usr/bin/chcon ] && /usr/bin/chcon -u system_u -r object_r -t postgresql_log_t "$PGLOG" 2>/dev/null
+		[ -x /sbin/restorecon ] && /sbin/restorecon "$PGLOG"
 	fi
 
 	# Check for the PGDATA structure
@@ -233,8 +234,19 @@ initdb(){
 			fi
 			# Clean up SELinux tagging for PGDATA
 			[ -x /sbin/restorecon ] && /sbin/restorecon "$PGDATA"
+
+			# Make sure the startup-time log file is OK, too
+			if [ ! -e "$PGLOG" -a ! -h "$PGLOG" ]
+			then
+				touch "$PGLOG" || exit 1
+				chown postgres:postgres "$PGLOG"
+				chmod go-rwx "$PGLOG"
+				[ -x /sbin/restorecon ] && /sbin/restorecon "$PGLOG"
+			fi
+
 			# Initialize the database
 			$SU -l postgres -c "$PGENGINE/initdb --pgdata='$PGDATA' --auth='ident'" >> "$PGLOG" 2>&1 < /dev/null
+
 			# Create directory for postmaster log
 			mkdir "$PGDATA/pg_log"
 			chown postgres:postgres "$PGDATA/pg_log"

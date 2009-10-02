@@ -1,11 +1,10 @@
 Summary:	Implementation of some Oracle functions into PostgreSQL
 Name:		orafce
-Version:	3.0RC1
+Version:	3.0.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/2185/%{name}-%{version}.tar.gz
-Patch0:		orafce-makefile.patch
+Source0:	http://pgfoundry.org/frs/download.php/2361/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/orafce/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -20,7 +19,6 @@ for production work.
 
 %prep
 %setup -q -n %{name}
-%patch0 -p1
 
 %build
 CFLAGS="${CFLAGS:-%optflags}" ; export CFLAGS
@@ -34,21 +32,25 @@ make USE_PGXS=1 %{?_smp_mflags} DESTDIR=%{buildroot} install
 install -d %{buildroot}%{_libdir}/pgsql/
 install -d %{buildroot}%{_datadir}/%{name}/
 install -d %{buildroot}%{_docdir}/%{name}/
-install -p -m 755 liborafunc.so.0.0 %{buildroot}%{_libdir}/pgsql/orafunc.so
-install -p -m 644 *.sql %{buildroot}%{_datadir}/%{name}/
-install -p -m 644 README.orafunc INSTALL.orafunc COPYRIGHT.orafunc %{buildroot}%{_docdir}/%{name}/
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(644,root,root,755)
+%dir %{_docdir}/pgsql/contrib/
+%dir %{_libdir}/pgsql
+%dir %{_datadir}/pgsql/contrib/
 %{_libdir}/pgsql/orafunc.so
-%dir %{_datadir}/%{name}
-%{_datadir}/%{name}/*.sql
-%{buildroot}%{_docdir}/%{name}/*.orafunc
+%{_docdir}/pgsql/contrib/*.orafunc
+%{_datadir}/pgsql/contrib/*orafunc.sql
 
 %changelog
+* Fri Oct 2 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 3.0.1-1
+- Update to 3.0.1
+- Remove patch0, it is in upstream now.
+- Apply some 3.0 fixes to spec.
+
 * Wed Aug 20 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 2.1.4-1
 - Update to 2.1.4
 

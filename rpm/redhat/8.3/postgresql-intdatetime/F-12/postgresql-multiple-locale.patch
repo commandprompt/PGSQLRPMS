@@ -1,0 +1,11 @@
+--- postgresql-8.2beta1/configure.old	2006-10-27 14:23:21.000000000 +0300
++++ postgresql-8.2beta1/configure	2006-10-27 14:24:01.000000000 +0300
+@@ -22238,7 +22238,7 @@
+ 
+ 
+   # Note: share/locale is always the default, independent of $datadir
+-  localedir='${prefix}/share/locale'
++  localedir='${prefix}/share/pgsql/locale/8.2'
+ 
+ 
+ fi

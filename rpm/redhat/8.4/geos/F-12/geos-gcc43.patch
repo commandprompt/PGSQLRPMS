@@ -1,0 +1,10 @@
+--- tests/unit/geos_unit.cpp.orig	2009-06-27 10:38:04.000000000 +0300
++++ tests/unit/geos_unit.cpp	2009-06-27 10:38:21.000000000 +0300
+@@ -13,6 +13,7 @@
+ #include <cstdlib>
+ // GEOS
+ #include <geos/unload.h>
++#include <stdlib.h>
+ 
+ namespace tut
+ {

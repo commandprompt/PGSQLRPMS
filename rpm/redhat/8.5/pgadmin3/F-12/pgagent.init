@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+#   /etc/rc.d/init.d/pgagent
+#
+# Starts the pgagent daemon
+#
+# chkconfig: - 65 35
+# description: PgAgent Postgresql Job Service
+# processname: pgagent
+# Source function library.
+. /etc/init.d/functions
+
+
+RETVAL=0
+prog="PgAgent"
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon "pgagent hostaddr=127.0.0.1 dbname=postgres user=postgres"
+    RETVAL=$?
+    echo
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc /usr/bin/pgagent
+    RETVAL=$?
+    echo
+}
+
+#
+#   See how we were called.
+#
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  reload|restart)
+    stop
+    start
+    RETVAL=$?
+    ;;
+  status)
+    status /usr/bin/pgagent
+    RETVAL=$?
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart|reload|status}"
+    exit 1
+esac
+
+exit $RETVAL
+

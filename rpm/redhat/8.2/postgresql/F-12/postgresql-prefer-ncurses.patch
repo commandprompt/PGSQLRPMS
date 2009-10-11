@@ -1,0 +1,20 @@
+This patch hacks the Postgres configure script to prefer libncurses over
+libtermcap.  This is needed in the current Fedora environment because while
+both are available, libtermcap is deprecated and will be removed in the
+fairly near future.  Because the need for this is short-term, I'm not
+going to try to push it upstream; this patch can go away once libtermcap
+is no longer present in the standard build environment.
+
+
+diff -Naur postgresql-8.2.1.orig/config/programs.m4 postgresql-8.2.1/config/programs.m4
+--- postgresql-8.2.1.orig/config/programs.m4	2006-05-23 15:28:45.000000000 -0400
++++ postgresql-8.2.1/config/programs.m4	2007-01-10 18:42:22.000000000 -0500
+@@ -88,7 +88,7 @@
+ fi
+ for pgac_rllib in $READLINE_ORDER ; do
+   AC_MSG_CHECKING([for ${pgac_rllib}])
+-  for pgac_lib in "" " -ltermcap" " -lncurses" " -lcurses" ; do
++  for pgac_lib in "" " -lncurses" " -ltermcap" " -lcurses" ; do
+     LIBS="${pgac_rllib}${pgac_lib} $pgac_save_LIBS"
+     AC_TRY_LINK_FUNC([readline], [[
+       # Older NetBSD, OpenBSD, and Irix have a broken linker that does not

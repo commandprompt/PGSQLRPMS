@@ -1,11 +1,12 @@
 Name:		postgresql_autodoc
-Version:	1.31
+Version:	1.40
 Release:	1%{?dist}
 Summary:	PostgreSQL AutoDoc Utility
 Group:		Applications/Databases
 License:	BSD
 URL:		http://www.rbt.ca/autodoc/
 Source0:	http://www.rbt.ca/autodoc/binaries/%{name}-%{version}.tar.gz
+Patch0:		%{name}-makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 
@@ -22,18 +23,17 @@ describes the database.
 
 %prep
 %setup -q -n %{name}
+%patch0 -p0
 
 %build
-%configure --datadir=%{_datadir}/pgsql
-make %{?_smp_mflags}
+PREFIX=%{_usr} make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
 install -d %{buildroot}/%{_bindir}/
-install -d %{buildroot}/%{_docdir}/%{name}
-cp -p postgresql_autodoc %{buildroot}/%{_bindir}/
-install -d %{buildroot}/%{_datadir}/pgsql/%{name}
-cp -p *.tmpl %{buildroot}/%{_datadir}/pgsql/%{name}
+install -d %{buildroot}/%{_datadir}/ı
+install -d %{buildroot}/%{_datadir}/%{name}
+DESTDIR=%{buildroot} PREFIX=%{_usr} make install %{?_smp_mflags} 
 
 %clean
 rm -rf %{buildroot}
@@ -41,9 +41,12 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
-%{_datadir}/pgsql/%{name}
+%{_datadir}/%{name}
 
 %changelog
+* Tue Oct 13 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.40-1
+- Update to 1.40
+
 * Mon Mar 17 2008 - Devrim GUNDUZ <devrim@commandprompt.com> 1.31-1
 - Update to 1.31
 

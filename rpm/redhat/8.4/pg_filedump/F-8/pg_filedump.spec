@@ -1,12 +1,12 @@
 Summary:	PostgreSQL File Dump Utility
 Name:		pg_filedump
-Version:	8.3
+Version:	8.4
 Release:	1%{?dist}
 URL:		http://sources.redhat.com/rhdb/
 License:	GPLv2+
 Group:		Applications/Databases
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	postgresql-devel >= 8.3
+BuildRequires:	postgresql-devel >= 8.4
 
 Source0:	http://sources.redhat.com/rhdb/tools/%{name}-%{version}.tar
 Source1:	pg_crc.c
@@ -18,7 +18,7 @@ Obsoletes:	rhdb-utils => 8.2.0
 Display formatted contents of a PostgreSQL heap/index/control file.
 
 %prep
-%setup -q 
+%setup -q -n %{name}-%{version}.0
 
 # We keep a copy of pg_crc.c in this SRPM so we don't need to have the
 # full PostgreSQL sources at hand.
@@ -46,6 +46,9 @@ rm -rf %{buildroot}
 %doc ChangeLog README.pg_filedump
 
 %changelog
+* Sat Oct 17 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4-1
+- Update to 8.4
+
 * Tue Mar 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3-1
 - Initial packaging for PGDG Repository, using the Fedora
   spec of Tom, with minor stylistic cleanup. Also, conflict

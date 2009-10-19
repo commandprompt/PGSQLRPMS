@@ -1,0 +1,83 @@
+--- cmd_archiver.ini.sample.old	2009-10-19 21:31:26.000000000 +0300
++++ cmd_archiver.ini.sample	2009-10-19 21:31:58.000000000 +0300
+@@ -4,13 +4,13 @@
+ 
+ ; The base database directory
+ 
+-pgdata: /var/lib/postgresql/8.3/main
++pgdata: /var/lib/pgsql/data
+ 
+ ; where to remotely copy archives
+-r_archivedir: /var/lib/postgresql/archive
++r_archivedir: /var/lib/pgsql/archive
+ 
+ ; where to locally copy archives
+-l_archivedir: /var/lib/postgresql/archive
++l_archivedir: /var/lib/pgsql/archive
+ 
+ ; where is rsync				
+ rsync_bin: /usr/bin/rsync			
+@@ -43,4 +43,4 @@
+ debug: on
+ 
+ ; if you want ssh debug (warning noisy)
+-ssh_debug: off
+\ No newline at end of file
++ssh_debug: off
+--- cmd_standby.ini.sample.old	2009-10-19 21:31:32.000000000 +0300
++++ cmd_standby.ini.sample	2009-10-19 21:33:19.000000000 +0300
+@@ -1,6 +1,6 @@
+ [DEFAULT]
+ ; what major version are we using?
+-pgversion: 8.2			
++pgversion: 8.4
+ 
+ ; Used for 8.2 (8.1?), should be set to something > than checkpoint_segments on master				
+ numarchives: 10			
+@@ -13,11 +13,11 @@
+ rsync: /usr/bin/rsync
+ 
+ ; the path to to the postgres bin		
+-pg_standby: /usr/lib/postgresql/8.3/bin/pg_standby
+-pg_ctl: /usr/lib/postgresql/8.3/bin/pg_ctl
++pg_standby: /usr/bin/pg_standby
++pg_ctl: /usr/bin/pg_ctl
+ 
+ ; path to psql on the master
+-r_psql: /usr/lib/postgresql/8.3/bin/psql	
++r_psql: /usr/bin/psql
+ 
+ ; Generalized information
+ 
+@@ -40,18 +40,18 @@
+ ssh_timeout: 30			
+ 
+ ; should be the same as r_archivedir for archiver
+-archivedir: /data2/pgsql/archive/
++archivedir: /var/lib/pgsql/archive/
+ 
+ ; where you executed initdb -D to	
+-pgdata: /data1/pgsql/data/	
++pgdata: /var/lib/pgsql/data
+ 
+ ; Confs
+ 
+ ; This is the postgresql.conf to be used when not in standby
+-postgresql_conf: /var/lib/postgresql/etc/postgresql.conf		
++postgresql_conf: /var/lib/pgsql/data/postgresql.conf		
+ 
+ ; This is the pg_hba.conf to be used when not in standby
+-pg_hba_conf: /var/lib/postgresql/etc/pg_hba.conf		
++pg_hba_conf: /var/lib/pgsql/data/pg_hba.conf		
+ 
+ ; Alarms
+ 
+@@ -63,7 +63,7 @@
+ 
+ ; Whatever is placed here will be executed on -FS must return 0
+ 
+-action_failover: /var/lib/postgresql/pitr_tools/failover.sh	
++action_failover: /var/lib/pgsql/bin/failover.sh	
+ 
+ 
+ 

@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f9
+DIST=.f12
 SPECFILE="pg_migrator.spec"
 
 # Now, include global Makefile

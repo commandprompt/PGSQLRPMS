@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f11
+DIST=.f12
 SPECFILE="pgsphere.spec"
 
 # Now, include global Makefile

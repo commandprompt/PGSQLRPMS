@@ -1,4 +1,4 @@
-############################
+###########################
 # RPM-specific Makefile	   #
 # http://yum.pgsqlrpms.org #
 #                          #
@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f11
+DIST=.f12
 SPECFILE="pgbouncer.spec"
 
 # Now, include global Makefile

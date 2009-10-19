@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f11
+DIST=.f12
 SPECFILE="pgpool-ha.spec"
 
 # Now, include global Makefile

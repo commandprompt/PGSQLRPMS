@@ -5,11 +5,11 @@
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
 Version:	2.0.3
-Release:	2%{?dist}
+Release:	cvs_2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
-Source0:	http://main.slony.info/downloads/2.0/source/%{name}-%{version}.tar.bz2
+Source0:	http://main.slony.info/downloads/2.0/source/%{name}-%{version}cvs.tar.bz2
 Source2:	filter-requires-perl-Pg.sh
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
@@ -47,7 +47,7 @@ documentation for Slony-I.
 %define __perl_requires %{SOURCE2}
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{version}cvs
 
 %build
 

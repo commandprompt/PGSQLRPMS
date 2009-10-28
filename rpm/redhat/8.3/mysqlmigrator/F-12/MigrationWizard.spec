@@ -16,7 +16,7 @@ BuildRequires:	ant
 Requires:	java
 
 %description
-Blah
+This is MySQL to PostgreSQL Migration Wizard by EnterpriseDB.
 
 %prep
 %setup -q -n wizard
@@ -40,7 +40,6 @@ rm -rf %{buildroot}
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*.jar
 %{_datadir}/%{name}/lib/*
-
 
 %changelog
 * Wed Oct 28 2009 Devrim Gunduz <devrim@CommandPrompt.com> 1.1-1

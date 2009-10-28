@@ -4,7 +4,7 @@ Version:	0.0.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/2278/%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{version}.tar.bz2
 URL:		http://www.sai.msu.su/~megera/wiki/plantuner
 BuildRequires:	postgresql-devel >= 8.4
 Requires:	postgresql-server >= 8.4

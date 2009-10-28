@@ -68,18 +68,18 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.5
-Release:	alpha1_2PGDG%{?dist}
+Release:	alpha2_1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}alpha1.tar.bz2
+Source0:	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}alpha2.tar.bz2
 Source3:	postgresql.init
 Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}alpha1-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}alpha2-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh
@@ -272,7 +272,7 @@ system, including regression tests and benchmarks.
 %define __perl_requires %{SOURCE16}
 
 %prep
-%setup -q -n %{name}-%{version}alpha1
+%setup -q -n %{name}-%{version}alpha2
 %patch1 -p1
 %patch3 -p1
 # patch5 is applied later
@@ -726,6 +726,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Oct 28 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha2-1PGDG
+- Update to 8.5 Alpha2
+
 * Tue Aug 25 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha1-2PGDG
 - More fixes for multiple version installation.
 

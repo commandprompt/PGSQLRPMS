@@ -1,0 +1,11 @@
+--- pgtune.old	2009-10-29 00:49:32.000000000 +0200
++++ pgtune	2009-10-29 00:49:51.000000000 +0200
+@@ -414,7 +414,7 @@
+   parser.add_option('-D','--debug',action="store_true",dest="debug",
+     default="False",help="Enable debugging mode")
+ 
+-  parser.add_option('-S','--settings',dest="settings_dir",default=None, 
++  parser.add_option('-S','--settings',dest="settings_dir",default="/usr/share/pgtune", 
+     help="Directory where settings data files are located at.  Defaults to the directory where the script is being run from")
+ 
+   options,args=parser.parse_args()

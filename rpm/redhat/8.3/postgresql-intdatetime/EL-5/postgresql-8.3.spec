@@ -68,11 +68,7 @@
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
-%ifnarch x86_64
 %{!?uuid:%define uuid 1}
-%else
-%{!?uuid:%define uuid 0}
-%endif
 %{!?ldap:%define ldap 1}
 
 Summary:	PostgreSQL client programs and libraries

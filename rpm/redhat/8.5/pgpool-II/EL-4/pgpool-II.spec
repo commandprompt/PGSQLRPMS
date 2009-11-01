@@ -1,7 +1,7 @@
 Summary:	Pgpool is a connection pooling/replication server for PostgreSQL
 Name:		pgpool-II
 Version:	2.2.5
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org
@@ -72,6 +72,12 @@ rm -rf %{buildroot}
 /sbin/ldconfig
 chkconfig --add pgpool
 
+%preun
+if [ $1 = 0 ] ; then
+	/sbin/service pgpool condstop >/dev/null 2>&1
+	chkconfig --del pgpool
+fi
+
 %postun -p /sbin/ldconfig
 
 %files
@@ -104,6 +110,10 @@ chkconfig --add pgpool
 %{_libdir}/libpcp.so
 
 %changelog
+* Sun Nov 01 2009 Devrim GUNDUZ <devrim@CommandPrompt.com> - 2.2.5-2
+- Remove init script from all runlevels before uninstall. Per #RH Bugzilla
+  532177
+
 * Sun Oct 4 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.2.5-1
 - Update to 2.2.5, for various fixes described at
   http://lists.pgfoundry.org/pipermail/pgpool-general/2009-October/002188.html

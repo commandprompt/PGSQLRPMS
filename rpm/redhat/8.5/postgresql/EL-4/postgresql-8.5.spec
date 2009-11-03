@@ -58,7 +58,7 @@
 %{!?intdatetimes:%define intdatetimes 1}
 %{!?kerberos:%define kerberos 1}
 %{!?nls:%define nls 1}
-%{!?xml:%define xml 1}
+%{!?xml:%define xml 0}
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
@@ -89,7 +89,7 @@ Patch3:		postgresql-logging.patch
 Patch6:		postgresql-perl-rpath.patch
 Patch8:		postgresql-prefer-ncurses.patch
 
-Buildrequires:	perl glibc-devel bison flex >= 2.5.31
+Buildrequires:	perl glibc-devel bison flex
 Requires:	/sbin/ldconfig initscripts
 
 %if %plpython

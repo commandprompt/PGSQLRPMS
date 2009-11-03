@@ -73,7 +73,7 @@ License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}alpha2.tar.gz
+Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha2/postgresql-%{version}alpha2.tar.bz2
 Source3:	postgresql.init
 Source4:	Makefile.regress
 Source5:	pg_config.h

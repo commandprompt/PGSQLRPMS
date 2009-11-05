@@ -89,7 +89,7 @@ Patch3:		postgresql-logging.patch
 Patch6:		postgresql-perl-rpath.patch
 Patch8:		postgresql-prefer-ncurses.patch
 
-Buildrequires:	perl glibc-devel bison flex >= 2.5.31
+Buildrequires:	perl glibc-devel bison flex
 Requires:	/sbin/ldconfig initscripts
 
 %if %plpython

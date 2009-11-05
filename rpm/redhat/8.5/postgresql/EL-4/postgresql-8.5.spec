@@ -618,7 +618,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/bin/vacuumlo
 %{pgbaseinstdir}/bin/pg_standby
 %doc %{pgbaseinstdir}/share/doc/contrib/*.example 
-%doc %{pgbaseinstdir}/share/contrib/*.sql
+#%doc %{pgbaseinstdir}/share/contrib/*.sql
 
 %files libs -f pg_libpq5.lst
 %defattr(-,root,root)
@@ -651,6 +651,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/share/postgres.shdescription
 %{pgbaseinstdir}/share/system_views.sql
 %{pgbaseinstdir}/share/*.sample
+%{pgbaseinstdir}/share/timezone/*
 %{pgbaseinstdir}/share/timezonesets/*
 %{pgbaseinstdir}/share/tsearch_data/*.affix
 %{pgbaseinstdir}/share/tsearch_data/*.dict

@@ -1,13 +1,13 @@
 Summary:	PostgreSQL Config Tuner
 Name:		pgtune
-Version:	0.9.2
+Version:	0.9.3
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgfoundry.org/projects/pgtune
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:	http://pgfoundry.org/frs/download.php/2448/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/2449/%{name}-%{version}.tar.gz
 Patch0:		pgtune-settingsdir.patch
 Requires:	postgresql-server
 Buildarch:	noarch
@@ -28,6 +28,7 @@ install -d %{buildroot}%{_bindir}
 install -d %{buildroot}%{_datadir}/%{name}
 
 install -m 755 pgtune %{buildroot}%{_bindir}
+install -m 644 -p pg_settings* %{buildroot}%{_datadir}/%{name}
 
 %clean
 rm -rf %{buildroot}
@@ -40,8 +41,11 @@ rm -rf %{buildroot}
 %attr(755,root,root) %{_bindir}/pgtune
 
 %changelog
-* Wed Oct 28 2009 Devrim Gunduz <devrim@commandprompt.com> 0.9.2-1
-- Update to 0.9.2
+* Wed Oct 28 2009 Devrim Gunduz <devrim@commandprompt.com> 0.9.1-1
+- Initial packaging for PostgreSQL RPM Repository
+
+* Wed Oct 28 2009 Greg Smith <gsmith@gregsmith.com> 0.9.2-2
+- Added copyright file, doesn't install sample postgresql.conf file.
 
 * Wed Oct 28 2009 Devrim Gunduz <devrim@commandprompt.com> 0.9.1-1
 - Initial packaging for PostgreSQL RPM Repository

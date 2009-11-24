@@ -1,0 +1,14 @@
+Remove a debugging leftover.
+
+
+diff -Naur postgresql-jdbc-8.4-701.src.orig/org/postgresql/gss/MakeGSS.java postgresql-jdbc-8.4-701.src/org/postgresql/gss/MakeGSS.java
+--- postgresql-jdbc-8.4-701.src.orig/org/postgresql/gss/MakeGSS.java	2008-11-29 02:43:47.000000000 -0500
++++ postgresql-jdbc-8.4-701.src/org/postgresql/gss/MakeGSS.java	2009-08-17 23:50:41.000000000 -0400
+@@ -18,7 +18,6 @@
+ import java.io.IOException;
+ import java.sql.SQLException;
+ 
+-import com.sun.security.auth.callback.TextCallbackHandler;
+ import org.postgresql.core.PGStream;
+ import org.postgresql.core.Logger;
+ import org.postgresql.util.*;

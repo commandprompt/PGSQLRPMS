@@ -36,7 +36,7 @@ Epoch:		0
 License:	BSD
 Group:		Applications/Databases
 URL:		http://jdbc.postgresql.org/
-
+Patch1:		%{name}-bogus-import.patch
 Source0:	http://jdbc.postgresql.org/download/%{name}-%{upstreamver}.src.tar.gz
 
 %if ! %{gcj_support}
@@ -61,6 +61,7 @@ Java programs to access a PostgreSQL database.
 
 %prep
 %setup -c -q
+%patch1 -p0
 mv -f %{name}-%{upstreamver}.src/* .
 rm -f %{name}-%{upstreamver}.src/.cvsignore
 rmdir %{name}-%{upstreamver}.src

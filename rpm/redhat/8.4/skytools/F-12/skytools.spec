@@ -45,8 +45,6 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/*.sql
 %{_datadir}/%{name}/upgrade/final/*.sql
 %{_bindir}/*.py
-%{_bindir}/*.pyo
-%{_bindir}/*.pyc
 %{python_sitearch}/londiste/*.py
 %{python_sitearch}/londiste/*.pyc
 %{python_sitearch}/pgq/*.py

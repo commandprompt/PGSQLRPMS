@@ -95,8 +95,8 @@ install -m 644 *.sql %{buildroot}%{_datadir}/pgsql/contrib/
 rm -f  %{buildroot}%{_datadir}/*.sql
 
 if [ "%{_libdir}" = "/usr/lib64" ] ; then
-	mv %{buildroot}%{_datadir}/pgsql/contrib/lwpostgis.sql %{buildroot}%{_datadir}/pgsql/contrib/lwpostgis-64.sql
-	mv %{buildroot}%{_datadir}/pgsql/contrib/lwpostgis_upgrade.sql %{buildroot}%{_datadir}/pgsql/contrib/lwpostgis_upgrade-64.sql
+       	mv %{buildroot}%{_datadir}/pgsql/contrib/postgis.sql %{buildroot}%{_datadir}/pgsql/contrib/postgis-64.sql
+        mv %{buildroot}%{_datadir}/pgsql/contrib/postgis_upgrade.sql %{buildroot}%{_datadir}/pgsql/contrib/postgis_upgrade-64.sql
 fi
 
 %if %javabuild

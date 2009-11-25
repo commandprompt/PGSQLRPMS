@@ -10,9 +10,6 @@ Source0:	http://pqxx.org/download/software/%{name}/%{name}-%{version}.tar.gz
 Source1:        http://pqxx.org/download/software/%{name}/%{name}-%{version}.tar.gz.md5sum
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-# drop -Werror for now, since we get -fvisibility warnings using gcc-4.1.1/fc6+
-# http://thaiopensource.org/development/libpqxx/ticket/83
-Patch1:         libpqxx-2.6.8-visibility.patch
 Patch2:         libpqxx-3.0-gcc43.patch
 Patch3:         libpqxx-2.6.8-multilib.patch
 
@@ -40,9 +37,6 @@ Requires:       postgresql-devel
 # fix spurious permissions
 chmod -x COPYING INSTALL
 
-#if ! 0%{?fedora} > 8 
-%patch1 -p1 -b .visibility
-#endif
 %patch2 -p1 -b .gcc43
 %patch3 -p1 -b .multilib
 
@@ -97,6 +91,7 @@ rm -rf %{buildroot}
 %changelog
 * Wed Sep 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> 3.0.2-1
 - Update to 3.0.2
+- Get rid of patch #1, which is not needed for libpqxx 3.0.
 
 * Mon Jun 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 3.0.1-1
 - Update to 3.0.1

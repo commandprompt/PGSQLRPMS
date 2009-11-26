@@ -6,8 +6,7 @@ Summary:	MySQL to PostgreSQL Migration Wizard
 Group:		Application/Databases
 License:	BSD
 URL:		http://www.enterprisedb.com/
-Source0:	%{name}-%{version}.tar.bz2
-#Source0:	http://www.enterprisedb.com/openDownloads.do?productId=407&redirectReason=true&productVersion=otherDownload
+Source0:	http://files.pgsqlrpms.org/%{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:	noarch

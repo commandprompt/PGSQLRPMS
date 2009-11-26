@@ -5,7 +5,7 @@
 Summary:	PostgreSQL database management tools from Skype
 Name:		skytools
 Version:	2.1.10
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/2370/%{name}-%{version}.tar.gz
@@ -44,9 +44,7 @@ rm -rf %{buildroot}
 %{_docdir}/%{name}/conf/*.ini
 %{_datadir}/%{name}/*.sql
 %{_datadir}/%{name}/upgrade/final/*.sql
-%{_bindir}/*.py
-%{_bindir}/*.pyo
-%{_bindir}/*.pyc
+%attr(755,root,root) %{_bindir}/*.py
 %{python_sitearch}/londiste/*.py
 %{python_sitearch}/londiste/*.pyc
 %{python_sitearch}/pgq/*.py
@@ -71,6 +69,9 @@ rm -rf %{buildroot}
 %{_mandir}/man5/londiste.*
 
 %changelog
+* Wed Nov 04 2009 Devrim GUNDUZ <devrim@gunduz.org> 2.1.10-2
+- Set executable flag on .py files, per report from Dimitri Fontaine
+
 * Wed Sep 2 2009 Devrim GUNDUZ <devrim@commandprompt.com> 2.1.10-1
 - Update to 2.1.10
 

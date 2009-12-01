@@ -1,11 +1,11 @@
 Summary:	Pgpool is a connection pooling/replication server for PostgreSQL
 Name:		pgpool-II
-Version:	2.2.5
-Release:	2%{?dist}
+Version:	2.2.6
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.PostgreSQL.org
-Source0:	http://pgfoundry.org/frs/download.php/2423/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/2478/%{name}-%{version}.tar.gz
 Source1:        pgpool.init
 Source2:        pgpool.sysconfig
 Patch1:		pgpool.conf.sample.patch
@@ -110,6 +110,9 @@ fi
 %{_libdir}/libpcp.so
 
 %changelog
+* Tue Dec 1 2009 Devrim GUNDUZ <devrim@CommandPrompt.com> - 2.2.6-1
+- Update to 2.2.6
+
 * Sun Nov 01 2009 Devrim GUNDUZ <devrim@CommandPrompt.com> - 2.2.5-2
 - Remove init script from all runlevels before uninstall. Per #RH Bugzilla
   532177

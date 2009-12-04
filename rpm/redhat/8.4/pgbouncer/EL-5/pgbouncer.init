@@ -66,13 +66,11 @@ start(){
 	chown postgres: /var/run/${NAME}
 
 	$SU -l postgres -c "pgbouncer '$BOUNCERCONF' & " >> "$BOUNCERLOG" 2>&1 < /dev/null
-	sleep 2
 	pid=`pidof -s pgbouncer`
         if [ $pid ]
         then
           success "$BOUNCER_START"
           touch /var/lock/subsys/${NAME}
-          echo "$pid" > "/var/run/${NAME}/${NAME}.pid"
           echo
         else
           failure "$BOUNCER_START"

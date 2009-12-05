@@ -1,6 +1,6 @@
 Summary:	Graphical client for PostgreSQL
 Name:		pgadmin3
-Version:	1.10.0
+Version:	1.10.1
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -76,7 +76,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/*
 
 %changelog
-* Mon Jun 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0
+* Sat Dec 5 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.1-1
+- Update to 1.10.1
+
+* Mon Jun 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-1
 - Update to 1.10.0 Gold
 
 * Wed Mar 25 2009 Devrim GUNDUZ <devrim@commandprompt.com> 1.10.0-beta2

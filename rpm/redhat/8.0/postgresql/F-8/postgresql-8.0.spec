@@ -36,7 +36,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.0.22
+Version:	8.0.23
 
 # Conventions for PostgreSQL Global Development Group RPM releases:
 
@@ -55,7 +55,7 @@ Version:	8.0.22
 # Test releases are where PostgreSQL itself is not in beta, but certain parts of
 # the RPM packaging (such as the spec file, the initscript, etc) are in beta.
 
-Release: 	2PGDG%{?dist}
+Release: 	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0: 	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
@@ -644,6 +644,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Dec 10 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.0.23-1PGDG
+- Update to 8.0.23, for various fixes described at
+  http://www.postgresql.org/docs/8.0/static/release.html#RELEASE-8-0-23
+
 * Wed Sep 09 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 8.0.22-2PGDG
 - Fix init script
 

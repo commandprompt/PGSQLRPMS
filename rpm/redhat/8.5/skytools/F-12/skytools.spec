@@ -21,6 +21,7 @@ The tools are named walmgr, PgQ and Londiste, respectively.
 %package modules
 Summary:	PostgreSQL modules of Skytools
 Group:		Applications/Databases
+Requires:	%{name}-%{version}
 
 %description modules
 This package has PostgreSQL modules of skytools.

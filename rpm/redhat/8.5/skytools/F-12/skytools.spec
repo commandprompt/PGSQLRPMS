@@ -11,7 +11,7 @@ Group:		Applications/Databases
 Source0:	http://pgfoundry.org/frs/download.php/2370/%{name}-%{version}.tar.gz
 URL:		http://pgfoundry.org/projects/skytools
 BuildRequires:	postgresql-devel, python-devel
-Requires:	python-psycopg2
+Requires:	python-psycopg2, postgresql
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description

@@ -2,7 +2,7 @@
 
 Name:		pgbouncer
 Version:	1.3.1
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	Lightweight connection pooler for PostgreSQL
 Group:		Applications/Databases
 License:	MIT and BSD
@@ -82,6 +82,9 @@ rm -rf %{buildroot}
 %{_mandir}/man5/%{name}.*
 
 %changelog
+* Thu Dec 10 2009 Devrim GUNDUZ <devrim@CommandPrompt.com> - 1.3.1-4
+- Adjust order of startup and kill.
+
 * Sat Dec 05 2009 Devrim GUNDUZ <devrim@CommandPrompt.com> - 1.3.1-3
 - Fix init script, per report from Scott Bowers:
   http://lists.pgfoundry.org/pipermail/pgbouncer-general/2009-December/000477.html

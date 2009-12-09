@@ -1,7 +1,7 @@
 #!/bin/sh
 # pgpool    This is the init script for starting up pgpool-II
 #
-# chkconfig: - 64 36
+# chkconfig: - 235 74 33
 # description: Starts and stops the pgpool daemon
 # processname: pgpool
 # pidfile:	/var/run/pgpool.pid
@@ -14,6 +14,9 @@
 #
 # v2.2.5 Devrim GUNDUZ <devrim@CommandPrompt.com>
 # - Fix logging.
+#
+# v2.3 Devrim GUNDUZ <devrim@CommandPrompt.com>
+# - Adjust order of startup and kill, per RH bugzilla #545739.
 
 if [ -r /etc/sysconfig/pgpool ]; then
     . /etc/sysconfig/pgpool

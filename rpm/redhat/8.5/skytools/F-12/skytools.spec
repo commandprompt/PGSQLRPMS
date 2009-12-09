@@ -91,7 +91,7 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/contrib/logtriga.sql
 
 %changelog
-* Tue Dec 9  2009 Devrim GUNDUZ <devrim@gunduz.org> - 2.1.10-4
+* Tue Dec 8 2009 Devrim GUNDUZ <devrim@gunduz.org> - 2.1.10-4
 - Split PostgreSQL modules to a separate package, per idea from
   Greg Smith.
 

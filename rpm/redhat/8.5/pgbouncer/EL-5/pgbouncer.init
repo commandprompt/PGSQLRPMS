@@ -1,11 +1,14 @@
 #!/bin/sh
 # pgbouncer    This is the init script for starting up the pgbouncer
 #
-# chkconfig: - 64 36
+# chkconfig: - 235 74 33
 # description: Starts and stops the pgbouncer daemon.
 #
 # processname: pgbouncer
 # pidfile: /var/run/pgbouncer/pgbouncer.pid
+#
+# v2.0 Devrim GUNDUZ <devrim@CommandPrompt.com>
+# - Adjust order of startup and kill.
 
 # Source function library.
 INITD=/etc/rc.d/init.d

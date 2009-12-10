@@ -60,8 +60,6 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/contrib/pgq_ext.sql
 %{_datadir}/pgsql/contrib/uninstall_pgq.sql
 %attr(755,root,root) %{_bindir}/*.py
-%{_bindir}/*.pyo
-%{_bindir}/*.pyc
 %{_libdir}/pgsql/*.so
 %{python_sitearch}/londiste/*.py
 %{python_sitearch}/londiste/*.pyc
@@ -70,9 +68,6 @@ rm -rf %{buildroot}
 %{python_sitearch}/skytools/*.py
 %{python_sitearch}/skytools/_cquoting.so
 %{python_sitearch}/skytools/*.pyc
-%ghost %{python_sitearch}/londiste/*.pyo
-%ghost %{python_sitearch}/pgq/*.pyo
-%ghost %{python_sitearch}/skytools/*.pyo
 %{_mandir}/man1/bulk_loader.*
 %{_mandir}/man1/cube_dispatcher.*
 %{_mandir}/man1/londiste.*

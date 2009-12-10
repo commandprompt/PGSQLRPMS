@@ -1,5 +1,5 @@
 Name:		proj
-Version:	4.6.1
+Version:	4.7.0
 Release:	1%{?dist}
 Epoch:		0
 Summary:	Cartographic projection software (PROJ.4)
@@ -8,7 +8,7 @@ Group:		Applications/Engineering
 License:	MIT
 URL:		http://trac.osgeo.org/proj
 Source0:	http://download.osgeo.org/%{name}/%{name}-%{version}.tar.gz
-Source1:	http://download.osgeo.org//proj/proj-datumgrid-1.3.zip
+Source1:	http://download.osgeo.org//proj/proj-datumgrid-1.5.zip
 Source2:	http://packages.debian.org/changelogs/pool/main/p/proj/proj_4.4.8-3/proj.copyright
 Patch0:		proj.copyright.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -21,7 +21,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %package nad
-Summary:	US and Canadian datum shift grids for PROJ.4
+Summary:	US, Canadian, French and New Zealand datum shift grids for PROJ.4
 Group:		Applications/Engineering
 Requires:	%{name} = %{version}-%{release}
 
@@ -120,11 +120,16 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}
 
 %files epsg
-%doc nad/README
 %defattr(-,root,root,-)
+%doc nad/README
 %attr(0644,root,root) %{_datadir}/%{name}/epsg
 
 %changelog
+* Thu Dec 10 2009 - Devrim GUNDUZ <devrim@commandprompt.com> - 0:4.7.0-1
+- Update to 4.7.0
+- Update proj-datumgrid to 1.5
+- Fix attr issue for epsg package.
+
 * Tue Dec 2 2008 - Devrim GUNDUZ <devrim@commandprompt.com> - 0:4.6.1-1
 - Update to 4.6.1
 - Update URLs

@@ -1,13 +1,13 @@
 Summary:	PgpoolAdmin - web-based pgpool administration
 Name:		pgpoolAdmin
-Version:	2.2
+Version:	2.3
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgpool.projects.postgresql.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:	http://pgfoundry.org/frs/download.php/2109/%{name}-%{version}.tar.gz
+Source0:	http://pgfoundry.org/frs/download.php/2494/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
 
 Requires:	php >= 4.3.9
@@ -37,7 +37,7 @@ install -d %{buildroot}%{_pgpoolAdmindir}
 install -d %{buildroot}%{_pgpoolAdmindir}/conf
 install -d %{buildroot}%{_sysconfdir}/%{name}
 install -m 644 *.php %{buildroot}%{_pgpoolAdmindir}
-cp -a  doc/ images/ install/ lang/ libs/ templates/ templates_c/ screen.css %{buildroot}%{_pgpoolAdmindir}
+cp -a  doc/ images/ install/ lang/ libs/ templates/ screen.css %{buildroot}%{_pgpoolAdmindir}
 install -m 755 conf/* %{buildroot}%{_sysconfdir}/%{name}/
 ln -s ../../../..%{_sysconfdir}/%{name}/pgmgt.conf.php %{buildroot}%{_pgpoolAdmindir}/conf/pgmgt.conf.php
 
@@ -76,10 +76,12 @@ rm -rf %{buildroot}
 %{_pgpoolAdmindir}/lang
 %{_pgpoolAdmindir}/libs
 %{_pgpoolAdmindir}/templates
-%attr(755,apache,apache) %{_pgpoolAdmindir}/templates_c
 %{_pgpoolAdmindir}/screen.css
 
 %changelog
+* Thu Dec 10 2009 Devrim Gunduz <devrim@commandprompt.com> 2.3-1
+- Update to 2.3
+
 * Mon Mar 23 2009 Devrim Gunduz <devrim@commandprompt.com> 2.2-1
 - Update to 2.2
 - Update spec and patches so that pgpoolAdmin works against pgpool 2.2

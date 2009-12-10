@@ -11,7 +11,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 
 BuildRequires:	perl(DBD::Pg)
-BuildRequires:	perl(HTML::Template), perl(Term::ReadKey)
+BuildRequires:	perl(Term::ReadKey)
 
 Requires:	postgresql-server >= 8.0, perl-TermReadKey
 Requires:	perl(DBD::Pg)

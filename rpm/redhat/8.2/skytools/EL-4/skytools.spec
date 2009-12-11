@@ -58,7 +58,9 @@ rm -rf %{buildroot}
 %{_datadir}/pgsql/contrib/pgq.sql
 %{_datadir}/pgsql/contrib/pgq.upgrade.sql
 %{_datadir}/pgsql/contrib/pgq_ext.sql
+%{_datadir}/pgsql/contrib/txid.sql
 %{_datadir}/pgsql/contrib/uninstall_pgq.sql
+%{_datadir}/pgsql/contrib/uninstall_txid.sql
 %attr(755,root,root) %{_bindir}/*.py
 %{_libdir}/pgsql/*.so
 %{python_sitearch}/londiste/*.py

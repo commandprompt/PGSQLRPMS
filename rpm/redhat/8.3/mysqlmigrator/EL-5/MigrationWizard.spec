@@ -11,8 +11,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:	noarch
 
-BuildRequires:	ant
-Requires:	java
+BuildRequires:	ant, java-1.6.0-openjdk-devel
+Requires:	java, java-1.6.0-openjdk
 
 %description
 This is MySQL to PostgreSQL Migration Wizard by EnterpriseDB.

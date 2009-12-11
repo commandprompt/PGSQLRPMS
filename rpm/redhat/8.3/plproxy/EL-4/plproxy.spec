@@ -30,7 +30,7 @@ install -d %{buildroot}%{_libdir}/pgsql
 install -m 644 plproxy.sql %{buildroot}%{_datadir}/%{name}-%{version}/
 %{__cp} -rp sql/ %{buildroot}%{_datadir}/%{name}-%{version}/
 %{__cp} -rp config/ %{buildroot}%{_datadir}/%{name}-%{version}/
-%{__cp} plproxy.so %{buildroot}%{_libdir}/pgsql/%{name}.so
+%{__cp} libplproxy.so %{buildroot}%{_libdir}/pgsql/%{name}.so
 %{__rm} -f %{buildroot}/%{_datadir}/pgsql/contrib/%{name}.sql
 
 %clean

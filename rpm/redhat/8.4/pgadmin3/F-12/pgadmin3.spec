@@ -5,7 +5,7 @@ Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source:		ftp://ftp.postgresql.org/pub/pgadmin3/release/v%{version}/src/%{name}-%{version}.tar.gz
-Patch0:		%{name}-%{version}-optflags.patch
+Patch0:		%{name}-1.10.0-optflags.patch
 URL:		http://www.pgadmin.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	wxGTK-devel postgresql-devel desktop-file-utils openssl-devel libxml2-devel libxslt-devel

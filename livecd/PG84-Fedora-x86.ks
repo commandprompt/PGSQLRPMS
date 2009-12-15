@@ -42,11 +42,11 @@ part / --size 4096
 # List of repositories. We want to stick to x86 builds only.
 
 # These are the public repositories
-repo --name=released --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-11&arch=i386
-repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f11&arch=i386
+repo --name=released --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=fedora-12&arch=i386
+repo --name=updates --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f12&arch=i386
 
 # PGDG RPM Repository
-repo --name=pgdg84  --baseurl=http://yum.pgsqlrpms.org/8.4/fedora/fedora-11-i386
+repo --name=pgdg84  --baseurl=http://yum.pgsqlrpms.org/8.4/fedora/fedora-12-i386
 
 %packages
 @base-x

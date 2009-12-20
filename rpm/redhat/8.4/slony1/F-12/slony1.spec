@@ -4,8 +4,8 @@
 
 Summary:	A "master to multiple slaves" replication system with cascading and failover
 Name:		slony1
-Version:	2.0.3
-Release:	2%{?dist}
+Version:	2.0.2
+Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://main.slony.info/
@@ -145,18 +145,13 @@ fi
 %endif
 
 %changelog
-* Mon Aug 17 2009 Devrim GÜNDÜZ <devrim@gunduz.org> - 2.0.3-2
-- Rename log directory to slony, to match upstream default
-
-* Mon Aug 17 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.3-1
-- Update to 2.0.3
-- Removed patch1
-
 * Sat May 9 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.2-1
 - Update to 2.0.2
 - Removed patch0 -- it is no longer needed.
 - Added a temp patch to get rid of sgml error.
 - Re-enable doc builds
+* Mon Aug 17 2009 Devrim GÜNDÜZ <devrim@gunduz.org> - 2.0.3-2
+- Rename log directory to slony, to match upstream default
 
 * Sat Mar 14 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.1-1
 - Update to 2.0.1

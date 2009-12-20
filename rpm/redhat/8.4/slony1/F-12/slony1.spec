@@ -150,7 +150,6 @@ fi
 - Removed patch0 -- it is no longer needed.
 - Added a temp patch to get rid of sgml error.
 - Re-enable doc builds
-* Mon Aug 17 2009 Devrim GÜNDÜZ <devrim@gunduz.org> - 2.0.3-2
 - Rename log directory to slony, to match upstream default
 
 * Sat Mar 14 2009 Devrim Gunduz <devrim@CommandPrompt.com> 2.0.1-1

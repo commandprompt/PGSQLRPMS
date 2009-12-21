@@ -326,6 +326,9 @@ TimedLogin=postgres
 TimedLoginDelay=0
 EOF
 
+# Create Desktop directory
+mkdir /var/lib/pgsql/Desktop
+
 # Create a desktop conf file for psql
 cat > /var/lib/pgsql/Desktop/psql <<EOF
 

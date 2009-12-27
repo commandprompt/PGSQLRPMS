@@ -1,11 +1,11 @@
 Summary:	Unit testing suite for PostgreSQL
 Name:		pgtap
-Version:	0.22
+Version:	0.23
 Release:	1%{?dist}
 Group:		Applications/Databases
 License:	BSD
 URL:		http://pgtap.projects.postgresql.org
-Source0:	http://pgfoundry.org/frs/download.php/2316/pgtap-%{version}.tar.gz
+Source0:	ftp://ftp.postgresql.org/pub/projects/pgFoundry/pgtap/pgtap-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:	postgresql-devel
 Requires:	postgresql-server, perl-Test-Harness >= 3.0
@@ -33,10 +33,14 @@ make install USE_PGXS=1 DESTDIR=%{buildroot}
 %files
 %defattr(-,root,root,-)
 %{_bindir}/pg_prove
+%{_bindir}/pg_tapgen
 %{_datadir}/pgsql/contrib/*
 %{_docdir}/pgsql/contrib/README.pgtap
 
 %changelog
+* Mon Dec 28 2009 Devrim GÜNDÜZ <devrim@CommandPrompt.com> 0.23-1
+- Update to 0.23
+ 
 * Wed Aug 19 2009 Darrell Fuhriman <darrell@projectdx.com> 0.22-1
 - initial RPM
  

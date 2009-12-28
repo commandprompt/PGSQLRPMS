@@ -11,6 +11,7 @@ Group:		Applications/Databases
 URL:		http://main.slony.info/
 Source0:	http://main.slony.info/downloads/2.0/source/%{name}-%{version}.tar.bz2
 Source2:	filter-requires-perl-Pg.sh
+Patch2:		%{name}-%{version}-doc.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	postgresql-devel, postgresql-server, initscripts, byacc, flex
 Requires:	postgresql-server, perl-DBD-Pg
@@ -48,6 +49,7 @@ documentation for Slony-I.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch2 -p1
 
 %build
 

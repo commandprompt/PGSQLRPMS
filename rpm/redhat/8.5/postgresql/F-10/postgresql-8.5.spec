@@ -68,18 +68,18 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	8.5
-Release:	alpha2_1PGDG%{?dist}
+Release:	alpha3_1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha2/postgresql-%{version}alpha2.tar.bz2
+Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha3/postgresql-%{version}alpha3.tar.bz2
 Source3:	postgresql.init
 Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}alpha2-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}alpha3-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh
@@ -275,7 +275,7 @@ system, including regression tests and benchmarks.
 %define __perl_requires %{SOURCE16}
 
 %prep
-%setup -q -n %{name}-%{version}alpha2
+%setup -q -n %{name}-%{version}alpha3
 %patch1 -p1
 %patch3 -p1
 # patch5 is applied later
@@ -592,13 +592,16 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/cube.so
 %{pgbaseinstdir}/lib/dblink.so
 %{pgbaseinstdir}/lib/earthdistance.so
+%{pgbaseinstdir}/lib/euc2004_sjis2004.so
 %{pgbaseinstdir}/lib/fuzzystrmatch.so
 %{pgbaseinstdir}/lib/insert_username.so
 %{pgbaseinstdir}/lib/isn.so
 %{pgbaseinstdir}/lib/hstore.so
+%{pgbaseinstdir}/lib/passwordcheck.so
 %{pgbaseinstdir}/lib/pg_freespacemap.so
 %{pgbaseinstdir}/lib/pg_stat_statements.so
 %{pgbaseinstdir}/lib/pgrowlocks.so
+%{pgbaseinstdir}/lib/plpython2.soo
 %{pgbaseinstdir}/lib/sslinfo.so
 %{pgbaseinstdir}/lib/lo.so
 %{pgbaseinstdir}/lib/ltree.so
@@ -733,6 +736,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Dec 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha3-1PGDG
+- Update to 8.5 Alpha3
+
 * Wed Oct 28 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha2-1PGDG
 - Update to 8.5	Alpha2
 

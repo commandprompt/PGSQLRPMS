@@ -28,7 +28,7 @@ prep:
 	spectool -g -S $(SPECFILE)
 
 clean:	
-	rm -rf i386/ x86_64
+	rm -rf i386/ i586/ i686/ x86_64
 	rm -f *.src.rpm
 	rm -f *.tar *.tar.gz *.tar.bz2 *.tgz
 

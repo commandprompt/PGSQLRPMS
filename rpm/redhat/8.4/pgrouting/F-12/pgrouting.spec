@@ -50,7 +50,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(644,root,root,755)
-%doc README.routing
+%doc README.routing COPYING authors.txt  BOOST_LICENSE_1_0.txt RELEASE_NOTES
 %attr(755,root,root) %{_libdir}/pgsql/*.so
 %{_datadir}/postlbs
 

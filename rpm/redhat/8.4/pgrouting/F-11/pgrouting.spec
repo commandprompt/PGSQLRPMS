@@ -50,14 +50,14 @@ rm -rf %{buildroot}
 
 %files
 %defattr(644,root,root,755)
-%doc README.routing
+%doc README.routing COPYING authors.txt  BOOST_LICENSE_1_0.txt RELEASE_NOTES
 %attr(755,root,root) %{_libdir}/pgsql/*.so
 %{_datadir}/postlbs
 
 %changelog
 * Wed Jan 20 2010 Devrim GÜNDÜZ <devrim@commandprompt.com> 1.0.3-5
 - Initial import to PostgreSQL RPM repository, with very little cosmetic 
-  changes. Thanks Peter	for sending spec to me.
+  changes Thanks Peter	for sending spec to me.
 
 * Wed Dec 09 2009 Peter HOPFGARTNER <peter.hopfgartner@r3-gis.com> - 1.0.3-4
 - New build for PostGIS 1.4.

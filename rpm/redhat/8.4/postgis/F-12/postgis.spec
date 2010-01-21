@@ -4,7 +4,7 @@
 
 Summary:	Geographic Information Systems Extensions to PostgreSQL
 Name:		postgis
-Version:	1.4.0
+Version:	1.4.1
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/Databases
@@ -161,6 +161,9 @@ rm -rf %{buildroot}
 %doc postgis*.pdf
 
 %changelog
+* Thu Dec 17  2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.4.1-1
+- Update to 1.4.1
+
 * Mon Jul 27 2009 Devrim GUNDUZ <devrim@commandprompt.com> - 1.4.0-1
 - Release 1.4.0
 

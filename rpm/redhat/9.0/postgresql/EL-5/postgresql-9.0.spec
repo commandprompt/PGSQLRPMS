@@ -19,7 +19,7 @@
 # -- only test releases or full releases should be.
 # This is the PostgreSQL Global Development Group Official RPMset spec file,
 # or a derivative thereof.
-# Copyright 2003-2009 Devrim GÜNDÜZ <devrim@commandprompt.com>
+# Copyright 2003-2010 Devrim GÜNDÜZ <devrim@commandprompt.com>
 # and others listed.
 
 # Major Contributors:
@@ -47,7 +47,7 @@
 %{!?kerbdir:%define kerbdir "/usr"}
 
 # This is a macro to be used with find_lang and other stuff
-%define majorversion 8.5
+%define majorversion 9.0
 %define	pgbaseinstdir	/usr/pgsql-%{majorversion}
 
 %{!?test:%define test 1}
@@ -62,12 +62,12 @@
 %{!?pam:%define pam 1}
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 1}
-%{!?uuid:%define uuid 1}
+%{!?uuid:%define uuid 0}
 %{!?ldap:%define ldap 1}
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.5
+Version:	9.0
 Release:	alpha3_1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -87,8 +87,9 @@ Source16:	filter-requires-perl-Pg.sh
 Patch1:		rpm-pgsql.patch
 Patch3:		postgresql-logging.patch
 Patch6:		postgresql-perl-rpath.patch
+Patch8:		postgresql-prefer-ncurses.patch
 
-Buildrequires:	perl glibc-devel bison flex >= 2.5.31
+Buildrequires:	perl glibc-devel bison flex
 Requires:	/sbin/ldconfig initscripts
 
 %if %plpython
@@ -276,6 +277,7 @@ system, including regression tests and benchmarks.
 %patch3 -p1
 # patch5 is applied later
 %patch6 -p1
+%patch8 -p1
 
 cp -p %{SOURCE12} .
 
@@ -291,10 +293,6 @@ CFLAGS="${CFLAGS} -I%{_includedir}/et" ; export CFLAGS
 # Strip out -ffast-math from CFLAGS....
 
 CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
-
-# Use --as-needed to eliminate unnecessary link dependencies.
-# Hopefully upstream will do this for itself in some future release.
-LDFLAGS="-Wl,--as-needed"; export LDFLAGS
 
 export LIBNAME=%{_lib}
 ./configure --disable-rpath \
@@ -487,14 +485,14 @@ chkconfig --add postgresql
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service postgresql-8.5 condstop >/dev/null 2>&1
-	chkconfig --del postgresql-8.5
+	/sbin/service postgresql-9.0 condstop >/dev/null 2>&1
+	chkconfig --del postgresql-9.0
 fi
 
 %postun server
 /sbin/ldconfig 
 if [ $1 -ge 1 ]; then
-  /sbin/service postgresql-8.5 condrestart >/dev/null 2>&1
+  /sbin/service postgresql-9.0 condrestart >/dev/null 2>&1
 fi
 
 %if %plperl
@@ -519,15 +517,15 @@ chown -R postgres:postgres /usr/share/pgsql/test >/dev/null 2>&1 || :
 
 # Create alternatives entries for common binaries:
 %post
-alternatives --install /usr/bin/psql psql /usr/pgsql-8.5/bin/psql 850
-alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-8.5/bin/pg_dump 850
-alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-8.5/bin/pg_dumpall 850
+alternatives --install /usr/bin/psql psql /usr/pgsql-9.0/bin/psql 900
+alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-9.0/bin/pg_dump 900
+alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-9.0/bin/pg_dumpall 900
 
 # Drop alternatives entries for common binaries:
 %postun
-alternatives --remove psql /usr/pgsql-8.5/bin/psql
-alternatives --remove pg_dump /usr/pgsql-8.4/bin/pg_dump
-alternatives --remove pg_dumpall /usr/pgsql-8.4/bin/pg_dumpall
+alternatives --remove psql /usr/pgsql-9.0/bin/psql
+alternatives --remove pg_dump /usr/pgsql-9.0/bin/pg_dump
+alternatives --remove pg_dumpall /usr/pgsql-9.0/bin/pg_dumpall
 
 %clean
 rm -rf %{buildroot}
@@ -588,7 +586,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/cube.so
 %{pgbaseinstdir}/lib/dblink.so
 %{pgbaseinstdir}/lib/earthdistance.so
-%{pgbaseinstdir}/lib/euc2004_sjis2004.so 
+%{pgbaseinstdir}/lib/euc2004_sjis2004.so
 %{pgbaseinstdir}/lib/fuzzystrmatch.so
 %{pgbaseinstdir}/lib/insert_username.so
 %{pgbaseinstdir}/lib/isn.so
@@ -732,8 +730,8 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Tue Dec 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha3-1PGDG
-- Update to 8.5 Alpha3 
+* Mon Dec 21 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha3-1PGDG
+- Update to 8.5	Alpha3
 
 * Wed Oct 28 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha2-1PGDG
 - Update to 8.5	Alpha2

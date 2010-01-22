@@ -19,7 +19,7 @@
 # -- only test releases or full releases should be.
 # This is the PostgreSQL Global Development Group Official RPMset spec file,
 # or a derivative thereof.
-# Copyright 2003-2009 Devrim GÜNDÜZ <devrim@commandprompt.com>
+# Copyright 2003-2010 Devrim GÜNDÜZ <devrim@commandprompt.com>
 # and others listed.
 
 # Major Contributors:
@@ -47,7 +47,7 @@
 %{!?kerbdir:%define kerbdir "/usr"}
 
 # This is a macro to be used with find_lang and other stuff
-%define majorversion 8.5
+%define majorversion 9.0
 %define	pgbaseinstdir	/usr/pgsql-%{majorversion}
 
 %{!?test:%define test 1}
@@ -67,7 +67,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.5
+Version:	9.0
 Release:	alpha3_1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -491,14 +491,14 @@ chkconfig --add postgresql
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service postgresql-8.5 condstop >/dev/null 2>&1
-	chkconfig --del postgresql-8.5
+	/sbin/service postgresql-9.0 condstop >/dev/null 2>&1
+	chkconfig --del postgresql-9.0
 fi
 
 %postun server
 /sbin/ldconfig 
 if [ $1 -ge 1 ]; then
-  /sbin/service postgresql-8.5 condrestart >/dev/null 2>&1
+  /sbin/service postgresql-9.0 condrestart >/dev/null 2>&1
 fi
 
 %if %plperl
@@ -523,15 +523,15 @@ chown -R postgres:postgres /usr/share/pgsql/test >/dev/null 2>&1 || :
 
 # Create alternatives entries for common binaries:
 %post
-alternatives --install /usr/bin/psql psql /usr/pgsql-8.5/bin/psql 850
-alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-8.5/bin/pg_dump 850
-alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-8.5/bin/pg_dumpall 850
+alternatives --install /usr/bin/psql psql /usr/pgsql-9.0/bin/psql 900
+alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-9.0/bin/pg_dump 900
+alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-9.0/bin/pg_dumpall 900
 
 # Drop alternatives entries for common binaries:
 %postun
-alternatives --remove psql /usr/pgsql-8.5/bin/psql
-alternatives --remove pg_dump /usr/pgsql-8.4/bin/pg_dump
-alternatives --remove pg_dumpall /usr/pgsql-8.4/bin/pg_dumpall
+alternatives --remove psql /usr/pgsql-9.0/bin/psql
+alternatives --remove pg_dump /usr/pgsql-9.0/bin/pg_dump
+alternatives --remove pg_dumpall /usr/pgsql-9.0/bin/pg_dumpall
 
 %clean
 rm -rf %{buildroot}
@@ -736,11 +736,11 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Mon Dec 21 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha3-1PGDG
-- Update to 8.5 Alpha 3.
+* Tue Dec 29 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha3-1PGDG
+- Update to 8.5 Alpha3
 
-* Sun Oct 25 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha2-1PGDG
-- Update to 8.5 Alpha 2.
+* Wed Oct 28 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha2-1PGDG
+- Update to 8.5	Alpha2
 
 * Tue Aug 25 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha1-2PGDG
 - More fixes for multiple version installation.
@@ -748,168 +748,3 @@ rm -rf %{buildroot}
 * Mon Aug 24 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha1-1PGDG
 - Initial cut for 8.5 Alpha 1, which supports multiple version installation.
   WARNING: This is for testing only.
-
-* Sat Jun 27 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4.0-1PGDG
-- Update to 8.4.0
-
-* Tue Jun 23 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4rc2-1PGDG
-- Update to 8.4 rc2
-
-* Sun Jun 14 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4rc1-1PGDG
-- Update to 8.4 rc1   
-
-* Sat May 16 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4beta2-1PGDG
-- Update to 8.4 beta 2
-
-* Fri Apr 10 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4beta1-1PGDG
-- Update to 8.4 beta1
-- Remove buildrhel3 macro
-
-* Fri Mar 27 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090327-1PGDG
-- Update to Mar 27 2009 CVS snapshot
-
-* Tue Mar 10 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090310-1PGDG
-- Update to Mar 10, 2009 CVS snapshot
-
-* Mon Jan 5 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20090105-1PGDG
-- Update to Jan 5, 2009 CVS snapshot
-
-* Mon Dec 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081229-1PGDG
-- Update to Dec 29, 2008 CVS snapshot
-- Update spec for new translation layout.
-- Update spec for new files.
-
-* Thu Dec 4 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081204-1PGDG
-- Update to Dec 04, 2008 CVS snapshot
-
-* Fri Nov 28 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081128-1PGDG
-- Update to Nov 28, 2008 CVS snapshot
-- We now buildrequire perl-ExtUtils-Embed for plperl.
-
-* Wed Nov 26 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081126-1PGDG
-- Update to Nov 26, 2008 CVS snapshot
-
-* Wed Nov 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081119-1PGDG
-- Update to Nov 19, 2008 CVS snapshot, to test auto-contrib module.
-
-* Tue Nov 18 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_20081118-1PGDG
-- Update to Nov 18, 2008 CVS snapshot, and fix spec file for that.
-- Fix version number, so that yum can pick up updates, per Guillaume Smet.
-
-* Thu Nov 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_13112008-1PGDG
-- Update to Nov 13  2008 CVS snapshot
-
-* Sat Oct 11 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_11102008-1PGDG
-- Update to Oct 11 2008 CVS snapshot
-- Add plpgsql translations.
-
-* Mon Sep 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_29092008-1PGDG
-- Update to Sep 29 2008 CVS snapshot
-
-* Mon Sep 15 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_15092008-1PGDG
-- Update to Sep 15 2008 CVS snapshot
-
-* Mon Sep 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_07092008-2PGDG
-- Use intdatetimes macro properly.
-
-* Sun Sep 7 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_07092008-1PGDG
-- Update to Sep 7 2008 CVS snapshot 
-
-* Fri Sep 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_03092008-2PGDG
-- Enable integer datetimes by default. This is a 8.4+ change.
-
-* Wed Sep 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.4devel_03092008-1PGDG
-- Initial cut for 8.4devel, Sep 3 2008 CVS snapshot
-- Remove patch4, it is already in 8.4
-- Update logging patch, so that logs will be rotated weekly.
-
-* Fri Aug 8 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-2PGDG
-- Update pam file -- current file does not work on recent Fedora releases :-(
-- Remove patch8 -- it is no longer needed in recent Fedora releases. Per Tom.
-
-* Mon Jun 9 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.3-1PGDG
-- Update to 8.3.3 (8.3.2 was skipped by upstream)
-- Re-enable uuid for F-9
-
-* Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-2PGDG
-- Enable LDAP support, per gripe from Bartek Siebab.
-- Use -Wl,--as-needed to suppress bogus dependencies for libraries that
-  are really only needed by some of the subpackages, per Fedora package.
-- Clean up cross-subpackage Requires: to ensure that updating any one
-  subpackage brings in the matching versions of others.
-  Resolves: #444271, per Fedora spec.
-
-* Thu Mar 13 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.1-1PGDG
-- Update to 8.3.1
-
-* Tue Feb 5 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-2PGDG
-- Enable the new GSSAPI support in 8.3, per reminder from Tom.
-
-* Fri Feb 1 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.0-1PGDG
-- Update to 8.3.0 
-- Update PDF docs to 8.3.0 
-- Set selftest to on by default.
-- Fix test routines, per Red Hat spec file.
-- Remove RHL 9 calls, and update supported platforms list.
-- Make initscript and pam config files be installed unconditionally;
-  seems new buildroots don't necessarily have those directories in 
-  place, per Red Hat RPMs
-
-* Tue Jan 29 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3RC2-2PGDG
-- Fix xml builds -- it was broken since first 8.3 package was built. 
-  Per report from Steve Woodcock.
-
-* Fri Jan 18 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3RC2-1PGDG
-- Update to 8.3 RC2
-
-* Thu Jan 3 2008 Devrim GUNDUZ <devrim@commandprompt.com> 8.3RC1-1PGDG
-- Update to 8.3 RC1, which also includes security fixes for CVE-2007-4769,
-  CVE-2007-4772, CVE-2007-6067, CVE-2007-6600, CVE-2007-6601
-- Update copyright date
-- Remove autoconf related lines (they are already unused)
-
-* Thu Dec 06 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta4-2PGDG
-- Set uuid default to 0. RHEL 4 does not have uuid package. RHEL 5 has 
-  in EPEL repository. 
-
-* Sun Dec 02 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta4-1PGDG
-- Update to beta4
-- Fix uuid builds
-
-* Sun Nov 16 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta3-1PGDG
-- Update to beta3
-- Trim changelog.
-
-* Sun Nov 04 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta2-3PGDG
-- Added a new macro for --enable-integer-datetimes. It is disabled by default.
-
-* Tue Oct 30 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta2-2PGDG
-- Add a macro for contrib/uuid-ossp and set it to 1
-
-* Sat Oct 26 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta2-1PGDG
-- Update to beta2 and fix spec file for beta2
-- Use perl-devel requirement only for ppc* arches (older RHEL releases
-  does not have perl-devel, so we needed this workaround)
-
-* Mon Oct 15 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta1-4PGDG
-- Build requires perl-devel, per failure on ppc64 builds.
-
-* Wed Oct 10 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta1-3PGDG
-- Merged latest changes from 8.2 spec file (Synced with Fedora's spec file. 
-  All fixes and patches are from Tom Lane) :
-   * Fix multilib problem for /usr/include/ecpg_config.h (which is new in 8.2.x)
-   * Use nicer solution for tzdata file substitution: upstream discussion
-   concluded that hardwiring the path was better than a symlink after all.
-   * Don't remove postgres user/group during RPM uninstall, per Fedora
-   packaging guidelines
-- Added new configuration option: --with-system-tzdata
-
-* Mon Oct 8 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta1-2PGDG
-- Added dist macro 
-
-* Fri Oct 5 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3beta1-1PGDG
-- Update to 8.3beta1
-- Updates to spec file for 8.3 changes
-
-* Tue Jun 5 2007 Devrim GUNDUZ <devrim@commandprompt.com> 8.3devel-1PGDG
-- Initial cut for 8.3devel

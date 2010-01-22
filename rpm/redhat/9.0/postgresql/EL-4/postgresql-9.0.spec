@@ -19,7 +19,7 @@
 # -- only test releases or full releases should be.
 # This is the PostgreSQL Global Development Group Official RPMset spec file,
 # or a derivative thereof.
-# Copyright 2003-2009 Devrim GÜNDÜZ <devrim@commandprompt.com>
+# Copyright 2003-2010 Devrim GÜNDÜZ <devrim@commandprompt.com>
 # and others listed.
 
 # Major Contributors:
@@ -47,7 +47,7 @@
 %{!?kerbdir:%define kerbdir "/usr"}
 
 # This is a macro to be used with find_lang and other stuff
-%define majorversion 8.5
+%define majorversion 9.0
 %define	pgbaseinstdir	/usr/pgsql-%{majorversion}
 
 %{!?test:%define test 1}
@@ -67,7 +67,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.5
+Version:	9.0
 Release:	alpha3_1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -484,14 +484,14 @@ chkconfig --add postgresql
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service postgresql-8.5 condstop >/dev/null 2>&1
-	chkconfig --del postgresql-8.5
+	/sbin/service postgresql-9.0 condstop >/dev/null 2>&1
+	chkconfig --del postgresql-9.0
 fi
 
 %postun server
 /sbin/ldconfig 
 if [ $1 -ge 1 ]; then
-  /sbin/service postgresql-8.5 condrestart >/dev/null 2>&1
+  /sbin/service postgresql-9.0 condrestart >/dev/null 2>&1
 fi
 
 %if %plperl
@@ -516,15 +516,15 @@ chown -R postgres:postgres /usr/share/pgsql/test >/dev/null 2>&1 || :
 
 # Create alternatives entries for common binaries:
 %post
-alternatives --install /usr/bin/psql psql /usr/pgsql-8.5/bin/psql 850
-alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-8.5/bin/pg_dump 850
-alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-8.5/bin/pg_dumpall 850
+alternatives --install /usr/bin/psql psql /usr/pgsql-9.0/bin/psql 900
+alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-9.0/bin/pg_dump 900
+alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-9.0/bin/pg_dumpall 900
 
 # Drop alternatives entries for common binaries:
 %postun
-alternatives --remove psql /usr/pgsql-8.5/bin/psql
-alternatives --remove pg_dump /usr/pgsql-8.4/bin/pg_dump
-alternatives --remove pg_dumpall /usr/pgsql-8.4/bin/pg_dumpall
+alternatives --remove psql /usr/pgsql-9.0/bin/psql
+alternatives --remove pg_dump /usr/pgsql-9.0/bin/pg_dump
+alternatives --remove pg_dumpall /usr/pgsql-9.0/bin/pg_dumpall
 
 %clean
 rm -rf %{buildroot}

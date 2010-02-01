@@ -1,11 +1,10 @@
 Summary:	PostgreSQL monitoring script
 Name:		check_postgres
-Version:	2.12.0
+Version:	2.13.0
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://bucardo.org/%{name}/%{name}.pl
-Source2:	http://bucardo.org/%{name}/%{name}.pl.html
+Source0:	http://bucardo.org/downloads/%{name}-%{version}.tar.gz
 URL:		http://bucardo.org/check_postgres/
 Requires:	postgresql-server >= 7.4
 Buildarch:	noarch
@@ -17,26 +16,38 @@ Postgres databases and reporting back in a Nagios-friendly manner. It is
 also used for MRTG.
 
 %prep
+%setup -q
 
 %build
+%{__perl} Makefile.PL INSTALLDIRS=vendor
+make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
 
 install -d %{buildroot}%{_bindir}/
 install -d %{buildroot}%{_docdir}/%{name}-%{version}
-install -m 755 %{SOURCE0} %{buildroot}%{_bindir}/
-install -m 644 %{SOURCE2} %{buildroot}%{_docdir}/%{name}-%{version}/
+install -d %{buildroot}%{_mandir}/man3/
+install -m 755 %{name}.pl %{buildroot}%{_bindir}/
+install -m 644 %{name}.pl.html README TODO %{buildroot}%{_docdir}/%{name}-%{version}/
+install -m 644 blib/man3/check_postgres.3pm %{buildroot}%{_mandir}/man3/
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc %{_docdir}/%{name}-%{version}/%{name}.pl.html
+%doc %{name}.pl.html README TODO
+%{_mandir}/man3/%{name}.*
 %{_bindir}/%{name}.pl
 
 %changelog
+* Mon Feb 1 2010 - Devrim GUNDUZ <devrim@commandprompt.com> 2.13.0-1
+- Update to 2.13.0
+- Refactor spec file:
+  * Use tarball, instead of .pl file directly.
+  * Add man page
+
 * Wed Sep 2 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 2.12.0-1
 - Update to 2.12.0
 

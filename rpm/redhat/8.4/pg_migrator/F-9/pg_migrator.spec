@@ -1,10 +1,10 @@
 Summary:	In-place data upgrade utility for PostgreSQL
 Name:		pg_migrator
-Version:	8.4.4
+Version:	8.4.14
 Release:	1%{?dist}
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/2323/%{name}-%{version}.tgz
+Source0:	http://pgfoundry.org/frs/download.php/2552/%{name}-%{version}.tgz
 URL:		http://pgfoundry.org/projects/pg-migrator
 BuildRequires:	postgresql-devel >= 8.4
 Requires:	postgresql-server >= 8.3
@@ -29,8 +29,9 @@ install -d %{buildroot}%{_bindir}/
 install -d %{buildroot}%{_libdir}/
 install -d %{buildroot}%{_docdir}/%{name}-%{version}
 install -m 755 src/pg_migrator %{buildroot}%{_bindir}
-install -m 644 func/pg_migrator.so %{buildroot}%{_libdir}
-install -m 644 DEVELOPERS IMPLEMENTATION INSTALL LICENSE README TODO %{buildroot}%{_docdir}/%{name}-%{version}
+install -m 644 func/pg_migrator_sysoids.so %{buildroot}%{_libdir}
+install -m 644 func/pg_migrator_toast.so %{buildroot}%{_libdir}
+install -m 644 CHANGES DEVELOPERS IMPLEMENTATION IMPLEMENTATION.jp INSTALL INSTALL.jp LICENSE README TODO %{buildroot}%{_docdir}/%{name}-%{version}
 
 strip %{buildroot}/%{_libdir}/*.so
 
@@ -42,11 +43,14 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc DEVELOPERS IMPLEMENTATION INSTALL LICENSE README TODO
+%doc CHANGES DEVELOPERS IMPLEMENTATION IMPLEMENTATION.jp INSTALL INSTALL.jp LICENSE README TODO
 %{_bindir}/pg_migrator
-%{_libdir}/pg_migrator.so
+%{_libdir}/pg_migrator_*.so
 
 %changelog
+* Mon Feb 1 2010 - Devrim GUNDUZ <devrim@commandprompt.com> 8.4.14-1
+- Update to 8.4.14
+
 * Mon Sep 7 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 8.4.4-1
 - Update to 8.4.4
 

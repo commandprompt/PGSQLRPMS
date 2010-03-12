@@ -1,8 +1,0 @@
---- gridsql-agent-1.1/config/gridsql_agent.config.old	2009-05-13 01:13:12.000000000 +0300
-+++ gridsql-agent-1.1/config/gridsql_agent.config	2009-05-13 01:13:32.000000000 +0300
-@@ -29,4 +29,4 @@
- # A1 uses PatternLayout.
- log4j.appender.console.layout=org.apache.log4j.PatternLayout
- log4j.appender.console.layout.ConversionPattern=%r [%t] %-5p %c %x - %m%n
--log4j.appender.console.File=/usr/local/gridsql-agent-1.1/log/agent.log
-+log4j.appender.console.File=/var/log/gridsql/agent.log

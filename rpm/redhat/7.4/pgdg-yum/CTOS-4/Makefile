@@ -15,3 +15,4 @@ SPECFILE="pgdg-centos-74.spec"
 
 # Now, include global Makefile
 include ../../../common/Makefile.global
+

@@ -1,6 +1,6 @@
 Name:		pgdg-redhat
 Version:	8.3
-Release:	6
+Release:	7
 Summary:	PostgreSQL 8.3.X PGDG RPMs for RHEL - Yum Repository Configuration
 Group:		System Environment/Base 
 License:	BSD
@@ -44,6 +44,9 @@ rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 %{_sysconfdir}/pki/rpm-gpg/*
 
 %changelog
+* Thu Mar 11 2010 CMD RPM Packagers <packages@commandprompt.com> - 8.3-7
+- Rebuilt for new key
+
 * Fri Dec 19 2008 Devrim GUNDUZ <devrim@commandprompt.com> - 8.3-6
 - Enable new channel: pgdg83-id and pgdg83-id-source for the packages
   with --integer-datetimes support.

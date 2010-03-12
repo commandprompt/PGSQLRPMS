@@ -1,6 +1,6 @@
 Name:		pgdg-redhat
 Version:	9.0
-Release:	1
+Release:	2
 Summary:	PostgreSQL 9.0.X PGDG RPMs for RHEL - Yum Repository Configuration
 Group:		System Environment/Base 
 License:	BSD
@@ -42,6 +42,9 @@ rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-PGDG
 %{_sysconfdir}/pki/rpm-gpg/*
 
 %changelog
+* Thu Mar 11 2010 CMD RPM Packagers <packages@commandprompt.com> - 9.0-2
+- Rebuilt for new key
+
 * Fri Jan 22 2010 Devrim GUNDUZ <devrim@commandprompt.com> - 9.0-1
 - 8.5 is now 9.0
 

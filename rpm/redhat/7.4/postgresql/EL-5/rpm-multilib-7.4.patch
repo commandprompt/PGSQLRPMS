@@ -1,5 +1,6 @@
---- postgresql-7.4.27/config/python.m4.orig	2005-12-12 09:56:04.000000000 +0200
-+++ postgresql-7.4.27/config/python.m4	2005-12-12 09:57:14.000000000 +0200
+diff -Nur postgresql-7.4.28.orig/config/python.m4 postgresql-7.4.28/config/python.m4
+--- postgresql-7.4.28.orig/config/python.m4	2003-09-01 16:01:48.000000000 -0700
++++ postgresql-7.4.28/config/python.m4	2010-03-14 12:57:47.000000000 -0700
 @@ -25,7 +25,11 @@
  python_version=`${PYTHON} -c "import sys; print sys.version[[:3]]"`
  python_prefix=`${PYTHON} -c "import sys; print sys.prefix"`
@@ -25,8 +26,9 @@
  fi
  ])# _PGAC_CHECK_PYTHON_DIRS
  
---- postgresql-7.4.27/configure.in.orig	2005-12-12 09:57:31.000000000 +0200
-+++ postgresql-7.4.27/configure.in	2005-12-12 10:01:45.000000000 +0200
+diff -Nur postgresql-7.4.28.orig/configure.in postgresql-7.4.28/configure.in
+--- postgresql-7.4.28.orig/configure.in	2010-03-11 20:06:01.000000000 -0800
++++ postgresql-7.4.28/configure.in	2010-03-14 13:04:14.000000000 -0700
 @@ -19,11 +19,11 @@
  dnl
  dnl The GNU folks apparently haven't heard that some people don't use
@@ -37,13 +39,13 @@
 +dnl Now use both docdir and infodir to work properly with RPM macros
 +dnl (courtesy, Elliott Lee <sopwith@redhat.com>)
 +dnl - Andrew Overholt <overholt@redhat.com> 10 December 2002
- AC_INIT([PostgreSQL], [7.4.27], [pgsql-bugs@postgresql.org])
+ AC_INIT([PostgreSQL], [7.4.28], [pgsql-bugs@postgresql.org])
 -m4_undefine([infodir])
 -m4_undefine([info])
  AC_SUBST(docdir)
  
- AC_PREREQ(2.53)
-@@ -40,6 +40,11 @@
+ m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.53], [], [m4_fatal([Autoconf version 2.53 is required.
+@@ -43,6 +43,10 @@
  template=
  AC_MSG_CHECKING([which template to use])
  
@@ -51,11 +53,10 @@
 +docdir="$with_docdir"
 +AC_SUBST(docdir)
 +
-+
  PGAC_ARG_REQ(with, template, [],
  [
    case $withval in
-@@ -442,8 +447,8 @@
+@@ -445,8 +449,8 @@
    if test -d "$krb4_prefix/include"; then
      INCLUDES="$INCLUDES -I$krb4_prefix/include"
    fi
@@ -66,16 +67,17 @@
    fi
  
    krb_srvtab="/etc/srvtab"
-@@ -452,7 +457,7 @@
- 
+@@ -456,7 +460,8 @@
  AC_SUBST(with_krb4)
  
--
+ 
+-#
 +test -z "$LIBNAME" && LIBNAME=lib
- #
++
  # Kerberos 5
  #
-@@ -467,8 +472,8 @@
+ AC_MSG_CHECKING([whether to build with Kerberos 5 support])
+@@ -470,8 +475,8 @@
    if test -d "$krb5_prefix/include"; then
      INCLUDES="$INCLUDES -I$krb5_prefix/include"
    fi
@@ -86,7 +88,7 @@
    fi
  
    krb_srvtab="FILE:\$(sysconfdir)/krb5.keytab"
-@@ -485,7 +490,7 @@
+@@ -488,7 +493,7 @@
  
  AC_SUBST(krb_srvtab)
  
@@ -95,7 +97,7 @@
  #
  # Kerberos configuration parameters
  #
-@@ -496,7 +501,7 @@
+@@ -499,7 +504,7 @@
  AC_DEFINE_UNQUOTED([PG_KRB_SRVNAM], ["$with_krb_srvnam"],
                     [Define to the name of the PostgreSQL service principal in Kerberos. (--with-krb-srvnam=NAME)])
  
@@ -104,18 +106,15 @@
  #
  # PAM
  #
-@@ -533,8 +538,8 @@
-   if test -d "${openssl_prefix}/include" ; then
-     INCLUDES="$INCLUDES -I${openssl_prefix}/include"
-   fi
--  if test -d "${openssl_prefix}/lib" ; then
--    LIBDIRS="$LIBDIRS -L${openssl_prefix}/lib"
-+  if test -d "${openssl_prefix}/$LIBNAME" ; then
-+    LIBDIRS="$LIBDIRS -L${openssl_prefix}/$LIBNAME"
-   fi
- ])
+@@ -510,7 +515,6 @@
+ AC_MSG_RESULT([$with_pam])
+ AC_SUBST(with_pam)
  
-@@ -597,7 +602,7 @@
+-
+ #
+ # Rendezvous
+ #
+@@ -600,7 +604,7 @@
  case $host_os in sysv5*)
    AC_CACHE_CHECK([whether ld -R works], [pgac_cv_prog_ld_R],
    [

@@ -73,7 +73,7 @@
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
-Version:	8.2.15
+Version:	8.2.16
 Release:	1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases

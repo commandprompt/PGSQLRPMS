@@ -34,9 +34,9 @@
 %{!?pgfts:%define pgfts 0}
 %{!?runselftest:%define runselftest 0}
 
-Summary:	PostgreSQL client programs and libraries
-Name:		postgresql
-Version:	8.0.24
+Summary:   PostgreSQL client programs and libraries
+Name:      postgresql
+Version:   8.0.24
 
 # Conventions for PostgreSQL Global Development Group RPM releases:
 
@@ -54,65 +54,65 @@ Version:	8.0.24
 
 # Test releases are where PostgreSQL itself is not in beta, but certain parts of
 # the RPM packaging (such as the spec file, the initscript, etc) are in beta.
+%define dist .el4
+Release:    1PGDG%{?dist}
+License:   BSD
+Group:      Applications/Databases
+Source0:    ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
+Source3:    postgresql.init
+Source4:    Makefile.regress
+Source6:    README.rpm-dist
+Source12:    http://www.postgresql.org/files/documentation/pdf/8.0/postgresql-8.0-A4.pdf
+Source14:    postgresql.pam
+Source15:    postgresql-bashprofile
+Source16:    filter-requires-perl-Pg.sh
+Source18:    ftp://ftp.pygresql.org/pub/distrib/PyGreSQL-3.8.1.tgz
 
-Release: 	1PGDG%{?dist}
-License:	BSD
-Group:		Applications/Databases
-Source0: 	ftp://ftp.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
-Source3: 	postgresql.init
-Source4: 	Makefile.regress
-Source6: 	README.rpm-dist
-Source12: 	http://www.postgresql.org/files/documentation/pdf/8.0/postgresql-8.0-A4.pdf
-Source14: 	postgresql.pam
-Source15: 	postgresql-bashprofile
-Source16: 	filter-requires-perl-Pg.sh
-Source18: 	ftp://ftp.pygresql.org/pub/distrib/PyGreSQL-3.8.1.tgz
+Patch1:    rpm-pgsql.patch
+Patch2:      postgresql-src-tutorial.patch
+Patch3:      postgresql-logging.patch
+Patch4:      postgresql-test.patch
+Patch6:      postgresql-perl-rpath.patch
 
-Patch1: 	rpm-pgsql.patch
-Patch2:		postgresql-src-tutorial.patch
-Patch3:		postgresql-logging.patch
-Patch4:		postgresql-test.patch
-Patch6:		postgresql-perl-rpath.patch
-
-BuildRequires:	perl glibc-devel bison flex
-Requires:	/sbin/ldconfig initscripts
+BuildRequires:   perl glibc-devel bison flex
+Requires:   /sbin/ldconfig initscripts
 
 %if %pltcl
-BuildRequires: 	tcl
+BuildRequires:    tcl
 %endif
 %if %tcldevel
-BuildRequires: 	tcl-devel
+BuildRequires:    tcl-devel
 %endif
 
-BuildRequires: 	readline-devel
-BuildRequires: 	zlib-devel >= 1.0.4
+BuildRequires:    readline-devel
+BuildRequires:    zlib-devel >= 1.0.4
 
 %if %ssl
-BuildRequires: 	openssl-devel
+BuildRequires:    openssl-devel
 %endif
 
 %if %kerberos
-BuildRequires:	krb5-devel
-BuildRequires:	e2fsprogs-devel
+BuildRequires:   krb5-devel
+BuildRequires:   e2fsprogs-devel
 %endif
 
 %if %nls
-BuildRequires:	gettext >= 0.10.35
+BuildRequires:   gettext >= 0.10.35
 %endif
 
 %if %pam
 %if %non6xpamdeps
-BuildRequires:	pam-devel
+BuildRequires:   pam-devel
 %endif
 %endif
 
 %if %xml
-BuildRequires:	libxml2-devel libxslt-devel
+BuildRequires:   libxml2-devel libxslt-devel
 %endif
 
-Url:		http://www.postgresql.org/ 
+Url:      http://www.postgresql.org/ 
 
-Buildroot: 	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Buildroot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # This is the PostgreSQL Global Development Group Official RPMset spec file,
 # or a derivative thereof.
@@ -286,36 +286,36 @@ CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
 export LIBNAME=%{_lib}
 %configure --disable-rpath \
 %if %beta
-	--enable-debug \
-	--enable-cassert \
+   --enable-debug \
+   --enable-cassert \
 %endif
 %if %plperl
-	--with-perl \
+   --with-perl \
 %endif
 %if %pltcl
-	--with-tcl \
-	--with-tclconfig=%{_libdir} \
+   --with-tcl \
+   --with-tclconfig=%{_libdir} \
 %endif
 %if %ssl
-	--with-openssl \
+   --with-openssl \
 %endif
 %if %pam
-	--with-pam \
+   --with-pam \
 %endif
 %if %kerberos
-	--with-krb5 \
-	--with-includes=%{kerbdir}/include \
-	--with-libraries=%{kerbdir}/lib \
+   --with-krb5 \
+   --with-includes=%{kerbdir}/include \
+   --with-libraries=%{kerbdir}/lib \
 %endif
 %if %nls
-	--enable-nls \
+   --enable-nls \
 %endif
 %if %pgfts
-	--enable-thread-safety \
+   --enable-thread-safety \
 %endif
-	--sysconfdir=/etc/sysconfig/pgsql \
-	--datadir=/usr/share/pgsql \
-	--with-docdir=%{_docdir}
+   --sysconfdir=/etc/sysconfig/pgsql \
+   --datadir=/usr/share/pgsql \
+   --with-docdir=%{_docdir}
 
 make %{?_smp_mflags} all
 make %{?_smp_mflags} -C contrib all
@@ -329,17 +329,17 @@ make %{?_smp_mflags} -C src/tutorial NO_PGXS=1 all
 rm -f src/tutorial/GNUmakefile
 
 %if %runselftest
-	pushd src/test/regress
-	make all
-	make MAX_CONNECTIONS=5 check
-	make clean
-	popd
+   pushd src/test/regress
+   make all
+   make MAX_CONNECTIONS=5 check
+   make clean
+   popd
 %endif
 
 %if %test
-	pushd src/test/regress
-	make RPMTESTING=1 all
-	popd
+   pushd src/test/regress
+   make RPMTESTING=1 all
+   popd
 %endif
 
 %install
@@ -357,16 +357,16 @@ cp src/tutorial/* %{buildroot}%{_libdir}/pgsql/tutorial
 
 if [ -d /etc/rc.d/init.d ]
 then
-	install -d %{buildroot}/etc/rc.d/init.d
-	sed 's/^PGVERSION=.*$/PGVERSION=%{version}/' <%{SOURCE3} > postgresql.init
-	install -m 755 postgresql.init %{buildroot}/etc/rc.d/init.d/postgresql
+   install -d %{buildroot}/etc/rc.d/init.d
+   sed 's/^PGVERSION=.*$/PGVERSION=%{version}/' <%{SOURCE3} > postgresql.init
+   install -m 755 postgresql.init %{buildroot}/etc/rc.d/init.d/postgresql
 fi
 
 %if %pam
 if [ -d /etc/pam.d ]
 then
-	install -d %{buildroot}/etc/pam.d
-	install -m 644 %{SOURCE14} %{buildroot}/etc/pam.d/postgresql
+   install -d %{buildroot}/etc/pam.d
+   install -m 644 %{SOURCE14} %{buildroot}/etc/pam.d/postgresql
 fi
 %endif
 
@@ -383,18 +383,18 @@ install -m 644 %{SOURCE15} %{buildroot}/var/lib/pgsql/.bash_profile
 install -d -m 700 %{buildroot}/etc/sysconfig/pgsql
 
 %if %test
-	# tests. There are many files included here that are unnecessary, but include
-	# them anyway for completeness.
-	mkdir -p %{buildroot}/usr/lib/pgsql/test
-	cp -a src/test/regress %{buildroot}/usr/lib/pgsql/test
-	install -m 0755 contrib/spi/refint.so %{buildroot}/usr/lib/pgsql/test/regress
-	install -m 0755 contrib/spi/autoinc.so %{buildroot}/usr/lib/pgsql/test/regress
-	pushd  %{buildroot}/usr/lib/pgsql/test/regress/
-	strip *.so
-	rm -f GNUmakefile Makefile
-	popd
-	cp %{SOURCE4} %{buildroot}/usr/lib/pgsql/test/regress/Makefile
-	chmod 0644 %{buildroot}/usr/lib/pgsql/test/regress/Makefile
+   # tests. There are many files included here that are unnecessary, but include
+   # them anyway for completeness.
+   mkdir -p %{buildroot}/usr/lib/pgsql/test
+   cp -a src/test/regress %{buildroot}/usr/lib/pgsql/test
+   install -m 0755 contrib/spi/refint.so %{buildroot}/usr/lib/pgsql/test/regress
+   install -m 0755 contrib/spi/autoinc.so %{buildroot}/usr/lib/pgsql/test/regress
+   pushd  %{buildroot}/usr/lib/pgsql/test/regress/
+   strip *.so
+   rm -f GNUmakefile Makefile
+   popd
+   cp %{SOURCE4} %{buildroot}/usr/lib/pgsql/test/regress/Makefile
+   chmod 0644 %{buildroot}/usr/lib/pgsql/test/regress/Makefile
 %endif
 
 # Fix some more documentation
@@ -425,7 +425,7 @@ cat postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
 %pre server
 groupadd -g 26 -o -r postgres >/dev/null 2>&1 || :
 useradd -M -n -g postgres -o -r -d /var/lib/pgsql -s /bin/bash \
-	-c "PostgreSQL Server" -u 26 postgres >/dev/null 2>&1 || :
+   -c "PostgreSQL Server" -u 26 postgres >/dev/null 2>&1 || :
 touch /var/log/pgsql
 chown postgres:postgres /var/log/pgsql
 chmod 0700 /var/log/pgsql
@@ -436,8 +436,8 @@ chkconfig --add postgresql
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service postgresql condstop >/dev/null 2>&1
-	chkconfig --del postgresql
+   /sbin/service postgresql condstop >/dev/null 2>&1
+   chkconfig --del postgresql
 fi
 
 %postun server
@@ -446,8 +446,8 @@ if [ $1 -ge 1 ]; then
   /sbin/service postgresql condrestart >/dev/null 2>&1
 fi
 if [ $1 = 0 ] ; then
-	userdel postgres >/dev/null 2>&1 || :
-	groupdel postgres >/dev/null 2>&1 || : 
+   userdel postgres >/dev/null 2>&1 || :
+   groupdel postgres >/dev/null 2>&1 || : 
 fi
 
 %if %pls

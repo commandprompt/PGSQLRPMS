@@ -70,75 +70,76 @@
 %{!?pgfts:%define pgfts 1}
 %{!?runselftest:%define runselftest 0}
 
-Summary:	PostgreSQL client programs and libraries
-Name:		postgresql
-Version:	8.1.20
-Release:	1PGDG%{?dist}
-License:	BSD
-Group:		Applications/Databases
-Url:		http://www.postgresql.org/ 
+%define dist .fc11
+Summary:   PostgreSQL client programs and libraries
+Name:      postgresql
+Version:   8.1.20
+Release:   1PGDG%{?dist}
+License:   BSD
+Group:      Applications/Databases
+Url:      http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/v%{version}/%{name}-%{version}.tar.bz2
-Source3:	%{name}.init
-Source4:	Makefile.regress
-Source5:	pg_config.h
-Source6:	README.rpm-dist
-Source12:	http://www.postgresql.org/files/documentation/pdf/8.1/%{name}-8.1-A4.pdf
-Source14:	%{name}.pam
-Source15:	%{name}-bashprofile
-Source16:	filter-requires-perl-Pg.sh
+Source0:   ftp://ftp.postgresql.org/pub/source/v%{version}/%{name}-%{version}.tar.bz2
+Source3:   %{name}.init
+Source4:   Makefile.regress
+Source5:   pg_config.h
+Source6:   README.rpm-dist
+Source12:   http://www.postgresql.org/files/documentation/pdf/8.1/%{name}-8.1-A4.pdf
+Source14:   %{name}.pam
+Source15:   %{name}-bashprofile
+Source16:   filter-requires-perl-Pg.sh
 
-Patch1:		rpm-pgsql.patch
-Patch2:		postgresql-src-tutorial.patch
-Patch3:		postgresql-logging.patch
-Patch4:		postgresql-test.patch
-Patch6:		postgresql-perl-rpath.patch
+Patch1:      rpm-pgsql.patch
+Patch2:      postgresql-src-tutorial.patch
+Patch3:      postgresql-logging.patch
+Patch4:      postgresql-test.patch
+Patch6:      postgresql-perl-rpath.patch
 
-BuildRequires:	perl glibc-devel bison flex
-Requires:	/sbin/ldconfig initscripts
+BuildRequires:   perl glibc-devel bison flex
+Requires:   /sbin/ldconfig initscripts
 
 %if %plperl
-BuildRequires:	perl-devel
+BuildRequires:   perl-devel
 BuildRequires:  perl-ExtUtils-Embed
 %endif
 
 %if %python
-BuildRequires:	python-devel
+BuildRequires:   python-devel
 %endif
 
 %if %pltcl
-BuildRequires:	tcl
+BuildRequires:   tcl
 %endif
 
 %if %tcldevel
-Buildrequires:	tcl-devel
+Buildrequires:   tcl-devel
 %endif
 
-BuildRequires:	readline-devel
-BuildRequires:	zlib-devel >= 1.0.4
+BuildRequires:   readline-devel
+BuildRequires:   zlib-devel >= 1.0.4
 
 %if %ssl
-BuildRequires:	openssl-devel
+BuildRequires:   openssl-devel
 %endif
 
 %if %kerberos
-BuildRequires:	krb5-devel
-BuildRequires:	e2fsprogs-devel
+BuildRequires:   krb5-devel
+BuildRequires:   e2fsprogs-devel
 %endif
 
 %if %nls
-BuildRequires:	gettext >= 0.10.35
+BuildRequires:   gettext >= 0.10.35
 %endif
 
 %if %xml
-BuildRequires:	libxml2-devel libxslt-devel
+BuildRequires:   libxml2-devel libxslt-devel
 %endif
 
 %if %pam
-BuildRequires:	pam-devel
+BuildRequires:   pam-devel
 %endif
 
-Buildroot:	%{_tmppath}/%{name}-%{version}-root
+Buildroot:   %{_tmppath}/%{name}-%{version}-root
 
 %description
 PostgreSQL is an advanced Object-Relational database management system
@@ -159,9 +160,9 @@ server, you need this package. You also need to install this package
 if you're installing the postgresql-server package.
 
 %package libs
-Summary:	The shared libraries required for any PostgreSQL clients
-Group:		Applications/Databases
-Provides:	libpq.so
+Summary:   The shared libraries required for any PostgreSQL clients
+Group:      Applications/Databases
+Provides:   libpq.so
 
 %description libs
 The postgresql-libs package provides the essential shared libraries for any 
@@ -170,11 +171,11 @@ to use any other PostgreSQL package or any clients that need to connect to a
 PostgreSQL server.
 
 %package server
-Summary:	The programs needed to create and run a PostgreSQL server
-Group:		Applications/Databases
-Requires:	/usr/sbin/useradd /sbin/chkconfig 
-Requires:	postgresql = %{version} libpq.so
-Conflicts:	postgresql < 7.4
+Summary:   The programs needed to create and run a PostgreSQL server
+Group:      Applications/Databases
+Requires:   /usr/sbin/useradd /sbin/chkconfig 
+Requires:   postgresql = %{version} libpq.so
+Conflicts:   postgresql < 7.4
 
 %description server
 The postgresql-server package includes the programs needed to create
@@ -188,8 +189,8 @@ PostgreSQL databases and/or your own PostgreSQL server. You also need
 to install the postgresql package.
 
 %package docs
-Summary:	Extra documentation for PostgreSQL
-Group:		Applications/Databases
+Summary:   Extra documentation for PostgreSQL
+Group:      Applications/Databases
 
 %description docs
 The postgresql-docs package includes the SGML source for the documentation
@@ -198,19 +199,19 @@ Install this package if you want to help with the PostgreSQL documentation
 project, or if you want to generate printed documentation.
 
 %package contrib
-Summary:	Contributed source and binaries distributed with PostgreSQL
-Group:		Applications/Databases
-Requires:	postgresql = %{version}
+Summary:   Contributed source and binaries distributed with PostgreSQL
+Group:      Applications/Databases
+Requires:   postgresql = %{version}
 
 %description contrib
 The postgresql-contrib package contains contributed packages that are
 included in the PostgreSQL distribution.
 
 %package devel
-Summary:	PostgreSQL development header files and libraries
-Group:		Development/Libraries
-Requires:	postgresql-libs = %{version}
-Requires:	postgresql = %{version}
+Summary:   PostgreSQL development header files and libraries
+Group:      Development/Libraries
+Requires:   postgresql-libs = %{version}
+Requires:   postgresql = %{version}
 
 %description devel
 The postgresql-devel package contains the header files and libraries
@@ -220,11 +221,11 @@ Postgres preprocessor. You need to install this package if you want to
 develop applications which will interact with a PostgreSQL server. 
 
 %if %pls
-%package	pl
-Summary:	The PL procedural languages for PostgreSQL
-Group:		Applications/Databases
-Requires:	postgresql = %{version}
-Requires:	postgresql-server = %{version}
+%package   pl
+Summary:   The PL procedural languages for PostgreSQL
+Group:      Applications/Databases
+Requires:   postgresql = %{version}
+Requires:   postgresql-server = %{version}
 
 %description pl
 PostgreSQL is an advanced Object-Relational database management
@@ -234,10 +235,10 @@ procedural languages for the backend where PL/Pgsql is part of the core server p
 
 %if %test
 %package test
-Summary:	The test suite distributed with PostgreSQL
-Group:		Applications/Databases
-Requires:	postgresql = %{version}
-Requires:	postgresql-server = %{version}
+Summary:   The test suite distributed with PostgreSQL
+Group:      Applications/Databases
+Requires:   postgresql = %{version}
+Requires:   postgresql-server = %{version}
 
 %description test
 PostgreSQL is an advanced Object-Relational database management
@@ -283,44 +284,44 @@ CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
 export LIBNAME=%{_lib}
 %configure --disable-rpath \
 %if %beta
-	--enable-debug \
-	--enable-cassert \
+   --enable-debug \
+   --enable-cassert \
 %endif
 %if %plperl
-	--with-perl \
+   --with-perl \
 %endif
 %if %pltcl
-	--with-tcl \
-	--with-tclconfig=%{_libdir} \
+   --with-tcl \
+   --with-tclconfig=%{_libdir} \
 %endif
 %if %python
-	--with-python \
+   --with-python \
 %endif
 %if %ssl
-	--with-openssl \
+   --with-openssl \
 %endif
 %if %pam
-	--with-pam \
+   --with-pam \
 %endif
 %if %kerberos
-	--with-krb5 \
-	--with-includes=%{kerbdir}/include \
-	--with-libraries=%{kerbdir}/%{_lib} \
+   --with-krb5 \
+   --with-includes=%{kerbdir}/include \
+   --with-libraries=%{kerbdir}/%{_lib} \
 %endif
 %if %nls
-	--enable-nls \
+   --enable-nls \
 %endif
 %if %pgfts
-	--enable-thread-safety \
+   --enable-thread-safety \
 %endif
-	--sysconfdir=/etc/sysconfig/pgsql \
-	--datadir=/%{_datadir}/pgsql \
-	--with-docdir=%{_docdir}
+   --sysconfdir=/etc/sysconfig/pgsql \
+   --datadir=/%{_datadir}/pgsql \
+   --with-docdir=%{_docdir}
 
 make %{?_smp_mflags} all
 make %{?_smp_mflags} -C contrib all
 %if %xml
-	make %{?_smp_mflags} -C contrib/xml2 all
+   make %{?_smp_mflags} -C contrib/xml2 all
 %endif
                               
 # Have to hack makefile to put correct path into tutorial scripts
@@ -329,17 +330,17 @@ make %{?_smp_mflags} -C src/tutorial NO_PGXS=1 all
 rm -f src/tutorial/GNUmakefile
 
 %if %runselftest
-	pushd src/test/regress
-	make all
-	make MAX_CONNECTIONS=5 check
-	make clean
-	popd
+   pushd src/test/regress
+   make all
+   make MAX_CONNECTIONS=5 check
+   make clean
+   popd
 %endif
 
 %if %test
-	pushd src/test/regress
-	make RPMTESTING=1 all
-	popd
+   pushd src/test/regress
+   make RPMTESTING=1 all
+   popd
 %endif
 
 %install
@@ -349,17 +350,17 @@ make DESTDIR=%{buildroot} install
 make -C contrib DESTDIR=%{buildroot} install
 
 %if %xml
-	make -C contrib/xml2 DESTDIR=%{buildroot} install
+   make -C contrib/xml2 DESTDIR=%{buildroot} install
 %endif
 
 # multilib header hack; note pg_config.h is installed in two places!
 # we only apply this to known Red Hat multilib arches, per bug #177564
 case `uname -i` in
-	i386 | x86_64 | ppc | ppc64 | s390 | s390x)
-		mv %{buildroot}%{_includedir}/pg_config.h %{buildroot}%{_includedir}/pg_config_`uname -i`.h
-		install -m 644 %{SOURCE5} %{buildroot}%{_includedir}
-		mv %{buildroot}%{_includedir}/pgsql/server/pg_config.h %{buildroot}%{_includedir}/pgsql/server/pg_config_`uname -i`.h
-		install -m 644 %{SOURCE5} %{buildroot}%{_includedir}/pgsql/server/
+   i386 | x86_64 | ppc | ppc64 | s390 | s390x)
+      mv %{buildroot}%{_includedir}/pg_config.h %{buildroot}%{_includedir}/pg_config_`uname -i`.h
+      install -m 644 %{SOURCE5} %{buildroot}%{_includedir}
+      mv %{buildroot}%{_includedir}/pgsql/server/pg_config.h %{buildroot}%{_includedir}/pgsql/server/pg_config_`uname -i`.h
+      install -m 644 %{SOURCE5} %{buildroot}%{_includedir}/pgsql/server/
     ;;
   *)
     ;;
@@ -370,16 +371,16 @@ cp src/tutorial/* %{buildroot}%{_libdir}/pgsql/tutorial
 
 if [ -d /etc/rc.d/init.d ]
 then
-	install -d %{buildroot}/etc/rc.d/init.d
-	sed 's/^PGVERSION=.*$/PGVERSION=%{version}/' <%{SOURCE3} > postgresql.init
-	install -m 755 postgresql.init %{buildroot}/etc/rc.d/init.d/postgresql
+   install -d %{buildroot}/etc/rc.d/init.d
+   sed 's/^PGVERSION=.*$/PGVERSION=%{version}/' <%{SOURCE3} > postgresql.init
+   install -m 755 postgresql.init %{buildroot}/etc/rc.d/init.d/postgresql
 fi
 
 %if %pam
 if [ -d /etc/pam.d ]
 then
-	install -d %{buildroot}/etc/pam.d
-	install -m 644 %{SOURCE14} %{buildroot}/etc/pam.d/postgresql
+   install -d %{buildroot}/etc/pam.d
+   install -m 644 %{SOURCE14} %{buildroot}/etc/pam.d/postgresql
 fi
 %endif
 
@@ -396,18 +397,18 @@ install -m 644 %{SOURCE15} %{buildroot}/var/lib/pgsql/.bash_profile
 install -d -m 700 %{buildroot}/etc/sysconfig/pgsql
 
 %if %test
-	# tests. There are many files included here that are unnecessary, but include
-	# them anyway for completeness.
-	mkdir -p %{buildroot}%{_libdir}/pgsql/test
-	cp -a src/test/regress %{buildroot}%{_libdir}/pgsql/test
-	install -m 0755 contrib/spi/refint.so %{buildroot}%{_libdir}/pgsql/test/regress
-	install -m 0755 contrib/spi/autoinc.so %{buildroot}%{_libdir}/pgsql/test/regress
-	pushd  %{buildroot}%{_libdir}/pgsql/test/regress/
-	strip *.so
-	rm -f GNUmakefile Makefile
-	popd
-	cp %{SOURCE4} %{buildroot}%{_libdir}/pgsql/test/regress/Makefile
-	chmod 0644 %{buildroot}%{_libdir}/pgsql/test/regress/Makefile
+   # tests. There are many files included here that are unnecessary, but include
+   # them anyway for completeness.
+   mkdir -p %{buildroot}%{_libdir}/pgsql/test
+   cp -a src/test/regress %{buildroot}%{_libdir}/pgsql/test
+   install -m 0755 contrib/spi/refint.so %{buildroot}%{_libdir}/pgsql/test/regress
+   install -m 0755 contrib/spi/autoinc.so %{buildroot}%{_libdir}/pgsql/test/regress
+   pushd  %{buildroot}%{_libdir}/pgsql/test/regress/
+   strip *.so
+   rm -f GNUmakefile Makefile
+   popd
+   cp %{SOURCE4} %{buildroot}%{_libdir}/pgsql/test/regress/Makefile
+   chmod 0644 %{buildroot}%{_libdir}/pgsql/test/regress/Makefile
 %endif
 
 # Fix some more documentation
@@ -438,7 +439,7 @@ cat postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
 %pre server
 groupadd -g 26 -o -r postgres >/dev/null 2>&1 || :
 useradd -M -n -g postgres -o -r -d /var/lib/pgsql -s /bin/bash \
-	-c "PostgreSQL Server" -u 26 postgres >/dev/null 2>&1 || :
+   -c "PostgreSQL Server" -u 26 postgres >/dev/null 2>&1 || :
 touch /var/log/pgsql
 chown postgres:postgres /var/log/pgsql
 chmod 0700 /var/log/pgsql
@@ -449,18 +450,18 @@ chkconfig --add postgresql
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service postgresql condstop >/dev/null 2>&1
-	chkconfig --del postgresql
+   /sbin/service postgresql condstop >/dev/null 2>&1
+   chkconfig --del postgresql
 fi
 
 %postun server
 /sbin/ldconfig 
 if [ $1 -ge 1 ]; then
-	/sbin/service postgresql condrestart >/dev/null 2>&1
+   /sbin/service postgresql condrestart >/dev/null 2>&1
 fi
 if [ $1 = 0 ] ; then
-	userdel postgres >/dev/null 2>&1 || :
-	groupdel postgres >/dev/null 2>&1 || : 
+   userdel postgres >/dev/null 2>&1 || :
+   groupdel postgres >/dev/null 2>&1 || : 
 fi
 
 %if %pls

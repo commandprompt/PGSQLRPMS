@@ -64,7 +64,7 @@ Version: 7.4.28
 
 # Pre-release RPM's should not be put up on the public ftp.postgresql.org server
 # -- only test releases or full releases should be.
-
+%define dist .el4
 Release: 1PGDG%{?dist}
 License: BSD
 Group: Applications/Databases
@@ -366,51 +366,51 @@ CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v ffast-math|xargs -n 100`
 export LIBNAME=%{_lib}
 %configure --disable-rpath \
 %if %beta
-	--enable-debug \
-	--enable-cassert \
+   --enable-debug \
+   --enable-cassert \
 %endif
 %if %plperl
-	--with-perl \
+   --with-perl \
 %endif
 %if %tcl
-	--with-tcl \
-	--with-tclconfig=%{_libdir} \
+   --with-tcl \
+   --with-tclconfig=%{_libdir} \
 %endif
 %if %tkpkg
-	--with-tkconfig=%{_libdir} \
+   --with-tkconfig=%{_libdir} \
 %else
-	--without-tk \
+   --without-tk \
 %endif
 %if %python
-	--with-python \
+   --with-python \
 %endif
 %if %ssl
-	--with-openssl \
+   --with-openssl \
 %endif
 %if %pam
-	--with-pam \
+   --with-pam \
 %endif
 %if %kerberos
-	--with-krb5=%kerbdir \
-	--with-includes=%{_includedir}/et \
+   --with-krb5=%kerbdir \
+   --with-includes=%{_includedir}/et \
 %endif
 %if %nls
-	--enable-nls \
+   --enable-nls \
 %endif
 %if %pgfts
-	--enable-thread-safety \
+   --enable-thread-safety \
 %endif
-	--sysconfdir=/etc/sysconfig/pgsql \
-	--datadir=/usr/share/pgsql \
-	--with-docdir=%{_docdir}
+   --sysconfdir=/etc/sysconfig/pgsql \
+   --datadir=/usr/share/pgsql \
+   --with-docdir=%{_docdir}
 
 make all
 make -C contrib all
 
 %if %test
-	pushd src/test
-	make all
-	popd
+   pushd src/test
+   make all
+   popd
 %endif
 
 %if %python
@@ -440,23 +440,23 @@ make DESTDIR=%{buildroot} install-all-headers
 install -m755 src/Makefile.global %{buildroot}/usr/include/pgsql
 
 %if %jdbc
-	# Java/JDBC
-	# Red Hat's standard place to put jarfiles is /usr/share/java
+   # Java/JDBC
+   # Red Hat's standard place to put jarfiles is /usr/share/java
 
-	# JDBC jars 
-	install -d %{buildroot}/usr/share/java
-	install -m 755 %{SOURCE8} %{buildroot}/usr/share/java
-	install -m 755 %{SOURCE9} %{buildroot}/usr/share/java
-	install -m 755 %{SOURCE10} %{buildroot}/usr/share/java
-	install -m 755 %{SOURCE11} %{buildroot}/usr/share/java
+   # JDBC jars 
+   install -d %{buildroot}/usr/share/java
+   install -m 755 %{SOURCE8} %{buildroot}/usr/share/java
+   install -m 755 %{SOURCE9} %{buildroot}/usr/share/java
+   install -m 755 %{SOURCE10} %{buildroot}/usr/share/java
+   install -m 755 %{SOURCE11} %{buildroot}/usr/share/java
 
 %endif
 
 if [ -d /etc/rc.d/init.d ]
 then
-	install -d %{buildroot}/etc/rc.d/init.d
-	sed 's/^PGVERSION=.*$/PGVERSION=%{version}/' <%{SOURCE3} > postgresql.init
-	install -m 755 postgresql.init %{buildroot}/etc/rc.d/init.d/postgresql
+   install -d %{buildroot}/etc/rc.d/init.d
+   sed 's/^PGVERSION=.*$/PGVERSION=%{version}/' <%{SOURCE3} > postgresql.init
+   install -m 755 postgresql.init %{buildroot}/etc/rc.d/init.d/postgresql
 fi
 
 
@@ -474,15 +474,15 @@ install -d -m 700 %{buildroot}/etc/sysconfig/pgsql
 
 
 %if %test
-	# tests. There are many files included here that are unnecessary, but include
-	# them anyway for completeness.
-	mkdir -p %{buildroot}/usr/lib/pgsql/test
-	cp -a src/test/regress %{buildroot}/usr/lib/pgsql/test
-	install -m 0755 contrib/spi/refint.so %{buildroot}/usr/lib/pgsql/test/regress
-	install -m 0755 contrib/spi/autoinc.so %{buildroot}/usr/lib/pgsql/test/regress
-	pushd  %{buildroot}/usr/lib/pgsql/test/regress/
-	strip *.so
-	popd
+   # tests. There are many files included here that are unnecessary, but include
+   # them anyway for completeness.
+   mkdir -p %{buildroot}/usr/lib/pgsql/test
+   cp -a src/test/regress %{buildroot}/usr/lib/pgsql/test
+   install -m 0755 contrib/spi/refint.so %{buildroot}/usr/lib/pgsql/test/regress
+   install -m 0755 contrib/spi/autoinc.so %{buildroot}/usr/lib/pgsql/test/regress
+   pushd  %{buildroot}/usr/lib/pgsql/test/regress/
+   strip *.so
+   popd
 %endif
 
 # Fix some more documentation
@@ -526,7 +526,7 @@ cat postgres.lang pg_resetxlog.lang pg_controldata.lang > server.lst
 %pre server
 groupadd -g 26 -o -r postgres >/dev/null 2>&1 || :
 useradd -M -n -g postgres -o -r -d /var/lib/pgsql -s /bin/bash \
-	-c "PostgreSQL Server" -u 26 postgres >/dev/null 2>&1 || :
+   -c "PostgreSQL Server" -u 26 postgres >/dev/null 2>&1 || :
 touch /var/log/pgsql
 chown postgres:postgres /var/log/pgsql
 chmod 0700 /var/log/pgsql
@@ -537,15 +537,15 @@ chkconfig --add postgresql
 
 %preun server
 if [ $1 = 0 ] ; then
-	/sbin/service postgresql condstop >/dev/null 2>&1
-	chkconfig --del postgresql
+   /sbin/service postgresql condstop >/dev/null 2>&1
+   chkconfig --del postgresql
 fi
 
 %postun server
 /sbin/ldconfig 
 if [ $1 = 0 ] ; then
-	userdel postgres >/dev/null 2>&1 || :
-	groupdel postgres >/dev/null 2>&1 || : 
+   userdel postgres >/dev/null 2>&1 || :
+   groupdel postgres >/dev/null 2>&1 || : 
 fi
 
 %if %tcl

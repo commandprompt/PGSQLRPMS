@@ -54,7 +54,7 @@ Version:   8.0.24
 
 # Test releases are where PostgreSQL itself is not in beta, but certain parts of
 # the RPM packaging (such as the spec file, the initscript, etc) are in beta.
-%define dist .el4
+%define dist .el5
 Release:    1PGDG%{?dist}
 License:   BSD
 Group:      Applications/Databases

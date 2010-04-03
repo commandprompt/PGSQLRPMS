@@ -68,7 +68,7 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	9.0
-Release:	alpha3_1PGDG%{?dist}
+Release:	alpha4_1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
@@ -730,6 +730,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Apr 3 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0alpha4-1PGDG
+- Update to 9.0	Alpha4
+
 * Mon Dec 21 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha3-1PGDG
 - Update to 8.5	Alpha3
 

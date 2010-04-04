@@ -73,7 +73,7 @@ License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha4/postgresql-%{version}alpha4.tar.bz2
+Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha4/postgresql-%{version}alpha4.tar.gz
 Source3:	postgresql.init
 Source4:	Makefile.regress
 Source5:	pg_config.h
@@ -674,6 +674,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/plpgsql.so
 %{pgbaseinstdir}/lib/test_parser.so
 %{pgbaseinstdir}/lib/tsearch2.so
+%{pgbaseinstdir}/lib/libpqwalreceiver.so
 
 %dir %{pgbaseinstdir}/lib
 %dir %{pgbaseinstdir}/share

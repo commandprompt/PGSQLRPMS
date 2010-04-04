@@ -73,13 +73,13 @@ License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha3/postgresql-%{version}alpha3.tar.bz2
+Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha4/postgresql-%{version}alpha4.tar.bz2
 Source3:	postgresql.init
 Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}alpha3-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}alpha4-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh
@@ -275,7 +275,7 @@ system, including regression tests and benchmarks.
 %define __perl_requires %{SOURCE16}
 
 %prep
-%setup -q -n %{name}-%{version}alpha3
+%setup -q -n %{name}-%{version}alpha4
 %patch1 -p1
 %patch3 -p1
 # patch5 is applied later
@@ -736,8 +736,8 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Sat Apr 03 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0alpha3-1PGDG
-- Update to 9.0	Alpha3
+* Sat Apr 03 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0alpha4-1PGDG
+- Update to 9.0	Alpha4
 
 * Wed Oct 28 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.5alpha2-1PGDG
 - Update to 8.5	Alpha2

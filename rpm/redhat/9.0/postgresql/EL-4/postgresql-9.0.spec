@@ -668,7 +668,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/plpgsql.so
 %{pgbaseinstdir}/lib/test_parser.so
 %{pgbaseinstdir}/lib/tsearch2.so
-%{pgbaseinstdir}/lib/lib/libpqwalreceiver.so
+%{pgbaseinstdir}/lib/libpqwalreceiver.so
 
 %dir %{pgbaseinstdir}/lib
 %dir %{pgbaseinstdir}/share

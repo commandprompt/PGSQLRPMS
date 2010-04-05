@@ -6,16 +6,14 @@ is a Perl packaging bug, myself, but apparently it's not going to
 change.
 So work around it by adding an rpath spec to plperl.so (only).
 Per bug #162198.
-
---- postgresql-8.4devel_20081128/src/pl/plperl/GNUmakefile.old	2008-12-01 01:39:25.000000000 +0200
-+++ postgresql-8.4devel_20081128/src/pl/plperl/GNUmakefile	2008-12-01 01:40:03.000000000 +0200
-@@ -37,6 +37,9 @@
+--- postgresql-9.0alpha4.orig/src/pl/plperl/GNUmakefile	2010-02-12 14:35:25.000000000 -0500
++++ postgresql-9.0alpha4/src/pl/plperl/GNUmakefile	2010-04-04 15:14:54.574318112 -0400
+@@ -38,7 +38,7 @@
  
- SHLIB_LINK = $(perl_embed_ldflags)
+ PERLCHUNKS = plc_perlboot.pl plc_safe_bad.pl plc_safe_ok.pl
  
-+# Force rpath to be used even though we disable it everywhere else
-+SHLIB_LINK += $(rpath)
-+
- REGRESS_OPTS = --dbname=$(PL_TESTDB) --load-language=plperl
- REGRESS = plperl plperl_trigger plperl_shared plperl_elog
- # where to find psql for running the tests
+-SHLIB_LINK = $(perl_embed_ldflags)
++SHLIB_LINK = $(rpath)
+ 
+ REGRESS_OPTS = --dbname=$(PL_TESTDB) --load-language=plperl  --load-language=plperlu
+ REGRESS = plperl plperl_trigger plperl_shared plperl_elog plperl_util plperl_init plperlu

@@ -65,6 +65,8 @@
 %{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
 
+%define dist f12
+
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	9.0

@@ -65,7 +65,7 @@
 %{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
 
-%define dist f11
+%define dist .f11
 
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql

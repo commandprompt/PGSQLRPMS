@@ -1,6 +1,6 @@
 # CMD MR specific
 %{!?cmdmrssl:%define cmdmrssl 1}
-%{!?cmdmrdebug:%define cmdmrdebug 0}
+%{!?cmdmrdebug:%define cmdmrdebug 1}
 %{?cmdmrdebug:%define __os_install_post /usr/lib/rpm/brp-compress}
 
 # General part
@@ -30,6 +30,7 @@
 %{!?ldap:%define ldap 1}
 
 %define	minorversion	1.8.3
+%define dist .el5
 
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator

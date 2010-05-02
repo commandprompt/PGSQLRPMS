@@ -70,18 +70,18 @@
 Summary:	PostgreSQL client programs and libraries
 Name:		postgresql
 Version:	9.0
-Release:	alpha4_1PGDG%{?dist}
+Release:	beta1_1PGDG%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha4/postgresql-%{version}alpha4.tar.gz
+Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha4/postgresql-%{version}beta1.tar.gz
 Source3:	postgresql.init
 Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
-Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}alpha4-A4.pdf
+Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}beta1-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
 Source16:	filter-requires-perl-Pg.sh
@@ -277,7 +277,7 @@ system, including regression tests and benchmarks.
 %define __perl_requires %{SOURCE16}
 
 %prep
-%setup -q -n %{name}-%{version}alpha4
+%setup -q -n %{name}-%{version}beta1
 %patch1 -p1
 %patch3 -p1
 # patch5 is applied later
@@ -646,6 +646,8 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/pam.d/postgresql
 %endif
 %attr (755,root,root) %dir /etc/sysconfig/pgsql
+%attr (755,root,root) %dir /etc/sysconfig/pgsql/tsearch_data
+%attr (755,root,root) %dir /etc/sysconfig/pgsql/timezonesets
 %{pgbaseinstdir}/bin/initdb
 %{pgbaseinstdir}/bin/pg_controldata
 %{pgbaseinstdir}/bin/pg_ctl
@@ -739,6 +741,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat May 01 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0beta1-1PGDG
+- Update to 9.0	Beta1
+
 * Sat Apr 03 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0alpha4-1PGDG
 - Update to 9.0	Alpha4
 

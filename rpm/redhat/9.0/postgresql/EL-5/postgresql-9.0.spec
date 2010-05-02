@@ -442,7 +442,11 @@ install -d -m 700 %{buildroot}/etc/sysconfig/pgsql/%{majorversion}
 # Fix some more documentation
 # gzip doc/internals.ps
 cp %{SOURCE6} README.rpm-dist
-mv %{buildroot}%{pgbaseinstdir}/share/doc/html doc
+mv doc/src/sgml/html %{buildroot}%{pgbaseinstdir}/share/doc                                     
+mkdir -p %{buildroot}%{pgbaseinstdir}/share/man/
+mv doc/src/sgml/man1 %{buildroot}%{pgbaseinstdir}/share/man/
+mv doc/src/sgml/man3 %{buildroot}%{pgbaseinstdir}/share/man/
+mv doc/src/sgml/man7 %{buildroot}%{pgbaseinstdir}/share/man/
 rm -rf %{buildroot}%{_docdir}/pgsql
 
 %find_lang ecpg-%{majorversion}

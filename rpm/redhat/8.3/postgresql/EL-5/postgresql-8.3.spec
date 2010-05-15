@@ -717,7 +717,7 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Sun May 15 2010 CMD RPM Packagers <packages@commandprompt.com> 8.3.11-1PGDG
+* Sat May 15 2010 CMD RPM Packagers <packages@commandprompt.com> 8.3.11-1PGDG
 - Update to 8.3.11
 
 * Sun Mar 14 2010 CMD RPM Packagers <packages@commandprompt.com> 8.3.10-1PGDG

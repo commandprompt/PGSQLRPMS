@@ -595,6 +595,8 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/pam.d/postgresql
 %endif
 %attr (755,root,root) %dir /etc/sysconfig/pgsql
+%attr (755,root,root) %dir /etc/sysconfig/pgsql/tsearch_data
+%attr (755,root,root) %dir /etc/sysconfig/pgsql/timezonesets
 %{_bindir}/pgsql/%{majorversion}/initdb
 %{_bindir}/pgsql/%{majorversion}/ipcclean
 %{_bindir}/pgsql/%{majorversion}/pg_controldata

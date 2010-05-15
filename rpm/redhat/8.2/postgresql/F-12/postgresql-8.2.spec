@@ -74,7 +74,7 @@
 %define dist .fc12
 Summary:   PostgreSQL client programs and libraries
 Name:      postgresql
-Version:   8.2.16
+Version:   8.2.17
 Release:   1PGDG%{?dist}
 License:   BSD
 Group:      Applications/Databases
@@ -604,6 +604,8 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/pam.d/postgresql
 %endif
 %attr (755,root,root) %dir /etc/sysconfig/pgsql
+%attr (755,root,root) %dir /etc/sysconfig/pgsql/tsearch_data
+%attr (755,root,root) %dir /etc/sysconfig/pgsql/timezonesets
 %{_bindir}/initdb
 %{_bindir}/ipcclean
 %{_bindir}/pg_controldata
@@ -684,6 +686,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat May 15 2010 CMD RPM Packagers <packages@commandprompt.com> 8.2.17-1PGDG
+- Update to 8.2.17
+
 * Sun Mar 14 2010 CMD RPM Packagers <packages@commandprompt.com> 8.2.16-1PGDG
 - Update to 8.2.16
 

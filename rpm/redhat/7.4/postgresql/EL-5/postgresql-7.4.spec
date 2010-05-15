@@ -43,7 +43,7 @@
 
 Summary: PostgreSQL client programs and libraries
 Name: postgresql
-Version: 7.4.28
+Version: 7.4.29
 
 # Conventions for PostgreSQL Global Development Group RPM releases:
 
@@ -677,6 +677,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /etc/rc.d/init.d/postgresql
 %attr (755,root,root) %dir /etc/sysconfig/pgsql
+%attr (755,root,root) %dir /etc/sysconfig/pgsql/tsearch_data
+%attr (755,root,root) %dir /etc/sysconfig/pgsql/timezonesets
 %{_bindir}/initdb
 %{_bindir}/initlocation
 %{_bindir}/ipcclean
@@ -784,6 +786,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat May 15 2010 CMD RPM Packagers <packages@commandprompt.com> 7.4.29-1PGDG
+- Update to 7.4.29
+
 * Mon Mar 15 2010 CMD RPM Packagers <packages@commandprompt.com> 7.4.28-1PGDG
 - Update to 7.4.28
 

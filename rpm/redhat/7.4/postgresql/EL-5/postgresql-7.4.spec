@@ -677,8 +677,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /etc/rc.d/init.d/postgresql
 %attr (755,root,root) %dir /etc/sysconfig/pgsql
-%attr (755,root,root) %dir /etc/sysconfig/pgsql/tsearch_data
-%attr (755,root,root) %dir /etc/sysconfig/pgsql/timezonesets
 %{_bindir}/initdb
 %{_bindir}/initlocation
 %{_bindir}/ipcclean

@@ -486,7 +486,7 @@ chown postgres:postgres /var/log/pgsql
 chmod 0700 /var/log/pgsql
 
 %post server
-chkconfig --add postgresql
+chkconfig --add postgresql-9.0
 /sbin/ldconfig
 
 %preun server
@@ -571,6 +571,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/share/man/man1/vacuumdb.*
 %{pgbaseinstdir}/share/man/man3/*
 %{pgbaseinstdir}/share/man/man7/*
+%{pgbaseinstdir}/share/doc/*
 
 %files docs
 %defattr(-,root,root)

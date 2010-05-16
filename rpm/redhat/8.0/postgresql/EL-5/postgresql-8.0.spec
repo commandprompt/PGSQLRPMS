@@ -571,8 +571,6 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/pam.d/postgresql
 %endif
 %attr (755,root,root) %dir /etc/sysconfig/pgsql
-%attr (755,root,root) %dir /etc/sysconfig/pgsql/tsearch_data
-%attr (755,root,root) %dir /etc/sysconfig/pgsql/timezonesets
 %{_bindir}/initdb
 %{_bindir}/ipcclean
 %{_bindir}/pg_controldata
@@ -645,7 +643,7 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Sat May 2010 CMD RPM Packagers <packages@commandprompt.com> 8.0.25-1PGDG
+* Sat May 15 2010 CMD RPM Packagers <packages@commandprompt.com> 8.0.25-1PGDG
 - Update to 8.0.25
 
 * Sun Mar 14 2010 CMD RPM Packagers <packages@commandprompt.com> 8.0.24-1PGDG

@@ -1,5 +1,6 @@
---- postgresql-8.2.11/src/pl/plperl/GNUmakefile.old	2008-12-03 07:31:05.000000000 +0200
-+++ postgresql-8.2.11/src/pl/plperl/GNUmakefile	2008-12-03 07:32:00.000000000 +0200
+diff -Nur postgresql-8.2.16.orig/src/pl/plperl/GNUmakefile postgresql-8.2.16/src/pl/plperl/GNUmakefile
+--- postgresql-8.2.16.orig/src/pl/plperl/GNUmakefile	2006-07-21 02:24:04.000000000 +0200
++++ postgresql-8.2.16/src/pl/plperl/GNUmakefile	2010-05-17 06:07:22.272643536 +0200
 @@ -36,6 +36,9 @@
  
  SHLIB_LINK = $(perl_embed_ldflags) $(BE_DLLLIBS)

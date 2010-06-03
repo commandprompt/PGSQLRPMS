@@ -3,13 +3,13 @@
 Summary:	Wrapper scripts for PostgreSQL Warm Standby
 Name:		pitrtools
 Version:	1.2
-Release:	3%{?dist}
+Release:	4%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0:	http://files.commandprompt.com/pitrtools/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-rpm-conf.patch
-URL:		https://projects.commandprompt.com/public/pitrtools
-Requires:	postgresql-server >= 8.3, postgresql-contrib >= 8.3
+URL:		https://public.commandprompt.com/projects/pitrtools
+Requires:	postgresql-server >= 8.2, postgresql-contrib >= 8.2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Buildarch:	noarch
 
@@ -47,7 +47,10 @@ rm -rf %{buildroot}
 %{pitrtoolsdir}/bin/cmd_*
 %{pitrtoolsdir}/etc/*.ini.sample
 
-%changelog
+%changelog                                                     
+* Wed Jun 2 2010 - CMD RPM Packagers <packages@commandprompt.com> 1.2-4
+- Changing incorrect version requirements for this package.
+
 * Wed Dec 9 2009 - Devrim GUNDUZ <devrim@commandprompt.com> 1.2-3
 - Change file ownerships from root to postgres, per pgcore #156.
 

@@ -19,7 +19,7 @@
 # -- only test releases or full releases should be.
 # This is the PostgreSQL Global Development Group Official RPMset spec file,
 # or a derivative thereof.
-# Copyright 2003-2010 Devrim GÜNDÜZ <devrim@commandprompt.com>
+# Copyright 2003-2010 CMD RPM Packagers <packages@commandprompt.com>
 # and others listed.
 
 # Major Contributors:
@@ -30,6 +30,7 @@
 # Alvaro Herrera
 # David Fetter
 # Greg Smith
+# Devrim Gunduz
 # and others in the Changelog....
 
 # This spec file and ancilliary files are licensed in accordance with 
@@ -60,7 +61,7 @@
 %{!?nls:%define nls 1}
 %{!?xml:%define xml 1}
 %{!?pam:%define pam 1}
-%{!?pgfts:%define pgfts 1}
+%{!?disablepgfts:%define disablepgfts 0}
 %{!?runselftest:%define runselftest 1}
 %{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
@@ -75,12 +76,13 @@ License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/%{version}beta2/postgresql-%{version}beta2.tar.gz
+Source0:	ftp://ftp.postgresql.org/pub/source/v%{version}beta2/postgresql-%{version}beta2.tar.bz2
 Source3:	postgresql.init
 Source4:	Makefile.regress
 Source5:	pg_config.h
 Source6:	README.rpm-dist
 Source7:	ecpg_config.h
+Source9:	postgresql-9.0-libs.conf
 Source12:	http://www.postgresql.org/files/documentation/pdf/%{majorversion}/postgresql-%{version}beta2-A4.pdf
 Source14:	postgresql.pam
 Source15:	postgresql-bashprofile
@@ -138,6 +140,8 @@ BuildRequires:	openldap-devel
 %endif
 
 Requires:	postgresql-libs = %{version}-%{release}
+Requires(post): %{_sbindir}/update-alternatives
+Requires(postun):	%{_sbindir}/update-alternatives
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -340,8 +344,8 @@ export LIBNAME=%{_lib}
 %if !%intdatetimes
 	--disable-integer-datetimes \
 %endif
-%if %pgfts
-	--enable-thread-safety \
+%if %disablepgfts
+	--disable-thread-safety \
 %endif
 %if %uuid
 	--with-ossp-uuid \
@@ -355,7 +359,7 @@ export LIBNAME=%{_lib}
 %endif
 	--with-system-tzdata=%{_datadir}/zoneinfo \
 	--sysconfdir=/etc/sysconfig/pgsql \
-	--with-docdir=%{_docdir}
+	--docdir=%{_docdir}
 
 make %{?_smp_mflags} all
 make %{?_smp_mflags} -C contrib all
@@ -429,6 +433,10 @@ install -m 644 %{SOURCE15} %{buildroot}/var/lib/pgsql/.bash_profile
 # Create the multiple postmaster startup directory
 install -d -m 700 %{buildroot}/etc/sysconfig/pgsql/%{majorversion}
 
+# Install a file under /etc/ld.so.conf.d, so libs can be detected easily.
+install -d -m 755 %{buildroot}/etc/ld.so.conf.d/
+install -m 700 %{SOURCE9} %{buildroot}/etc/ld.so.conf.d/
+
 %if %test
 	# tests. There are many files included here that are unnecessary,
 	# but include them anyway for completeness.  We replace the original
@@ -448,7 +456,11 @@ install -d -m 700 %{buildroot}/etc/sysconfig/pgsql/%{majorversion}
 # Fix some more documentation
 # gzip doc/internals.ps
 cp %{SOURCE6} README.rpm-dist
+mkdir -p %{buildroot}%{pgbaseinstdir}/share/doc/html
+mv doc/src/sgml/html %{buildroot}%{pgbaseinstdir}/share/doc/
 mv %{buildroot}%{pgbaseinstdir}/share/doc/html doc
+mkdir -p %{buildroot}%{pgbaseinstdir}/share/man/
+mv doc/src/sgml/man1 doc/src/sgml/man3 doc/src/sgml/man7  %{buildroot}%{pgbaseinstdir}/share/man/
 rm -rf %{buildroot}%{_docdir}/pgsql
 
 %find_lang ecpg-%{majorversion}
@@ -488,7 +500,7 @@ chown postgres:postgres /var/log/pgsql
 chmod 0700 /var/log/pgsql
 
 %post server
-chkconfig --add postgresql
+chkconfig --add postgresql-9.0
 /sbin/ldconfig
 
 %preun server
@@ -525,15 +537,16 @@ chown -R postgres:postgres /usr/share/pgsql/test >/dev/null 2>&1 || :
 
 # Create alternatives entries for common binaries:
 %post
-alternatives --install /usr/bin/psql psql /usr/pgsql-9.0/bin/psql 900
-alternatives --install /usr/bin/pg_dump pg_dump /usr/pgsql-9.0/bin/pg_dump 900
-alternatives --install /usr/bin/pg_dumpall pg_dumpall /usr/pgsql-9.0/bin/pg_dumpall 900
+%{_sbindir}/update-alternatives --install %{_bindir}/psql psql %{pgbaseinstdir}/bin/psql 900
+%{_sbindir}/update-alternatives --install /usr/bin/psql psql %{pgbaseinstdir}/bin/psql 900
+%{_sbindir}/update-alternatives --install /usr/bin/pg_dump pg_dump %{pgbaseinstdir}/bin/pg_dump 900
+%{_sbindir}/update-alternatives --install /usr/bin/pg_dumpall pg_dumpall %{pgbaseinstdir}/bin/pg_dumpall 900
 
 # Drop alternatives entries for common binaries:
 %postun
-alternatives --remove psql /usr/pgsql-9.0/bin/psql
-alternatives --remove pg_dump /usr/pgsql-9.0/bin/pg_dump
-alternatives --remove pg_dumpall /usr/pgsql-9.0/bin/pg_dumpall
+%{_sbindir}/update-alternatives --remove psql %{pgbaseinstdir}/bin/psql
+%{_sbindir}/update-alternatives --remove pg_dump %{pgbaseinstdir}/bin/pg_dump
+%{_sbindir}/update-alternatives --remove pg_dumpall %{pgbaseinstdir}/bin/pg_dumpall
 
 %clean
 rm -rf %{buildroot}
@@ -594,7 +607,6 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/cube.so
 %{pgbaseinstdir}/lib/dblink.so
 %{pgbaseinstdir}/lib/earthdistance.so
-%{pgbaseinstdir}/lib/euc2004_sjis2004.so
 %{pgbaseinstdir}/lib/fuzzystrmatch.so
 %{pgbaseinstdir}/lib/insert_username.so
 %{pgbaseinstdir}/lib/isn.so
@@ -613,6 +625,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/pgstattuple.so
 %{pgbaseinstdir}/lib/pg_buffercache.so
 %{pgbaseinstdir}/lib/pg_trgm.so
+%{pgbaseinstdir}/lib/pg_upgrade_support.so
 %{pgbaseinstdir}/lib/refint.so
 %{pgbaseinstdir}/lib/seg.so
 %{pgbaseinstdir}/lib/tablefunc.so
@@ -629,8 +642,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/bin/pgbench
 %{pgbaseinstdir}/bin/vacuumlo
 %{pgbaseinstdir}/bin/pg_standby
-%doc %{pgbaseinstdir}/share/doc/contrib/*.example 
-%doc %{pgbaseinstdir}/share/contrib/*.sql
+%{pgbaseinstdir}/bin/pg_upgrade
 
 %files libs -f pg_libpq5.lst
 %defattr(-,root,root)
@@ -638,6 +650,8 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/libecpg.so*
 %{pgbaseinstdir}/lib/libpgtypes.so.*
 %{pgbaseinstdir}/lib/libecpg_compat.so.*
+%{pgbaseinstdir}/lib/libpqwalreceiver.so
+%config(noreplace) %{_sysconfdir}/ld.so.conf.d/%{name}-%{majorversion}-libs.conf
 
 %files server -f pg_server.lst
 %defattr(-,root,root)
@@ -673,10 +687,10 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/lib/dict_int.so
 %{pgbaseinstdir}/lib/dict_snowball.so
 %{pgbaseinstdir}/lib/dict_xsyn.so
+%{pgbaseinstdir}/lib/euc2004_sjis2004.so
 %{pgbaseinstdir}/lib/plpgsql.so
 %{pgbaseinstdir}/lib/test_parser.so
 %{pgbaseinstdir}/lib/tsearch2.so
-%{pgbaseinstdir}/lib/libpqwalreceiver.so
 
 %dir %{pgbaseinstdir}/lib
 %dir %{pgbaseinstdir}/share

@@ -1,12 +1,13 @@
---- postgresql-8.4beta1//src/backend/utils/misc/postgresql.conf.sample.old	2009-04-10 08:19:29.000000000 +0300
-+++ postgresql-8.4beta1//src/backend/utils/misc/postgresql.conf.sample	2009-04-10 08:20:13.000000000 +0300
-@@ -228,23 +228,23 @@
+diff -Nur postgresql-9.0beta2.orig/src/backend/utils/misc/postgresql.conf.sample postgresql-9.0beta2/src/backend/utils/misc/postgresql.conf.sample
+--- postgresql-9.0beta2.orig/src/backend/utils/misc/postgresql.conf.sample	2010-05-02 04:10:33.000000000 +0200
++++ postgresql-9.0beta2/src/backend/utils/misc/postgresql.conf.sample	2010-06-08 09:43:04.581995049 +0200
+@@ -249,23 +249,23 @@
  
  # - Where to Log -
  
 -#log_destination = 'stderr'		# Valid values are combinations of
 +log_destination = 'stderr'		# Valid values are combinations of
- 					# stderr, csvlog, syslog and eventlog,
+ 					# stderr, csvlog, syslog, and eventlog,
  					# depending on platform.  csvlog
  					# requires logging_collector to be on.
  
@@ -29,7 +30,7 @@
  					# same name as the new log file will be
  					# truncated rather than appended to.
  					# But such truncation only occurs on
-@@ -252,9 +252,9 @@
+@@ -273,9 +273,9 @@
  					# or size-driven rotation.  Default is
  					# off, meaning append to existing files
  					# in all cases.

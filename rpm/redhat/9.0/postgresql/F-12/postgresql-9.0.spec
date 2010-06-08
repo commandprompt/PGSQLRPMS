@@ -75,7 +75,7 @@ License:	BSD
 Group:		Applications/Databases
 Url:		http://www.postgresql.org/ 
 
-Source0:	ftp://ftp.postgresql.org/pub/source/%{version}alpha4/postgresql-%{version}beta1.tar.gz
+Source0:	ftp://ftp.postgresql.org/pub/source/%{version}beta2/postgresql-%{version}beta1.tar.gz
 Source3:	postgresql.init
 Source4:	Makefile.regress
 Source5:	pg_config.h
@@ -741,6 +741,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Jun 7 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0beta2-1PGDG
+- Update to 9.0	Beta2
+
 * Sat May 01 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0beta1-1PGDG
 - Update to 9.0	Beta1
 

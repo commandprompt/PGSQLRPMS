@@ -451,7 +451,7 @@ install -m 700 %{SOURCE9} %{buildroot}/etc/ld.so.conf.d/
 # gzip doc/internals.ps
 cp %{SOURCE6} README.rpm-dist
 mkdir -p %{buildroot}%{pgbaseinstdir}/share/doc/html
-mv doc/src/sgml/html %{buildroot}%{pgbaseinstdir}/share/doc/
+mv doc/src/sgml/html %{buildroot}%{pgbaseinstdir}/share/doc/html
 mv %{buildroot}%{pgbaseinstdir}/share/doc/html doc
 mkdir -p %{buildroot}%{pgbaseinstdir}/share/man/
 mv doc/src/sgml/man1 doc/src/sgml/man3 doc/src/sgml/man7  %{buildroot}%{pgbaseinstdir}/share/man/
@@ -637,6 +637,7 @@ rm -rf %{buildroot}
 %{pgbaseinstdir}/bin/vacuumlo
 %{pgbaseinstdir}/bin/pg_standby
 %{pgbaseinstdir}/bin/pg_upgrade
+%{pgbaseinstdir}/bin/pg_archivecleanup
 
 %files libs -f pg_libpq5.lst
 %defattr(-,root,root)

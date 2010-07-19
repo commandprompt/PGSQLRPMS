@@ -753,6 +753,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Jul 19 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0beta3-1PGDG
+- Update to 9.0 Beta3
+
 * Mon Jun 7 2010 CMD RPM Packagers <packages@commandprompt.com> 9.0beta2-1PGDG
 - Update to 9.0	Beta2
 

@@ -1,8 +1,3 @@
-# CMD MR specific
-%{!?cmdmrssl:%define cmdmrssl 1}
-%{!?cmdmrdebug:%define cmdmrdebug 0}
-%{?cmdmrdebug:%define __os_install_post /usr/lib/rpm/brp-compress}
-
 # General part
 
 %define beta 0
@@ -25,11 +20,12 @@
 %{!?uuid:%define uuid 1}
 %{!?ldap:%define ldap 1}
 
-%define	minorversion	1.8.3
+%define	minorversion	1.8.4
+%define dist .fc12
 
 Summary:	Asynchronous Replication for PostgreSQL
 Name:		mammoth-replicator
-Version:	8.3.9
+Version:	8.3.11
 Release:	%{minorversion}%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -283,13 +279,7 @@ LDFLAGS="-Wl,--as-needed"; export LDFLAGS
 
 export LIBNAME=%{_lib}
 %configure --disable-rpath \
-	--enable-replication \
-%if %cmdmrssl
-	--with-mcp-openssl \
-%endif
-%if %cmdmrdebug
 	--enable-debug \
-%endif
 %if %beta
 	--enable-debug \
 	--enable-cassert \
@@ -706,6 +696,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Jul 20 2010 CMD RPM Packagers <packages@commandprompt.com> 8.3.11-1.8.4-1
+- Update to 8.3.11-1.8.4
+
 * Wed Dec 16 2009 Devrim GUNDUZ <devrim@commandprompt.com> 8.3.9-1.8.3-1
 - Update to 8.3.9-1.8.3
 
